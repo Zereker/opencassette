@@ -1,0 +1,6 @@
+# Byte-exact files matter here: scenario SHA-256s are recorded into
+# cassette meta, and cassettes round-trip binary bodies. Keep line endings
+# LF on every platform (the Windows CI runner would otherwise CRLF-convert
+# on checkout) and never text-convert compressed cassettes.
+* text=auto eol=lf
+*.gz binary

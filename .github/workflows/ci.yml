@@ -9,9 +9,15 @@ on:
 permissions:
   contents: read
 
+# One run per branch: a new push cancels the previous, still-running one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
-  go:
+  lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -20,14 +26,58 @@ jobs:
           cache: true
       - name: Gofmt
         run: test -z "$(gofmt -l .)" || { gofmt -l .; exit 1; }
+      - name: Tidy
+        run: go mod tidy -diff
       - name: Lint
-        # Runs the standard set (govet, staticcheck, errcheck, …) plus wsl —
-        # see .golangci.yml.
+        # Standard set (govet, staticcheck, errcheck, …) plus wsl and the
+        # curated extras — see .golangci.yml.
         uses: golangci/golangci-lint-action@v8
         with:
           version: v2.12.2
-      - name: Test
-        run: go test ./...
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Build
+        run: go build ./...
+      - name: Test (race)
+        run: go test -race -coverprofile=coverage.out ./...
+      - name: Coverage summary
+        if: matrix.os == 'ubuntu-latest'
+        run: go tool cover -func=coverage.out | tail -1
+      - uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          name: coverage
+          path: coverage.out
+
+  vulncheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: golang/govulncheck-action@v1
+        with:
+          go-version-file: go.mod
+
+  verify-corpus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
       - name: Verify corpus
         # Every cassette in the corpus must pass the authenticity/leak checks
         # on every change — FAIL findings break the build.
