@@ -13,5 +13,7 @@ satisfy — the short version is *real, scrubbed, provenanced*.
 
 The corpus starts small on purpose. First targets are the vendor ecosystems
 where no public recorded traffic exists at all (DeepSeek, Zhipu GLM,
-MiniMax); one scenario-pack run per model is the intended unit of
-contribution.
+MiniMax); one scenario-pack run plus one field-probe run
+(`record -probe-fields`, producing the per-field `fields/`,
+`fields-rejected/` and `field-support.json` — see FORMAT.md) per model is
+the intended unit of contribution.

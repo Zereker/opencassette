@@ -19,6 +19,17 @@
 //	  -scenario-dir packs/openai-chat \
 //	  -vendor deepseek -model deepseek-chat
 //
+// Probing per-field vendor support (one minimal request per top-level field
+// of the pack's chat_full_params.json, plus synthetic probes like
+// stream_options that the full body can't legally carry; accepted fields'
+// cassettes land in fields/, 400/422 rejections — evidence of non-support —
+// in fields-rejected/, and a field-support.json matrix alongside):
+//
+//	RECORD_API_KEY=sk-... opencassette record \
+//	  -url https://api.deepseek.com/chat/completions \
+//	  -probe-fields packs/openai-chat \
+//	  -vendor deepseek -model deepseek-chat
+//
 // The API key is read from an environment variable (default RECORD_API_KEY),
 // never from a flag; it is scrubbed from recordings both by header name and
 // by literal value. Auth styles (-auth): bearer (default) | x-api-key |
@@ -27,6 +38,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
@@ -113,6 +125,7 @@ func runRecord(args []string) {
 	endpoint := fs.String("url", "", "full endpoint URL (required)")
 	bodyFile := fs.String("body-file", "", "request body file, '-' for stdin (single-recording mode)")
 	scenarioDir := fs.String("scenario-dir", "", "record every scenario in this pack instead of one -body-file")
+	probeFields := fs.String("probe-fields", "", "probe per-field vendor support using this pack dir's chat_basic.json (base) + chat_full_params.json (field source); writes fields/, fields-rejected/ and field-support.json")
 	corpusDir := fs.String("corpus-dir", "corpus", "corpus root the output path is composed under")
 	vendor := fs.String("vendor", "", "vendor directory name, e.g. deepseek / zhipu / minimax")
 	model := fs.String("model", "", "model directory name, e.g. deepseek-chat / glm-4-plus")
@@ -136,14 +149,21 @@ func runRecord(args []string) {
 		log.Fatalf("record: environment variable %s is empty (or pass -auth none)", *keyEnv)
 	}
 
-	if *scenarioDir != "" {
+	if *scenarioDir != "" || *probeFields != "" {
 		if *bodyFile != "" || *name != "" || *out != "" || *appendExisting {
-			log.Fatal("record: -scenario-dir is exclusive with -body-file/-name/-out/-append")
+			log.Fatal("record: -scenario-dir/-probe-fields are exclusive with -body-file/-name/-out/-append")
+		}
+		if *scenarioDir != "" && *probeFields != "" {
+			log.Fatal("record: -scenario-dir and -probe-fields are exclusive (run them as separate passes)")
 		}
 		if *vendor == "" || *model == "" {
-			log.Fatal("record: batch mode needs -vendor and -model")
+			log.Fatal("record: batch/probe mode needs -vendor and -model")
 		}
-		runBatch(*scenarioDir, *corpusDir, *endpoint, *vendor, *model, *protocol, *authStyle, key, headers, *timeout, *pause)
+		if *probeFields != "" {
+			runProbe(*probeFields, *corpusDir, *endpoint, *vendor, *model, *protocol, *authStyle, key, headers, *timeout, *pause)
+		} else {
+			runBatch(*scenarioDir, *corpusDir, *endpoint, *vendor, *model, *protocol, *authStyle, key, headers, *timeout, *pause)
+		}
 		return
 	}
 
@@ -198,23 +218,189 @@ func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 	}
 }
 
-// metaFor builds the provenance block; scenarioSHA is the pack file's hash
-// in batch mode, empty (and omitted from the YAML) for ad-hoc -body-file
-// recordings, which have no pack version to trace back to.
-func metaFor(endpoint, vendor, model, scenarioName, scenarioSHA string) recorder.Meta {
-	host := endpoint
-	if u, err := url.Parse(endpoint); err == nil && u.Host != "" {
-		host = u.Scheme + "://" + u.Host
+// =============================================================================
+// probe-fields
+// =============================================================================
+
+// fieldSupport is the machine-readable support matrix a probe run writes
+// next to the fields/ and fields-rejected/ trees: per field, whether the
+// vendor accepted it in isolation, with the evidence cassette alongside.
+type fieldSupport struct {
+	RecordedAt   string                 `json:"recorded_at"`
+	Vendor       string                 `json:"vendor"`
+	Model        string                 `json:"model"`
+	Endpoint     string                 `json:"endpoint"`
+	Source       string                 `json:"source"`
+	SourceSHA256 string                 `json:"source_sha256"`
+	Fields       map[string]fieldResult `json:"fields"`
+}
+
+type fieldResult struct {
+	Status     string   `json:"status"` // supported | rejected | error
+	HTTP       int      `json:"http,omitempty"`
+	Companions []string `json:"companions,omitempty"`
+}
+
+func runProbe(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key string, headers headerFlags, timeout, pause time.Duration) {
+	baseRaw, err := os.ReadFile(filepath.Join(dir, "chat_basic.json"))
+	if err != nil {
+		log.Fatalf("record: probe base: %v", err)
 	}
+	base, err := scenario.Scenario{Name: "chat_basic", Body: baseRaw}.WithModel(model)
+	if err != nil {
+		log.Fatalf("record: %v", err)
+	}
+	fullRaw, err := os.ReadFile(filepath.Join(dir, "chat_full_params.json"))
+	if err != nil {
+		log.Fatalf("record: probe field source: %v", err)
+	}
+	fullSHA := scenario.Scenario{Body: fullRaw}.SHA256()
+	probes, err := scenario.BuildProbes(base, fullRaw)
+	if err != nil {
+		log.Fatalf("record: %v", err)
+	}
+
+	// If the minimal body itself fails, every probe would read as a
+	// rejection — abort instead of writing a matrix of noise.
+	fmt.Fprintln(os.Stderr, "===== baseline: minimal request =====")
+	status, _, err := probeOne(endpoint, base, authStyle, key, headers, timeout, recorder.Meta{})
+	if err != nil {
+		log.Fatalf("record: baseline call failed (nothing probed): %v", err)
+	}
+	if status < 200 || status >= 300 {
+		log.Fatalf("record: baseline minimal request got HTTP %d — fix endpoint/model/auth before probing fields", status)
+	}
+
+	protoDir := filepath.Join(corpusDir, vendor, model, protocol)
+	report := fieldSupport{
+		RecordedAt:   time.Now().UTC().Format(time.RFC3339),
+		Vendor:       vendor,
+		Model:        model,
+		Endpoint:     hostOf(endpoint),
+		Source:       "chat_full_params.json",
+		SourceSHA256: fullSHA,
+		Fields:       map[string]fieldResult{},
+	}
+	var errored []string
+	for _, p := range probes {
+		time.Sleep(pause)
+		fmt.Fprintf(os.Stderr, "\n===== field %s =====\n", p.Field)
+		res := fieldResult{Companions: p.Companions}
+		if strings.ContainsAny(p.Field, `/\`) {
+			fmt.Fprintf(os.Stderr, "ERROR: field name %q is not a path segment\n", p.Field)
+			res.Status = "error"
+			report.Fields[p.Field] = res
+			errored = append(errored, p.Field)
+			continue
+		}
+		meta := metaFor(endpoint, vendor, model, "field:"+p.Field, fullSHA)
+		status, rec, err := probeOne(endpoint, p.Body, authStyle, key, headers, timeout, meta)
+		res.HTTP = status
+		switch {
+		case err != nil:
+			fmt.Fprintf(os.Stderr, "ERROR: %v\n", err)
+			res.Status = "error"
+			errored = append(errored, p.Field)
+		case status >= 200 && status < 300:
+			res.Status = "supported"
+			path := filepath.Join(protoDir, "fields", p.Field+".yaml")
+			if err := rec.WriteFile(path); err != nil {
+				log.Fatalf("record: %v", err)
+			}
+			fmt.Fprintf(os.Stderr, "SUPPORTED — wrote %s\n", path)
+		case status == 400 || status == 422:
+			res.Status = "rejected"
+			path := filepath.Join(protoDir, "fields-rejected", p.Field+".yaml")
+			if err := rec.WriteFile(path); err != nil {
+				log.Fatalf("record: %v", err)
+			}
+			fmt.Fprintf(os.Stderr, "REJECTED — wrote %s\n", path)
+		default:
+			// 401/403/429/5xx say nothing about the field itself: record
+			// no evidence, claim neither support nor rejection.
+			res.Status = "error"
+			errored = append(errored, fmt.Sprintf("%s (HTTP %d)", p.Field, status))
+		}
+		report.Fields[p.Field] = res
+	}
+
+	if err := os.MkdirAll(protoDir, 0o755); err != nil {
+		log.Fatalf("record: mkdir %s: %v", protoDir, err)
+	}
+	buf, err := json.MarshalIndent(report, "", "  ")
+	if err != nil {
+		log.Fatalf("record: marshal support matrix: %v", err)
+	}
+	reportPath := filepath.Join(protoDir, "field-support.json")
+	if err := os.WriteFile(reportPath, append(buf, '\n'), 0o644); err != nil {
+		log.Fatalf("record: write %s: %v", reportPath, err)
+	}
+
+	supported, rejected := 0, 0
+	for _, r := range report.Fields {
+		switch r.Status {
+		case "supported":
+			supported++
+		case "rejected":
+			rejected++
+		}
+	}
+	fmt.Fprintf(os.Stderr, "\n%d field(s): %d supported, %d rejected, %d error(s) — matrix in %s\n",
+		len(probes), supported, rejected, len(errored), reportPath)
+	if len(errored) > 0 {
+		fmt.Fprintf(os.Stderr, "no evidence recorded for: %s\n", strings.Join(errored, ", "))
+	}
+	fmt.Fprintln(os.Stderr, "before publishing: read the files, then run `opencassette verify` over them")
+	if len(errored) > 0 {
+		os.Exit(1)
+	}
+}
+
+// probeOne sends one probe request through a fresh recorder and reports the
+// upstream status; the caller decides which bucket (if any) the recording
+// lands in — unlike recordOne, a 4xx here is data, not an operator mistake.
+func probeOne(endpoint string, body []byte, authStyle, key string, headers headerFlags, timeout time.Duration, meta recorder.Meta) (int, *recorder.Recorder, error) {
+	rec := recorder.New(nil)
+	rec.RedactValue(key)
+	rec.SetMeta(meta)
+	req, err := buildRequest(endpoint, body, authStyle, key, headers, rec)
+	if err != nil {
+		return 0, nil, err
+	}
+	client := &http.Client{Transport: rec, Timeout: timeout}
+	resp, err := client.Do(req)
+	if err != nil {
+		return 0, nil, err
+	}
+	respBody, err := io.ReadAll(resp.Body)
+	_ = resp.Body.Close()
+	if err != nil {
+		return 0, nil, fmt.Errorf("read response: %w", err)
+	}
+	fmt.Fprintf(os.Stderr, "HTTP %s\n%s\n", resp.Status, preview(respBody, 800))
+	return resp.StatusCode, rec, nil
+}
+
+// metaFor builds the provenance block; scenarioSHA is the pack file's hash
+// in batch mode (or the field-source file's in probe mode), empty for
+// ad-hoc -body-file recordings, which have no pack version to trace to.
+func metaFor(endpoint, vendor, model, scenarioName, scenarioSHA string) recorder.Meta {
 	return recorder.Meta{
 		RecordedAt:     time.Now().UTC().Format(time.RFC3339),
 		Vendor:         vendor,
 		Model:          model,
-		Endpoint:       host,
+		Endpoint:       hostOf(endpoint),
 		Scenario:       scenarioName,
 		ScenarioSHA256: scenarioSHA,
 		Tool:           "opencassette/" + version,
 	}
+}
+
+func hostOf(endpoint string) string {
+	if u, err := url.Parse(endpoint); err == nil && u.Host != "" {
+		return u.Scheme + "://" + u.Host
+	}
+	return endpoint
 }
 
 func recordOne(endpoint string, body []byte, authStyle, key string, headers headerFlags, timeout time.Duration, outPath string, appendExisting bool, meta recorder.Meta) error {
