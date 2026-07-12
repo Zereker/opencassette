@@ -42,6 +42,11 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
+    defaults:
+      run:
+        # The Windows runner's default pwsh splits "-coverprofile=coverage.out"
+        # at the dot, handing go test a bogus ".out" package. Bash everywhere.
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
