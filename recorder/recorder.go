@@ -231,7 +231,7 @@ func (r *Recorder) WriteFile(path string) error {
 	}
 
 	if dir := filepath.Dir(path); dir != "." {
-		if err := os.MkdirAll(dir, 0o755); err != nil {
+		if err := os.MkdirAll(dir, 0o750); err != nil {
 			return fmt.Errorf("recorder: mkdir %s: %w", dir, err)
 		}
 	}

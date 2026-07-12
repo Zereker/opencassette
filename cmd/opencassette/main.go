@@ -607,7 +607,7 @@ func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 		report.Fields[p.Field] = res
 	}
 
-	if err := os.MkdirAll(protoDir, 0o755); err != nil {
+	if err := os.MkdirAll(protoDir, 0o750); err != nil {
 		log.Fatalf("record: mkdir %s: %v", protoDir, err)
 	}
 
@@ -825,7 +825,7 @@ func buildRequest(run runConfig, body []byte, rec *recorder.Recorder) (*http.Req
 		rec.ScrubQueryParam(param)
 	}
 
-	req, err := http.NewRequest("POST", finalURL, strings.NewReader(string(body)))
+	req, err := http.NewRequest(http.MethodPost, finalURL, strings.NewReader(string(body)))
 	if err != nil {
 		return nil, err
 	}

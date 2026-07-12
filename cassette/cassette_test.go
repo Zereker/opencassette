@@ -1,6 +1,7 @@
 package cassette
 
 import (
+	"net/http"
 	"strings"
 	"testing"
 )
@@ -16,7 +17,7 @@ func TestLoadInteractionsFormat(t *testing.T) {
 	}
 
 	it := its[0]
-	if it.Method != "POST" || it.URI != "https://api.example.com/v1/chat/completions" {
+	if it.Method != http.MethodPost || it.URI != "https://api.example.com/v1/chat/completions" {
 		t.Errorf("method/uri: %q %q", it.Method, it.URI)
 	}
 

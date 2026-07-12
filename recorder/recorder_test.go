@@ -46,7 +46,7 @@ func TestRecordAndLoadRoundTrip(t *testing.T) {
 	client := &http.Client{Transport: rec}
 
 	reqBody := `{"model":"m","messages":[{"role":"user","content":"hi"}]}`
-	req1, _ := http.NewRequest("POST", srv.URL+"/chat?key="+testSecret, strings.NewReader(reqBody))
+	req1, _ := http.NewRequest(http.MethodPost, srv.URL+"/chat?key="+testSecret, strings.NewReader(reqBody))
 	req1.Header.Set("Authorization", "Bearer "+testSecret)
 
 	resp1, err := client.Do(req1)
@@ -61,12 +61,15 @@ func TestRecordAndLoadRoundTrip(t *testing.T) {
 		t.Fatalf("caller must still see the real body, got %q", got1)
 	}
 
-	req2, _ := http.NewRequest("POST", srv.URL+"/chat/stream", strings.NewReader(reqBody))
+	req2, _ := http.NewRequest(http.MethodPost, srv.URL+"/chat/stream", strings.NewReader(reqBody))
 	req2.Header.Set("Authorization", "Bearer "+testSecret)
 
-	if _, err := client.Do(req2); err != nil {
+	resp2, err := client.Do(req2)
+	if err != nil {
 		t.Fatalf("request 2: %v", err)
 	}
+
+	_ = resp2.Body.Close()
 
 	path := filepath.Join(t.TempDir(), "nested", "recorded.yaml")
 	if err := rec.WriteFile(path); err != nil {
@@ -100,7 +103,7 @@ func TestRecordAndLoadRoundTrip(t *testing.T) {
 		t.Fatalf("want 2 interactions, got %d", len(its))
 	}
 
-	if its[0].Method != "POST" || string(its[0].RequestBody) != reqBody {
+	if its[0].Method != http.MethodPost || string(its[0].RequestBody) != reqBody {
 		t.Errorf("interaction 0 request mismatch: method=%q body=%q", its[0].Method, its[0].RequestBody)
 	}
 
@@ -123,7 +126,7 @@ func TestRecordAndLoadRoundTrip(t *testing.T) {
 func TestAppendAcrossRuns(t *testing.T) {
 	var turn int
 
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		turn++
 
 		w.Header().Set("Content-Type", "application/json")
@@ -142,9 +145,13 @@ func TestAppendAcrossRuns(t *testing.T) {
 	rec1.SetMeta(Meta{RecordedAt: "2026-07-12T08:00:00Z", Scenario: "loop"})
 
 	client1 := &http.Client{Transport: rec1}
-	if _, err := client1.Post(srv.URL, "application/json", strings.NewReader(`{"n":1}`)); err != nil {
+
+	resp1, err := client1.Post(srv.URL, "application/json", strings.NewReader(`{"n":1}`))
+	if err != nil {
 		t.Fatal(err)
 	}
+
+	_ = resp1.Body.Close()
 
 	if err := rec1.WriteFile(path); err != nil {
 		t.Fatal(err)
@@ -156,9 +163,13 @@ func TestAppendAcrossRuns(t *testing.T) {
 	}
 
 	client2 := &http.Client{Transport: rec2}
-	if _, err := client2.Post(srv.URL, "application/json", strings.NewReader(`{"n":2}`)); err != nil {
+
+	resp2, err := client2.Post(srv.URL, "application/json", strings.NewReader(`{"n":2}`))
+	if err != nil {
 		t.Fatal(err)
 	}
+
+	_ = resp2.Body.Close()
 
 	if err := rec2.WriteFile(path); err != nil {
 		t.Fatal(err)
@@ -191,7 +202,7 @@ func TestBinaryBodyRoundTrip(t *testing.T) {
 	// gunzips that, which would be a different (also valid) path.
 	binary := []byte{0xff, 0xfe, 0x00, 0x01, 'e', 'v', 'e', 'n', 't', 0x80}
 
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/vnd.amazon.eventstream")
 		_, _ = w.Write(binary)
 	}))
@@ -200,9 +211,13 @@ func TestBinaryBodyRoundTrip(t *testing.T) {
 	rec := New(nil)
 
 	client := &http.Client{Transport: rec}
-	if _, err := client.Post(srv.URL, "application/json", strings.NewReader(`{}`)); err != nil {
+
+	resp, err := client.Post(srv.URL, "application/json", strings.NewReader(`{}`))
+	if err != nil {
 		t.Fatal(err)
 	}
+
+	_ = resp.Body.Close()
 
 	path := filepath.Join(t.TempDir(), "bin.yaml")
 	if err := rec.WriteFile(path); err != nil {

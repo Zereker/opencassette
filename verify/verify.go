@@ -37,6 +37,8 @@ import (
 // Level classifies a finding.
 type Level string
 
+// Fail findings are objective defects that should block a merge; Warn
+// findings are heuristics that need a human look.
 const (
 	Fail Level = "FAIL"
 	Warn Level = "WARN"
@@ -110,7 +112,7 @@ func fileAt(path string, now time.Time) []Finding {
 
 	for _, pat := range rawSecretPatterns {
 		if m := pat.Find(raw); m != nil {
-			add(Fail, "secret-shaped string in file: %q", truncate(string(m), 24))
+			add(Fail, "secret-shaped string in file: %q", truncate(string(m)))
 		}
 	}
 
@@ -130,13 +132,13 @@ func fileAt(path string, now time.Time) []Finding {
 
 		for _, body := range [][]byte{it.RequestBody, []byte(it.URI)} {
 			if m := skKeyPattern.Find(body); m != nil {
-				add(Fail, "interaction #%d: secret-shaped string in request: %q", i, truncate(string(m), 24))
+				add(Fail, "interaction #%d: secret-shaped string in request: %q", i, truncate(string(m)))
 			}
 		}
 
 		resp := it.ResponseBody
 		if m := skKeyPattern.Find(resp); m != nil {
-			add(Fail, "interaction #%d: secret-shaped string in response: %q", i, truncate(string(m), 24))
+			add(Fail, "interaction #%d: secret-shaped string in response: %q", i, truncate(string(m)))
 		}
 
 		if placeholderIDPattern.Match(resp) {
@@ -187,7 +189,7 @@ func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 				}
 
 				if m := skKeyPattern.FindString(s); m != "" {
-					add(Fail, "header %q carries a secret-shaped value: %q (nonstandard auth header? record with -scrub-header)", name, truncate(m, 24))
+					add(Fail, "header %q carries a secret-shaped value: %q (nonstandard auth header? record with -scrub-header)", name, truncate(m))
 				}
 			}
 
@@ -335,7 +337,8 @@ func HasFailures(findings []Finding) bool {
 	return false
 }
 
-func truncate(s string, n int) string {
+func truncate(s string) string {
+	const n = 24
 	if len(s) <= n {
 		return s
 	}

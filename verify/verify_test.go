@@ -174,7 +174,13 @@ func TestImpossibleTimestampsFail(t *testing.T) {
 func TestMissingMetaWarns(t *testing.T) {
 	ts := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
 	content := fmt.Sprintf(goodTemplate, ts)
-	content = content[strings.Index(content, "interactions:"):]
+
+	idx := strings.Index(content, "interactions:")
+	if idx < 0 {
+		t.Fatal("template lost its interactions block")
+	}
+
+	content = content[idx:]
 
 	_, warns := levels(File(writeFile(t, content)))
 	if len(warns) == 0 || !strings.Contains(strings.Join(warns, ";"), "provenance") {

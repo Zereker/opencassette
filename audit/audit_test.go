@@ -48,14 +48,14 @@ func specServer(t *testing.T) *httptest.Server {
 	t.Helper()
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/openapi.yml", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/openapi.yml", func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = w.Write([]byte(miniSpec))
 	})
-	mux.HandleFunc("/discovery.json", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/discovery.json", func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = w.Write([]byte(miniDiscovery))
 	})
 	srv := httptest.NewServer(mux)
-	mux.HandleFunc("/stats.yml", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/stats.yml", func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = fmt.Fprintf(w, "configured_endpoints: 1\nopenapi_spec_url: %s/openapi.yml\n", srv.URL)
 	})
 	t.Cleanup(srv.Close)
