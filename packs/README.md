@@ -43,6 +43,14 @@ one-way by design: the spec is a growth ceiling for packs, never a
 validator of recorded traffic — vendors' deviations from their own specs
 are data, not errors.
 
+`stainless-stats` follows the SDK repo's pointer, so audits always see
+the *current* ceiling — new upstream fields show up the day they ship.
+When you want determinism instead (the same audit result on every run),
+pin the spec: `opencassette audit -resolve packs` prints each pack's
+resolved spec URL — Stainless URLs are content-addressed, so pasting one
+into pack.json as `{"kind": "openapi", "url": "...", "path": "..."}`
+freezes the ceiling, and raising it becomes an explicit one-line diff.
+
 ## `openai-chat/` — scenarios and provenance
 
 No body in this pack was invented. Sources fall in three classes: verbatim

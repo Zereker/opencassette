@@ -101,6 +101,20 @@ func TestFieldsErrors(t *testing.T) {
 	}
 }
 
+func TestStainlessSpecURLResolves(t *testing.T) {
+	srv := specServer(t)
+	url, err := StainlessSpecURL(srv.Client(), srv.URL+"/stats.yml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if url != srv.URL+"/openapi.yml" {
+		t.Errorf("resolved %q", url)
+	}
+	if _, err := StainlessSpecURL(srv.Client(), srv.URL+"/discovery.json"); err == nil {
+		t.Error("non-stats file must not resolve")
+	}
+}
+
 func TestCompare(t *testing.T) {
 	r := Compare([]string{"a", "b", "x"}, []string{"a", "b", "c"})
 	if r.SpecTotal != 3 || !reflect.DeepEqual(r.Covered, []string{"a", "b"}) ||

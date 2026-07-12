@@ -43,17 +43,11 @@ func Fields(client *http.Client, ref *scenario.SpecRef) ([]string, error) {
 		}
 		return openapiRequestFields(raw, ref.Path)
 	case "stainless-stats":
-		raw, err := fetch(client, ref.URL)
+		specURL, err := StainlessSpecURL(client, ref.URL)
 		if err != nil {
 			return nil, err
 		}
-		var stats struct {
-			OpenAPISpecURL string `yaml:"openapi_spec_url"`
-		}
-		if err := yaml.Unmarshal(raw, &stats); err != nil || stats.OpenAPISpecURL == "" {
-			return nil, fmt.Errorf("audit: %s has no openapi_spec_url (not a Stainless .stats.yml?)", ref.URL)
-		}
-		spec, err := fetch(client, stats.OpenAPISpecURL)
+		spec, err := fetch(client, specURL)
 		if err != nil {
 			return nil, err
 		}
@@ -67,6 +61,26 @@ func Fields(client *http.Client, ref *scenario.SpecRef) ([]string, error) {
 	default:
 		return nil, fmt.Errorf("audit: unknown spec kind %q (want openapi | stainless-stats | discovery)", ref.Kind)
 	}
+}
+
+// StainlessSpecURL resolves an SDK repo's .stats.yml to the OpenAPI spec
+// URL it currently names. The URLs are content-addressed (a hash in the
+// filename), so the result is also what a maintainer pins in pack.json —
+// swap the pack's spec to kind "openapi" with this URL to make audits
+// deterministic, and bumping the ceiling becomes an explicit one-line
+// change.
+func StainlessSpecURL(client *http.Client, statsURL string) (string, error) {
+	raw, err := fetch(client, statsURL)
+	if err != nil {
+		return "", err
+	}
+	var stats struct {
+		OpenAPISpecURL string `yaml:"openapi_spec_url"`
+	}
+	if err := yaml.Unmarshal(raw, &stats); err != nil || stats.OpenAPISpecURL == "" {
+		return "", fmt.Errorf("audit: %s has no openapi_spec_url (not a Stainless .stats.yml?)", statsURL)
+	}
+	return stats.OpenAPISpecURL, nil
 }
 
 // Report is the pack-vs-spec diff.

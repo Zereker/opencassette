@@ -95,6 +95,7 @@ func runAudit(args []string) {
 	fs := flag.NewFlagSet("audit", flag.ExitOnError)
 	root := fs.String("dir", "packs", "packs root, or a single pack directory")
 	strict := fs.Bool("strict", false, "exit 1 if any audited pack is missing spec-declared fields")
+	resolve := fs.Bool("resolve", false, "print each pack's resolved (pinnable) spec URL instead of auditing")
 	timeout := fs.Duration("timeout", time.Minute, "spec fetch timeout")
 	_ = fs.Parse(args)
 	if fs.NArg() > 0 {
@@ -124,6 +125,18 @@ func runAudit(args []string) {
 		}
 		if pack.Spec == nil {
 			fmt.Printf("== %s (%s): no spec declared in pack.json, skipping\n", dir, pack.Protocol)
+			continue
+		}
+		if *resolve {
+			url := pack.Spec.URL
+			if pack.Spec.Kind == "stainless-stats" {
+				if url, err = audit.StainlessSpecURL(client, url); err != nil {
+					log.Fatalf("audit: %s: %v", dir, err)
+				}
+				fmt.Printf("%s: pin as {\"kind\": \"openapi\", \"url\": %q, \"path\": %q}\n", dir, url, pack.Spec.Path)
+				continue
+			}
+			fmt.Printf("%s: %s (already a stable URL)\n", dir, url)
 			continue
 		}
 		specFields, err := audit.Fields(client, pack.Spec)
