@@ -1,0 +1,1 @@
+{"input":[{"content":"What is 5 times 4?","role":"user","type":"message"}],"instructions":"You are terse. Answer in five words or fewer.","model":"gpt-5.5","store":false,"stream":true,"tools":[{"type":"function","name":"multiply","description":"Return x * y.","parameters":{"properties":{"x":{"type":"integer"},"y":{"type":"integer"}},"required":["x","y"],"type":"object"}}]}

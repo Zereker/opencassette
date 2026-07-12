@@ -1,0 +1,6 @@
+{
+  "protocol": "anthropic",
+  "required": ["model", "messages", "max_tokens"],
+  "model_field": "model",
+  "stream_field": "stream"
+}

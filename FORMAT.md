@@ -61,8 +61,12 @@ interactions:
 corpus/<vendor>/<model>/<protocol>/<stream|nostream>/<scenario>.yaml
 ```
 
-- `protocol` is the wire protocol recorded (`openai`, `anthropic`, …).
-- The stream bucket comes from the request body's own `"stream"` field.
+- `protocol` is the wire protocol recorded (`openai`, `anthropic`,
+  `gemini`, `openai-responses`, …), defaulting to the pack manifest's.
+- The stream bucket comes from the request body's stream field (per the
+  pack manifest); protocols that signal streaming in the URL instead
+  (Gemini's `:streamGenerateContent`) are recorded with an explicit
+  `-bucket`.
 - A multi-turn scenario (recorded with `-append`) stays in whichever bucket
   its first turn landed in — the bucket classifies the scenario, and a file
   can't live in two directories.

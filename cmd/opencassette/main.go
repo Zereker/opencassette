@@ -129,8 +129,9 @@ func runRecord(args []string) {
 	corpusDir := fs.String("corpus-dir", "corpus", "corpus root the output path is composed under")
 	vendor := fs.String("vendor", "", "vendor directory name, e.g. deepseek / zhipu / minimax")
 	model := fs.String("model", "", "model directory name, e.g. deepseek-chat / glm-4-plus")
-	protocol := fs.String("protocol", "openai", "wire protocol being recorded (path segment)")
+	protocol := fs.String("protocol", "", "wire protocol path segment (default: the pack manifest's, else openai)")
 	name := fs.String("name", "", "scenario name (file basename without .yaml)")
+	bucket := fs.String("bucket", "auto", "stream|nostream|auto — corpus bucket; auto reads the body's stream field, but URL-streamed protocols (Gemini :streamGenerateContent) need it set explicitly")
 	out := fs.String("out", "", "explicit output path (overrides composition)")
 	authStyle := fs.String("auth", "bearer", "bearer | x-api-key | api-key | query:<param> | none")
 	keyEnv := fs.String("key-env", "RECORD_API_KEY", "environment variable holding the API key")
@@ -144,6 +145,12 @@ func runRecord(args []string) {
 	if *endpoint == "" {
 		log.Fatal("record: -url is required")
 	}
+	if *bucket != "auto" && *bucket != "stream" && *bucket != "nostream" {
+		log.Fatalf("record: -bucket %q (want stream | nostream | auto)", *bucket)
+	}
+	// The model may live in the URL path rather than the body (Gemini's
+	// /models/<model>:generateContent) — substitute a {model} placeholder.
+	*endpoint = strings.ReplaceAll(*endpoint, "{model}", *model)
 	key := os.Getenv(*keyEnv)
 	if key == "" && *authStyle != "none" {
 		log.Fatalf("record: environment variable %s is empty (or pass -auth none)", *keyEnv)
@@ -160,9 +167,9 @@ func runRecord(args []string) {
 			log.Fatal("record: batch/probe mode needs -vendor and -model")
 		}
 		if *probeFields != "" {
-			runProbe(*probeFields, *corpusDir, *endpoint, *vendor, *model, *protocol, *authStyle, key, headers, *timeout, *pause)
+			runProbe(*probeFields, *corpusDir, *endpoint, *vendor, *model, protocolOr(*protocol, "openai"), *authStyle, key, headers, *timeout, *pause)
 		} else {
-			runBatch(*scenarioDir, *corpusDir, *endpoint, *vendor, *model, *protocol, *authStyle, key, headers, *timeout, *pause)
+			runBatch(*scenarioDir, *corpusDir, *endpoint, *vendor, *model, *protocol, *bucket, *authStyle, key, headers, *timeout, *pause)
 		}
 		return
 	}
@@ -174,7 +181,8 @@ func runRecord(args []string) {
 	if err != nil {
 		log.Fatalf("record: read body: %v", err)
 	}
-	outPath, err := resolveOutPath(*out, *corpusDir, *vendor, *model, *protocol, *name, body, *appendExisting)
+	stream := bucketStream(*bucket, gjson.GetBytes(body, "stream").Bool())
+	outPath, err := resolveOutPath(*out, *corpusDir, *vendor, *model, protocolOr(*protocol, "openai"), *name, stream, *appendExisting)
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
@@ -184,22 +192,49 @@ func runRecord(args []string) {
 	fmt.Fprintln(os.Stderr, "before publishing: read the file, then run `opencassette verify` over it")
 }
 
-func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key string, headers headerFlags, timeout, pause time.Duration) {
-	pack, err := scenario.LoadDir(dir)
+// protocolOr resolves the corpus protocol segment: the explicit -protocol
+// flag wins, then fallback (a pack manifest's protocol, or "openai").
+func protocolOr(flagValue, fallback string) string {
+	if flagValue != "" {
+		return flagValue
+	}
+	return fallback
+}
+
+// bucketStream folds the -bucket override into the body-derived stream flag.
+func bucketStream(bucket string, bodyStream bool) bool {
+	switch bucket {
+	case "stream":
+		return true
+	case "nostream":
+		return false
+	}
+	return bodyStream
+}
+
+func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, bucket, authStyle, key string, headers headerFlags, timeout, pause time.Duration) {
+	pack, err := scenario.LoadPack(dir)
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
+	protocol = protocolOr(protocol, pack.Protocol)
+	if pack.ModelField == "" && !strings.Contains(endpoint, model) {
+		log.Fatalf("record: this pack carries no model in the body — put a {model} placeholder in -url (e.g. .../models/{model}:generateContent)")
+	}
+	if pack.StreamField == "" && bucket == "auto" {
+		log.Fatalf("record: this pack's bodies don't signal streaming (the endpoint does) — pass -bucket stream or -bucket nostream")
+	}
 	var failed []string
-	for i, sc := range pack {
+	for i, sc := range pack.Scenarios {
 		if i > 0 {
 			time.Sleep(pause)
 		}
-		fmt.Fprintf(os.Stderr, "\n===== scenario %d/%d: %s =====\n", i+1, len(pack), sc.Name)
+		fmt.Fprintf(os.Stderr, "\n===== scenario %d/%d: %s =====\n", i+1, len(pack.Scenarios), sc.Name)
 		body, err := sc.WithModel(model)
 		if err != nil {
 			log.Fatalf("record: %v", err)
 		}
-		outPath, err := resolveOutPath("", corpusDir, vendor, model, protocol, sc.Name, body, false)
+		outPath, err := resolveOutPath("", corpusDir, vendor, model, protocol, sc.Name, bucketStream(bucket, sc.Stream), false)
 		if err != nil {
 			log.Fatalf("record: %v", err)
 		}
@@ -208,7 +243,7 @@ func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 			failed = append(failed, sc.Name)
 		}
 	}
-	fmt.Fprintf(os.Stderr, "\n%d/%d scenarios recorded\n", len(pack)-len(failed), len(pack))
+	fmt.Fprintf(os.Stderr, "\n%d/%d scenarios recorded\n", len(pack.Scenarios)-len(failed), len(pack.Scenarios))
 	if len(failed) > 0 {
 		fmt.Fprintf(os.Stderr, "failed: %s\n", strings.Join(failed, ", "))
 	}
@@ -246,7 +281,7 @@ func runProbe(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 	if err != nil {
 		log.Fatalf("record: probe base: %v", err)
 	}
-	base, err := scenario.Scenario{Name: "chat_basic", Body: baseRaw}.WithModel(model)
+	base, err := scenario.Scenario{Name: "chat_basic", Body: baseRaw, ModelField: "model"}.WithModel(model)
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
@@ -451,12 +486,12 @@ func readBody(path string) ([]byte, error) {
 }
 
 // resolveOutPath composes <corpus>/<vendor>/<model>/<protocol>/<stream|nostream>/<name>.yaml
-// unless -out overrides it. The bucket comes from the request body's own
-// "stream" field; on -append, if the composed bucket has no file but the
-// sibling bucket does, the existing file wins — a multi-turn scenario is
-// classified by its first turn, and turn 2 of an agent loop is typically
-// non-streaming even when turn 1 streamed.
-func resolveOutPath(out, corpusDir, vendor, model, protocol, name string, body []byte, appendExisting bool) (string, error) {
+// unless -out overrides it. The caller decides the bucket (body stream
+// field, pack manifest, or -bucket override); on -append, if the composed
+// bucket has no file but the sibling bucket does, the existing file wins —
+// a multi-turn scenario is classified by its first turn, and turn 2 of an
+// agent loop is typically non-streaming even when turn 1 streamed.
+func resolveOutPath(out, corpusDir, vendor, model, protocol, name string, stream bool, appendExisting bool) (string, error) {
 	if out != "" {
 		return out, nil
 	}
@@ -469,7 +504,7 @@ func resolveOutPath(out, corpusDir, vendor, model, protocol, name string, body [
 		}
 	}
 	bucket := "nostream"
-	if gjson.GetBytes(body, "stream").Bool() {
+	if stream {
 		bucket = "stream"
 	}
 	path := filepath.Join(corpusDir, vendor, model, protocol, bucket, name+".yaml")

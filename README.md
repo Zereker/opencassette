@@ -36,7 +36,7 @@ grow a shared library of real captures.
 |---|---|
 | `cassette` (Go package) | Loads both on-disk cassette formats found in the wild (pytest-recording's `interactions:` and langchain's parallel lists), normalizing bodies (nested/`!!binary`/gzipped) into plain bytes |
 | `recorder` (Go package) | An `http.RoundTripper` that records real calls with name-based **and** value-based credential scrubbing, plus a `meta:` provenance block |
-| `scenario` (Go package) + `packs/` | Standard request-body packs (SDK-derived, coverage-enforced by tests) so a recording session exercises tools, tool loops, streaming, structured output — not just `"hi"` |
+| `scenario` (Go package) + `packs/` | Standard request-body packs (SDK-derived, coverage-enforced by tests) for four wire protocols — OpenAI chat, OpenAI Responses, Anthropic Messages, Gemini generateContent — so a recording session exercises tools, tool loops, streaming, structured output — not just `"hi"` |
 | `verify` (Go package) | Checks a corpus for leaked credentials and synthetic-data tells (placeholder ids, impossible timestamps, token accounting that doesn't add up) |
 | `cmd/opencassette` | The CLI over all of it: `record` and `verify` |
 | `corpus/` | The recordings themselves, laid out `vendor/model/protocol/{stream,nostream}/scenario.yaml` |
@@ -53,6 +53,23 @@ RECORD_API_KEY=sk-... ./opencassette record \
   -scenario-dir packs/openai-chat \
   -vendor deepseek -model deepseek-chat
 # -> corpus/deepseek/deepseek-chat/openai/{stream,nostream}/<scenario>.yaml
+```
+
+Other protocols work the same way — the pack's `pack.json` manifest tells
+the recorder where the model and stream flag live (Gemini carries both in
+the URL):
+
+```sh
+RECORD_API_KEY=... ./opencassette record \
+  -url 'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent' \
+  -scenario-dir packs/gemini-generatecontent \
+  -vendor google -model gemini-2.0-flash -auth query:key -bucket nostream
+
+RECORD_API_KEY=sk-ant-... ./opencassette record \
+  -url https://api.anthropic.com/v1/messages \
+  -scenario-dir packs/anthropic-messages \
+  -vendor anthropic -model claude-sonnet-4-5 \
+  -auth x-api-key -header 'anthropic-version: 2023-06-01'
 ```
 
 Probe which request fields a vendor actually supports — one minimal call

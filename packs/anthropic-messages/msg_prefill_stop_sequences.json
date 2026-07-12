@@ -1,0 +1,1 @@
+{"max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Very short function describing a pelican"}]},{"role":"assistant","content":[{"type":"text","text":"```python"}]}],"model":"claude-haiku-4-5-20251001","stop_sequences":["```"],"temperature":1.0,"stream":true}

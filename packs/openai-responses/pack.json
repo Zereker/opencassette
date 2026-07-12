@@ -1,0 +1,6 @@
+{
+  "protocol": "openai-responses",
+  "required": ["model", "input"],
+  "model_field": "model",
+  "stream_field": "stream"
+}

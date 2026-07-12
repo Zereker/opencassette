@@ -1,0 +1,6 @@
+{
+  "protocol": "openai",
+  "required": ["model", "messages"],
+  "model_field": "model",
+  "stream_field": "stream"
+}

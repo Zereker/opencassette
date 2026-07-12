@@ -1,0 +1,6 @@
+{
+  "protocol": "gemini",
+  "required": ["contents"],
+  "model_field": "",
+  "stream_field": ""
+}
