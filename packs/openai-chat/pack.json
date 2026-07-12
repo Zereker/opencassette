@@ -2,5 +2,10 @@
   "protocol": "openai",
   "required": ["model", "messages"],
   "model_field": "model",
-  "stream_field": "stream"
+  "stream_field": "stream",
+  "spec": {
+    "kind": "stainless-stats",
+    "url": "https://raw.githubusercontent.com/openai/openai-python/main/.stats.yml",
+    "path": "/chat/completions"
+  }
 }

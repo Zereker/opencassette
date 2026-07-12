@@ -30,6 +30,19 @@ URL-model packs put a `{model}` placeholder in `-url`; for URL-streamed
 packs (Gemini's `:streamGenerateContent`) record twice with an explicit
 `-bucket stream` / `-bucket nostream`.
 
+A manifest may also carry a `spec` block naming the protocol's
+authoritative request schema — OpenAI and Anthropic publish theirs via
+their SDK repos' `.stats.yml` (`"kind": "stainless-stats"`), Gemini via
+Google's discovery document (`"kind": "discovery"`), and a plain
+`"kind": "openapi"` URL works too. `opencassette audit packs` fetches
+each spec and diffs it against the pack's field union: `missing` fields
+are the to-record list (each new scenario still needs real provenance —
+the spec names the gap, it doesn't provide the body), `extra` fields are
+vendor extensions or spec drift worth investigating. The audit is
+one-way by design: the spec is a growth ceiling for packs, never a
+validator of recorded traffic — vendors' deviations from their own specs
+are data, not errors.
+
 ## `openai-chat/` — scenarios and provenance
 
 No body in this pack was invented. Sources fall in three classes: verbatim

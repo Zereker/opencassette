@@ -52,6 +52,7 @@ import (
 
 	"github.com/tidwall/gjson"
 
+	"github.com/zereker/opencassette/audit"
 	"github.com/zereker/opencassette/recorder"
 	"github.com/zereker/opencassette/scenario"
 	"github.com/zereker/opencassette/verify"
@@ -68,6 +69,8 @@ func main() {
 		runRecord(os.Args[2:])
 	case "verify":
 		runVerify(os.Args[2:])
+	case "audit":
+		runAudit(os.Args[2:])
 	case "version", "-version", "--version":
 		fmt.Println("opencassette/" + version)
 	default:
@@ -76,8 +79,86 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: opencassette <record|verify> [flags]  (see -h on each subcommand)")
+	fmt.Fprintln(os.Stderr, "usage: opencassette <record|verify|audit> [flags]  (see -h on each subcommand)")
 	os.Exit(2)
+}
+
+// =============================================================================
+// audit
+// =============================================================================
+
+// runAudit diffs each pack's request-field coverage against the
+// authoritative spec its pack.json names (network required). Advisory by
+// default: the report suggests what to record next; -strict turns gaps
+// into a non-zero exit for automation.
+func runAudit(args []string) {
+	fs := flag.NewFlagSet("audit", flag.ExitOnError)
+	root := fs.String("dir", "packs", "packs root, or a single pack directory")
+	strict := fs.Bool("strict", false, "exit 1 if any audited pack is missing spec-declared fields")
+	timeout := fs.Duration("timeout", time.Minute, "spec fetch timeout")
+	_ = fs.Parse(args)
+	if fs.NArg() > 0 {
+		*root = fs.Arg(0)
+	}
+
+	dirs := []string{*root}
+	if _, err := os.Stat(filepath.Join(*root, "pack.json")); os.IsNotExist(err) {
+		entries, err := os.ReadDir(*root)
+		if err != nil {
+			log.Fatalf("audit: %v", err)
+		}
+		dirs = dirs[:0]
+		for _, e := range entries {
+			if e.IsDir() {
+				dirs = append(dirs, filepath.Join(*root, e.Name()))
+			}
+		}
+	}
+
+	client := &http.Client{Timeout: *timeout}
+	gaps := false
+	for _, dir := range dirs {
+		pack, err := scenario.LoadPack(dir)
+		if err != nil {
+			log.Fatalf("audit: %v", err)
+		}
+		if pack.Spec == nil {
+			fmt.Printf("== %s (%s): no spec declared in pack.json, skipping\n", dir, pack.Protocol)
+			continue
+		}
+		specFields, err := audit.Fields(client, pack.Spec)
+		if err != nil {
+			log.Fatalf("audit: %s: %v", dir, err)
+		}
+		if pack.ModelField == "" {
+			// The model rides in the URL for this pack; the body not
+			// carrying it is by design, not a coverage gap.
+			specFields = without(specFields, "model")
+		}
+		r := audit.Compare(audit.PackFields(pack), specFields)
+		fmt.Printf("== %s (%s) vs %s\n", dir, pack.Protocol, pack.Spec.URL)
+		fmt.Printf("   covered %d/%d spec fields\n", len(r.Covered), r.SpecTotal)
+		if len(r.Missing) > 0 {
+			gaps = true
+			fmt.Printf("   missing from pack (%d): %s\n", len(r.Missing), strings.Join(r.Missing, ", "))
+		}
+		if len(r.Extra) > 0 {
+			fmt.Printf("   not in spec (%d, vendor extension or spec drift): %s\n", len(r.Extra), strings.Join(r.Extra, ", "))
+		}
+	}
+	if *strict && gaps {
+		os.Exit(1)
+	}
+}
+
+func without(list []string, drop string) []string {
+	out := list[:0]
+	for _, v := range list {
+		if v != drop {
+			out = append(out, v)
+		}
+	}
+	return out
 }
 
 // =============================================================================

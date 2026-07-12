@@ -55,6 +55,17 @@ var syntheticProbes = map[string]probeRule{
 	},
 }
 
+// SyntheticProbeFields lists the fields probing covers beyond what any
+// pack body carries, so coverage audits can count them.
+func SyntheticProbeFields() []string {
+	out := make([]string, 0, len(syntheticProbes))
+	for f := range syntheticProbes {
+		out = append(out, f)
+	}
+	sort.Strings(out)
+	return out
+}
+
 // BuildProbes derives one probe per top-level field of fullParams (except
 // model and messages, which come from base — the pack's minimal scenario,
 // already model-substituted), plus the synthetic probes for fields the

@@ -45,6 +45,26 @@ type Manifest struct {
 	// the stream/nostream corpus bucket. Empty means the body doesn't
 	// decide (the endpoint does — record with an explicit -bucket).
 	StreamField string `json:"stream_field"`
+	// Spec optionally names the protocol's authoritative request schema,
+	// for `opencassette audit` to diff the pack's coverage against. The
+	// audit is one-way: the spec suggests fields the pack could grow to
+	// carry; it never disqualifies recorded traffic.
+	Spec *SpecRef `json:"spec,omitempty"`
+}
+
+// SpecRef locates an authoritative request schema.
+type SpecRef struct {
+	// Kind: "openapi" (URL is an OpenAPI document), "stainless-stats"
+	// (URL is an SDK repo's .stats.yml whose openapi_spec_url names the
+	// current spec — how OpenAI and Anthropic publish theirs), or
+	// "discovery" (URL is a Google API discovery document).
+	Kind string `json:"kind"`
+	URL  string `json:"url"`
+	// Path is the OpenAPI request path whose POST body schema to read
+	// (openapi / stainless-stats kinds).
+	Path string `json:"path,omitempty"`
+	// Schema is the discovery-document schema name (discovery kind).
+	Schema string `json:"schema,omitempty"`
 }
 
 func defaultManifest() Manifest {

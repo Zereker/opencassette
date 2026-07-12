@@ -38,7 +38,8 @@ grow a shared library of real captures.
 | `recorder` (Go package) | An `http.RoundTripper` that records real calls with name-based **and** value-based credential scrubbing, plus a `meta:` provenance block |
 | `scenario` (Go package) + `packs/` | Standard request-body packs (SDK-derived, coverage-enforced by tests) for four wire protocols — OpenAI chat, OpenAI Responses, Anthropic Messages, Gemini generateContent — so a recording session exercises tools, tool loops, streaming, structured output — not just `"hi"` |
 | `verify` (Go package) | Checks a corpus for leaked credentials and synthetic-data tells (placeholder ids, impossible timestamps, token accounting that doesn't add up) |
-| `cmd/opencassette` | The CLI over all of it: `record` and `verify` |
+| `audit` (Go package) | Diffs each pack's field coverage against the protocol's authoritative schema (OpenAI/Anthropic via their SDKs' published OpenAPI specs, Gemini via Google's discovery document) — a one-way ceiling check that suggests what to record next, never a validator of recorded traffic |
+| `cmd/opencassette` | The CLI over all of it: `record`, `verify` and `audit` |
 | `corpus/` | The recordings themselves, laid out `vendor/model/protocol/{stream,nostream}/scenario.yaml` |
 
 ## Quick start
@@ -88,6 +89,16 @@ Verify a corpus (CI runs this on every PR):
 
 ```sh
 ./opencassette verify corpus
+```
+
+Audit pack coverage against each protocol's authoritative spec (network;
+advisory — the report is a to-record list, not a gate):
+
+```sh
+./opencassette audit packs
+# == packs/anthropic-messages (anthropic) vs .../anthropic-sdk-python/main/.stats.yml
+#    covered 9/18 spec fields
+#    missing from pack (9): cache_control, ..., system, tool_choice, top_k, top_p
 ```
 
 Load cassettes in your own tests:

@@ -2,5 +2,10 @@
   "protocol": "gemini",
   "required": ["contents"],
   "model_field": "",
-  "stream_field": ""
+  "stream_field": "",
+  "spec": {
+    "kind": "discovery",
+    "url": "https://generativelanguage.googleapis.com/$discovery/rest?version=v1beta",
+    "schema": "GenerateContentRequest"
+  }
 }
