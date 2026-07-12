@@ -453,6 +453,18 @@ func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 		log.Fatalf("record: %v", err)
 	}
 
+	// Refuse to clobber an earlier probe run before spending any API
+	// calls — the per-file check in writeCassette would only trip after
+	// the baseline and first probes already ran.
+	protoDirEarly := filepath.Join(corpusDir, vendor, model, protocol)
+	if !run.force {
+		for _, p := range []string{"fields", "fields-rejected", "field-support.json"} {
+			if _, err := os.Stat(filepath.Join(protoDirEarly, p)); err == nil {
+				log.Fatalf("record: %s already has probe results (%s) — re-probe with -force", protoDirEarly, p)
+			}
+		}
+	}
+
 	// If the minimal body itself fails, every probe would read as a
 	// rejection — abort instead of writing a matrix of noise.
 	fmt.Fprintln(os.Stderr, "===== baseline: minimal request =====")
