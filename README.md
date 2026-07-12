@@ -55,6 +55,18 @@ RECORD_API_KEY=sk-... ./opencassette record \
 # -> corpus/deepseek/deepseek-chat/openai/{stream,nostream}/<scenario>.yaml
 ```
 
+Probe which request fields a vendor actually supports — one minimal call
+per field, accepted fields recorded under `fields/`, 400/422 rejections
+(evidence of non-support) under `fields-rejected/`, plus a
+`field-support.json` matrix:
+
+```sh
+RECORD_API_KEY=sk-... ./opencassette record \
+  -url https://api.deepseek.com/chat/completions \
+  -probe-fields packs/openai-chat \
+  -vendor deepseek -model deepseek-chat
+```
+
 Verify a corpus (CI runs this on every PR):
 
 ```sh

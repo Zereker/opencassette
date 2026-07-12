@@ -67,6 +67,21 @@ corpus/<vendor>/<model>/<protocol>/<stream|nostream>/<scenario>.yaml
   its first turn landed in — the bucket classifies the scenario, and a file
   can't live in two directories.
 
+A field-probe run (`record -probe-fields`) adds three siblings under the
+same `<protocol>/` directory:
+
+```
+corpus/<vendor>/<model>/<protocol>/fields/<field>.yaml           # accepted: minimal request + one field, HTTP 2xx
+corpus/<vendor>/<model>/<protocol>/fields-rejected/<field>.yaml  # the vendor's 400/422 — recorded evidence of non-support
+corpus/<vendor>/<model>/<protocol>/field-support.json            # machine-readable support matrix for the run
+```
+
+A probe cassette's `meta.scenario` is `field:<name>`, and its
+`meta.scenario_sha256` hashes the pack's `chat_full_params.json` the field
+value came from. Statuses other than 2xx/400/422 (auth failures, rate
+limits, 5xx) say nothing about the field: no cassette is written and the
+matrix marks the field `error`.
+
 ## Second format the loader accepts (read-only)
 
 For importing existing third-party captures, the loader also parses

@@ -31,6 +31,30 @@ declares, plus the structural shapes (both stream buckets, named
 tool_choice, a tool-result round trip with parallel calls, json_schema
 output). Removing a field's only carrier turns CI red.
 
+## Field probing (`record -probe-fields packs/openai-chat`)
+
+The full-params scenario can only prove "this exact bundle was accepted";
+a strict vendor's 4xx on it says nothing about which fields it *does*
+support, and a lenient vendor silently ignoring a field looks identical to
+supporting it. Probe mode turns the same two committed files into
+per-field evidence: for every top-level field of `chat_full_params.json`
+(except `model`/`messages`) it sends `chat_basic.json`'s minimal body plus
+that one field, in isolation.
+
+Four fields are adjusted so the probe measures capability rather than
+request-validation noise (the rules live in `scenario.BuildProbes` and are
+test-pinned):
+
+| Field | Adjustment | Why |
+|---|---|---|
+| `tool_choice`, `parallel_tool_calls` | carries `tools` from the full-params body | only valid alongside declared tools |
+| `stream` | sent as `true` | the committed `false` is treated as absent by every vendor |
+| `audio` | carries `modalities: ["text","audio"]` | audio output is rejected unless the modality is requested |
+
+Results: 2xx cassettes land in `fields/`, 400/422 rejections (evidence of
+non-support, error body included) in `fields-rejected/`, and a
+`field-support.json` matrix is written alongside — see FORMAT.md.
+
 ## Adding scenarios
 
 Provenance order of preference: verbatim real SDK request > derived from
