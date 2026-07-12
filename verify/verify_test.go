@@ -70,6 +70,24 @@ func TestUnscrubbedCredentialHeaderFails(t *testing.T) {
 	}
 }
 
+// TestCredentialHeaderVariantsAllCaught: a scalar-valued credential header
+// (hand-written files use that form) must be flagged, and must not stop the
+// remaining headers in the same section from being checked — an earlier
+// version bailed out of the whole section on the first non-list value.
+func TestCredentialHeaderVariantsAllCaught(t *testing.T) {
+	ts := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
+	content := strings.Replace(fmt.Sprintf(goodTemplate, ts),
+		"    headers:\n      Authorization:\n      - '**REDACTED**'\n",
+		"    headers:\n      Authorization: Bearer scalar-leak\n      X-Api-Key:\n      - list-leak\n", 1)
+	fails, _ := levels(File(writeFile(t, content)))
+	joined := strings.Join(fails, ";")
+	for _, header := range []string{"Authorization", "X-Api-Key"} {
+		if !strings.Contains(joined, fmt.Sprintf("%q is not scrubbed", header)) {
+			t.Errorf("leaked %s not caught: %v", header, fails)
+		}
+	}
+}
+
 func TestSecretShapedStringsFail(t *testing.T) {
 	ts := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
 	for name, replace := range map[string][2]string{

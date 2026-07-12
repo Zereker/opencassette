@@ -163,12 +163,17 @@ func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 			if !credentialHeaders[strings.ToLower(name)] {
 				continue
 			}
-			list, ok := vals.([]any)
-			if !ok {
-				return
-			}
-			for _, v := range list {
-				if s, ok := v.(string); ok && s != redacted {
+			switch v := vals.(type) {
+			case []any:
+				for _, item := range v {
+					if s, ok := item.(string); ok && s != redacted {
+						add(Fail, "credential header %q is not scrubbed", name)
+					}
+				}
+			case string:
+				// Hand-written files sometimes carry the value as a scalar
+				// instead of the usual one-element list; a leak is a leak.
+				if v != redacted {
 					add(Fail, "credential header %q is not scrubbed", name)
 				}
 			}
