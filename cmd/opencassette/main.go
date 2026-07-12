@@ -158,7 +158,7 @@ func runRecord(args []string) {
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
-	if err := recordOne(*endpoint, body, *authStyle, key, headers, *timeout, outPath, *appendExisting, metaFor(*endpoint, *vendor, *model, *name)); err != nil {
+	if err := recordOne(*endpoint, body, *authStyle, key, headers, *timeout, outPath, *appendExisting, metaFor(*endpoint, *vendor, *model, *name, "")); err != nil {
 		log.Fatalf("record: %v", err)
 	}
 	fmt.Fprintln(os.Stderr, "before publishing: read the file, then run `opencassette verify` over it")
@@ -183,7 +183,7 @@ func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 		if err != nil {
 			log.Fatalf("record: %v", err)
 		}
-		if err := recordOne(endpoint, body, authStyle, key, headers, timeout, outPath, false, metaFor(endpoint, vendor, model, sc.Name)); err != nil {
+		if err := recordOne(endpoint, body, authStyle, key, headers, timeout, outPath, false, metaFor(endpoint, vendor, model, sc.Name, sc.SHA256())); err != nil {
 			fmt.Fprintf(os.Stderr, "SKIPPED %s: %v\n", sc.Name, err)
 			failed = append(failed, sc.Name)
 		}
@@ -198,18 +198,22 @@ func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 	}
 }
 
-func metaFor(endpoint, vendor, model, scenarioName string) recorder.Meta {
+// metaFor builds the provenance block; scenarioSHA is the pack file's hash
+// in batch mode, empty (and omitted from the YAML) for ad-hoc -body-file
+// recordings, which have no pack version to trace back to.
+func metaFor(endpoint, vendor, model, scenarioName, scenarioSHA string) recorder.Meta {
 	host := endpoint
 	if u, err := url.Parse(endpoint); err == nil && u.Host != "" {
 		host = u.Scheme + "://" + u.Host
 	}
 	return recorder.Meta{
-		RecordedAt: time.Now().UTC().Format(time.RFC3339),
-		Vendor:     vendor,
-		Model:      model,
-		Endpoint:   host,
-		Scenario:   scenarioName,
-		Tool:       "opencassette/" + version,
+		RecordedAt:     time.Now().UTC().Format(time.RFC3339),
+		Vendor:         vendor,
+		Model:          model,
+		Endpoint:       host,
+		Scenario:       scenarioName,
+		ScenarioSHA256: scenarioSHA,
+		Tool:           "opencassette/" + version,
 	}
 }
 

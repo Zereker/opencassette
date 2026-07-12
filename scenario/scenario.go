@@ -8,6 +8,8 @@
 package scenario
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -64,6 +66,15 @@ func LoadDir(dir string) ([]Scenario, error) {
 		})
 	}
 	return out, nil
+}
+
+// SHA256 returns the hex SHA-256 of the scenario body exactly as the pack
+// file defines it — before the model substitution. Recorded into the
+// cassette's meta block, it ties a capture to the precise pack version that
+// produced it even after the pack file is later edited.
+func (s Scenario) SHA256() string {
+	sum := sha256.Sum256(s.Body)
+	return hex.EncodeToString(sum[:])
 }
 
 // WithModel returns the scenario body with its "model" field replaced —

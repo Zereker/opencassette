@@ -1,8 +1,11 @@
 package scenario
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/tidwall/gjson"
@@ -106,6 +109,22 @@ func TestPackStructuralGuarantees(t *testing.T) {
 	} {
 		if !ok {
 			t.Errorf("pack is missing %s", name)
+		}
+	}
+}
+
+// TestSHA256IsHashOfCommittedPackFile pins what the meta block's
+// scenario_sha256 traces back to: the pack file's bytes as committed,
+// untouched by the model substitution.
+func TestSHA256IsHashOfCommittedPackFile(t *testing.T) {
+	for _, sc := range loadPack(t) {
+		raw, err := os.ReadFile(filepath.Join(packDir, sc.Name+".json"))
+		if err != nil {
+			t.Fatalf("%s: %v", sc.Name, err)
+		}
+		sum := sha256.Sum256(raw)
+		if got, want := sc.SHA256(), hex.EncodeToString(sum[:]); got != want {
+			t.Errorf("%s: SHA256() = %s, want hash of pack file %s", sc.Name, got, want)
 		}
 	}
 }

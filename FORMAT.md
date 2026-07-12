@@ -13,6 +13,8 @@ meta:
   model: deepseek-chat                   # model as sent upstream
   endpoint: https://api.deepseek.com     # scheme://host actually called
   scenario: chat_basic                   # scenario-pack name, if batch-recorded
+  scenario_sha256: 9f3c…                 # SHA-256 of the pack scenario file as committed
+                                         # (pre model-substitution), if batch-recorded
   tool: opencassette/0.1.0
 interactions:
 - request:

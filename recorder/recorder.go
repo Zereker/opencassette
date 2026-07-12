@@ -54,7 +54,11 @@ type Meta struct {
 	Model      string `yaml:"model,omitempty"`    // model as sent upstream
 	Endpoint   string `yaml:"endpoint,omitempty"` // scheme://host of the real API called
 	Scenario   string `yaml:"scenario,omitempty"` // scenario-pack name, if batch-recorded
-	Tool       string `yaml:"tool,omitempty"`     // recorder identifier, e.g. opencassette/0.1.0
+	// ScenarioSHA256 is the hex SHA-256 of the pack scenario body as
+	// committed (pre model-substitution), so a cassette stays traceable to
+	// the exact pack version that produced it after the pack file changes.
+	ScenarioSHA256 string `yaml:"scenario_sha256,omitempty"`
+	Tool           string `yaml:"tool,omitempty"` // recorder identifier, e.g. opencassette/0.1.0
 }
 
 // Recorder is an http.RoundTripper that passes requests through to a base
