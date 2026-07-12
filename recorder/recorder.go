@@ -83,6 +83,7 @@ func New(base http.RoundTripper) *Recorder {
 	if base == nil {
 		base = http.DefaultTransport
 	}
+
 	r := &Recorder{
 		base:        base,
 		scrubHeader: make(map[string]bool, len(defaultScrubHeaders)),
@@ -91,6 +92,7 @@ func New(base http.RoundTripper) *Recorder {
 	for _, h := range defaultScrubHeaders {
 		r.scrubHeader[h] = true
 	}
+
 	return r
 }
 
@@ -98,6 +100,7 @@ func New(base http.RoundTripper) *Recorder {
 func (r *Recorder) SetMeta(m Meta) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
+
 	r.meta = &m
 }
 
@@ -121,6 +124,7 @@ func (r *Recorder) ScrubQueryParam(name string) { r.scrubQuery[name] = true }
 func (r *Recorder) Len() int {
 	r.mu.Lock()
 	defer r.mu.Unlock()
+
 	return len(r.interactions)
 }
 
@@ -130,12 +134,15 @@ func (r *Recorder) Len() int {
 // exchange, and hands the caller a replayable response.
 func (r *Recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 	var reqBody []byte
+
 	if req.Body != nil {
 		b, err := io.ReadAll(req.Body)
 		_ = req.Body.Close()
+
 		if err != nil {
 			return nil, fmt.Errorf("recorder: read request body: %w", err)
 		}
+
 		reqBody = b
 		req.Body = io.NopCloser(bytes.NewReader(b))
 	}
@@ -144,11 +151,14 @@ func (r *Recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	respBody, err := io.ReadAll(resp.Body)
 	_ = resp.Body.Close()
+
 	if err != nil {
 		return nil, fmt.Errorf("recorder: read response body: %w", err)
 	}
+
 	resp.Body = io.NopCloser(bytes.NewReader(respBody))
 
 	doc := interactionDoc{
@@ -164,6 +174,7 @@ func (r *Recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 			Status:  statusDoc{Code: resp.StatusCode, Message: statusMessage(resp)},
 		},
 	}
+
 	var node yaml.Node
 	if err := node.Encode(doc); err != nil {
 		return nil, fmt.Errorf("recorder: encode interaction: %w", err)
@@ -172,6 +183,7 @@ func (r *Recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 	r.mu.Lock()
 	r.interactions = append(r.interactions, node)
 	r.mu.Unlock()
+
 	return resp, nil
 }
 
@@ -186,19 +198,24 @@ func (r *Recorder) PrependFromFile(path string) error {
 	if err != nil {
 		return fmt.Errorf("recorder: read %s: %w", path, err)
 	}
+
 	var doc fileDoc
 	if err := yaml.Unmarshal(raw, &doc); err != nil {
 		return fmt.Errorf("recorder: parse %s: %w", path, err)
 	}
+
 	if len(doc.Interactions) == 0 {
 		return fmt.Errorf("recorder: %s has no interactions: list (not a cassette this tool wrote?)", path)
 	}
+
 	r.mu.Lock()
+
 	r.interactions = append(doc.Interactions, r.interactions...)
 	if r.meta == nil {
 		r.meta = doc.Meta
 	}
 	r.mu.Unlock()
+
 	return nil
 }
 
@@ -208,21 +225,26 @@ func (r *Recorder) PrependFromFile(path string) error {
 func (r *Recorder) WriteFile(path string) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
+
 	if len(r.interactions) == 0 {
 		return fmt.Errorf("recorder: no interactions recorded")
 	}
+
 	if dir := filepath.Dir(path); dir != "." {
 		if err := os.MkdirAll(dir, 0o755); err != nil {
 			return fmt.Errorf("recorder: mkdir %s: %w", dir, err)
 		}
 	}
+
 	out, err := yaml.Marshal(fileDoc{Meta: r.meta, Interactions: r.interactions})
 	if err != nil {
 		return fmt.Errorf("recorder: marshal: %w", err)
 	}
+
 	if err := os.WriteFile(path, out, 0o644); err != nil {
 		return fmt.Errorf("recorder: write %s: %w", path, err)
 	}
+
 	return nil
 }
 
@@ -272,9 +294,11 @@ func bodyValue(b []byte) any {
 	if len(b) == 0 {
 		return nil
 	}
+
 	if utf8.Valid(b) {
 		return string(b)
 	}
+
 	return &yaml.Node{
 		Kind:  yaml.ScalarNode,
 		Tag:   "!!binary",
@@ -289,12 +313,15 @@ func (r *Recorder) scrubHeaders(h http.Header) map[string][]string {
 			out[name] = []string{redacted}
 			continue
 		}
+
 		cp := make([]string, len(vals))
 		for i, v := range vals {
 			cp[i] = r.redactString(v)
 		}
+
 		out[name] = cp
 	}
+
 	return out
 }
 
@@ -302,15 +329,19 @@ func (r *Recorder) scrubURI(u *url.URL) string {
 	cp := *u
 	q := cp.Query()
 	changed := false
+
 	for name := range q {
 		if r.scrubQuery[name] {
 			q.Set(name, redacted)
+
 			changed = true
 		}
 	}
+
 	if changed {
 		cp.RawQuery = q.Encode()
 	}
+
 	return r.redactString(cp.String())
 }
 
@@ -323,6 +354,7 @@ func (r *Recorder) redactString(s string) string {
 			s = strings.ReplaceAll(s, esc, redacted)
 		}
 	}
+
 	return s
 }
 

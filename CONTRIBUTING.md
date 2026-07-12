@@ -45,6 +45,7 @@ if your change removes the only carrier of a parameter, tests go red.
 
 ## Code
 
-Standard Go project: `gofmt`, `go vet ./...`, `go test ./...` must pass.
-Keep the loader backward-compatible — existing corpus files must never stop
-loading.
+Standard Go project: `gofmt`, `golangci-lint run` (standard linters plus
+`wsl` — config in `.golangci.yml`) and `go test ./...` must pass; CI runs
+all three. Keep the loader backward-compatible — existing corpus files
+must never stop loading.

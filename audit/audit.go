@@ -35,28 +35,33 @@ func Fields(client *http.Client, ref *scenario.SpecRef) ([]string, error) {
 	if ref == nil {
 		return nil, fmt.Errorf("audit: pack.json declares no spec")
 	}
+
 	switch ref.Kind {
 	case "openapi":
 		raw, err := fetch(client, ref.URL)
 		if err != nil {
 			return nil, err
 		}
+
 		return openapiRequestFields(raw, ref.Path)
 	case "stainless-stats":
 		specURL, err := StainlessSpecURL(client, ref.URL)
 		if err != nil {
 			return nil, err
 		}
+
 		spec, err := fetch(client, specURL)
 		if err != nil {
 			return nil, err
 		}
+
 		return openapiRequestFields(spec, ref.Path)
 	case "discovery":
 		raw, err := fetch(client, ref.URL)
 		if err != nil {
 			return nil, err
 		}
+
 		return discoveryFields(raw, ref.Schema)
 	default:
 		return nil, fmt.Errorf("audit: unknown spec kind %q (want openapi | stainless-stats | discovery)", ref.Kind)
@@ -74,12 +79,14 @@ func StainlessSpecURL(client *http.Client, statsURL string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	var stats struct {
 		OpenAPISpecURL string `yaml:"openapi_spec_url"`
 	}
 	if err := yaml.Unmarshal(raw, &stats); err != nil || stats.OpenAPISpecURL == "" {
 		return "", fmt.Errorf("audit: %s has no openapi_spec_url (not a Stainless .stats.yml?)", statsURL)
 	}
+
 	return stats.OpenAPISpecURL, nil
 }
 
@@ -95,6 +102,7 @@ type Report struct {
 func Compare(packFields, specFields []string) Report {
 	pack := toSet(packFields)
 	spec := toSet(specFields)
+
 	r := Report{SpecTotal: len(spec)}
 	for f := range spec {
 		if pack[f] {
@@ -103,14 +111,17 @@ func Compare(packFields, specFields []string) Report {
 			r.Missing = append(r.Missing, f)
 		}
 	}
+
 	for f := range pack {
 		if !spec[f] {
 			r.Extra = append(r.Extra, f)
 		}
 	}
+
 	sort.Strings(r.Covered)
 	sort.Strings(r.Missing)
 	sort.Strings(r.Extra)
+
 	return r
 }
 
@@ -122,25 +133,31 @@ func Compare(packFields, specFields []string) Report {
 // by design, not a gap.
 func PackFields(pack *scenario.Pack) []string {
 	set := map[string]bool{}
+
 	for _, sc := range pack.Scenarios {
 		var doc map[string]json.RawMessage
 		if json.Unmarshal(sc.Body, &doc) != nil {
 			continue // LoadPack already validated; belt and braces
 		}
+
 		for f := range doc {
 			set[f] = true
 		}
 	}
+
 	if pack.Protocol == "openai" {
 		for _, f := range scenario.SyntheticProbeFields() {
 			set[f] = true
 		}
 	}
+
 	out := make([]string, 0, len(set))
 	for f := range set {
 		out = append(out, f)
 	}
+
 	sort.Strings(out)
+
 	return out
 }
 
@@ -149,14 +166,17 @@ func fetch(client *http.Client, url string) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("audit: fetch %s: %w", url, err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
+
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("audit: fetch %s: HTTP %s", url, resp.Status)
 	}
+
 	raw, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("audit: read %s: %w", url, err)
 	}
+
 	return raw, nil
 }
 
@@ -167,25 +187,33 @@ func openapiRequestFields(raw []byte, path string) ([]string, error) {
 	if err := yaml.Unmarshal(raw, &spec); err != nil {
 		return nil, fmt.Errorf("audit: parse OpenAPI document: %w", err)
 	}
+
 	paths, _ := spec["paths"].(map[string]any)
+
 	p, ok := paths[path].(map[string]any)
 	if !ok {
 		return nil, fmt.Errorf("audit: path %q not found in spec", path)
 	}
+
 	schema := dig(p, "post", "requestBody", "content", "application/json", "schema")
 	if schema == nil {
 		return nil, fmt.Errorf("audit: no JSON request schema at POST %s", path)
 	}
+
 	set := map[string]bool{}
 	collectProps(spec, schema, set, 0)
+
 	if len(set) == 0 {
 		return nil, fmt.Errorf("audit: request schema at POST %s has no resolvable properties", path)
 	}
+
 	out := make([]string, 0, len(set))
 	for f := range set {
 		out = append(out, f)
 	}
+
 	sort.Strings(out)
+
 	return out, nil
 }
 
@@ -196,19 +224,23 @@ func collectProps(spec map[string]any, node any, out map[string]bool, depth int)
 	if depth > 8 {
 		return
 	}
+
 	m, ok := node.(map[string]any)
 	if !ok {
 		return
 	}
+
 	if ref, ok := m["$ref"].(string); ok {
 		collectProps(spec, deref(spec, ref), out, depth+1)
 		return
 	}
+
 	if all, ok := m["allOf"].([]any); ok {
 		for _, sub := range all {
 			collectProps(spec, sub, out, depth+1)
 		}
 	}
+
 	if props, ok := m["properties"].(map[string]any); ok {
 		for f := range props {
 			out[f] = true
@@ -220,14 +252,17 @@ func deref(spec map[string]any, ref string) any {
 	if !strings.HasPrefix(ref, "#/") {
 		return nil // remote refs are out of scope
 	}
+
 	var cur any = spec
 	for _, seg := range strings.Split(strings.TrimPrefix(ref, "#/"), "/") {
 		m, ok := cur.(map[string]any)
 		if !ok {
 			return nil
 		}
+
 		cur = m[seg]
 	}
+
 	return cur
 }
 
@@ -240,15 +275,19 @@ func discoveryFields(raw []byte, schema string) ([]string, error) {
 	if err := json.Unmarshal(raw, &doc); err != nil {
 		return nil, fmt.Errorf("audit: parse discovery document: %w", err)
 	}
+
 	s, ok := doc.Schemas[schema]
 	if !ok || len(s.Properties) == 0 {
 		return nil, fmt.Errorf("audit: schema %q not found in discovery document", schema)
 	}
+
 	out := make([]string, 0, len(s.Properties))
 	for f := range s.Properties {
 		out = append(out, f)
 	}
+
 	sort.Strings(out)
+
 	return out, nil
 }
 
@@ -259,8 +298,10 @@ func dig(m map[string]any, keys ...string) any {
 		if !ok {
 			return nil
 		}
+
 		cur = mm[k]
 	}
+
 	return cur
 }
 
@@ -269,5 +310,6 @@ func toSet(list []string) map[string]bool {
 	for _, f := range list {
 		set[f] = true
 	}
+
 	return set
 }

@@ -1,0 +1,10 @@
+# golangci-lint v2 configuration.
+version: "2"
+
+linters:
+  # standard = errcheck, govet, ineffassign, staticcheck, unused
+  default: standard
+  enable:
+    # wsl (v5): whitespace discipline — blank lines that group related
+    # statements and separate unrelated ones.
+    - wsl_v5

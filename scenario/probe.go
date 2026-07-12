@@ -62,7 +62,9 @@ func SyntheticProbeFields() []string {
 	for f := range syntheticProbes {
 		out = append(out, f)
 	}
+
 	sort.Strings(out)
+
 	return out
 }
 
@@ -76,61 +78,78 @@ func BuildProbes(base, fullParams []byte) ([]Probe, error) {
 	if err := json.Unmarshal(base, &baseDoc); err != nil {
 		return nil, fmt.Errorf("scenario: parse probe base: %w", err)
 	}
+
 	if err := json.Unmarshal(fullParams, &fullDoc); err != nil {
 		return nil, fmt.Errorf("scenario: parse full-params: %w", err)
 	}
+
 	model, okM := baseDoc["model"]
+
 	messages, okMsg := baseDoc["messages"]
 	if !okM || !okMsg {
 		return nil, fmt.Errorf("scenario: probe base must have model and messages")
 	}
 
 	var fields []string
+
 	for f := range fullDoc {
 		if f != "model" && f != "messages" {
 			fields = append(fields, f)
 		}
 	}
+
 	if len(fields) == 0 {
 		return nil, fmt.Errorf("scenario: full-params has no probeable fields")
 	}
+
 	for f := range syntheticProbes {
 		if _, ok := fullDoc[f]; !ok {
 			fields = append(fields, f)
 		}
 	}
+
 	sort.Strings(fields)
 
 	out := make([]Probe, 0, len(fields))
 	for _, field := range fields {
 		val, inFull := fullDoc[field]
+
 		rule := probeRules[field]
 		if !inFull {
 			rule = syntheticProbes[field]
 		}
+
 		doc := map[string]json.RawMessage{"model": model, "messages": messages}
+
 		if rule.value != nil {
 			val = rule.value
 		}
+
 		doc[field] = val
+
 		var companions []string
 		for _, c := range rule.companions {
 			cv, ok := fullDoc[c]
 			if !ok {
 				return nil, fmt.Errorf("scenario: full-params no longer carries %q, required by the %q probe", c, field)
 			}
+
 			doc[c] = cv
 			companions = append(companions, c)
 		}
+
 		for k, v := range rule.extra {
 			doc[k] = v
 			companions = append(companions, k)
 		}
+
 		sort.Strings(companions)
+
 		body, err := json.Marshal(doc)
 		if err != nil {
 			return nil, fmt.Errorf("scenario: marshal %q probe: %w", field, err)
 		}
+
 		out = append(out, Probe{
 			Field:      field,
 			Body:       body,
@@ -138,5 +157,6 @@ func BuildProbes(base, fullParams []byte) ([]Probe, error) {
 			Companions: companions,
 		})
 	}
+
 	return out, nil
 }

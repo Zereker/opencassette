@@ -19,8 +19,12 @@ jobs:
           cache: true
       - name: Gofmt
         run: test -z "$(gofmt -l .)" || { gofmt -l .; exit 1; }
-      - name: Vet
-        run: go vet ./...
+      - name: Lint
+        # Runs the standard set (govet, staticcheck, errcheck, …) plus wsl —
+        # see .golangci.yml.
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.12.2
       - name: Test
         run: go test ./...
       - name: Verify corpus

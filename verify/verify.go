@@ -86,6 +86,7 @@ func File(path string) []Finding {
 
 func fileAt(path string, now time.Time) []Finding {
 	var out []Finding
+
 	add := func(level Level, format string, args ...any) {
 		out = append(out, Finding{Path: path, Level: level, Msg: fmt.Sprintf(format, args...)})
 	}
@@ -95,6 +96,7 @@ func fileAt(path string, now time.Time) []Finding {
 		add(Fail, "unparseable: %v", err)
 		return out
 	}
+
 	if len(its) == 0 {
 		add(Fail, "no interactions")
 		return out
@@ -105,6 +107,7 @@ func fileAt(path string, now time.Time) []Finding {
 		add(Fail, "unreadable: %v", err)
 		return out
 	}
+
 	for _, pat := range rawSecretPatterns {
 		if m := pat.Find(raw); m != nil {
 			add(Fail, "secret-shaped string in file: %q", truncate(string(m), 24))
@@ -120,26 +123,33 @@ func fileAt(path string, now time.Time) []Finding {
 			add(Fail, "interaction #%d: URI %q has no host", i, it.URI)
 			continue
 		}
+
 		if u.Scheme != "https" {
 			add(Warn, "interaction #%d: non-https URI %q (localhost re-recording? real vendor traffic should be https)", i, it.URI)
 		}
+
 		for _, body := range [][]byte{it.RequestBody, []byte(it.URI)} {
 			if m := skKeyPattern.Find(body); m != nil {
 				add(Fail, "interaction #%d: secret-shaped string in request: %q", i, truncate(string(m), 24))
 			}
 		}
+
 		resp := it.ResponseBody
 		if m := skKeyPattern.Find(resp); m != nil {
 			add(Fail, "interaction #%d: secret-shaped string in response: %q", i, truncate(string(m), 24))
 		}
+
 		if placeholderIDPattern.Match(resp) {
 			add(Warn, "interaction #%d: response id looks like a placeholder (synthetic data?)", i)
 		}
+
 		if epochPlaceholder.Match(resp) {
 			add(Warn, "interaction #%d: response created=1234567890 (epoch placeholder — synthetic data?)", i)
 		}
+
 		checkUsage(resp, i, add)
 	}
+
 	return out
 }
 
@@ -153,15 +163,18 @@ func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 	if yaml.Unmarshal(raw, &doc) != nil {
 		return // cassette.Load already parsed it; a divergence here isn't the check's job
 	}
+
 	inspect := func(section any) {
 		m, ok := section.(map[string]any)
 		if !ok {
 			return
 		}
+
 		headers, ok := m["headers"].(map[string]any)
 		if !ok {
 			return
 		}
+
 		for name, vals := range headers {
 			isCredential := credentialHeaders[strings.ToLower(name)]
 			check := func(s string) {
@@ -169,12 +182,15 @@ func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 					if s != redacted {
 						add(Fail, "credential header %q is not scrubbed", name)
 					}
+
 					return
 				}
+
 				if m := skKeyPattern.FindString(s); m != "" {
 					add(Fail, "header %q carries a secret-shaped value: %q (nonstandard auth header? record with -scrub-header)", name, truncate(m, 24))
 				}
 			}
+
 			switch v := vals.(type) {
 			case []any:
 				for _, item := range v {
@@ -189,6 +205,7 @@ func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 			}
 		}
 	}
+
 	if interactions, ok := doc["interactions"].([]any); ok {
 		for _, item := range interactions {
 			if m, ok := item.(map[string]any); ok {
@@ -197,6 +214,7 @@ func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 			}
 		}
 	}
+
 	for _, key := range []string{"requests", "responses"} {
 		if list, ok := doc[key].([]any); ok {
 			for _, item := range list {
@@ -220,14 +238,17 @@ func checkMeta(raw []byte, now time.Time, add func(Level, string, ...any)) {
 		add(Warn, "no meta provenance block (self-recorded cassettes must carry one)")
 		return
 	}
+
 	ts, err := time.Parse(time.RFC3339, doc.Meta.RecordedAt)
 	if err != nil {
 		add(Fail, "meta.recorded_at %q is not RFC3339", doc.Meta.RecordedAt)
 		return
 	}
+
 	if ts.After(now.Add(24 * time.Hour)) {
 		add(Fail, "meta.recorded_at %q is in the future", doc.Meta.RecordedAt)
 	}
+
 	if ts.Year() < 2020 {
 		add(Fail, "meta.recorded_at %q predates the APIs being recorded", doc.Meta.RecordedAt)
 	}
@@ -248,6 +269,7 @@ func checkUsage(resp []byte, i int, add func(Level, string, ...any)) {
 		if !ok {
 			continue
 		}
+
 		checkUsageJSON([]byte(strings.TrimSpace(payload)), i, add)
 	}
 }
@@ -265,9 +287,11 @@ func checkUsageJSON(body []byte, i int, add func(Level, string, ...any)) bool {
 	if json.Unmarshal(body, &probe) != nil {
 		return false
 	}
+
 	if u := probe.Usage; u != nil && u.Prompt != nil && u.Completion != nil && u.Total != nil && *u.Prompt+*u.Completion != *u.Total {
 		add(Warn, "interaction #%d: usage does not add up (%d + %d != %d) — synthetic data?", i, *u.Prompt, *u.Completion, *u.Total)
 	}
+
 	return true
 }
 
@@ -275,21 +299,28 @@ func checkUsageJSON(body []byte, i int, add func(Level, string, ...any)) bool {
 // all findings plus the number of files examined.
 func Dir(dir string) ([]Finding, int, error) {
 	var findings []Finding
+
 	files := 0
+
 	err := filepath.WalkDir(dir, func(path string, d os.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
-		if d.IsDir() || !(strings.HasSuffix(path, ".yaml") || strings.HasSuffix(path, ".yaml.gz")) {
+
+		if d.IsDir() || (!strings.HasSuffix(path, ".yaml") && !strings.HasSuffix(path, ".yaml.gz")) {
 			return nil
 		}
+
 		files++
+
 		findings = append(findings, File(path)...)
+
 		return nil
 	})
 	if err != nil {
 		return nil, 0, err
 	}
+
 	return findings, files, nil
 }
 
@@ -300,6 +331,7 @@ func HasFailures(findings []Finding) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -307,5 +339,6 @@ func truncate(s string, n int) string {
 	if len(s) <= n {
 		return s
 	}
+
 	return s[:n] + "..."
 }

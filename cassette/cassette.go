@@ -48,7 +48,9 @@ func Load(path string) ([]Interaction, error) {
 	if err != nil {
 		return nil, fmt.Errorf("cassette: read %s: %w", path, err)
 	}
+
 	raw = gunzipIfNeeded(raw)
+
 	var doc map[string]any
 	if err := yaml.Unmarshal(raw, &doc); err != nil {
 		return nil, fmt.Errorf("cassette: parse %s: %w", path, err)
@@ -61,28 +63,35 @@ func Load(path string) ([]Interaction, error) {
 			if !ok {
 				continue
 			}
+
 			out = append(out, buildInteraction(m["request"], m["response"]))
 		}
+
 		return out, nil
 	}
 
 	reqs, _ := doc["requests"].([]any)
 	resps, _ := doc["responses"].([]any)
+
 	n := len(reqs)
 	if len(resps) > n {
 		n = len(resps)
 	}
+
 	out := make([]Interaction, 0, n)
 	for i := 0; i < n; i++ {
 		var req, resp any
 		if i < len(reqs) {
 			req = reqs[i]
 		}
+
 		if i < len(resps) {
 			resp = resps[i]
 		}
+
 		out = append(out, buildInteraction(req, resp))
 	}
+
 	return out, nil
 }
 
@@ -93,9 +102,11 @@ func buildInteraction(req, resp any) Interaction {
 		it.URI, _ = m["uri"].(string)
 		it.RequestBody = decodeBody(m["body"])
 	}
+
 	if m, ok := resp.(map[string]any); ok {
 		it.ResponseBody = decodeBody(m["body"])
 	}
+
 	return it
 }
 
@@ -122,15 +133,19 @@ func gunzipIfNeeded(b []byte) []byte {
 	if len(b) < 2 || b[0] != 0x1f || b[1] != 0x8b {
 		return b
 	}
+
 	r, err := gzip.NewReader(bytes.NewReader(b))
 	if err != nil {
 		return b
 	}
-	defer r.Close()
+
+	defer func() { _ = r.Close() }()
+
 	out, err := io.ReadAll(r)
 	if err != nil {
 		return b
 	}
+
 	return out
 }
 
@@ -139,27 +154,34 @@ func gunzipIfNeeded(b []byte) []byte {
 // separated); iterate via SortedKeys for deterministic order.
 func LoadDir(dir string) (map[string][]Interaction, error) {
 	out := make(map[string][]Interaction)
+
 	err := filepath.WalkDir(dir, func(path string, d os.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
-		if d.IsDir() || !(strings.HasSuffix(path, ".yaml") || strings.HasSuffix(path, ".yaml.gz")) {
+
+		if d.IsDir() || (!strings.HasSuffix(path, ".yaml") && !strings.HasSuffix(path, ".yaml.gz")) {
 			return nil
 		}
+
 		rel, err := filepath.Rel(dir, path)
 		if err != nil {
 			return err
 		}
+
 		interactions, err := Load(path)
 		if err != nil {
 			return err
 		}
+
 		out[filepath.ToSlash(rel)] = interactions
+
 		return nil
 	})
 	if err != nil {
 		return nil, err
 	}
+
 	return out, nil
 }
 
@@ -169,6 +191,8 @@ func SortedKeys[V any](m map[string]V) []string {
 	for k := range m {
 		keys = append(keys, k)
 	}
+
 	sort.Strings(keys)
+
 	return keys
 }

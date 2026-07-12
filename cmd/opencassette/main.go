@@ -68,6 +68,7 @@ func main() {
 	if len(os.Args) < 2 {
 		usage()
 	}
+
 	switch os.Args[1] {
 	case "record":
 		runRecord(os.Args[2:])
@@ -101,6 +102,7 @@ func runAudit(args []string) {
 	strict := fs.Bool("strict", false, "exit 1 if any audited pack is missing spec-declared fields")
 	resolve := fs.Bool("resolve", false, "print each pack's resolved (pinnable) spec URL instead of auditing")
 	timeout := fs.Duration("timeout", time.Minute, "spec fetch timeout")
+
 	_ = fs.Parse(args)
 	if fs.NArg() > 0 {
 		*root = fs.Arg(0)
@@ -112,7 +114,9 @@ func runAudit(args []string) {
 		if err != nil {
 			log.Fatalf("audit: %v", err)
 		}
+
 		dirs = dirs[:0]
+
 		for _, e := range entries {
 			if e.IsDir() {
 				dirs = append(dirs, filepath.Join(*root, e.Name()))
@@ -123,6 +127,7 @@ func runAudit(args []string) {
 	scanning := len(dirs) != 1 || dirs[0] != *root // subdir scan vs an explicitly named pack
 	client := &http.Client{Timeout: *timeout}
 	gaps := false
+
 	for _, dir := range dirs {
 		pack, err := scenario.LoadPack(dir)
 		if err != nil {
@@ -132,44 +137,58 @@ func runAudit(args []string) {
 				fmt.Printf("== %s: not a loadable pack, skipping (%v)\n", dir, err)
 				continue
 			}
+
 			log.Fatalf("audit: %v", err)
 		}
+
 		if pack.Spec == nil {
 			fmt.Printf("== %s (%s): no spec declared in pack.json, skipping\n", dir, pack.Protocol)
 			continue
 		}
+
 		if *resolve {
 			url := pack.Spec.URL
 			if pack.Spec.Kind == "stainless-stats" {
 				if url, err = audit.StainlessSpecURL(client, url); err != nil {
 					log.Fatalf("audit: %s: %v", dir, err)
 				}
+
 				fmt.Printf("%s: pin as {\"kind\": \"openapi\", \"url\": %q, \"path\": %q}\n", dir, url, pack.Spec.Path)
+
 				continue
 			}
+
 			fmt.Printf("%s: %s (already a stable URL)\n", dir, url)
+
 			continue
 		}
+
 		specFields, err := audit.Fields(client, pack.Spec)
 		if err != nil {
 			log.Fatalf("audit: %s: %v", dir, err)
 		}
+
 		if pack.ModelField == "" {
 			// The model rides in the URL for this pack; the body not
 			// carrying it is by design, not a coverage gap.
 			specFields = without(specFields, "model")
 		}
+
 		r := audit.Compare(audit.PackFields(pack), specFields)
 		fmt.Printf("== %s (%s) vs %s\n", dir, pack.Protocol, pack.Spec.URL)
 		fmt.Printf("   covered %d/%d spec fields\n", len(r.Covered), r.SpecTotal)
+
 		if len(r.Missing) > 0 {
 			gaps = true
+
 			fmt.Printf("   missing from pack (%d): %s\n", len(r.Missing), strings.Join(r.Missing, ", "))
 		}
+
 		if len(r.Extra) > 0 {
 			fmt.Printf("   not in spec (%d, vendor extension or spec drift): %s\n", len(r.Extra), strings.Join(r.Extra, ", "))
 		}
 	}
+
 	if *strict && gaps {
 		os.Exit(1)
 	}
@@ -182,6 +201,7 @@ func without(list []string, drop string) []string {
 			out = append(out, v)
 		}
 	}
+
 	return out
 }
 
@@ -192,6 +212,7 @@ func without(list []string, drop string) []string {
 func runVerify(args []string) {
 	fs := flag.NewFlagSet("verify", flag.ExitOnError)
 	dir := fs.String("dir", "corpus", "corpus directory to verify")
+
 	_ = fs.Parse(args)
 	if fs.NArg() > 0 {
 		*dir = fs.Arg(0)
@@ -201,10 +222,13 @@ func runVerify(args []string) {
 	if err != nil {
 		log.Fatalf("verify: %v", err)
 	}
+
 	for _, f := range findings {
 		fmt.Printf("%s  %s: %s\n", f.Level, f.Path, f.Msg)
 	}
+
 	fmt.Printf("%d file(s) verified, %d finding(s)\n", files, len(findings))
+
 	if verify.HasFailures(findings) {
 		os.Exit(1)
 	}
@@ -221,7 +245,9 @@ func (h *headerFlags) Set(v string) error {
 	if !strings.Contains(v, ":") {
 		return fmt.Errorf("want \"Name: value\", got %q", v)
 	}
+
 	*h = append(*h, v)
+
 	return nil
 }
 
@@ -247,9 +273,11 @@ type runConfig struct {
 func (c runConfig) newRecorder() *recorder.Recorder {
 	rec := recorder.New(nil)
 	rec.RedactValue(c.key)
+
 	for _, h := range c.scrubHeaders {
 		rec.ScrubHeader(h)
 	}
+
 	return rec
 }
 
@@ -262,6 +290,7 @@ func (c runConfig) writeCassette(rec *recorder.Recorder, path string) error {
 			return fmt.Errorf("%s already exists (re-record with -force)", path)
 		}
 	}
+
 	return rec.WriteFile(path)
 }
 
@@ -284,8 +313,10 @@ func runRecord(args []string) {
 	force := fs.Bool("force", false, "overwrite existing cassettes (default: refuse — a published file may already be human-reviewed)")
 	timeout := fs.Duration("timeout", 3*time.Minute, "request timeout (reasoning models can be slow)")
 	pause := fs.Duration("pause", time.Second, "delay between scenario calls in batch mode")
+
 	var headers headerFlags
 	fs.Var(&headers, "header", "extra request header \"Name: value\" (repeatable)")
+
 	var scrubHeaders listFlags
 	fs.Var(&scrubHeaders, "scrub-header", "additional header name to redact in recordings (repeatable) — REQUIRED when a vendor's auth rides in a header outside the default scrub list")
 	_ = fs.Parse(args)
@@ -293,12 +324,14 @@ func runRecord(args []string) {
 	if *endpoint == "" {
 		log.Fatal("record: -url is required")
 	}
+
 	if *bucket != "auto" && *bucket != "stream" && *bucket != "nostream" {
 		log.Fatalf("record: -bucket %q (want stream | nostream | auto)", *bucket)
 	}
 	// The model may live in the URL path rather than the body (Gemini's
 	// /models/<model>:generateContent) — substitute a {model} placeholder.
 	*endpoint = strings.ReplaceAll(*endpoint, "{model}", *model)
+
 	key := os.Getenv(*keyEnv)
 	if key == "" && *authStyle != "none" {
 		log.Fatalf("record: environment variable %s is empty (or pass -auth none)", *keyEnv)
@@ -308,12 +341,15 @@ func runRecord(args []string) {
 		if *bodyFile != "" || *name != "" || *out != "" || *appendExisting {
 			log.Fatal("record: -scenario-dir/-probe-fields are exclusive with -body-file/-name/-out/-append")
 		}
+
 		if *scenarioDir != "" && *probeFields != "" {
 			log.Fatal("record: -scenario-dir and -probe-fields are exclusive (run them as separate passes)")
 		}
+
 		if *vendor == "" || *model == "" {
 			log.Fatal("record: batch/probe mode needs -vendor and -model")
 		}
+
 		run := runConfig{
 			endpoint: *endpoint, authStyle: *authStyle, key: key,
 			headers: headers, scrubHeaders: scrubHeaders,
@@ -324,21 +360,26 @@ func runRecord(args []string) {
 		} else {
 			runBatch(run, *scenarioDir, *corpusDir, *vendor, *model, *protocol, *bucket)
 		}
+
 		return
 	}
 
 	if *bodyFile == "" {
 		log.Fatal("record: -body-file (or -scenario-dir) is required")
 	}
+
 	body, err := readBody(*bodyFile)
 	if err != nil {
 		log.Fatalf("record: read body: %v", err)
 	}
+
 	stream := bucketStream(*bucket, gjson.GetBytes(body, "stream").Bool())
+
 	outPath, err := resolveOutPath(*out, *corpusDir, *vendor, *model, protocolOr(*protocol, "openai"), *name, stream, *appendExisting)
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
+
 	run := runConfig{
 		endpoint: *endpoint, authStyle: *authStyle, key: key,
 		headers: headers, scrubHeaders: scrubHeaders,
@@ -347,6 +388,7 @@ func runRecord(args []string) {
 	if err := recordOne(run, body, outPath, *appendExisting, metaFor(*endpoint, *vendor, *model, *name, "")); err != nil {
 		log.Fatalf("record: %v", err)
 	}
+
 	fmt.Fprintln(os.Stderr, "before publishing: read the file, then run `opencassette verify` over it")
 }
 
@@ -356,6 +398,7 @@ func protocolOr(flagValue, fallback string) string {
 	if flagValue != "" {
 		return flagValue
 	}
+
 	return fallback
 }
 
@@ -367,6 +410,7 @@ func bucketStream(bucket string, bodyStream bool) bool {
 	case "nostream":
 		return false
 	}
+
 	return bodyStream
 }
 
@@ -375,37 +419,49 @@ func runBatch(run runConfig, dir, corpusDir, vendor, model, protocol, bucket str
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
+
 	protocol = protocolOr(protocol, pack.Protocol)
 	if pack.ModelField == "" && !strings.Contains(run.endpoint, model) {
 		log.Fatalf("record: this pack carries no model in the body — put a {model} placeholder in -url (e.g. .../models/{model}:generateContent)")
 	}
+
 	if pack.StreamField == "" && bucket == "auto" {
 		log.Fatalf("record: this pack's bodies don't signal streaming (the endpoint does) — pass -bucket stream or -bucket nostream")
 	}
+
 	var failed []string
+
 	for i, sc := range pack.Scenarios {
 		if i > 0 {
 			time.Sleep(run.pause)
 		}
+
 		fmt.Fprintf(os.Stderr, "\n===== scenario %d/%d: %s =====\n", i+1, len(pack.Scenarios), sc.Name)
+
 		body, err := sc.WithModel(model)
 		if err != nil {
 			log.Fatalf("record: %v", err)
 		}
+
 		outPath, err := resolveOutPath("", corpusDir, vendor, model, protocol, sc.Name, bucketStream(bucket, sc.Stream), false)
 		if err != nil {
 			log.Fatalf("record: %v", err)
 		}
+
 		if err := recordOne(run, body, outPath, false, metaFor(run.endpoint, vendor, model, sc.Name, sc.SHA256())); err != nil {
 			fmt.Fprintf(os.Stderr, "SKIPPED %s: %v\n", sc.Name, err)
 			failed = append(failed, sc.Name)
 		}
 	}
+
 	fmt.Fprintf(os.Stderr, "\n%d/%d scenarios recorded\n", len(pack.Scenarios)-len(failed), len(pack.Scenarios))
+
 	if len(failed) > 0 {
 		fmt.Fprintf(os.Stderr, "failed: %s\n", strings.Join(failed, ", "))
 	}
+
 	fmt.Fprintln(os.Stderr, "before publishing: read the files, then run `opencassette verify` over them")
+
 	if len(failed) > 0 {
 		os.Exit(1)
 	}
@@ -439,15 +495,19 @@ func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 	if err != nil {
 		log.Fatalf("record: probe base: %v", err)
 	}
+
 	base, err := scenario.Scenario{Name: "chat_basic", Body: baseRaw, ModelField: "model"}.WithModel(model)
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
+
 	fullRaw, err := os.ReadFile(filepath.Join(dir, "chat_full_params.json"))
 	if err != nil {
 		log.Fatalf("record: probe field source: %v", err)
 	}
+
 	fullSHA := scenario.Scenario{Body: fullRaw}.SHA256()
+
 	probes, err := scenario.BuildProbes(base, fullRaw)
 	if err != nil {
 		log.Fatalf("record: %v", err)
@@ -457,6 +517,7 @@ func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 	// calls — the per-file check in writeCassette would only trip after
 	// the baseline and first probes already ran.
 	protoDirEarly := filepath.Join(corpusDir, vendor, model, protocol)
+
 	if !run.force {
 		for _, p := range []string{"fields", "fields-rejected", "field-support.json"} {
 			if _, err := os.Stat(filepath.Join(protoDirEarly, p)); err == nil {
@@ -468,10 +529,12 @@ func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 	// If the minimal body itself fails, every probe would read as a
 	// rejection — abort instead of writing a matrix of noise.
 	fmt.Fprintln(os.Stderr, "===== baseline: minimal request =====")
+
 	status, _, err := probeOne(run, base, recorder.Meta{})
 	if err != nil {
 		log.Fatalf("record: baseline call failed (nothing probed): %v", err)
 	}
+
 	if status < 200 || status >= 300 {
 		log.Fatalf("record: baseline minimal request got HTTP %d — fix endpoint/model/auth before probing fields", status)
 	}
@@ -486,62 +549,80 @@ func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 		SourceSHA256: fullSHA,
 		Fields:       map[string]fieldResult{},
 	}
+
 	var errored []string
+
 	for _, p := range probes {
 		time.Sleep(run.pause)
 		fmt.Fprintf(os.Stderr, "\n===== field %s =====\n", p.Field)
+
 		res := fieldResult{Companions: p.Companions}
 		if strings.ContainsAny(p.Field, `/\`) {
 			fmt.Fprintf(os.Stderr, "ERROR: field name %q is not a path segment\n", p.Field)
+
 			res.Status = "error"
 			report.Fields[p.Field] = res
 			errored = append(errored, p.Field)
+
 			continue
 		}
+
 		meta := metaFor(run.endpoint, vendor, model, "field:"+p.Field, fullSHA)
 		status, rec, err := probeOne(run, p.Body, meta)
+
 		res.HTTP = status
 		switch {
 		case err != nil:
 			fmt.Fprintf(os.Stderr, "ERROR: %v\n", err)
+
 			res.Status = "error"
+
 			errored = append(errored, p.Field)
 		case status >= 200 && status < 300:
 			res.Status = "supported"
+
 			path := filepath.Join(protoDir, "fields", p.Field+".yaml")
 			if err := run.writeCassette(rec, path); err != nil {
 				log.Fatalf("record: %v", err)
 			}
+
 			fmt.Fprintf(os.Stderr, "SUPPORTED — wrote %s\n", path)
 		case status == 400 || status == 422:
 			res.Status = "rejected"
+
 			path := filepath.Join(protoDir, "fields-rejected", p.Field+".yaml")
 			if err := run.writeCassette(rec, path); err != nil {
 				log.Fatalf("record: %v", err)
 			}
+
 			fmt.Fprintf(os.Stderr, "REJECTED — wrote %s\n", path)
 		default:
 			// 401/403/429/5xx say nothing about the field itself: record
 			// no evidence, claim neither support nor rejection.
 			res.Status = "error"
+
 			errored = append(errored, fmt.Sprintf("%s (HTTP %d)", p.Field, status))
 		}
+
 		report.Fields[p.Field] = res
 	}
 
 	if err := os.MkdirAll(protoDir, 0o755); err != nil {
 		log.Fatalf("record: mkdir %s: %v", protoDir, err)
 	}
+
 	buf, err := json.MarshalIndent(report, "", "  ")
 	if err != nil {
 		log.Fatalf("record: marshal support matrix: %v", err)
 	}
+
 	reportPath := filepath.Join(protoDir, "field-support.json")
 	if err := os.WriteFile(reportPath, append(buf, '\n'), 0o644); err != nil {
 		log.Fatalf("record: write %s: %v", reportPath, err)
 	}
 
 	supported, rejected := 0, 0
+
 	for _, r := range report.Fields {
 		switch r.Status {
 		case "supported":
@@ -550,12 +631,16 @@ func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 			rejected++
 		}
 	}
+
 	fmt.Fprintf(os.Stderr, "\n%d field(s): %d supported, %d rejected, %d error(s) — matrix in %s\n",
 		len(probes), supported, rejected, len(errored), reportPath)
+
 	if len(errored) > 0 {
 		fmt.Fprintf(os.Stderr, "no evidence recorded for: %s\n", strings.Join(errored, ", "))
 	}
+
 	fmt.Fprintln(os.Stderr, "before publishing: read the files, then run `opencassette verify` over them")
+
 	if len(errored) > 0 {
 		os.Exit(1)
 	}
@@ -567,21 +652,28 @@ func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 func probeOne(run runConfig, body []byte, meta recorder.Meta) (int, *recorder.Recorder, error) {
 	rec := run.newRecorder()
 	rec.SetMeta(meta)
+
 	req, err := buildRequest(run, body, rec)
 	if err != nil {
 		return 0, nil, err
 	}
+
 	client := &http.Client{Transport: rec, Timeout: run.timeout}
+
 	resp, err := client.Do(req)
 	if err != nil {
 		return 0, nil, err
 	}
+
 	respBody, err := io.ReadAll(resp.Body)
 	_ = resp.Body.Close()
+
 	if err != nil {
 		return 0, nil, fmt.Errorf("read response: %w", err)
 	}
+
 	fmt.Fprintf(os.Stderr, "HTTP %s\n%s\n", resp.Status, preview(respBody, 800))
+
 	return resp.StatusCode, rec, nil
 }
 
@@ -604,6 +696,7 @@ func hostOf(endpoint string) string {
 	if u, err := url.Parse(endpoint); err == nil && u.Host != "" {
 		return u.Scheme + "://" + u.Host
 	}
+
 	return endpoint
 }
 
@@ -627,24 +720,30 @@ func recordOne(run runConfig, body []byte, outPath string, appendExisting bool, 
 	if err != nil {
 		return err
 	}
+
 	client := &http.Client{Transport: rec, Timeout: run.timeout}
+
 	resp, err := client.Do(req)
 	if err != nil {
 		return fmt.Errorf("request failed (nothing recorded): %w", err)
 	}
+
 	respBody, err := io.ReadAll(resp.Body)
 	_ = resp.Body.Close()
+
 	if err != nil {
 		return fmt.Errorf("read response: %w", err)
 	}
 
 	fmt.Fprintf(os.Stderr, "HTTP %s\n%s\n", resp.Status, preview(respBody, 2000))
+
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		// A real error response is real data too — but make the operator read
 		// it and re-run with the request fixed, rather than silently
 		// publishing an error cassette.
 		return fmt.Errorf("upstream returned %s; not writing %s (fix the request and re-run)", resp.Status, outPath)
 	}
+
 	if appendExisting {
 		if err := rec.WriteFile(outPath); err != nil {
 			return err
@@ -652,7 +751,9 @@ func recordOne(run runConfig, body []byte, outPath string, appendExisting bool, 
 	} else if err := run.writeCassette(rec, outPath); err != nil {
 		return err
 	}
+
 	fmt.Fprintf(os.Stderr, "wrote %d interaction(s) to %s\n", rec.Len(), outPath)
+
 	return nil
 }
 
@@ -660,6 +761,7 @@ func readBody(path string) ([]byte, error) {
 	if path == "-" {
 		return io.ReadAll(os.Stdin)
 	}
+
 	return os.ReadFile(path)
 }
 
@@ -673,18 +775,22 @@ func resolveOutPath(out, corpusDir, vendor, model, protocol, name string, stream
 	if out != "" {
 		return out, nil
 	}
+
 	if vendor == "" || model == "" || name == "" {
 		return "", fmt.Errorf("either -out, or all of -vendor/-model/-name, must be set")
 	}
+
 	for flagName, v := range map[string]string{"-vendor": vendor, "-model": model, "-protocol": protocol, "-name": name} {
 		if strings.ContainsAny(v, `/\`) {
 			return "", fmt.Errorf("%s %q must be a single path segment", flagName, v)
 		}
 	}
+
 	bucket := "nostream"
 	if stream {
 		bucket = "stream"
 	}
+
 	path := filepath.Join(corpusDir, vendor, model, protocol, bucket, name+".yaml")
 	if appendExisting {
 		if _, err := os.Stat(path); os.IsNotExist(err) {
@@ -692,12 +798,14 @@ func resolveOutPath(out, corpusDir, vendor, model, protocol, name string, stream
 			if bucket == "stream" {
 				sibling = "nostream"
 			}
+
 			alt := filepath.Join(corpusDir, vendor, model, protocol, sibling, name+".yaml")
 			if _, err := os.Stat(alt); err == nil {
 				return alt, nil
 			}
 		}
 	}
+
 	return path, nil
 }
 
@@ -708,10 +816,12 @@ func buildRequest(run runConfig, body []byte, rec *recorder.Recorder) (*http.Req
 		if err != nil {
 			return nil, fmt.Errorf("parse -url: %w", err)
 		}
+
 		q := u.Query()
 		q.Set(param, run.key)
 		u.RawQuery = q.Encode()
 		finalURL = u.String()
+
 		rec.ScrubQueryParam(param)
 	}
 
@@ -719,11 +829,14 @@ func buildRequest(run runConfig, body []byte, rec *recorder.Recorder) (*http.Req
 	if err != nil {
 		return nil, err
 	}
+
 	req.Header.Set("Content-Type", "application/json")
+
 	for _, h := range run.headers {
 		name, value, _ := strings.Cut(h, ":")
 		req.Header.Set(strings.TrimSpace(name), strings.TrimSpace(value))
 	}
+
 	switch {
 	case run.authStyle == "bearer":
 		req.Header.Set("Authorization", "Bearer "+run.key)
@@ -736,6 +849,7 @@ func buildRequest(run runConfig, body []byte, rec *recorder.Recorder) (*http.Req
 	default:
 		return nil, fmt.Errorf("unknown -auth %q (want bearer | x-api-key | api-key | query:<param> | none)", run.authStyle)
 	}
+
 	return req, nil
 }
 
@@ -743,5 +857,6 @@ func preview(b []byte, n int) string {
 	if len(b) <= n {
 		return string(b)
 	}
+
 	return string(b[:n]) + fmt.Sprintf("\n...(truncated, %d bytes total)", len(b))
 }
