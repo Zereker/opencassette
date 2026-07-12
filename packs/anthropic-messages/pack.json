@@ -1,0 +1,11 @@
+{
+  "protocol": "anthropic",
+  "required": ["model", "messages", "max_tokens"],
+  "model_field": "model",
+  "stream_field": "stream",
+  "spec": {
+    "kind": "stainless-stats",
+    "url": "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/.stats.yml",
+    "path": "/v1/messages"
+  }
+}

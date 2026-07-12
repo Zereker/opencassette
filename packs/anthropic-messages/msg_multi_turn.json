@@ -1,0 +1,1 @@
+{"max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]},{"role":"assistant","content":[{"type":"text","text":"- Captain\n- Scoop"}]},{"role":"user","content":[{"type":"text","text":"in french"}]}],"model":"claude-sonnet-4-5","temperature":1.0,"stream":true}

@@ -14,7 +14,7 @@ func buildPackProbes(t *testing.T) []Probe {
 	if err != nil {
 		t.Fatalf("probing needs the pack's chat_basic.json as base: %v", err)
 	}
-	base, err := Scenario{Name: "chat_basic", Body: baseRaw}.WithModel("probe-model")
+	base, err := Scenario{Name: "chat_basic", Body: baseRaw, ModelField: "model"}.WithModel("probe-model")
 	if err != nil {
 		t.Fatal(err)
 	}

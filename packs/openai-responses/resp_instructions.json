@@ -1,0 +1,1 @@
+{"input":[{"content":"Say hi in one word.","role":"user","type":"message"}],"instructions":"You are terse. Answer in five words or fewer.","model":"gpt-5.5","store":false,"stream":true}
