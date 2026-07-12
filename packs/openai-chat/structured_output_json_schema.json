@@ -1,0 +1,1 @@
+{"messages":[{"content":"respond with good","role":"user"}],"model":"gpt-5-nano","response_format":{"type":"json_schema","json_schema":{"schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"title":"BadModel","type":"object","additionalProperties":false},"name":"BadModel","strict":true}},"stream":false}

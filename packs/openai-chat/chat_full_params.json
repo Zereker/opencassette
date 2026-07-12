@@ -1,0 +1,33 @@
+{
+  "model": "gpt-4o",
+  "messages": [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": [
+      {"type": "image_url", "image_url": {"url": "https://example.com/view.jpeg", "detail": "high"}},
+      {"type": "text", "text": "图片主要讲了什么？一句话。"}
+    ]}
+  ],
+  "tools": [{"type": "function", "function": {
+    "name": "get_weather", "description": "查询城市天气",
+    "parameters": {"type": "object", "properties": {"city": {"type": "string"}}, "required": ["city"]}}}],
+  "tool_choice": "auto",
+  "parallel_tool_calls": true,
+  "max_completion_tokens": 2048,
+  "temperature": 0.6,
+  "top_p": 0.9,
+  "frequency_penalty": 0.1,
+  "presence_penalty": 0.1,
+  "n": 1,
+  "seed": 42,
+  "stop": ["<END>"],
+  "response_format": {"type": "text"},
+  "stream": false,
+  "user": "e2e-field-matrix",
+  "store": false,
+  "metadata": {"case": "full"},
+  "service_tier": "default",
+  "modalities": ["text"],
+  "web_search_options": {},
+  "prediction": {"type": "content", "content": "预测内容"},
+  "audio": {"voice": "alloy", "format": "wav"}
+}

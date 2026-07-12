@@ -1,0 +1,24 @@
+meta:
+  recorded_at: "2026-07-12T08:00:00Z"
+  vendor: example
+  model: example-model
+  tool: opencassette/0.1.0
+interactions:
+- request:
+    body: '{"model":"example-model","messages":[{"role":"user","content":"hi"}]}'
+    headers:
+      Authorization:
+      - '**REDACTED**'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.example.com/v1/chat/completions
+  response:
+    body:
+      string: '{"id":"chatcmpl-abc123","choices":[{"message":{"role":"assistant","content":"hello"}}],"usage":{"prompt_tokens":9,"completion_tokens":1,"total_tokens":10}}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK

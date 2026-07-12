@@ -1,0 +1,18 @@
+requests:
+- body: '{"model":"example-model","messages":[{"role":"user","content":"hi"}],"stream":true}'
+  headers:
+    authorization:
+    - '**REDACTED**'
+  method: POST
+  uri: https://api.example.com/v1/chat/completions
+responses:
+- body:
+    string: !!binary |
+      ZGF0YTogeyJjaG9pY2VzIjpbeyJkZWx0YSI6eyJjb250ZW50IjoiaGkifX1dfQoKZGF0YTogW0RP
+      TkVdCgo=
+  headers:
+    content-type:
+    - text/event-stream
+  status:
+    code: 200
+    message: OK
