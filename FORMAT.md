@@ -53,6 +53,9 @@ interactions:
 - The literal API key value is additionally replaced wherever its bytes
   appear — any header, the URI query string, including URL-escaped
   spellings — so nonstandard auth carriers can't leak it.
+- A vendor whose auth rides in a header outside the default list must be
+  recorded with `-scrub-header <name>` (repeatable); `verify` flags any
+  secret-shaped header value as a hard failure, as a second net.
 - `verify` treats any surviving credential-shaped string as a hard failure.
 
 ## Corpus layout

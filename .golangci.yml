@@ -1,0 +1,41 @@
+# golangci-lint v2 configuration. Runs in CI on every PR to main.
+version: "2"
+
+linters:
+  # standard = errcheck, govet, ineffassign, staticcheck, unused
+  default: standard
+  enable:
+    # whitespace discipline — blank lines that group related statements
+    - wsl_v5
+    # HTTP response bodies must be closed (this tool records HTTP for a living)
+    - bodyclose
+    # security checks — a credential-scrubbing tool should hold itself to these
+    - gosec
+    # errors.Is/As instead of == and type assertions on wrapped errors
+    - errorlint
+    # opinionated correctness/readability diagnostics
+    - gocritic
+    # misspellings in comments and strings (docs-heavy repo)
+    - misspell
+    # style: exported-symbol docs, naming, context conventions
+    - revive
+    # test helpers must call t.Helper()
+    - thelper
+    # drop unnecessary type conversions
+    - unconvert
+    # flag unused function parameters
+    - unparam
+    # http.StatusOK etc. over magic numbers
+    - usestdlibvars
+    # nolint directives must be scoped and justified
+    - nolintlint
+  settings:
+    gosec:
+      excludes:
+        # G304 (file inclusion via variable): every path here comes from a
+        # CLI flag or pack directory the operator chose — that's the tool's
+        # job, not an injection surface.
+        - G304
+      config:
+        # Cassettes and reports are meant to be published; 0644 is the point.
+        G306: "0644"

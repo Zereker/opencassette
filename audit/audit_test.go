@@ -46,24 +46,27 @@ const miniDiscovery = `{
 
 func specServer(t *testing.T) *httptest.Server {
 	t.Helper()
+
 	mux := http.NewServeMux()
-	mux.HandleFunc("/openapi.yml", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/openapi.yml", func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = w.Write([]byte(miniSpec))
 	})
-	mux.HandleFunc("/discovery.json", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/discovery.json", func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = w.Write([]byte(miniDiscovery))
 	})
 	srv := httptest.NewServer(mux)
-	mux.HandleFunc("/stats.yml", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "configured_endpoints: 1\nopenapi_spec_url: %s/openapi.yml\n", srv.URL)
+	mux.HandleFunc("/stats.yml", func(w http.ResponseWriter, _ *http.Request) {
+		_, _ = fmt.Fprintf(w, "configured_endpoints: 1\nopenapi_spec_url: %s/openapi.yml\n", srv.URL)
 	})
 	t.Cleanup(srv.Close)
+
 	return srv
 }
 
 func TestFieldsAllKinds(t *testing.T) {
 	srv := specServer(t)
 	want := []string{"messages", "model", "temperature", "tools"}
+
 	for _, ref := range []*scenario.SpecRef{
 		{Kind: "openapi", URL: srv.URL + "/openapi.yml", Path: "/chat/completions"},
 		{Kind: "stainless-stats", URL: srv.URL + "/stats.yml", Path: "/chat/completions"},
@@ -72,6 +75,7 @@ func TestFieldsAllKinds(t *testing.T) {
 		if err != nil {
 			t.Fatalf("%s: %v", ref.Kind, err)
 		}
+
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("%s: fields = %v, want %v ($ref/allOf resolution broken?)", ref.Kind, got, want)
 		}
@@ -81,6 +85,7 @@ func TestFieldsAllKinds(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	if !reflect.DeepEqual(got, []string{"contents", "model", "tools"}) {
 		t.Errorf("discovery: fields = %v", got)
 	}
@@ -103,13 +108,16 @@ func TestFieldsErrors(t *testing.T) {
 
 func TestStainlessSpecURLResolves(t *testing.T) {
 	srv := specServer(t)
+
 	url, err := StainlessSpecURL(srv.Client(), srv.URL+"/stats.yml")
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	if url != srv.URL+"/openapi.yml" {
 		t.Errorf("resolved %q", url)
 	}
+
 	if _, err := StainlessSpecURL(srv.Client(), srv.URL+"/discovery.json"); err == nil {
 		t.Error("non-stats file must not resolve")
 	}
@@ -131,6 +139,7 @@ func TestPackFieldsRealPacks(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	fields := PackFields(openai)
 	if !contains(fields, "stream_options") {
 		t.Errorf("openai-chat pack fields must count synthetic probes: %v", fields)
@@ -140,6 +149,7 @@ func TestPackFieldsRealPacks(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	if contains(PackFields(gemini), "model") {
 		t.Error("gemini pack fields must not contain model")
 	}
@@ -151,5 +161,6 @@ func contains(list []string, s string) bool {
 			return true
 		}
 	}
+
 	return false
 }

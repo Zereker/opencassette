@@ -98,11 +98,27 @@ type Scenario struct {
 // validated against the manifest's required fields.
 func LoadPack(dir string) (*Pack, error) {
 	man := defaultManifest()
+
 	if raw, err := os.ReadFile(filepath.Join(dir, "pack.json")); err == nil {
+		// An empty model_field/stream_field is meaningful ("not in the
+		// body"), so a silently-missing key would flip semantics — every
+		// key must be written out explicitly.
+		var keys map[string]json.RawMessage
+		if err := json.Unmarshal(raw, &keys); err != nil {
+			return nil, fmt.Errorf("scenario: parse %s/pack.json: %w", dir, err)
+		}
+
+		for _, k := range []string{"protocol", "required", "model_field", "stream_field"} {
+			if _, ok := keys[k]; !ok {
+				return nil, fmt.Errorf(`scenario: %s/pack.json must set %q explicitly ("" means "not in the body")`, dir, k)
+			}
+		}
+
 		man = Manifest{}
 		if err := json.Unmarshal(raw, &man); err != nil {
 			return nil, fmt.Errorf("scenario: parse %s/pack.json: %w", dir, err)
 		}
+
 		if man.Protocol == "" || len(man.Required) == 0 {
 			return nil, fmt.Errorf("scenario: %s/pack.json must declare protocol and required fields", dir)
 		}
@@ -114,13 +130,17 @@ func LoadPack(dir string) (*Pack, error) {
 	if err != nil {
 		return nil, fmt.Errorf("scenario: read %s: %w", dir, err)
 	}
+
 	var names []string
+
 	for _, e := range entries {
 		if !e.IsDir() && filepath.Ext(e.Name()) == ".json" && e.Name() != "pack.json" {
 			names = append(names, e.Name())
 		}
 	}
+
 	sort.Strings(names)
+
 	if len(names) == 0 {
 		return nil, fmt.Errorf("scenario: no *.json scenarios in %s", dir)
 	}
@@ -128,22 +148,27 @@ func LoadPack(dir string) (*Pack, error) {
 	pack := &Pack{Manifest: man, Scenarios: make([]Scenario, 0, len(names))}
 	for _, name := range names {
 		path := filepath.Join(dir, name)
+
 		body, err := os.ReadFile(path)
 		if err != nil {
 			return nil, fmt.Errorf("scenario: read %s: %w", path, err)
 		}
+
 		if !json.Valid(body) {
 			return nil, fmt.Errorf("scenario: %s is not valid JSON", path)
 		}
+
 		for _, field := range man.Required {
 			if !gjson.GetBytes(body, field).Exists() {
 				return nil, fmt.Errorf("scenario: %s must have top-level %q (required by pack.json)", path, field)
 			}
 		}
+
 		stream := false
 		if man.StreamField != "" {
 			stream = gjson.GetBytes(body, man.StreamField).Bool()
 		}
+
 		pack.Scenarios = append(pack.Scenarios, Scenario{
 			Name:       strings.TrimSuffix(name, ".json"),
 			Body:       body,
@@ -151,6 +176,7 @@ func LoadPack(dir string) (*Pack, error) {
 			Stream:     stream,
 		})
 	}
+
 	return pack, nil
 }
 
@@ -161,6 +187,7 @@ func LoadDir(dir string) ([]Scenario, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return pack.Scenarios, nil
 }
 
@@ -182,14 +209,18 @@ func (s Scenario) WithModel(model string) ([]byte, error) {
 	if s.ModelField == "" {
 		return s.Body, nil
 	}
+
 	var m map[string]json.RawMessage
 	if err := json.Unmarshal(s.Body, &m); err != nil {
 		return nil, fmt.Errorf("scenario %s: %w", s.Name, err)
 	}
+
 	quoted, err := json.Marshal(model)
 	if err != nil {
 		return nil, err
 	}
+
 	m[s.ModelField] = quoted
+
 	return json.Marshal(m)
 }
