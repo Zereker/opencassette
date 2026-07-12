@@ -99,6 +99,18 @@ type Scenario struct {
 func LoadPack(dir string) (*Pack, error) {
 	man := defaultManifest()
 	if raw, err := os.ReadFile(filepath.Join(dir, "pack.json")); err == nil {
+		// An empty model_field/stream_field is meaningful ("not in the
+		// body"), so a silently-missing key would flip semantics — every
+		// key must be written out explicitly.
+		var keys map[string]json.RawMessage
+		if err := json.Unmarshal(raw, &keys); err != nil {
+			return nil, fmt.Errorf("scenario: parse %s/pack.json: %w", dir, err)
+		}
+		for _, k := range []string{"protocol", "required", "model_field", "stream_field"} {
+			if _, ok := keys[k]; !ok {
+				return nil, fmt.Errorf(`scenario: %s/pack.json must set %q explicitly ("" means "not in the body")`, dir, k)
+			}
+		}
 		man = Manifest{}
 		if err := json.Unmarshal(raw, &man); err != nil {
 			return nil, fmt.Errorf("scenario: parse %s/pack.json: %w", dir, err)

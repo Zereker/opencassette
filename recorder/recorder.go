@@ -62,8 +62,11 @@ type Meta struct {
 }
 
 // Recorder is an http.RoundTripper that passes requests through to a base
-// transport while accumulating scrubbed copies of every exchange. It is
-// safe for concurrent use; interactions are appended in completion order.
+// transport while accumulating scrubbed copies of every exchange.
+// Concurrent requests are safe (interactions are appended in completion
+// order), but the configuration methods — SetMeta, RedactValue,
+// ScrubHeader, ScrubQueryParam — must all be called before the first
+// request starts; they do not synchronize with in-flight RoundTrips.
 type Recorder struct {
 	base http.RoundTripper
 

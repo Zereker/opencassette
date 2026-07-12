@@ -88,6 +88,35 @@ func TestCredentialHeaderVariantsAllCaught(t *testing.T) {
 	}
 }
 
+// TestSecretShapedHeaderValueFails: a vendor's nonstandard auth header
+// (name not on the credential list) recorded without -scrub-header must
+// still be caught by the value-shape net.
+func TestSecretShapedHeaderValueFails(t *testing.T) {
+	ts := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
+	content := strings.Replace(fmt.Sprintf(goodTemplate, ts),
+		"      Authorization:\n      - '**REDACTED**'\n",
+		"      Authorization:\n      - '**REDACTED**'\n      X-Custom-Auth:\n      - 'sk-abcdefghijklmnopqrstuvwxyz123456'\n", 1)
+	fails, _ := levels(File(writeFile(t, content)))
+	if !strings.Contains(strings.Join(fails, ";"), `"X-Custom-Auth"`) {
+		t.Fatalf("secret-shaped value in nonstandard header not caught: %v", fails)
+	}
+}
+
+// TestSSEUsageChecked: usage arithmetic in a streaming response's final
+// chunk gets the same scrutiny as a plain JSON body.
+func TestSSEUsageChecked(t *testing.T) {
+	ts := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
+	sse := `data: {"choices":[{"delta":{"content":"hi"}}]}\n\ndata: {"choices":[],"usage":{"prompt_tokens":9,"completion_tokens":3,"total_tokens":999}}\n\ndata: [DONE]\n\n`
+	sse = strings.ReplaceAll(sse, `\n`, "\n        ") // YAML literal-block indent
+	content := strings.Replace(fmt.Sprintf(goodTemplate, ts),
+		`      string: '{"id":"chatcmpl-a1b2c3","created":1783840001,"choices":[{"message":{"content":"hello"}}],"usage":{"prompt_tokens":9,"completion_tokens":3,"total_tokens":12}}'`,
+		"      string: |\n        "+sse, 1)
+	_, warns := levels(File(writeFile(t, content)))
+	if !strings.Contains(strings.Join(warns, ";"), "does not add up") {
+		t.Fatalf("SSE usage inconsistency not caught: %v", warns)
+	}
+}
+
 func TestSecretShapedStringsFail(t *testing.T) {
 	ts := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
 	for name, replace := range map[string][2]string{

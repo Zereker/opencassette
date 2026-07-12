@@ -144,7 +144,10 @@ func fileAt(path string, now time.Time) []Finding {
 }
 
 // checkHeaders walks both on-disk formats' header maps looking for a
-// credential-bearing header whose value survived unscrubbed.
+// credential-bearing header whose value survived unscrubbed — and for
+// secret-shaped values in ANY header, because a vendor with a nonstandard
+// auth header (recorded without -scrub-header) bypasses the recorder's
+// name-based scrub list entirely.
 func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 	var doc map[string]any
 	if yaml.Unmarshal(raw, &doc) != nil {
@@ -160,22 +163,29 @@ func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 			return
 		}
 		for name, vals := range headers {
-			if !credentialHeaders[strings.ToLower(name)] {
-				continue
+			isCredential := credentialHeaders[strings.ToLower(name)]
+			check := func(s string) {
+				if isCredential {
+					if s != redacted {
+						add(Fail, "credential header %q is not scrubbed", name)
+					}
+					return
+				}
+				if m := skKeyPattern.FindString(s); m != "" {
+					add(Fail, "header %q carries a secret-shaped value: %q (nonstandard auth header? record with -scrub-header)", name, truncate(m, 24))
+				}
 			}
 			switch v := vals.(type) {
 			case []any:
 				for _, item := range v {
-					if s, ok := item.(string); ok && s != redacted {
-						add(Fail, "credential header %q is not scrubbed", name)
+					if s, ok := item.(string); ok {
+						check(s)
 					}
 				}
 			case string:
 				// Hand-written files sometimes carry the value as a scalar
 				// instead of the usual one-element list; a leak is a leak.
-				if v != redacted {
-					add(Fail, "credential header %q is not scrubbed", name)
-				}
+				check(v)
 			}
 		}
 	}
@@ -224,8 +234,27 @@ func checkMeta(raw []byte, now time.Time, add func(Level, string, ...any)) {
 }
 
 // checkUsage flags OpenAI-style token accounting that doesn't add up — real
-// upstreams are consistent; hand-typed numbers often aren't.
+// upstreams are consistent; hand-typed numbers often aren't. Both plain
+// JSON bodies and SSE streams are checked: a forged stream's usage chunk
+// is exactly as likely to have hand-typed numbers as a forged JSON body.
 func checkUsage(resp []byte, i int, add func(Level, string, ...any)) {
+	if checkUsageJSON(resp, i, add) {
+		return
+	}
+	// Not a single JSON document — try SSE: each `data: {...}` line is a
+	// candidate chunk, and usage rides in whichever chunk carries it.
+	for _, line := range strings.Split(string(resp), "\n") {
+		payload, ok := strings.CutPrefix(strings.TrimRight(line, "\r"), "data:")
+		if !ok {
+			continue
+		}
+		checkUsageJSON([]byte(strings.TrimSpace(payload)), i, add)
+	}
+}
+
+// checkUsageJSON reports whether body parsed as JSON (regardless of
+// whether it carried usage), warning when usage arithmetic is off.
+func checkUsageJSON(body []byte, i int, add func(Level, string, ...any)) bool {
 	var probe struct {
 		Usage *struct {
 			Prompt     *int `json:"prompt_tokens"`
@@ -233,13 +262,13 @@ func checkUsage(resp []byte, i int, add func(Level, string, ...any)) {
 			Total      *int `json:"total_tokens"`
 		} `json:"usage"`
 	}
-	if json.Unmarshal(resp, &probe) != nil || probe.Usage == nil {
-		return
+	if json.Unmarshal(body, &probe) != nil {
+		return false
 	}
-	u := probe.Usage
-	if u.Prompt != nil && u.Completion != nil && u.Total != nil && *u.Prompt+*u.Completion != *u.Total {
+	if u := probe.Usage; u != nil && u.Prompt != nil && u.Completion != nil && u.Total != nil && *u.Prompt+*u.Completion != *u.Total {
 		add(Warn, "interaction #%d: usage does not add up (%d + %d != %d) — synthetic data?", i, *u.Prompt, *u.Completion, *u.Total)
 	}
+	return true
 }
 
 // Dir verifies every *.yaml / *.yaml.gz under dir recursively, returning

@@ -2,6 +2,7 @@
 //
 //	opencassette record  — make real API calls and write scrubbed cassettes
 //	opencassette verify  — check a corpus for leaks and synthetic-data tells
+//	opencassette audit   — diff pack coverage against each protocol's authoritative spec
 //
 // Recording one scenario:
 //
@@ -33,8 +34,11 @@
 // The API key is read from an environment variable (default RECORD_API_KEY),
 // never from a flag; it is scrubbed from recordings both by header name and
 // by literal value. Auth styles (-auth): bearer (default) | x-api-key |
-// api-key | query:<param> | none. A scenario the upstream rejects (non-2xx)
-// is skipped and reported, never written.
+// api-key | query:<param> | none. A vendor whose auth rides in a header
+// outside the default scrub list MUST be recorded with -scrub-header (the
+// verifier flags secret-shaped header values as a second net). A scenario
+// the upstream rejects (non-2xx) is skipped and reported, never written,
+// and an existing cassette is never overwritten without -force.
 package main
 
 import (
@@ -116,11 +120,18 @@ func runAudit(args []string) {
 		}
 	}
 
+	scanning := len(dirs) != 1 || dirs[0] != *root // subdir scan vs an explicitly named pack
 	client := &http.Client{Timeout: *timeout}
 	gaps := false
 	for _, dir := range dirs {
 		pack, err := scenario.LoadPack(dir)
 		if err != nil {
+			if scanning {
+				// A non-pack directory under the packs root shouldn't kill
+				// the audit of every real pack next to it.
+				fmt.Printf("== %s: not a loadable pack, skipping (%v)\n", dir, err)
+				continue
+			}
 			log.Fatalf("audit: %v", err)
 		}
 		if pack.Spec == nil {
@@ -165,7 +176,7 @@ func runAudit(args []string) {
 }
 
 func without(list []string, drop string) []string {
-	out := list[:0]
+	out := make([]string, 0, len(list))
 	for _, v := range list {
 		if v != drop {
 			out = append(out, v)
@@ -214,6 +225,46 @@ func (h *headerFlags) Set(v string) error {
 	return nil
 }
 
+type listFlags []string
+
+func (l *listFlags) String() string     { return strings.Join(*l, ",") }
+func (l *listFlags) Set(v string) error { *l = append(*l, v); return nil }
+
+// runConfig carries the per-run recording knobs shared by every mode.
+type runConfig struct {
+	endpoint     string
+	authStyle    string
+	key          string
+	headers      headerFlags
+	scrubHeaders []string
+	timeout      time.Duration
+	pause        time.Duration
+	force        bool
+}
+
+// newRecorder builds the recording transport with every scrub the run
+// declared: the literal key value plus any extra header names.
+func (c runConfig) newRecorder() *recorder.Recorder {
+	rec := recorder.New(nil)
+	rec.RedactValue(c.key)
+	for _, h := range c.scrubHeaders {
+		rec.ScrubHeader(h)
+	}
+	return rec
+}
+
+// writeCassette refuses to clobber an existing recording unless the run
+// says -force: a file already in the corpus may be human-reviewed, and a
+// re-run must not silently replace it.
+func (c runConfig) writeCassette(rec *recorder.Recorder, path string) error {
+	if !c.force {
+		if _, err := os.Stat(path); err == nil {
+			return fmt.Errorf("%s already exists (re-record with -force)", path)
+		}
+	}
+	return rec.WriteFile(path)
+}
+
 func runRecord(args []string) {
 	fs := flag.NewFlagSet("record", flag.ExitOnError)
 	endpoint := fs.String("url", "", "full endpoint URL (required)")
@@ -230,10 +281,13 @@ func runRecord(args []string) {
 	authStyle := fs.String("auth", "bearer", "bearer | x-api-key | api-key | query:<param> | none")
 	keyEnv := fs.String("key-env", "RECORD_API_KEY", "environment variable holding the API key")
 	appendExisting := fs.Bool("append", false, "prepend the existing cassette (must have been written by this tool)")
+	force := fs.Bool("force", false, "overwrite existing cassettes (default: refuse — a published file may already be human-reviewed)")
 	timeout := fs.Duration("timeout", 3*time.Minute, "request timeout (reasoning models can be slow)")
 	pause := fs.Duration("pause", time.Second, "delay between scenario calls in batch mode")
 	var headers headerFlags
 	fs.Var(&headers, "header", "extra request header \"Name: value\" (repeatable)")
+	var scrubHeaders listFlags
+	fs.Var(&scrubHeaders, "scrub-header", "additional header name to redact in recordings (repeatable) — REQUIRED when a vendor's auth rides in a header outside the default scrub list")
 	_ = fs.Parse(args)
 
 	if *endpoint == "" {
@@ -260,10 +314,15 @@ func runRecord(args []string) {
 		if *vendor == "" || *model == "" {
 			log.Fatal("record: batch/probe mode needs -vendor and -model")
 		}
+		run := runConfig{
+			endpoint: *endpoint, authStyle: *authStyle, key: key,
+			headers: headers, scrubHeaders: scrubHeaders,
+			timeout: *timeout, pause: *pause, force: *force,
+		}
 		if *probeFields != "" {
-			runProbe(*probeFields, *corpusDir, *endpoint, *vendor, *model, protocolOr(*protocol, "openai"), *authStyle, key, headers, *timeout, *pause)
+			runProbe(run, *probeFields, *corpusDir, *vendor, *model, protocolOr(*protocol, "openai"))
 		} else {
-			runBatch(*scenarioDir, *corpusDir, *endpoint, *vendor, *model, *protocol, *bucket, *authStyle, key, headers, *timeout, *pause)
+			runBatch(run, *scenarioDir, *corpusDir, *vendor, *model, *protocol, *bucket)
 		}
 		return
 	}
@@ -280,7 +339,12 @@ func runRecord(args []string) {
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
-	if err := recordOne(*endpoint, body, *authStyle, key, headers, *timeout, outPath, *appendExisting, metaFor(*endpoint, *vendor, *model, *name, "")); err != nil {
+	run := runConfig{
+		endpoint: *endpoint, authStyle: *authStyle, key: key,
+		headers: headers, scrubHeaders: scrubHeaders,
+		timeout: *timeout, force: *force,
+	}
+	if err := recordOne(run, body, outPath, *appendExisting, metaFor(*endpoint, *vendor, *model, *name, "")); err != nil {
 		log.Fatalf("record: %v", err)
 	}
 	fmt.Fprintln(os.Stderr, "before publishing: read the file, then run `opencassette verify` over it")
@@ -306,13 +370,13 @@ func bucketStream(bucket string, bodyStream bool) bool {
 	return bodyStream
 }
 
-func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, bucket, authStyle, key string, headers headerFlags, timeout, pause time.Duration) {
+func runBatch(run runConfig, dir, corpusDir, vendor, model, protocol, bucket string) {
 	pack, err := scenario.LoadPack(dir)
 	if err != nil {
 		log.Fatalf("record: %v", err)
 	}
 	protocol = protocolOr(protocol, pack.Protocol)
-	if pack.ModelField == "" && !strings.Contains(endpoint, model) {
+	if pack.ModelField == "" && !strings.Contains(run.endpoint, model) {
 		log.Fatalf("record: this pack carries no model in the body — put a {model} placeholder in -url (e.g. .../models/{model}:generateContent)")
 	}
 	if pack.StreamField == "" && bucket == "auto" {
@@ -321,7 +385,7 @@ func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, bucket, authSty
 	var failed []string
 	for i, sc := range pack.Scenarios {
 		if i > 0 {
-			time.Sleep(pause)
+			time.Sleep(run.pause)
 		}
 		fmt.Fprintf(os.Stderr, "\n===== scenario %d/%d: %s =====\n", i+1, len(pack.Scenarios), sc.Name)
 		body, err := sc.WithModel(model)
@@ -332,7 +396,7 @@ func runBatch(dir, corpusDir, endpoint, vendor, model, protocol, bucket, authSty
 		if err != nil {
 			log.Fatalf("record: %v", err)
 		}
-		if err := recordOne(endpoint, body, authStyle, key, headers, timeout, outPath, false, metaFor(endpoint, vendor, model, sc.Name, sc.SHA256())); err != nil {
+		if err := recordOne(run, body, outPath, false, metaFor(run.endpoint, vendor, model, sc.Name, sc.SHA256())); err != nil {
 			fmt.Fprintf(os.Stderr, "SKIPPED %s: %v\n", sc.Name, err)
 			failed = append(failed, sc.Name)
 		}
@@ -370,7 +434,7 @@ type fieldResult struct {
 	Companions []string `json:"companions,omitempty"`
 }
 
-func runProbe(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key string, headers headerFlags, timeout, pause time.Duration) {
+func runProbe(run runConfig, dir, corpusDir, vendor, model, protocol string) {
 	baseRaw, err := os.ReadFile(filepath.Join(dir, "chat_basic.json"))
 	if err != nil {
 		log.Fatalf("record: probe base: %v", err)
@@ -392,7 +456,7 @@ func runProbe(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 	// If the minimal body itself fails, every probe would read as a
 	// rejection — abort instead of writing a matrix of noise.
 	fmt.Fprintln(os.Stderr, "===== baseline: minimal request =====")
-	status, _, err := probeOne(endpoint, base, authStyle, key, headers, timeout, recorder.Meta{})
+	status, _, err := probeOne(run, base, recorder.Meta{})
 	if err != nil {
 		log.Fatalf("record: baseline call failed (nothing probed): %v", err)
 	}
@@ -405,14 +469,14 @@ func runProbe(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 		RecordedAt:   time.Now().UTC().Format(time.RFC3339),
 		Vendor:       vendor,
 		Model:        model,
-		Endpoint:     hostOf(endpoint),
+		Endpoint:     hostOf(run.endpoint),
 		Source:       "chat_full_params.json",
 		SourceSHA256: fullSHA,
 		Fields:       map[string]fieldResult{},
 	}
 	var errored []string
 	for _, p := range probes {
-		time.Sleep(pause)
+		time.Sleep(run.pause)
 		fmt.Fprintf(os.Stderr, "\n===== field %s =====\n", p.Field)
 		res := fieldResult{Companions: p.Companions}
 		if strings.ContainsAny(p.Field, `/\`) {
@@ -422,8 +486,8 @@ func runProbe(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 			errored = append(errored, p.Field)
 			continue
 		}
-		meta := metaFor(endpoint, vendor, model, "field:"+p.Field, fullSHA)
-		status, rec, err := probeOne(endpoint, p.Body, authStyle, key, headers, timeout, meta)
+		meta := metaFor(run.endpoint, vendor, model, "field:"+p.Field, fullSHA)
+		status, rec, err := probeOne(run, p.Body, meta)
 		res.HTTP = status
 		switch {
 		case err != nil:
@@ -433,14 +497,14 @@ func runProbe(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 		case status >= 200 && status < 300:
 			res.Status = "supported"
 			path := filepath.Join(protoDir, "fields", p.Field+".yaml")
-			if err := rec.WriteFile(path); err != nil {
+			if err := run.writeCassette(rec, path); err != nil {
 				log.Fatalf("record: %v", err)
 			}
 			fmt.Fprintf(os.Stderr, "SUPPORTED — wrote %s\n", path)
 		case status == 400 || status == 422:
 			res.Status = "rejected"
 			path := filepath.Join(protoDir, "fields-rejected", p.Field+".yaml")
-			if err := rec.WriteFile(path); err != nil {
+			if err := run.writeCassette(rec, path); err != nil {
 				log.Fatalf("record: %v", err)
 			}
 			fmt.Fprintf(os.Stderr, "REJECTED — wrote %s\n", path)
@@ -488,15 +552,14 @@ func runProbe(dir, corpusDir, endpoint, vendor, model, protocol, authStyle, key 
 // probeOne sends one probe request through a fresh recorder and reports the
 // upstream status; the caller decides which bucket (if any) the recording
 // lands in — unlike recordOne, a 4xx here is data, not an operator mistake.
-func probeOne(endpoint string, body []byte, authStyle, key string, headers headerFlags, timeout time.Duration, meta recorder.Meta) (int, *recorder.Recorder, error) {
-	rec := recorder.New(nil)
-	rec.RedactValue(key)
+func probeOne(run runConfig, body []byte, meta recorder.Meta) (int, *recorder.Recorder, error) {
+	rec := run.newRecorder()
 	rec.SetMeta(meta)
-	req, err := buildRequest(endpoint, body, authStyle, key, headers, rec)
+	req, err := buildRequest(run, body, rec)
 	if err != nil {
 		return 0, nil, err
 	}
-	client := &http.Client{Transport: rec, Timeout: timeout}
+	client := &http.Client{Transport: rec, Timeout: run.timeout}
 	resp, err := client.Do(req)
 	if err != nil {
 		return 0, nil, err
@@ -532,22 +595,27 @@ func hostOf(endpoint string) string {
 	return endpoint
 }
 
-func recordOne(endpoint string, body []byte, authStyle, key string, headers headerFlags, timeout time.Duration, outPath string, appendExisting bool, meta recorder.Meta) error {
-	rec := recorder.New(nil)
-	rec.RedactValue(key)
+func recordOne(run runConfig, body []byte, outPath string, appendExisting bool, meta recorder.Meta) error {
+	rec := run.newRecorder()
 	if appendExisting {
 		if err := rec.PrependFromFile(outPath); err != nil {
 			return fmt.Errorf("-append: %w", err)
 		}
 	} else {
 		rec.SetMeta(meta)
+		// Check before spending the API call, not after.
+		if !run.force {
+			if _, err := os.Stat(outPath); err == nil {
+				return fmt.Errorf("%s already exists (re-record with -force)", outPath)
+			}
+		}
 	}
 
-	req, err := buildRequest(endpoint, body, authStyle, key, headers, rec)
+	req, err := buildRequest(run, body, rec)
 	if err != nil {
 		return err
 	}
-	client := &http.Client{Transport: rec, Timeout: timeout}
+	client := &http.Client{Transport: rec, Timeout: run.timeout}
 	resp, err := client.Do(req)
 	if err != nil {
 		return fmt.Errorf("request failed (nothing recorded): %w", err)
@@ -565,7 +633,11 @@ func recordOne(endpoint string, body []byte, authStyle, key string, headers head
 		// publishing an error cassette.
 		return fmt.Errorf("upstream returned %s; not writing %s (fix the request and re-run)", resp.Status, outPath)
 	}
-	if err := rec.WriteFile(outPath); err != nil {
+	if appendExisting {
+		if err := rec.WriteFile(outPath); err != nil {
+			return err
+		}
+	} else if err := run.writeCassette(rec, outPath); err != nil {
 		return err
 	}
 	fmt.Fprintf(os.Stderr, "wrote %d interaction(s) to %s\n", rec.Len(), outPath)
@@ -617,15 +689,15 @@ func resolveOutPath(out, corpusDir, vendor, model, protocol, name string, stream
 	return path, nil
 }
 
-func buildRequest(endpoint string, body []byte, authStyle, key string, headers headerFlags, rec *recorder.Recorder) (*http.Request, error) {
-	finalURL := endpoint
-	if param, ok := strings.CutPrefix(authStyle, "query:"); ok {
-		u, err := url.Parse(endpoint)
+func buildRequest(run runConfig, body []byte, rec *recorder.Recorder) (*http.Request, error) {
+	finalURL := run.endpoint
+	if param, ok := strings.CutPrefix(run.authStyle, "query:"); ok {
+		u, err := url.Parse(run.endpoint)
 		if err != nil {
 			return nil, fmt.Errorf("parse -url: %w", err)
 		}
 		q := u.Query()
-		q.Set(param, key)
+		q.Set(param, run.key)
 		u.RawQuery = q.Encode()
 		finalURL = u.String()
 		rec.ScrubQueryParam(param)
@@ -636,21 +708,21 @@ func buildRequest(endpoint string, body []byte, authStyle, key string, headers h
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
-	for _, h := range headers {
+	for _, h := range run.headers {
 		name, value, _ := strings.Cut(h, ":")
 		req.Header.Set(strings.TrimSpace(name), strings.TrimSpace(value))
 	}
 	switch {
-	case authStyle == "bearer":
-		req.Header.Set("Authorization", "Bearer "+key)
-	case authStyle == "x-api-key":
-		req.Header.Set("x-api-key", key)
-	case authStyle == "api-key":
-		req.Header.Set("api-key", key)
-	case authStyle == "none", strings.HasPrefix(authStyle, "query:"):
+	case run.authStyle == "bearer":
+		req.Header.Set("Authorization", "Bearer "+run.key)
+	case run.authStyle == "x-api-key":
+		req.Header.Set("x-api-key", run.key)
+	case run.authStyle == "api-key":
+		req.Header.Set("api-key", run.key)
+	case run.authStyle == "none", strings.HasPrefix(run.authStyle, "query:"):
 		// handled above / nothing to add
 	default:
-		return nil, fmt.Errorf("unknown -auth %q (want bearer | x-api-key | api-key | query:<param> | none)", authStyle)
+		return nil, fmt.Errorf("unknown -auth %q (want bearer | x-api-key | api-key | query:<param> | none)", run.authStyle)
 	}
 	return req, nil
 }

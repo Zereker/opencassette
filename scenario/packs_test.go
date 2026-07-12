@@ -1,6 +1,9 @@
 package scenario
 
 import (
+	"os"
+	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/tidwall/gjson"
@@ -228,6 +231,26 @@ func TestOpenAIResponsesPack(t *testing.T) {
 		if !ok {
 			t.Errorf("openai-responses pack is missing %s", name)
 		}
+	}
+}
+
+// TestManifestKeysMustBeExplicit: pack.json omitting model_field would
+// silently mean "model rides in the URL" — WithModel becomes a no-op and
+// every recording keeps the pack's committed model while the corpus path
+// claims the vendor's. Missing keys must be a loud load error instead.
+func TestManifestKeysMustBeExplicit(t *testing.T) {
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "s.json"),
+		[]byte(`{"model":"m","messages":[]}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "pack.json"),
+		[]byte(`{"protocol":"openai","required":["model","messages"],"stream_field":"stream"}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	_, err := LoadPack(dir)
+	if err == nil || !strings.Contains(err.Error(), "model_field") {
+		t.Fatalf("missing model_field key accepted: %v", err)
 	}
 }
 
