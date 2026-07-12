@@ -20,9 +20,10 @@
 //	  -vendor deepseek -model deepseek-chat
 //
 // Probing per-field vendor support (one minimal request per top-level field
-// of the pack's chat_full_params.json; accepted fields' cassettes land in
-// fields/, 400/422 rejections — evidence of non-support — in
-// fields-rejected/, and a field-support.json matrix alongside):
+// of the pack's chat_full_params.json, plus synthetic probes like
+// stream_options that the full body can't legally carry; accepted fields'
+// cassettes land in fields/, 400/422 rejections — evidence of non-support —
+// in fields-rejected/, and a field-support.json matrix alongside):
 //
 //	RECORD_API_KEY=sk-... opencassette record \
 //	  -url https://api.deepseek.com/chat/completions \

@@ -41,10 +41,25 @@ var probeRules = map[string]probeRule{
 	"audio": {extra: map[string]json.RawMessage{"modalities": json.RawMessage(`["text","audio"]`)}},
 }
 
+// syntheticProbes are fields probed even though the full-params body can't
+// carry them: stream_options is rejected outright when stream is false, so
+// putting it in chat_full_params.json would invalidate that scenario. It
+// still needs per-field evidence — include_usage is the only way a stream
+// carries token accounting at all, and a stream probe without it records a
+// cassette with no usage data. The value mirrors the pack's
+// chat_stream_usage.json (a verbatim real SDK request).
+var syntheticProbes = map[string]probeRule{
+	"stream_options": {
+		value: json.RawMessage(`{"include_usage":true}`),
+		extra: map[string]json.RawMessage{"stream": json.RawMessage(`true`)},
+	},
+}
+
 // BuildProbes derives one probe per top-level field of fullParams (except
 // model and messages, which come from base — the pack's minimal scenario,
-// already model-substituted). Probes are returned sorted by field name and
-// their bodies marshal deterministically.
+// already model-substituted), plus the synthetic probes for fields the
+// full-params body cannot legally carry. Probes are returned sorted by
+// field name and their bodies marshal deterministically.
 func BuildProbes(base, fullParams []byte) ([]Probe, error) {
 	var baseDoc, fullDoc map[string]json.RawMessage
 	if err := json.Unmarshal(base, &baseDoc); err != nil {
@@ -65,16 +80,24 @@ func BuildProbes(base, fullParams []byte) ([]Probe, error) {
 			fields = append(fields, f)
 		}
 	}
-	sort.Strings(fields)
 	if len(fields) == 0 {
 		return nil, fmt.Errorf("scenario: full-params has no probeable fields")
 	}
+	for f := range syntheticProbes {
+		if _, ok := fullDoc[f]; !ok {
+			fields = append(fields, f)
+		}
+	}
+	sort.Strings(fields)
 
 	out := make([]Probe, 0, len(fields))
 	for _, field := range fields {
+		val, inFull := fullDoc[field]
 		rule := probeRules[field]
+		if !inFull {
+			rule = syntheticProbes[field]
+		}
 		doc := map[string]json.RawMessage{"model": model, "messages": messages}
-		val := fullDoc[field]
 		if rule.value != nil {
 			val = rule.value
 		}

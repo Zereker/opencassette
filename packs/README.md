@@ -50,6 +50,7 @@ test-pinned):
 | `tool_choice`, `parallel_tool_calls` | carries `tools` from the full-params body | only valid alongside declared tools |
 | `stream` | sent as `true` | the committed `false` is treated as absent by every vendor |
 | `audio` | carries `modalities: ["text","audio"]` | audio output is rejected unless the modality is requested |
+| `stream_options` | synthetic probe — `{"include_usage": true}` riding on `stream: true` (value mirrors `chat_stream_usage.json`) | can't live in the full-params body (rejected when `stream` is false), but it's the only way a recorded stream carries usage/token accounting |
 
 Results: 2xx cassettes land in `fields/`, 400/422 rejections (evidence of
 non-support, error body included) in `fields-rejected/`, and a

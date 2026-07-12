@@ -96,6 +96,19 @@ func TestBuildProbesRules(t *testing.T) {
 	if p := byField["audio"]; gjson.GetBytes(p.Body, "modalities").Raw != `["text","audio"]` {
 		t.Errorf("audio probe must request the audio modality: %s", p.Body)
 	}
+	// stream_options can't live in chat_full_params (invalid with
+	// stream:false) but must still be probed — it is the only way a
+	// recorded stream carries usage/token accounting.
+	if p, ok := byField["stream_options"]; !ok {
+		t.Error("no synthetic stream_options probe generated")
+	} else {
+		if !gjson.GetBytes(p.Body, "stream_options.include_usage").Bool() {
+			t.Errorf("stream_options probe must set include_usage: %s", p.Body)
+		}
+		if !gjson.GetBytes(p.Body, "stream").Bool() || !p.Stream {
+			t.Errorf("stream_options probe must ride on stream:true: %s", p.Body)
+		}
+	}
 	if p := byField["temperature"]; len(p.Companions) != 0 || p.Stream {
 		t.Errorf("plain field grew companions/stream: %+v", p)
 	}
