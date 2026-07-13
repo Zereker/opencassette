@@ -1,5 +1,5 @@
 meta:
-    recorded_at: "2026-07-13T09:45:20Z"
+    recorded_at: "2026-07-13T09:53:48Z"
     vendor: minimax
     model: MiniMax-M2.7
     endpoint: https://api.minimaxi.com
@@ -19,18 +19,18 @@ interactions:
       response:
         body:
             string: |
-                {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"message":{"content":"<think>\nThe user says \"respond with good\". They probably want a short answer? \"good\" perhaps means respond with \"good\". Or maybe they want a response that's positive. The instruction: \"respond with good\". There's no other context. So presumably we need to output \"good\". However, maybe they want a friendly response. Possibly the user wants a \"good\" response. I think we can respond with something like \"Good!\" or \"That's good!\" Or \"Good to hear from you!\" The phrase \"respond with good\" is ambiguous. Could be a test to see if the assistant follows instructions to output \"good\". Possibly they want the assistant to output just \"good\". The simplest answer is \"good\". The user may be testing if the assistant obeys. Usually we do what they say.\n\nGiven that no policy violation, we can comply. The best answer: \"Good.\" Or \"good\". I think we should output exactly \"good\". Probably safe.\n\nGiven instruction: \"respond with good\". So respond with the word \"good\". Use minimal extra words? The instruction is \"respond with good\". The answer is just \"good\". If we add punctuation, it still includes \"good\". It's okay.\n\nThus: Output \"good\".\n</think>\n\ngood","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935920,"model":"MiniMax-M2.7","object":"chat.completion","usage":{"total_tokens":299,"total_characters":0,"prompt_tokens":44,"completion_tokens":255,"completion_tokens_details":{"reasoning_tokens":254}},"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"base_resp":{"status_code":0,"status_msg":""}}
+                {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"message":{"content":"<think>\nThe user says: \"respond with good\". The user wants the assistant to respond with \"good\". There's no content or context. The user wants a response that is just \"good\". It's unclear if there's any policy violation. The user says \"respond with good\". That's a request. It's a short response. The user presumably wants a simple answer: \"good\". There's no disallowed content. We can comply. There's no conflict with policies. So the answer is just \"good\". There's no other request. According to policy, we can respond with a short \"good\". We must respond as per instructions. Possibly the user wants a confirmation: \"good\". The user says \"respond with good\". So we respond \"good\". No extraneous content. Ensure we follow \"Concise\" but no policy violation.\n\nThus final answer: \"good\".\n</think>\n\ngood","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936429,"model":"MiniMax-M2.7","object":"chat.completion","usage":{"total_tokens":217,"total_characters":0,"prompt_tokens":44,"completion_tokens":173,"completion_tokens_details":{"reasoning_tokens":172}},"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"base_resp":{"status_code":0,"status_msg":""}}
         headers:
             Alb_receive_time:
-                - "1783935920.207"
+                - "1783936429.095"
             Alb_request_id:
-                - 5757fe0df711b64159732b81798c1e47ed209cfc
+                - '**TRACE_ID_3**'
             Content-Type:
                 - application/json; charset=utf-8
             Date:
-                - Mon, 13 Jul 2026 09:45:28 GMT
+                - Mon, 13 Jul 2026 09:53:53 GMT
             Minimax-Request-Id:
-                - '**TRACE_ID_4**'
+                - '**TRACE_ID_5**'
             Trace-Id:
                 - '**TRACE_ID_1**'
             Vary:
@@ -38,7 +38,7 @@ interactions:
             X-Mm-Request-Id:
                 - '**TRACE_ID_2**'
             X-Session-Id:
-                - '**TRACE_ID_3**'
+                - '**TRACE_ID_4**'
         status:
             code: 200
             message: OK

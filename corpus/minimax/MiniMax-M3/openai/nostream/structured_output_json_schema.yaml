@@ -1,5 +1,5 @@
 meta:
-    recorded_at: "2026-07-13T09:46:16Z"
+    recorded_at: "2026-07-13T09:54:45Z"
     vendor: minimax
     model: MiniMax-M3
     endpoint: https://api.minimaxi.com
@@ -18,25 +18,24 @@ interactions:
         uri: https://api.minimaxi.com/v1/chat/completions
       response:
         body:
-            string: |
-                {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"message":{"content":"<think>\nThe user just said \"respond with good\". This is a very simple request - they want me to respond with \"good\".\n</think>\nGood.","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935976,"model":"MiniMax-M3","object":"chat.completion","usage":{"total_tokens":208,"total_characters":0,"prompt_tokens":179,"completion_tokens":29,"prompt_tokens_details":{"cached_tokens":114}},"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard","base_resp":{"status_code":0,"status_msg":""}}
+            string: "{\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"content\":\"<think>\\nThe user simply asked me to \\\"respond with good\\\". This is a very brief and casual request. They might be testing me, greeting me, or just asking for a positive response. I'll respond in a friendly, positive manner.\\n</think>\\nGood! \U0001F60A How can I help you today?\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936485,\"model\":\"MiniMax-M3\",\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":237,\"total_characters\":0,\"prompt_tokens\":179,\"completion_tokens\":58,\"prompt_tokens_details\":{\"cached_tokens\":114}},\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0,\"service_tier\":\"standard\",\"base_resp\":{\"status_code\":0,\"status_msg\":\"\"}}\n"
         headers:
             Alb_receive_time:
-                - "1783935976.741"
+                - "1783936485.389"
             Alb_request_id:
-                - 1197f87c7c7a09e27a19b2dfc74cec8359275801
+                - '**TRACE_ID_5**'
             Content-Length:
-                - "715"
+                - "849"
             Content-Type:
                 - application/json; charset=utf-8
             Date:
-                - Mon, 13 Jul 2026 09:46:17 GMT
+                - Mon, 13 Jul 2026 09:54:47 GMT
             Minimax-Request-Id:
-                - '**TRACE_ID_3**'
+                - '**TRACE_ID_2**'
             Trace-Id:
                 - '**TRACE_ID_1**'
             X-Mm-Request-Id:
-                - '**TRACE_ID_2**'
+                - '**TRACE_ID_3**'
             X-Session-Id:
                 - '**TRACE_ID_4**'
         status:

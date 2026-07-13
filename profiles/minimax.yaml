@@ -6,3 +6,4 @@ trace_headers:
   - minimax-request-id
   - x-mm-request-id
   - x-session-id
+  - alb_request_id # AWS ALB request id (underscore-named) in front of the API

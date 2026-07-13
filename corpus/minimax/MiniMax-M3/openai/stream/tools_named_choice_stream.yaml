@@ -1,5 +1,5 @@
 meta:
-    recorded_at: "2026-07-13T09:46:23Z"
+    recorded_at: "2026-07-13T09:54:52Z"
     vendor: minimax
     model: MiniMax-M3
     endpoint: https://api.minimaxi.com
@@ -19,23 +19,23 @@ interactions:
       response:
         body:
             string: |+
-                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"<think>\nThe user wants me to extract information from","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935983,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"<think>\nThe user wants me to extract information about","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936492,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
 
-                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the statement \"Erick is 27 years old\" using the _Person function. The required parameters are name and age, both of which can be extracted from the sentence.","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935983,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" a person. Based on the text \"Erick is 27 years old\", I can extract:\n- name: Erick\n- age: 27\n</think>\n","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936492,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
 
-                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"\n</think>\n","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935983,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"role":"assistant","name":"MiniMax AI","tool_calls":[{"id":"call_function_k2p38pn40ft6_1","type":"function","function":{"name":"_Person","arguments":"{\"name\": \"Erick\", \"age\": "},"index":0}],"audio_content":""}}],"created":1783936492,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
 
-                data: {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"tool_calls","index":0,"delta":{"role":"assistant","name":"MiniMax AI","tool_calls":[{"id":"call_function_thgcsm7z4d2f_1","type":"function","function":{"name":"_Person","arguments":"{\"name\": \"Erick\", \"age\": 27}"},"index":0}],"audio_content":""}}],"created":1783935983,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+                data: {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"tool_calls","index":0,"delta":{"role":"assistant","name":"MiniMax AI","tool_calls":[{"function":{"arguments":"27}"},"index":0}],"audio_content":""}}],"created":1783936492,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
 
         headers:
             Alb_receive_time:
-                - "1783935983.662"
+                - "1783936492.335"
             Alb_request_id:
-                - 9784b5ec8299d8fb7fd123767dbee60c2cef9640
+                - '**TRACE_ID_5**'
             Content-Type:
                 - text/event-stream; charset=utf-8
             Date:
-                - Mon, 13 Jul 2026 09:46:24 GMT
+                - Mon, 13 Jul 2026 09:54:52 GMT
             Minimax-Request-Id:
                 - '**TRACE_ID_4**'
             Trace-Id:

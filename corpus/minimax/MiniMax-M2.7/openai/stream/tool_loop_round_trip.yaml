@@ -1,5 +1,5 @@
 meta:
-    recorded_at: "2026-07-13T09:45:29Z"
+    recorded_at: "2026-07-13T09:53:54Z"
     vendor: minimax
     model: MiniMax-M2.7
     endpoint: https://api.minimaxi.com
@@ -18,34 +18,26 @@ interactions:
         uri: https://api.minimaxi.com/v1/chat/completions
       response:
         body:
-            string: |+
-                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"<think>\nI got","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935929,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
-
-                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" two pelican names from the tool. Let me provide these to the user.\n</think>\n\nHere are two names for a","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935929,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
-
-                data: {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"delta":{"content":" pet pelican:\n\n1. **Charles**\n2. **Sammy**\n\nWould you like more name suggestions?","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935929,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
-
-                data: {"id":"**TRACE_ID_1**","choices":[],"created":1783935929,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":{"total_tokens":282,"total_characters":0,"prompt_tokens":232,"completion_tokens":50,"completion_tokens_details":{"reasoning_tokens":21}},"base_resp":{"status_code":0,"status_msg":""}}
-
+            string: "data: {\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"<think>\\nThe function\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":null,\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" calls succeeded. I got two pelican names: \\\"Charles\\\" and \\\"Sammy\\\". I will present these to the user.\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":null,\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"\\n</think>\\n\\nHere are two name suggestions for a pet pelican:\\n\\n1. **Charles** \U0001F9A2\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":null,\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"delta\":{\"content\":\"\\n2. **Sammy** \U0001F9A2\\n\\nWould you like more suggestions?\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":null,\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"choices\":[],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":{\"total_tokens\":300,\"total_characters\":0,\"prompt_tokens\":232,\"completion_tokens\":68,\"completion_tokens_details\":{\"reasoning_tokens\":31}},\"base_resp\":{\"status_code\":0,\"status_msg\":\"\"}}\n\n"
         headers:
             Alb_receive_time:
-                - "1783935929.29"
+                - "1783936434.745"
             Alb_request_id:
-                - 1ac3a2bc0193baa67edb3a171c5096b6c265d5b6
+                - '**TRACE_ID_2**'
             Content-Type:
                 - text/event-stream; charset=utf-8
             Date:
-                - Mon, 13 Jul 2026 09:45:29 GMT
-            Request-Id:
-                - '**TRACE_ID_3**'
+                - Mon, 13 Jul 2026 09:53:55 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_4**'
             Trace-Id:
                 - '**TRACE_ID_1**'
             Vary:
                 - Accept-Encoding
             X-Mm-Request-Id:
-                - '**TRACE_ID_2**'
+                - '**TRACE_ID_3**'
             X-Session-Id:
-                - '**TRACE_ID_4**'
+                - '**TRACE_ID_5**'
         status:
             code: 200
             message: OK
