@@ -1,0 +1,109 @@
+meta:
+    recorded_at: "2026-07-13T08:03:42Z"
+    vendor: google
+    model: gemini-2.5-flash
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_basic
+    scenario_sha256: cfe7ad57ae1984efbd37afd5d6a157cb4b76f4a352fb421460f34385b5f985da
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Name for a pet pelican, just the name"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-2.5-flash:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "* Pellie\n* Captain\n* Scoop\n* Gus\n* Skipper\n* Pouch\n* Mariner\n* Beaky\n* Finley\n* Admiral\n* Poseidon\n* Barnacle\n* Percy\n* Willow\n* Fisher\n* Gulliver\n* Chomps\n* Sterling\n* Seabreeze\n* Pip"
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 3.1885395e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 7.76413e-08,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 3.1415914e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.45955505e-08,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.0036416054
+                        }
+                      ],
+                      "avgLogprobs": -6.7344870496152049
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 10,
+                    "candidatesTokenCount": 67,
+                    "totalTokenCount": 1007,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 10
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 67
+                      }
+                    ],
+                    "thoughtsTokenCount": 930
+                  },
+                  "modelVersion": "gemini-2.5-flash",
+                  "createTime": "2026-07-13T08:03:43.239477Z",
+                  "responseId": "35tUavXODrHh8vUP58mO4Ao"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 08:03:50 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

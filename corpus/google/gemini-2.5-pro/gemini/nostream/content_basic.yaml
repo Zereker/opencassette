@@ -1,0 +1,109 @@
+meta:
+    recorded_at: "2026-07-13T08:03:00Z"
+    vendor: google
+    model: gemini-2.5-pro
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_basic
+    scenario_sha256: cfe7ad57ae1984efbd37afd5d6a157cb4b76f4a352fb421460f34385b5f985da
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Name for a pet pelican, just the name"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-2.5-pro:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "Percival"
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 5.96176e-08,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 2.5880308e-06,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.054103196
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.32415125e-05,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 8.598532e-09,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        }
+                      ],
+                      "avgLogprobs": -169.30819702148438
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 10,
+                    "candidatesTokenCount": 2,
+                    "totalTokenCount": 1249,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 10
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 2
+                      }
+                    ],
+                    "thoughtsTokenCount": 1237
+                  },
+                  "modelVersion": "gemini-2.5-pro",
+                  "createTime": "2026-07-13T08:03:01.501267Z",
+                  "responseId": "tZtUapPMHtT5694PleGigA8"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 08:03:17 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

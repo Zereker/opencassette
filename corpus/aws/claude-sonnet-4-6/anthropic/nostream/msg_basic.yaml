@@ -1,0 +1,47 @@
+meta:
+    recorded_at: "2026-07-13T08:23:21Z"
+    vendor: aws
+    model: claude-sonnet-4-6
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_basic
+    scenario_sha256: 96900b854ccc0e54a2c4212e2641250233b20c87390701d9f0cb0412a548dc40
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]}],"temperature":1.0}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082321Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2F3z04ny93dpv5/invoke
+      response:
+        body:
+            string: '{"model":"claude-sonnet-4-6","id":"msg_bdrk_01SVuXi3PUckUfAcSumJpPUM","type":"message","role":"assistant","content":[{"type":"text","text":"**Percy** or **Peggy**"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":17,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":12}}'
+        headers:
+            Content-Length:
+                - "418"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:23:22 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Cache-Write-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "17"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "1160"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "12"
+            X-Amzn-Requestid:
+                - f6e67474-5b77-4b0a-84fb-5d24681e3b53
+        status:
+            code: 200
+            message: OK

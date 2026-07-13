@@ -1,0 +1,45 @@
+meta:
+    recorded_at: "2026-07-13T08:22:02Z"
+    vendor: aws
+    model: claude-opus-4-8
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_basic
+    scenario_sha256: 96900b854ccc0e54a2c4212e2641250233b20c87390701d9f0cb0412a548dc40
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]}],"temperature":1.0}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082202Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fa7p85oev50sb/invoke
+      response:
+        body:
+            string: '{"model":"claude-opus-4-8","id":"msg_bdrk_uy4pbhyssekckwshc77uadyilbhwfzlcm4hqzw76g6bhg6o4lu5a","type":"message","role":"assistant","content":[{"type":"text","text":"Here are two names for a pet pelican:\n\n1. **Pelican Pete**\n2. **Scoop**"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":20,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":36,"output_tokens_details":{"thinking_tokens":0},"service_tier":"standard"}}'
+        headers:
+            Content-Length:
+                - "568"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:22:04 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "20"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "1157"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "36"
+            X-Amzn-Requestid:
+                - c0c18294-699a-41da-8033-319d871c3fbc
+        status:
+            code: 200
+            message: OK

@@ -1,0 +1,109 @@
+meta:
+    recorded_at: "2026-07-13T08:03:27Z"
+    vendor: google
+    model: gemini-2.5-pro
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_output
+    scenario_sha256: abb2092b96d390d21af1ba01d701224df4456a2c53e5da5520e3cb1cd0bb7248
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent a cool dog"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"name": {"type": "string"}, "age": {"type": "integer"}, "bio": {"type": "string"}}, "required": ["name", "age", "bio"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-2.5-pro:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "{\n  \"name\": \"Barko\",\n  \"age\": 3,\n  \"bio\": \"A certified therapy dog by day, a semi-professional skateboarder by night. Specializes in fetching frisbees mid-air and has a particular fondness for artisan bacon treats.\"\n}"
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.3415622e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.7025425e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.027974926
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.0258293e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.1957318e-08,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        }
+                      ],
+                      "avgLogprobs": -1.2804351556496543
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 14,
+                    "candidatesTokenCount": 61,
+                    "totalTokenCount": 349,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 14
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 61
+                      }
+                    ],
+                    "thoughtsTokenCount": 274
+                  },
+                  "modelVersion": "gemini-2.5-pro",
+                  "createTime": "2026-07-13T08:03:27.400917Z",
+                  "responseId": "z5tUapW8GIC9jNAPgo-SkAo"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 08:03:31 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

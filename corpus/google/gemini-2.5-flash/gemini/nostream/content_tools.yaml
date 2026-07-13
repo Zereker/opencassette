@@ -1,0 +1,122 @@
+meta:
+    recorded_at: "2026-07-13T08:04:01Z"
+    vendor: google
+    model: gemini-2.5-flash
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_tools
+    scenario_sha256: 5cbd321c7a3ef9304163261fe3fd60aa1633ec201f0f6e13d0379d25f8751b32
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Two names for a pet pelican"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "tools": [{"functionDeclarations": [{"name": "pelican_name_generator", "description": null, "parameters": {"properties": {}, "type": "object"}}]}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-2.5-flash:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "functionCall": {
+                              "name": "pelican_name_generator",
+                              "args": {}
+                            },
+                            "thoughtSignature": "CoYCAY89a1/vl8nS1i0u/RtuHZmIPOT+rpGBjvgu/LaBVaRFEqO+pR53cyzgcDWO8Inc0SkLkMscHn6xH4MsOBd9kwLpy6RgJ7slFXfPUe1WBhRBaCvO7/NYX0V60ozRILBtWFo8GUq/csy1baHoplFFF2bshvMPBBxCc3L1i/weGLQCXDQuf16DwMYNalmQ+6EV9cEzE9ikWAPWW49ryGERAxvW2fULoxOVfBiSD3WEbUgYHMUYk6hslaj7L68doyc0CGZGk5+i33SHaRl4fDUO5h0pldGZO2uCTX+UgqH8IKcbJmcJAv0puZ4706BoHmgCW0Pm3Pa/uUs8G46hMXzYdPgAKK2BkA=="
+                          },
+                          {
+                            "functionCall": {
+                              "name": "pelican_name_generator",
+                              "args": {}
+                            }
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 4.390679e-05,
+                          "severity": "HARM_SEVERITY_LOW",
+                          "severityScore": 0.21290514
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 0.0005563232,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.012064531
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 6.598742e-05,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.079987586
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.4829103e-05,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.027410805
+                        }
+                      ],
+                      "avgLogprobs": -0.7724506060282389
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 14,
+                    "candidatesTokenCount": 12,
+                    "totalTokenCount": 79,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 14
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 12
+                      }
+                    ],
+                    "thoughtsTokenCount": 53
+                  },
+                  "modelVersion": "gemini-2.5-flash",
+                  "createTime": "2026-07-13T08:04:01.760106Z",
+                  "responseId": "8ZtUaqqyLvGDoLAPlcWu-Qw"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 08:04:09 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK
