@@ -1,0 +1,7 @@
+# Google Vertex AI (Gemini) redaction overlay. Loaded automatically with
+# --vendor google. The endpoint path carries an internal GCP project id
+# (e.g. projects/prod-1-460607); normalize it in both the request URI and
+# meta.endpoint while keeping the vendor domain and API shape intact.
+replacements:
+  - pattern: 'projects/[a-z0-9][a-z0-9-]*'
+    with: "projects/**PROJECT**"
