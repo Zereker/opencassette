@@ -1,0 +1,6 @@
+# Volcengine Ark (Doubao / 字节火山) redaction overlay. Loaded automatically
+# with --vendor huoshan. x-request-id is already covered by the cross-vendor
+# baseline; x-client-request-id is Ark's extra per-request correlation id.
+# (X-Envoy-Upstream-Service-Time is a latency number, not an id — kept.)
+trace_headers:
+  - x-client-request-id
