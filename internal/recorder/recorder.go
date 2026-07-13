@@ -224,7 +224,17 @@ func (r *Recorder) WriteFile(path string) error {
 		}
 	}
 
-	out, err := yaml.Marshal(fileDoc{Meta: r.meta, Interactions: r.interactions})
+	// The endpoint host is provenance, but an internal proxy host can still
+	// carry secrets or private topology — scrub it through the same rules as
+	// the request URI (a copy, so repeated WriteFile stays idempotent).
+	meta := r.meta
+	if meta != nil && meta.Endpoint != "" {
+		m := *meta
+		m.Endpoint = r.scrubber.ScrubEndpoint(m.Endpoint)
+		meta = &m
+	}
+
+	out, err := yaml.Marshal(fileDoc{Meta: meta, Interactions: r.interactions})
 	if err != nil {
 		return fmt.Errorf("recorder: marshal: %w", err)
 	}

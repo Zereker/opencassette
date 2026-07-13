@@ -8,18 +8,23 @@ trace_headers:
   - apim-request-id       # per-request correlation UUID (APIM gateway)
   - azureml-model-session # model deployment session id
 
-# Custom replacements (optional) run on the recorded copy only, AFTER the
-# scrubbing above — the live request/response are never touched. Exactly one
-# of header/find/pattern per rule; `in` limits scope to header/uri/body
-# (default: all). Leave commented unless a specific value must be masked, and
-# do not mask real provenance (e.g. chatcmpl-* ids the verifier relies on).
-#
-# replacements:
-#   - header: x-ms-region        # replace a whole header value by name
+# Custom replacements run on the recorded copy only, AFTER the scrubbing above
+# — the live request/response are never touched. Exactly one of
+# header/find/pattern per rule; `in` limits scope to header/uri/body (default:
+# all). Do not mask real provenance (e.g. chatcmpl-* ids the verifier relies
+# on).
+replacements:
+  # Azure resource hosts are internal proxy names that leak region and
+  # deployment numbering (e.g. auto-eastus2-s011-d0429-...). Normalize the
+  # resource label to a placeholder while keeping the vendor domain, so the
+  # request URI and meta.endpoint both read as Azure OpenAI without exposing
+  # the internal topology.
+  - pattern: '[a-z0-9-]+\.openai\.azure\.com'
+    with: "**RESOURCE**.openai.azure.com"
+
+# More examples (commented): a whole header value, a literal, a body-only id.
+#   - header: x-ms-region
 #     with: "**REGION**"
-#   - find: "my-resource-name"   # literal substring
-#     with: "**RESOURCE**"
-#     in: [uri, body]
-#   - pattern: 'org-[a-z0-9]{24}' # regexp match, body only
+#   - pattern: 'org-[a-z0-9]{24}'
 #     with: "**ORG_ID**"
 #     in: [body]
