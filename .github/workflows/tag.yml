@@ -1,23 +1,24 @@
-# Cut a release tag — for clients whose git credentials can push commits
-# but not tags (e.g. proxied CI sessions, app integrations).
+# Release tagging for a repo whose primary consumers pull it as a Go module:
+# every push to main (PR merges included) mints the next patch tag, so a
+# merged change is immediately pinnable without anyone remembering to cut a
+# release.
 #
-# Two triggers:
-#   - push to main touching VERSION: tags that commit with the file's
-#     content (the release-file pattern; works for integrations that can
-#     write files but lack actions:write to dispatch).
-#   - workflow_dispatch with a tag input: for humans in the Actions UI.
+# Version resolution, in order:
+#   1. workflow_dispatch input — humans in the Actions UI, any version.
+#   2. VERSION file, when the pushed commit touched it — the escape hatch
+#      for minor/major jumps (set it to e.g. v0.1.0 in the same PR).
+#   3. Otherwise: latest existing vX.Y.Z tag with the patch incremented.
 #
-# If the tag already exists the run skips (idempotent) rather than moving
-# it; re-releasing a version requires deleting the tag first, by hand.
+# Existing tags are never moved. Tag pushes use GITHUB_TOKEN and this
+# workflow has no tag trigger, so it cannot retrigger itself.
 name: tag
 on:
   push:
     branches: [main]
-    paths: [VERSION]
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag name to create at this ref's HEAD (e.g. v0.0.4)"
+        description: "Exact tag to create at this ref's HEAD (e.g. v0.1.0)"
         required: true
 
 permissions:
@@ -28,13 +29,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # HEAD + first parent, enough to diff a merge commit
       - name: Resolve tag name
         id: resolve
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             TAG="${{ inputs.tag }}"
-          else
+          elif git diff --name-only HEAD^1 HEAD 2>/dev/null | grep -qx VERSION; then
             TAG="$(tr -d '[:space:]' < VERSION)"
+          else
+            LATEST="$(git ls-remote --tags origin 'refs/tags/v*' \
+              | awk -F/ '{print $3}' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' \
+              | sort -V | tail -1)"
+            if [ -z "$LATEST" ]; then
+              TAG="v0.0.1"
+            else
+              TAG="$(echo "$LATEST" | awk -F. '{printf "%s.%s.%d", $1, $2, $3+1}')"
+            fi
           fi
           if ! echo "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+([-+][A-Za-z0-9.-]+)?$'; then
             echo "tag must look like vX.Y.Z (got: $TAG)" >&2
