@@ -1,0 +1,44 @@
+meta:
+    recorded_at: "2026-07-13T09:54:00Z"
+    vendor: minimax
+    model: MiniMax-M3
+    endpoint: https://api.minimaxi.com
+    scenario: chat_basic
+    scenario_sha256: c88a48870c2ffdb177b8dbbca23f3ced1f791a59ce08288a4bf18e83a69c8099
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"MiniMax-M3"}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: |
+                {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"message":{"content":"<think>\nThe user wants a story about a cat. Let me write an engaging, well-crafted short story featuring a cat as the main character. I'll make it interesting with personality, plot, and a satisfying arc.\n</think>\n# The Cartographer of Moonlight Lane\n\nIn a crooked little house at the end of Moonlight Lane, there lived a cat named Finnigan. He was an orange tabby with a notch in his left ear and a habit of staring at walls for hours, as though reading secrets written in the plaster.\n\nHis owner, an elderly woman named Mabel, believed Finnigan was simply a lazy cat. Every morning, she would set out his breakfast of salmon pâté, pat his head, and mutter, \"You could catch a mouse if you tried, you know.\"\n\nFinnigan would blink slowly, as if this comment were beneath his dignity, then return to his wall.\n\nWhat Mabel didn't know—what *no one* knew—was that Finnigan was not staring at nothing at all. He was a cartographer.\n\nBehind the walls of his house lived the mousefolk, a tiny civilization that had been building beneath the floorboards for generations. They had libraries made of cracker crumbs, theaters made of bottle caps, and roads paved with stolen sequins. And every night, when the house grew quiet, Finnigan would watch them through the cracks in the baseboards, memorizing their tunnels, their bridges, their small magnificent world.\n\nHe drew maps of it all. With one paw dipped in the inkwell of a tipped-over fountain pen, he scratched detailed charts onto sheets of paper he stole from Mabel's desk. He labeled every corridor: *The Great Cheese Grotto*, *The Parliament of Buttons*, *The Whispering Wheatfields* (where mice kept their grain stores).\n\nThe mousefolk didn't know he was watching. They thought they were hidden.\n\nBut one autumn evening, something changed. A young mouse named Pip—curious, clumsy, and far too brave for his own whiskers—pushed a sliver of paper through a crack in the baseboard. It landed at Finnigan's paws.\n\nIt was a map. A map of Finnigan's house, drawn from the mice's perspective. The pantry was labeled *The White Mountain*. The sofa cushions were *The Soft Caverns*. And at the very top of the map, in tiny wobbly letters, was a note:\n\n*\"To the giant who lives above: We see you too. We have always seen you. Why do you watch us? Are you our friend, or are you waiting? —Pip\"*\n\nFinnigan stared at the note for a long time. His whiskers trembled. Then, very carefully, he took up the fountain pen and wrote back on a scrap of paper:\n\n*\"I am your friend. I am making a book so the world remembers you, when the humans sell this house and the floors are torn up. I am your cartographer. —F.\"*\n\nHe slid the paper through the crack.\n\nFor a long moment, nothing happened. Then a small, trembling voice rose from below.\n\n*\"A book?\"* whispered Pip. *\"About* us?\"\n\n*\"About all of you,\"* Finnigan purred through the floorboards. *\"Every tunnel. Every name. Every mouse who ever lived here.\"*\n\nThere was a long pause. Then, from somewhere deep in the walls, came a sound Finnigan had never heard before: a thousand tiny mouse voices, singing.\n\nThat winter, Mabel got very sick. The house grew cold, and the people who came to visit spoke in low, serious voices. Finnigan sat on the windowsill, watching them with his great golden eyes, knowing what they were saying even though he could not speak their words.\n\nOn the last night, Mabel reached up and stroked his head, weaker than she'd ever been. \"You were a good cat, Finnigan,\" she whispered. \"Though you never caught a single mouse.\"\n\nFinnigan pressed his face into her hand. *I did something better,* he thought. *I caught their whole world in a book, and I kept it safe.*\n\nIn the morning, the house was full of strangers. Finnigan slipped out the cat flap and disappeared into the neighborhood.\n\nThe family who bought the house found the maps in the attic a week later. Dozens of them. Hundreds. Pinned to the walls, stacked in shoeboxes, hidden inside old hat boxes. Beautifully detailed drawings of a hidden kingdom, with a note in shaky handwriting on the very last page:\n\n*\"For whoever finds this. There was a world beneath your feet. There were names. There were songs. Remember them. —F.\"*\n\nThey never tore up the floors.\n\nAnd to this day, if you press your ear to the baseboards of the old house on Moonlight Lane, you can hear, if you listen very carefully, the faint sound of a thousand tiny mice, singing a thank-you song to a cat who drew them a place in the stars.\n\n---\n\n*Some heroes wear capes. Some wear fur. The best ones leave maps behind.*","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936441,"model":"MiniMax-M3","object":"chat.completion","usage":{"total_tokens":1221,"total_characters":0,"prompt_tokens":183,"completion_tokens":1038,"prompt_tokens_details":{"cached_tokens":114}},"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard","base_resp":{"status_code":0,"status_msg":""}}
+        headers:
+            Alb_receive_time:
+                - "1783936441.133"
+            Alb_request_id:
+                - '**TRACE_ID_5**'
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:54:20 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_4**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Session-Id:
+                - '**TRACE_ID_3**'
+        status:
+            code: 200
+            message: OK

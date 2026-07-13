@@ -1,0 +1,43 @@
+meta:
+    recorded_at: "2026-07-13T09:54:45Z"
+    vendor: minimax
+    model: MiniMax-M3
+    endpoint: https://api.minimaxi.com
+    scenario: structured_output_json_schema
+    scenario_sha256: b9ee4045cb68240f8adf70a58dc356640b33f236f0ae7c54fa4dfe55edbb15ea
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"respond with good","role":"user"}],"model":"MiniMax-M3","response_format":{"type":"json_schema","json_schema":{"schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"title":"BadModel","type":"object","additionalProperties":false},"name":"BadModel","strict":true}},"stream":false}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: "{\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"content\":\"<think>\\nThe user simply asked me to \\\"respond with good\\\". This is a very brief and casual request. They might be testing me, greeting me, or just asking for a positive response. I'll respond in a friendly, positive manner.\\n</think>\\nGood! \U0001F60A How can I help you today?\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936485,\"model\":\"MiniMax-M3\",\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":237,\"total_characters\":0,\"prompt_tokens\":179,\"completion_tokens\":58,\"prompt_tokens_details\":{\"cached_tokens\":114}},\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0,\"service_tier\":\"standard\",\"base_resp\":{\"status_code\":0,\"status_msg\":\"\"}}\n"
+        headers:
+            Alb_receive_time:
+                - "1783936485.389"
+            Alb_request_id:
+                - '**TRACE_ID_5**'
+            Content-Length:
+                - "849"
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:54:47 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_2**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            X-Mm-Request-Id:
+                - '**TRACE_ID_3**'
+            X-Session-Id:
+                - '**TRACE_ID_4**'
+        status:
+            code: 200
+            message: OK

@@ -1,0 +1,155 @@
+meta:
+    recorded_at: "2026-07-13T09:53:13Z"
+    vendor: minimax
+    model: MiniMax-M2.7
+    endpoint: https://api.minimaxi.com
+    scenario: chat_stream_usage
+    scenario_sha256: 73ca6813e2fb764472d020437bab0c06aba10e340bb0db97ea1de671f1c4496b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"MiniMax-M2.7","stream":true,"stream_options":{"include_usage":true}}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: |+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"<think>\nThe user","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" asks: \"Write a story about a cat.\" This is a simple request. There's no policy violation. We should comply. The request","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" is for a story about a cat. We can produce a short story or longer. It can be any genre. Could be whimsical, a magical cat","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", etc.\n\nWe should not produce disallowed content. The content is safe.\n\nThus produce a story about a cat. The user might be expecting something creative. We'll respond with a short story","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", maybe about a cat in a city, or a cat with magical powers.\n\nGiven instructions","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":": the assistant should respond with a story. There's no additional constraints.\n\nThus let's produce a story about a","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" cat. We'll comply.\n</think>\n\n**The Midnight Wanderer**\n\nIn the cobblestone heart","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" of Willowbrook, where the lampposts flickered like fireflies and the night sky","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" draped itself in velvety indigo, there lived a cat unlike any other. His","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" name was Míro, a sleek black feline with eyes the color of a harvest moon.","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" He was known to the townsfolk not for his midnight prow","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"ls, but for the uncanny gift he possessed: he could slip between the cracks of reality, disappearing","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" into the world of shadows and reappearing wherever his curiosity called.\n\n---\n\n","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"Míro spent his days perched on the windowsill of the old bookshop owned by a widowed woman","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" named Eliza. The shop smelled of parchment, dried lavender, and the faint hint of incense that Eliza used","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" while reading. She had named the cat after a wandering poet she’d once admired—a man who claimed","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" that the best stories were those lived, not told.\n\nEvery evening, as the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" town clock struck six, Míro would stretch his limbs, flex his velvet paws, and leap onto the narrow alley","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" that led to the market square. The square, a kaleidoscope of stalls selling everything from honeyed pastries to silver trink","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"ets, was a theater of life and light. Míro’s presence there was subtle","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":": a flash of black fur, a glint of moonlit eyes, a lingering scent of night jasmine","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":".\n\nIt was on one such evening that Míro heard a faint, desperate me","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"wl echoing from the old fountain at the center of the square. He padded over, his tail swishing with curiosity","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", and found a tiny, trembling kitten caught beneath the water’s edge. The kitten’s fur was the color","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" of sunrise, a warm orange that contrasted sharply with the cold stone. Its eyes","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" were wide, terrified.\n\nWithout hesitation, Míro slipped into the shadow of the fountain’s base—a","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" place where the stone met the earth’s veins. In that pocket of darkness, he whispered a","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" secret known only to his kind: *“Grant me a breath of moonlight.”* A soft, silvery","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" glow emanated from his fur, and he pulled the kitten up, cradling it gently with his paws. He carried the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" rescued creature to a warm nook beneath a market stall, hidden from","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the bustling crowd.\n\nThe kitten, whom Míro dubbed *","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"Sunny*, snuggled close, purring like a small engine. The two cats lay","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" there, listening to the distant music of a violin that drifted from a tavern, and the distant chatter of the towns","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"folk. As the night deepened, Míro felt the familiar pull of his midnight wanderings, but for the first time, the thought of leaving the world’s","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" edges behind felt less compelling than staying to protect Sunny.\n\n---\n\nOver the following weeks, M","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"íro’s routine changed. He still visited Eliza’s bookshop, still curled up on the worn armchair by the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" fire, but he also spent evenings guiding Sunny through the labyrinth of Willowbrook’s alleys. He taught the younger cat","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" how to dart through the narrow passages, how to balance on the ledges of the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" old houses, and how to find the sweetest fish in the market’s early dawn","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" deliveries.\n\nMíro also discovered something else. The shadows that had always beckoned him, inviting him into that secret in‑between world, began","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" to recede. Instead, a new door opened—one made of warmth, of shared stories, and","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" of quiet companionship. He realized that the true magic wasn’t the ability to slip between worlds, but the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" ability to weave a new world from moments of kindness.\n\nOne moonlit night, as the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" town slept, Míro perched atop the fountain, now dry and silent. He looked up at the stars","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", feeling the gentle tug of his old wanderlust. He imagined the endless possibilities beyond","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" Willowbrook, the stories waiting to be discovered in distant lands. But then he felt a","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" soft nudge against his side. Sunny, now a sprightly young cat, brushed against him","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", purring. Their eyes met, and Míro understood: every journey, no matter how far, begins","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" with a single step, and sometimes that step is a warm, purring presence at your side.\n\nHe closed his eyes,","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" letting the night wrap around them both like a soft blanket. The lampposts flickered,","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the clock tower chimed midnight, and the cats remained, guardians of Willowbrook’s quiet corners, their","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" story a secret whispered only to those who dared to listen.\n\n---\n\nAnd so, the legend of Míro and Sunny lived","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" on in the hearts of the townsfolk—a reminder that even the most mystical of wanderers can","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" find their truest home in the simple act of caring for another, and that the greatest adventures are often the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"delta":{"content":" ones shared.","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[],"created":1783936393,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":{"total_tokens":1154,"total_characters":0,"prompt_tokens":48,"completion_tokens":1106,"completion_tokens_details":{"reasoning_tokens":143}},"base_resp":{"status_code":0,"status_msg":""}}
+
+        headers:
+            Alb_receive_time:
+                - "1783936393.873"
+            Alb_request_id:
+                - '**TRACE_ID_4**'
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:53:14 GMT
+            Request-Id:
+                - '**TRACE_ID_3**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Session-Id:
+                - '**TRACE_ID_5**'
+        status:
+            code: 200
+            message: OK

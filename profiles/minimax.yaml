@@ -1,0 +1,9 @@
+# MiniMax redaction overlay. Loaded automatically with --vendor minimax. The
+# API returns request/session correlation ids the cross-vendor baseline does
+# not know about; discover and rewrite them to **TRACE_ID_n** markers. (The
+# standard Trace-Id header is already covered by the baseline.)
+trace_headers:
+  - minimax-request-id
+  - x-mm-request-id
+  - x-session-id
+  - alb_request_id # AWS ALB request id (underscore-named) in front of the API

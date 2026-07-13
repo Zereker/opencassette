@@ -1,0 +1,43 @@
+meta:
+    recorded_at: "2026-07-13T09:53:54Z"
+    vendor: minimax
+    model: MiniMax-M2.7
+    endpoint: https://api.minimaxi.com
+    scenario: tool_loop_round_trip
+    scenario_sha256: 4a05c06dab3664d090ff6ad1a3d478d2824b51c36ed4aa63ecf7b77aac09e825
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"max_tokens":8192,"messages":[{"role":"user","content":"Two names for a pet pelican"},{"role":"assistant","content":" ","tool_calls":[{"id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","type":"function","function":{"name":"pelican_name_generator","arguments":"{}"}},{"id":"toolu_01N8a4jWyf116qKTMqKKmjyt","type":"function","function":{"name":"pelican_name_generator","arguments":"{}"}}]},{"role":"tool","content":"Charles","tool_call_id":"toolu_01LtHJmixrs9NcWQkK8hu8hj"},{"role":"tool","content":"Sammy","tool_call_id":"toolu_01N8a4jWyf116qKTMqKKmjyt"}],"model":"MiniMax-M2.7","stream":true,"stream_options":{"include_usage":true},"temperature":1,"tools":[{"type":"function","function":{"name":"pelican_name_generator","parameters":{"properties":{},"type":"object"}}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: "data: {\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"<think>\\nThe function\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":null,\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" calls succeeded. I got two pelican names: \\\"Charles\\\" and \\\"Sammy\\\". I will present these to the user.\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":null,\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"\\n</think>\\n\\nHere are two name suggestions for a pet pelican:\\n\\n1. **Charles** \U0001F9A2\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":null,\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"delta\":{\"content\":\"\\n2. **Sammy** \U0001F9A2\\n\\nWould you like more suggestions?\",\"role\":\"assistant\",\"name\":\"MiniMax AI\",\"audio_content\":\"\"}}],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":null,\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"choices\":[],\"created\":1783936434,\"model\":\"MiniMax-M2.7\",\"object\":\"chat.completion.chunk\",\"usage\":{\"total_tokens\":300,\"total_characters\":0,\"prompt_tokens\":232,\"completion_tokens\":68,\"completion_tokens_details\":{\"reasoning_tokens\":31}},\"base_resp\":{\"status_code\":0,\"status_msg\":\"\"}}\n\n"
+        headers:
+            Alb_receive_time:
+                - "1783936434.745"
+            Alb_request_id:
+                - '**TRACE_ID_2**'
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:53:55 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_4**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_3**'
+            X-Session-Id:
+                - '**TRACE_ID_5**'
+        status:
+            code: 200
+            message: OK
