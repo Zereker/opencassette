@@ -46,21 +46,24 @@ type recordOptions struct {
 // shared read-only across every scenario's recorder; each recorder derives
 // its own Scrubber, so trace numbering restarts per cassette.
 type runConfig struct {
-	endpoint  string
-	authStyle string
-	key       string
-	headers   []string
-	rules     *redact.Rules
-	timeout   time.Duration
-	pause     time.Duration
-	force     bool
-	stderr    io.Writer
-	version   string
+	endpoint      string
+	authStyle     string
+	key           string
+	headers       []string
+	rules         *redact.Rules
+	baseTransport http.RoundTripper
+	awsAuth       *awsBedrockAuth
+	timeout       time.Duration
+	pause         time.Duration
+	force         bool
+	stderr        io.Writer
+	version       string
 }
 
-// newRecorder builds a recording transport over the shared ruleset.
+// newRecorder builds a recording transport over the shared ruleset, wrapping
+// the run's base transport (nil = default; aws-sigv4 supplies a TLS-SNI one).
 func (c runConfig) newRecorder() *recorder.Recorder {
-	return recorder.NewWithRules(nil, c.rules)
+	return recorder.NewWithRules(c.baseTransport, c.rules)
 }
 
 // writeCassette refuses to clobber an existing recording unless the run
@@ -106,7 +109,7 @@ func newRecordCommand(app *application) *cobra.Command {
 	flags.StringVar(&opts.name, "name", "", "scenario name (file basename without .yaml)")
 	flags.StringVar(&opts.bucket, "bucket", opts.bucket, "stream | nostream | auto")
 	flags.StringVar(&opts.out, "out", "", "explicit output path (overrides composition)")
-	flags.StringVar(&opts.authStyle, "auth", opts.authStyle, "bearer | x-api-key | api-key | query:<param> | google-sa | none")
+	flags.StringVar(&opts.authStyle, "auth", opts.authStyle, "bearer | x-api-key | api-key | query:<param> | google-sa | aws-sigv4 | none")
 	flags.StringVar(&opts.keyEnv, "key-env", opts.keyEnv, "environment variable holding the API key")
 	flags.StringVar(&opts.profileDir, "profile-dir", opts.profileDir, "directory of vendor redaction profiles (<vendor>.yaml)")
 	flags.BoolVar(&opts.appendExisting, "append", false, "prepend the existing cassette")
@@ -188,9 +191,30 @@ func runRecordCommand(app *application, opts recordOptions) error {
 		rules.AddCredentialHeader(h)
 	}
 
+	// aws-sigv4: the key is the Bedrock endpoint metadata JSON. Assume the
+	// role now, register the resulting credentials for redaction, and route
+	// over a TLS-SNI transport (the NLB DNS name doesn't match its cert).
+	var awsAuth *awsBedrockAuth
+	var baseTransport http.RoundTripper
+
+	if opts.authStyle == "aws-sigv4" {
+		auth, secrets, err := newAWSBedrockAuth(key)
+		if err != nil {
+			return fmt.Errorf("record: aws-sigv4: %w", err)
+		}
+
+		awsAuth = auth
+		baseTransport = auth.transport()
+
+		for _, s := range secrets {
+			rules.AddSecret(s)
+		}
+	}
+
 	run := runConfig{
 		endpoint: opts.endpoint, authStyle: opts.authStyle, key: key,
 		headers: opts.headers, rules: rules,
+		baseTransport: baseTransport, awsAuth: awsAuth,
 		timeout: opts.timeout, pause: opts.pause, force: opts.force,
 		stderr: app.stderr, version: app.version,
 	}
@@ -441,6 +465,10 @@ func resolveOutPath(out, corpusDir, vendor, model, protocol, name string, stream
 }
 
 func buildRequest(run runConfig, body []byte, rec *recorder.Recorder) (*http.Request, error) {
+	if run.authStyle == "aws-sigv4" {
+		return run.awsAuth.buildRequest(run.endpoint, body)
+	}
+
 	finalURL := run.endpoint
 	if param, ok := strings.CutPrefix(run.authStyle, "query:"); ok {
 		u, err := url.Parse(run.endpoint)

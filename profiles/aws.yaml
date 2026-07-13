@@ -1,0 +1,12 @@
+# AWS Bedrock redaction overlay. Loaded automatically with --vendor aws. The
+# request URI carries an internal NLB load-balancer id and the AWS account id
+# (inside the inference-profile ARN); normalize both in the URI, meta.endpoint
+# and bodies. The SigV4 Authorization / X-Amz-Security-Token headers are
+# already blanked by the cross-vendor baseline.
+replacements:
+  # internal NLB load-balancer hostname id
+  - pattern: 'bedrock-nlb-[a-z0-9]+'
+    with: "**NLB**"
+  # AWS account id (12 digits) inside the ARN — keep service/region, mask account
+  - pattern: '(bedrock:[a-z0-9-]+:)[0-9]{12}'
+    with: "${1}**ACCOUNT**"
