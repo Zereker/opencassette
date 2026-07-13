@@ -1,0 +1,39 @@
+meta:
+    recorded_at: "2026-07-13T10:13:34Z"
+    vendor: huoshan
+    model: doubao-seed-2-0-pro-260215
+    endpoint: https://ark.cn-beijing.volces.com
+    scenario: structured_output_json_schema
+    scenario_sha256: b9ee4045cb68240f8adf70a58dc356640b33f236f0ae7c54fa4dfe55edbb15ea
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"respond with good","role":"user"}],"model":"doubao-seed-2-0-pro-260215","response_format":{"type":"json_schema","json_schema":{"schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"title":"BadModel","type":"object","additionalProperties":false},"name":"BadModel","strict":true}},"stream":false}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://ark.cn-beijing.volces.com/api/v3/chat/completions
+      response:
+        body:
+            string: '{"choices":[{"finish_reason":"stop","index":0,"logprobs":null,"message":{"content":"{\"response\":\"good\"}","reasoning_content":"\nOkay, let''s see. The user wants me to respond with \"good\" in the response field, right? The schema requires a response string, no extra properties. So the JSON should be {\"response\": \"good\"}. Yep that''s it.","role":"assistant"}}],"created":1783937617,"id":"**TRACE_ID_1**","model":"doubao-seed-2-0-pro-260215","service_tier":"default","object":"chat.completion","usage":{"completion_tokens":58,"prompt_tokens":205,"total_tokens":263,"prompt_tokens_details":{"cached_tokens":0},"completion_tokens_details":{"reasoning_tokens":53}}}'
+        headers:
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 10:13:36 GMT
+            Server:
+                - istio-envoy
+            Vary:
+                - Accept-Encoding
+            X-Client-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Envoy-Upstream-Service-Time:
+                - "2214"
+            X-Request-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK

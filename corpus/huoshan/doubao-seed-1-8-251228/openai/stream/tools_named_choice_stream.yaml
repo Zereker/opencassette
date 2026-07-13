@@ -1,0 +1,73 @@
+meta:
+    recorded_at: "2026-07-13T10:18:03Z"
+    vendor: huoshan
+    model: doubao-seed-1-8-251228
+    endpoint: https://ark.cn-beijing.volces.com
+    scenario: tools_named_choice_stream
+    scenario_sha256: 808bc3a1d316f1cc45666e9da592a91c9136fc429c7df455a64922b356d425c8
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Extract: Erick is 27 years old.","role":"user"}],"model":"doubao-seed-1-8-251228","stream":true,"temperature":0.0,"tool_choice":{"type":"function","function":{"name":"_Person"}},"tools":[{"type":"function","function":{"name":"_Person","description":"A person with a name and age.","parameters":{"properties":{"name":{"description":"The person''s name","type":"string"},"age":{"description":"The person''s age in years","type":"integer"}},"required":["name","age"],"type":"object"}}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://ark.cn-beijing.volces.com/api/v3/chat/completions
+      response:
+        body:
+            string: |+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"","name":"_Person"},"id":"call_rcst7jt0zz58rjdpfflt4her","index":0,"type":"function"}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":" {\""},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"name"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"\":"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":" \""},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"Er"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"ick"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"\","},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":" \""},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"age"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"\":"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":" "},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"2"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"7"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant","tool_calls":[{"function":{"arguments":"}"},"index":0}]},"index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: {"choices":[{"delta":{"content":"","role":"assistant"},"finish_reason":"tool_calls","index":0}],"created":1783937884,"id":"**TRACE_ID_1**","model":"doubao-seed-1-8-251228","service_tier":"default","object":"chat.completion.chunk","usage":null}
+
+                data: [DONE]
+
+        headers:
+            Cache-Control:
+                - no-cache
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 10:18:03 GMT
+            Server:
+                - istio-envoy
+            X-Client-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Envoy-Upstream-Service-Time:
+                - "819"
+            X-Request-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK
