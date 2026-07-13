@@ -53,6 +53,7 @@ type runConfig struct {
 	rules         *redact.Rules
 	baseTransport http.RoundTripper
 	awsAuth       *awsBedrockAuth
+	awsStream     bool
 	timeout       time.Duration
 	pause         time.Duration
 	force         bool
@@ -81,7 +82,7 @@ func (c runConfig) writeCassette(rec *recorder.Recorder, path string) error {
 
 func newRecordCommand(app *application) *cobra.Command {
 	opts := recordOptions{
-		corpusDir: "corpus",
+		corpusDir:  "corpus",
 		bucket:     "auto",
 		authStyle:  "bearer",
 		keyEnv:     "RECORD_API_KEY",
@@ -194,8 +195,11 @@ func runRecordCommand(app *application, opts recordOptions) error {
 	// aws-sigv4: the key is the Bedrock endpoint metadata JSON. Assume the
 	// role now, register the resulting credentials for redaction, and route
 	// over a TLS-SNI transport (the NLB DNS name doesn't match its cert).
-	var awsAuth *awsBedrockAuth
-	var baseTransport http.RoundTripper
+	var (
+		awsAuth       *awsBedrockAuth
+		baseTransport http.RoundTripper
+		awsStream     bool
+	)
 
 	if opts.authStyle == "aws-sigv4" {
 		auth, secrets, err := newAWSBedrockAuth(key)
@@ -203,8 +207,9 @@ func runRecordCommand(app *application, opts recordOptions) error {
 			return fmt.Errorf("record: aws-sigv4: %w", err)
 		}
 
+		awsStream = opts.bucket == "stream"
 		awsAuth = auth
-		baseTransport = auth.transport()
+		baseTransport = auth.transport(awsStream)
 
 		for _, s := range secrets {
 			rules.AddSecret(s)
@@ -214,7 +219,7 @@ func runRecordCommand(app *application, opts recordOptions) error {
 	run := runConfig{
 		endpoint: opts.endpoint, authStyle: opts.authStyle, key: key,
 		headers: opts.headers, rules: rules,
-		baseTransport: baseTransport, awsAuth: awsAuth,
+		baseTransport: baseTransport, awsAuth: awsAuth, awsStream: awsStream,
 		timeout: opts.timeout, pause: opts.pause, force: opts.force,
 		stderr: app.stderr, version: app.version,
 	}
@@ -466,7 +471,7 @@ func resolveOutPath(out, corpusDir, vendor, model, protocol, name string, stream
 
 func buildRequest(run runConfig, body []byte, rec *recorder.Recorder) (*http.Request, error) {
 	if run.authStyle == "aws-sigv4" {
-		return run.awsAuth.buildRequest(run.endpoint, body)
+		return run.awsAuth.buildRequest(run.endpoint, body, run.awsStream)
 	}
 
 	finalURL := run.endpoint

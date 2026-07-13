@@ -7,8 +7,8 @@ import "testing"
 // client_email / private_key must error, not attempt a token exchange.
 func TestGoogleServiceAccountTokenRejectsBadInput(t *testing.T) {
 	cases := []string{
-		"",                          // empty
-		"not json",                  // unparseable
+		"",                           // empty
+		"not json",                   // unparseable
 		`{"client_email":"a@b.com"}`, // no private_key
 		`{"private_key":"x"}`,        // no client_email
 	}

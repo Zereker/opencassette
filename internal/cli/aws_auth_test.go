@@ -46,7 +46,7 @@ func TestNewAWSBedrockAuthRejectsBadMetadata(t *testing.T) {
 		"not json",
 		`{}`,
 		`{"region":"ap-northeast-1"}`,
-		`{"region":"ap-northeast-1","role_arn":"r","inference_profile_arn":"a"}`, // no aws_keys
+		`{"region":"ap-northeast-1","role_arn":"r","inference_profile_arn":"a"}`,                 // no aws_keys
 		`{"region":"ap-northeast-1","role_arn":"r","inference_profile_arn":"a","aws_keys":[{}]}`, // empty keys
 	}
 
