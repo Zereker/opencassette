@@ -75,6 +75,34 @@ func TestUnscrubbedCredentialHeaderFails(t *testing.T) {
 	}
 }
 
+func TestTraceHeaderMustBeScrubbed(t *testing.T) {
+	ts := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
+	base := fmt.Sprintf(goodTemplate, ts)
+
+	for _, tc := range []struct {
+		name     string
+		value    string
+		wantFail bool
+	}{
+		{name: "raw", value: "20260713112414ced32426897a4acd", wantFail: true},
+		{name: "numbered marker", value: "**TRACE_ID_1**", wantFail: false},
+		{name: "generic marker", value: "**TRACE_ID**", wantFail: false},
+		{name: "legacy redaction", value: "**REDACTED**", wantFail: false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			content := strings.Replace(base,
+				"      Content-Type:\n      - application/json\n",
+				"      Content-Type:\n      - application/json\n      X-Log-Id:\n      - '"+tc.value+"'\n", 1)
+			fails, _ := levels(File(writeFile(t, content)))
+
+			gotFail := strings.Contains(strings.Join(fails, ";"), "trace header")
+			if gotFail != tc.wantFail {
+				t.Fatalf("trace failure = %v, want %v: %v", gotFail, tc.wantFail, fails)
+			}
+		})
+	}
+}
+
 // TestCredentialHeaderVariantsAllCaught: a scalar-valued credential header
 // (hand-written files use that form) must be flagged, and must not stop the
 // remaining headers in the same section from being checked — an earlier

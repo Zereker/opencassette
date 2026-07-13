@@ -26,6 +26,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -36,6 +37,8 @@ import (
 
 const redacted = "**REDACTED**"
 
+const traceRedacted = "**TRACE_ID**"
+
 // defaultScrubHeaders are the credential-bearing header names every
 // recording scrubs regardless of configuration.
 var defaultScrubHeaders = []string{
@@ -43,6 +46,32 @@ var defaultScrubHeaders = []string{
 	"x-api-key", "api-key", "x-goog-api-key", "x-auth-token",
 	"x-amz-security-token",
 	"cookie", "set-cookie",
+}
+
+// traceHeaders are correlation carriers whose values can let a published
+// recording be looked up in a vendor's internal logs. Unlike credentials,
+// trace values are discovered from each exchange and replaced everywhere in
+// its recorded copy — headers, URI, request body and response body. This
+// preserves cross-field correlation while keeping the original identifier
+// private.
+var traceHeaders = map[string]bool{
+	"b3":                    true,
+	"correlation-id":        true,
+	"trace-id":              true,
+	"traceparent":           true,
+	"tracestate":            true,
+	"request-id":            true,
+	"x-amzn-trace-id":       true,
+	"x-b3-traceid":          true,
+	"x-b3-spanid":           true,
+	"x-cloud-trace-context": true,
+	"x-correlation-id":      true,
+	"x-datadog-parent-id":   true,
+	"x-datadog-trace-id":    true,
+	"x-log-id":              true,
+	"x-request-id":          true,
+	"x-trace-id":            true,
+	"uber-trace-id":         true,
 }
 
 // Meta is the provenance block written at the top of every recording — the
@@ -76,6 +105,8 @@ type Recorder struct {
 	scrubHeader  map[string]bool
 	scrubQuery   map[string]bool
 	secretValues []string
+	traceValues  map[string]string
+	nextTrace    int
 }
 
 // New wraps base (nil = http.DefaultTransport) in a recording transport.
@@ -88,6 +119,7 @@ func New(base http.RoundTripper) *Recorder {
 		base:        base,
 		scrubHeader: make(map[string]bool, len(defaultScrubHeaders)),
 		scrubQuery:  map[string]bool{},
+		traceValues: map[string]string{},
 	}
 	for _, h := range defaultScrubHeaders {
 		r.scrubHeader[h] = true
@@ -160,17 +192,18 @@ func (r *Recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 	}
 
 	resp.Body = io.NopCloser(bytes.NewReader(respBody))
+	traceReplacements := r.traceReplacements(req.Header, resp.Header)
 
 	doc := interactionDoc{
 		Request: requestDoc{
-			Body:    bodyValue(reqBody),
-			Headers: r.scrubHeaders(req.Header),
+			Body:    bodyValue(r.redactBytes(reqBody, traceReplacements)),
+			Headers: r.scrubHeaders(req.Header, traceReplacements),
 			Method:  req.Method,
-			URI:     r.scrubURI(req.URL),
+			URI:     r.scrubURI(req.URL, traceReplacements),
 		},
 		Response: responseDoc{
-			Body:    respBodyDoc{String: bodyValue(respBody)},
-			Headers: r.scrubHeaders(resp.Header),
+			Body:    respBodyDoc{String: bodyValue(r.redactBytes(respBody, traceReplacements))},
+			Headers: r.scrubHeaders(resp.Header, traceReplacements),
 			Status:  statusDoc{Code: resp.StatusCode, Message: statusMessage(resp)},
 		},
 	}
@@ -306,7 +339,7 @@ func bodyValue(b []byte) any {
 	}
 }
 
-func (r *Recorder) scrubHeaders(h http.Header) map[string][]string {
+func (r *Recorder) scrubHeaders(h http.Header, traceReplacements map[string]string) map[string][]string {
 	out := make(map[string][]string, len(h))
 	for name, vals := range h {
 		if r.scrubHeader[strings.ToLower(name)] {
@@ -314,9 +347,23 @@ func (r *Recorder) scrubHeaders(h http.Header) map[string][]string {
 			continue
 		}
 
+		if traceHeaders[strings.ToLower(name)] {
+			redactedValues := make([]string, len(vals))
+			for i, v := range vals {
+				redactedValues[i] = r.redactString(v, traceReplacements, false)
+				if redactedValues[i] == v {
+					redactedValues[i] = traceRedacted
+				}
+			}
+
+			out[name] = redactedValues
+
+			continue
+		}
+
 		cp := make([]string, len(vals))
 		for i, v := range vals {
-			cp[i] = r.redactString(v)
+			cp[i] = r.redactString(v, traceReplacements, false)
 		}
 
 		out[name] = cp
@@ -325,7 +372,7 @@ func (r *Recorder) scrubHeaders(h http.Header) map[string][]string {
 	return out
 }
 
-func (r *Recorder) scrubURI(u *url.URL) string {
+func (r *Recorder) scrubURI(u *url.URL, traceReplacements map[string]string) string {
 	cp := *u
 	q := cp.Query()
 	changed := false
@@ -342,20 +389,160 @@ func (r *Recorder) scrubURI(u *url.URL) string {
 		cp.RawQuery = q.Encode()
 	}
 
-	return r.redactString(cp.String())
+	return r.redactString(cp.String(), traceReplacements, true)
 }
 
-func (r *Recorder) redactString(s string) string {
+func (r *Recorder) redactBytes(b []byte, traceReplacements map[string]string) []byte {
+	if len(b) == 0 {
+		return b
+	}
+
+	return []byte(r.redactString(string(b), traceReplacements, false))
+}
+
+func (r *Recorder) redactString(s string, traceReplacements map[string]string, escaped bool) string {
+	// Replace longer values first. Composite formats such as traceparent also
+	// contribute their trace/span components, and replacing a component first
+	// would prevent the full carrier from being recognized.
+	keys := make([]string, 0, len(traceReplacements))
+	for value := range traceReplacements {
+		keys = append(keys, value)
+	}
+
+	sort.Slice(keys, func(i, j int) bool { return len(keys[i]) > len(keys[j]) })
+
+	for _, value := range keys {
+		s = strings.ReplaceAll(s, value, traceReplacements[value])
+		if escaped {
+			if esc := url.QueryEscape(value); esc != value {
+				s = strings.ReplaceAll(s, esc, traceReplacements[value])
+			}
+		}
+	}
+
 	for _, sec := range r.secretValues {
 		s = strings.ReplaceAll(s, sec, redacted)
 		// Query strings carry the key percent-/plus-escaped when it contains
 		// reserved characters; cover the URL-escaped spelling too.
-		if esc := url.QueryEscape(sec); esc != sec {
-			s = strings.ReplaceAll(s, esc, redacted)
+		if escaped {
+			if esc := url.QueryEscape(sec); esc != sec {
+				s = strings.ReplaceAll(s, esc, redacted)
+			}
 		}
 	}
 
 	return s
+}
+
+// traceReplacements discovers trace/correlation values in request and
+// response headers. Tokens are stable for the lifetime of a Recorder, so a
+// value repeated across headers, JSON and SSE chunks stays correlatable.
+func (r *Recorder) traceReplacements(headers ...http.Header) map[string]string {
+	values := map[string]bool{}
+
+	for _, h := range headers {
+		for name, items := range h {
+			if !traceHeaders[strings.ToLower(name)] {
+				continue
+			}
+
+			for _, item := range items {
+				for _, value := range traceParts(name, item) {
+					if value != "" {
+						values[value] = true
+					}
+				}
+			}
+		}
+	}
+
+	ordered := make([]string, 0, len(values))
+	for value := range values {
+		ordered = append(ordered, value)
+	}
+
+	sort.Strings(ordered)
+
+	out := make(map[string]string, len(ordered))
+	for _, value := range ordered {
+		out[value] = r.traceToken(value)
+	}
+
+	return out
+}
+
+func (r *Recorder) traceToken(value string) string {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	if token := r.traceValues[value]; token != "" {
+		return token
+	}
+
+	r.nextTrace++
+	token := fmt.Sprintf("**TRACE_ID_%d**", r.nextTrace)
+	r.traceValues[value] = token
+
+	return token
+}
+
+// traceParts returns both the full carrier and independently useful trace or
+// span components that may also appear in a JSON/SSE response body.
+func traceParts(name, value string) []string {
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return nil
+	}
+
+	// Very short request IDs are not safe global replacements: replacing an
+	// ID such as "1" throughout a JSON response would corrupt unrelated data.
+	// The header itself is still scrubbed by name; only sufficiently specific
+	// values are propagated into bodies and URIs.
+	parts := make([]string, 0, 3)
+	appendPart := func(part string) {
+		if len(part) >= 8 {
+			parts = append(parts, part)
+		}
+	}
+	appendPart(value)
+
+	switch strings.ToLower(name) {
+	case "b3":
+		fields := strings.Split(value, "-")
+		if len(fields) >= 2 {
+			appendPart(fields[0])
+			appendPart(fields[1])
+		}
+	case "traceparent":
+		fields := strings.Split(value, "-")
+		if len(fields) >= 4 {
+			appendPart(fields[1])
+			appendPart(fields[2])
+		}
+	case "uber-trace-id":
+		fields := strings.Split(value, ":")
+		if len(fields) >= 2 {
+			appendPart(fields[0])
+			appendPart(fields[1])
+		}
+	case "x-cloud-trace-context":
+		traceID, rest, ok := strings.Cut(value, "/")
+		if ok {
+			appendPart(traceID)
+
+			spanID, _, _ := strings.Cut(rest, ";")
+			appendPart(spanID)
+		}
+	case "x-amzn-trace-id":
+		for field := range strings.SplitSeq(value, ";") {
+			key, component, ok := strings.Cut(strings.TrimSpace(field), "=")
+			if ok && (strings.EqualFold(key, "root") || strings.EqualFold(key, "parent")) {
+				appendPart(component)
+			}
+		}
+	}
+
+	return parts
 }
 
 func statusMessage(resp *http.Response) string {

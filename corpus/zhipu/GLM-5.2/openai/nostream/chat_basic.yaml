@@ -1,0 +1,43 @@
+meta:
+    recorded_at: "2026-07-13T05:12:40Z"
+    vendor: zhipu
+    model: GLM-5.2
+    endpoint: https://open.bigmodel.cn
+    scenario: chat_basic
+    scenario_sha256: c88a48870c2ffdb177b8dbbca23f3ced1f791a59ce08288a4bf18e83a69c8099
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"GLM-5.2"}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://open.bigmodel.cn/api/paas/v4/chat/completions
+      response:
+        body:
+            string: '{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"\n\n\n# The Cat Who Found His Way Home\n\nThe rain had been falling for three days straight when Mabel first noticed the cat.\n\nShe was standing at her kitchen window, watching the water cascade down the glass like tiny rivers, when she saw him — a scrawny orange tabby huddled beneath the old oak tree in her backyard. He was soaked through, his fur plastered against his ribs, and he was shaking.\n\n\"Well,\" Mabel said to no one in particular, \"that won''t do.\"\n\nShe put on her raincoat and boots, grabbed an old towel, and stepped out into the storm. The cat watched her approach with wide yellow eyes — cautious but too cold and tired to run.\n\n\"Easy now,\" she murmured, kneeling down and extending a hand. He sniffed her fingers once, twice, then pressed his wet head against her palm. Something in Mabel''s chest tightened.\n\nShe wrapped him in the towel and carried him inside.\n\n---\n\nFor the first week, the cat — whom she named Rusty, for obvious reasons — barely left the spot beneath the kitchen radiator. He ate the food she set out for him, used the litter box she''d bought, and tolerated the gentle strokes along his back, but he kept his distance. He watched everything with those careful yellow eyes, as if waiting for something to go wrong.\n\nMabel didn''t push. At seventy-two, she had learned that trust was not something you could rush — not in cats, and not in people.\n\nBy the second week, Rusty had claimed the armchair by the window. By the third, he was sleeping at the foot of Mabel''s bed. And by the end of the first month, he would greet her each morning by butting his head against her shin and meowing until she filled his bowl.\n\n\"He''s just using you for food,\" her neighbor, Carl, said one afternoon while Mabel watered her garden.\n\n\"Isn''t that what we all want?\" Mabel replied with a smile. \"Someone who sticks around for the meals?\"\n\n---\n\nThe truth was, Mabel needed Rusty as much as he needed her.\n\nIt had been two years since her husband, Walt, had passed. Two years of quiet mornings and emptier evenings. The house, which had once been full of laughter and conversation and the sound of Walt''s off-key singing from the shower, had become just a house. Four walls and a roof.\n\nBut Rusty changed the acoustics. Suddenly there was the jingle of his collar tag as he trotted down the hallway. The soft thump of him jumping onto the couch. The rumble of his purr — deep and steady as a small engine — vibrating against Mabel''s chest in the evenings while she read.\n\nShe started talking to him. Small things at first. \"Looks like rain again, Rusty.\" \"Can you believe the price of eggs these days?\" But then the small things grew larger.\n\n\"I miss him, Rusty. I miss him every single day.\"\n\nRusty would blink slowly at her — that slow, deliberate blink that cat people know means *I see you. I trust you.* — and press closer.\n\n---\n\nIt was a Tuesday in October when everything changed.\n\nMabel was in the garden, pulling the last of the tomato plants, when she felt a pain in her chest — sharp and sudden, like a hand squeezing from the inside. She gasped, dropping the trowel, and sank to her knees in the dirt.\n\nRusty was there in an instant.\n\nHe had been lounging on the porch, as he always did when Mabel was outside, but now he was circling her, meowing loudly — not his usual demanding meow, but something urgent and raw. He darted toward the fence, then back to her, then toward the fence again.\n\n\"Carl,\" Mabel whispered, understanding. The Wiltons'' fence. Carl was on the other side.\n\nRusty shot across the yard, slipped through a gap in the fence boards, and disappeared. A moment later, Mabel heard barking — Carl''s old retriever, Biscuit — and then Carl''s voice.\n\n\"What in the— Rusty? What are you doing here? Go on, shoo!\"\n\nBut Rusty didn''t shoo. He yowled and scratched at the back door, and something in his persistence made Carl pause.\n\n\"Mabel?\" Carl called over the fence. \"Mabel, you alright?\"\n\nSilence.\n\nCarl found her in the garden, conscious but barely, her face gray and her hand clutching her chest. He called 911, and the ambulance came wailing down the street eleven minutes later.\n\n---\n\nMabel spent four days in the hospital. She had a stent put in and a long list of instructions from the doctor. When Carl drove her home, the first thing she saw was Rusty sitting in the front window, his orange fur a small flame against the glass.\n\nThe moment she opened the door, he was there, winding between her legs, purring so hard his whole body trembled.\n\n\"He hasn''t moved from that window since they took you away,\" Carl said from the doorway. \"My wife brought him food, but he barely touched it. Just sat there. Watching.\"\n\nMabel knelt down — carefully, because her chest still ached — and gathered Rusty into her arms. He didn''t squirm or protest. He just tucked his head under her chin and purred.\n\n\"You stubborn old thing,\" she whispered, her eyes stinging. \"Thank you.\"\n\n---\n\nYears passed. Mabel''s hair went fully silver, and Rusty''s muzzle turned white. They developed a rhythm — a quiet, unshakable rhythm that needed no words. Morning feedings. Afternoon sunbeams. Evening reading sessions in the armchair by the window.\n\nThe neighbors got used to seeing them together — the old woman in her garden with the orange cat lounging nearby, always watching, always within reach.\n\n\"He''s her guardian angel,\" Carl''s wife, Diane, said once.\n\n\"Nah,\" Carl replied, watching Mabel laugh at something Rusty was doing — batting at a butterfly, probably. \"He''s just a cat who knows a good thing when he finds it.\"\n\nBut if you looked closely — really closely — at the way Rusty positioned himself between Mabel and the world, the way his ears swiveled toward every unfamiliar sound, the way he pressed his paw to her hand when it trembled — you might have agreed with Diane.\n\nSome angels have wings. This one had whiskers.\n\n---\n\nMabel lived to be eighty-one. She passed in her sleep on a Sunday in April, with Rusty curled against her side, his purr the last sound to fill the room.\n\nCarl and Diane took him in, reluctantly at first — they had the old dog, after all, and weren''t \"cat people.\" But Rusty won them over the way he won over everyone: slowly, quietly, and with the patient certainty of someone who had learned that home isn''t a place.\n\nIt''s whoever stays.","reasoning_content":"The user wants me to write a story about a cat. I''ll write an engaging, creative short story.","role":"assistant"}}],"created":1783919594,"id":"**TRACE_ID_1**","model":"GLM-5.2","object":"chat.completion","request_id":"**TRACE_ID_1**","usage":{"completion_tokens":1480,"completion_tokens_details":{"reasoning_tokens":22},"prompt_tokens":19,"prompt_tokens_details":{"cached_tokens":0},"total_tokens":1499}}'
+        headers:
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 05:13:14 GMT
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+            X-Log-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK

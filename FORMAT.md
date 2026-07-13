@@ -51,12 +51,19 @@ interactions:
   `x-goog-api-key`, `x-auth-token`, `x-amz-security-token`, `cookie`,
   `set-cookie`, `proxy-authorization`) are replaced with `**REDACTED**`.
 - The literal API key value is additionally replaced wherever its bytes
-  appear — any header, the URI query string, including URL-escaped
+  appear — headers, bodies and the URI query string, including URL-escaped
   spellings — so nonstandard auth carriers can't leak it.
+- Trace/correlation headers (`traceparent`, `x-request-id`, `x-log-id`,
+  `x-trace-id`, B3, AWS X-Ray, Google Cloud and Uber carriers) are
+  automatically scrubbed. A discovered identifier is replaced consistently
+  in headers, URIs, JSON bodies and SSE chunks with a marker such as
+  `**TRACE_ID_1**`, preserving correlation without publishing the original.
 - A vendor whose auth rides in a header outside the default list must be
   recorded with `-scrub-header <name>` (repeatable); `verify` flags any
   secret-shaped header value as a hard failure, as a second net.
 - `verify` treats any surviving credential-shaped string as a hard failure.
+- `verify` treats a raw value in a known trace/correlation header as a hard
+  failure.
 
 ## Corpus layout
 
