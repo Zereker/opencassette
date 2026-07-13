@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 	"testing"
+	"testing/fstest"
 )
 
 func TestLoadInteractionsFormat(t *testing.T) {
@@ -93,5 +94,43 @@ func TestLoadDir(t *testing.T) {
 		if keys[i-1] >= keys[i] {
 			t.Errorf("SortedKeys not sorted: %v", keys)
 		}
+	}
+}
+
+// TestLoadFSAndLoadDirFS exercises the fs.FS loaders directly against an
+// in-memory fs, independent of the disk-backed testdata (whose coverage now
+// also flows through LoadDirFS, since LoadDir delegates to it).
+func TestLoadFSAndLoadDirFS(t *testing.T) {
+	const doc = `interactions:
+- request:
+    method: POST
+    uri: https://api.example.com/v1/chat/completions
+    body: '{"model":"m"}'
+  response:
+    body:
+      string: '{"id":"cmpl-1"}'
+`
+
+	fsys := fstest.MapFS{
+		"vendor/model/openai/nostream/basic.yaml": {Data: []byte(doc)},
+		"README.md": {Data: []byte("not a cassette")},
+	}
+
+	its, err := LoadFS(fsys, "vendor/model/openai/nostream/basic.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(its) != 1 || !strings.Contains(string(its[0].ResponseBody), "cmpl-1") {
+		t.Fatalf("LoadFS decoded wrong: %+v", its)
+	}
+
+	all, err := LoadDirFS(fsys)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(all) != 1 { // README.md must be skipped
+		t.Fatalf("want 1 cassette, got %d: %v", len(all), SortedKeys(all))
 	}
 }
