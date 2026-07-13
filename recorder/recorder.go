@@ -4,12 +4,13 @@
 // output is pytest-recording's `interactions:` format plus a `meta:`
 // provenance block (see Meta), with credentials scrubbed to `**REDACTED**`.
 //
-// Scrubbing is both name-based (a default set of credential-bearing header
-// names, extendable via ScrubHeader/ScrubQueryParam) and value-based
-// (RedactValue registers the literal API key, which is then replaced
-// wherever its bytes appear — any header, any query parameter, including
-// URL-escaped spellings — so a vendor with a nonstandard auth header can't
-// leak the key just because the header name wasn't on the list).
+// The recorder captures the exchange and owns the on-disk format; the
+// redaction policy (which headers, query parameters and trace carriers to
+// scrub, plus value-based secret replacement) lives in the redact package.
+// New starts from redact.Baseline; NewWithRules lets a caller overlay a
+// vendor profile. RedactValue/ScrubHeader/ScrubQueryParam forward to the
+// active rules so the live API key and any extra carriers can be registered
+// before the first request.
 //
 // A recorded file must still be checked by a human before publishing:
 // scrubbing removes the credentials this package knows about, not secrets a
@@ -23,56 +24,21 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"os"
 	"path/filepath"
-	"sort"
 	"strconv"
 	"strings"
 	"sync"
 	"unicode/utf8"
 
 	"gopkg.in/yaml.v3"
+
+	"github.com/zereker/opencassette/redact"
 )
 
-const redacted = "**REDACTED**"
-
-const traceRedacted = "**TRACE_ID**"
-
-// defaultScrubHeaders are the credential-bearing header names every
-// recording scrubs regardless of configuration.
-var defaultScrubHeaders = []string{
-	"authorization", "proxy-authorization",
-	"x-api-key", "api-key", "x-goog-api-key", "x-auth-token",
-	"x-amz-security-token",
-	"cookie", "set-cookie",
-}
-
-// traceHeaders are correlation carriers whose values can let a published
-// recording be looked up in a vendor's internal logs. Unlike credentials,
-// trace values are discovered from each exchange and replaced everywhere in
-// its recorded copy — headers, URI, request body and response body. This
-// preserves cross-field correlation while keeping the original identifier
-// private.
-var traceHeaders = map[string]bool{
-	"b3":                    true,
-	"correlation-id":        true,
-	"trace-id":              true,
-	"traceparent":           true,
-	"tracestate":            true,
-	"request-id":            true,
-	"x-amzn-trace-id":       true,
-	"x-b3-traceid":          true,
-	"x-b3-spanid":           true,
-	"x-cloud-trace-context": true,
-	"x-correlation-id":      true,
-	"x-datadog-parent-id":   true,
-	"x-datadog-trace-id":    true,
-	"x-log-id":              true,
-	"x-request-id":          true,
-	"x-trace-id":            true,
-	"uber-trace-id":         true,
-}
+// redacted is the marker the redact package writes; kept as a package-local
+// alias so recorder tests can assert on it without importing redact.
+const redacted = redact.Redacted
 
 // Meta is the provenance block written at the top of every recording — the
 // difference between a verifiable capture and an unattributable blob. The
@@ -102,30 +68,23 @@ type Recorder struct {
 	mu           sync.Mutex
 	meta         *Meta
 	interactions []yaml.Node
-	scrubHeader  map[string]bool
-	scrubQuery   map[string]bool
-	secretValues []string
-	traceValues  map[string]string
-	nextTrace    int
+	scrubber     *redact.Scrubber
 }
 
-// New wraps base (nil = http.DefaultTransport) in a recording transport.
+// New wraps base (nil = http.DefaultTransport) in a recording transport that
+// scrubs with the cross-vendor redact.Baseline.
 func New(base http.RoundTripper) *Recorder {
+	return NewWithRules(base, redact.Baseline())
+}
+
+// NewWithRules is New with an explicit ruleset, e.g. the baseline overlaid
+// with a vendor profile via redact.Rules.Merge.
+func NewWithRules(base http.RoundTripper, rules *redact.Rules) *Recorder {
 	if base == nil {
 		base = http.DefaultTransport
 	}
 
-	r := &Recorder{
-		base:        base,
-		scrubHeader: make(map[string]bool, len(defaultScrubHeaders)),
-		scrubQuery:  map[string]bool{},
-		traceValues: map[string]string{},
-	}
-	for _, h := range defaultScrubHeaders {
-		r.scrubHeader[h] = true
-	}
-
-	return r
+	return &Recorder{base: base, scrubber: rules.NewScrubber()}
 }
 
 // SetMeta attaches the provenance block WriteFile will emit.
@@ -139,18 +98,14 @@ func (r *Recorder) SetMeta(m Meta) {
 // RedactValue registers a literal secret (an API key) to be replaced with
 // **REDACTED** wherever its exact bytes appear — header values and the
 // request URI — regardless of which header or query parameter carried it.
-func (r *Recorder) RedactValue(v string) {
-	if v != "" {
-		r.secretValues = append(r.secretValues, v)
-	}
-}
+func (r *Recorder) RedactValue(v string) { r.scrubber.AddSecret(v) }
 
 // ScrubHeader adds a header name (case-insensitive) to the redaction set.
-func (r *Recorder) ScrubHeader(name string) { r.scrubHeader[strings.ToLower(name)] = true }
+func (r *Recorder) ScrubHeader(name string) { r.scrubber.AddCredentialHeader(name) }
 
 // ScrubQueryParam adds a query parameter name to the redaction set (for
 // key-in-URL auth styles like Gemini AI Studio's ?key=...).
-func (r *Recorder) ScrubQueryParam(name string) { r.scrubQuery[name] = true }
+func (r *Recorder) ScrubQueryParam(name string) { r.scrubber.AddQueryParam(name) }
 
 // Len reports how many interactions have been recorded so far.
 func (r *Recorder) Len() int {
@@ -192,18 +147,18 @@ func (r *Recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 	}
 
 	resp.Body = io.NopCloser(bytes.NewReader(respBody))
-	traceReplacements := r.traceReplacements(req.Header, resp.Header)
+	traceReplacements := r.scrubber.TraceReplacements(req.Header, resp.Header)
 
 	doc := interactionDoc{
 		Request: requestDoc{
-			Body:    bodyValue(r.redactBytes(reqBody, traceReplacements)),
-			Headers: r.scrubHeaders(req.Header, traceReplacements),
+			Body:    bodyValue(r.scrubber.Bytes(reqBody, traceReplacements)),
+			Headers: r.scrubber.Headers(req.Header, traceReplacements),
 			Method:  req.Method,
-			URI:     r.scrubURI(req.URL, traceReplacements),
+			URI:     r.scrubber.URI(req.URL, traceReplacements),
 		},
 		Response: responseDoc{
-			Body:    respBodyDoc{String: bodyValue(r.redactBytes(respBody, traceReplacements))},
-			Headers: r.scrubHeaders(resp.Header, traceReplacements),
+			Body:    respBodyDoc{String: bodyValue(r.scrubber.Bytes(respBody, traceReplacements))},
+			Headers: r.scrubber.Headers(resp.Header, traceReplacements),
 			Status:  statusDoc{Code: resp.StatusCode, Message: statusMessage(resp)},
 		},
 	}
@@ -337,212 +292,6 @@ func bodyValue(b []byte) any {
 		Tag:   "!!binary",
 		Value: base64.StdEncoding.EncodeToString(b),
 	}
-}
-
-func (r *Recorder) scrubHeaders(h http.Header, traceReplacements map[string]string) map[string][]string {
-	out := make(map[string][]string, len(h))
-	for name, vals := range h {
-		if r.scrubHeader[strings.ToLower(name)] {
-			out[name] = []string{redacted}
-			continue
-		}
-
-		if traceHeaders[strings.ToLower(name)] {
-			redactedValues := make([]string, len(vals))
-			for i, v := range vals {
-				redactedValues[i] = r.redactString(v, traceReplacements, false)
-				if redactedValues[i] == v {
-					redactedValues[i] = traceRedacted
-				}
-			}
-
-			out[name] = redactedValues
-
-			continue
-		}
-
-		cp := make([]string, len(vals))
-		for i, v := range vals {
-			cp[i] = r.redactString(v, traceReplacements, false)
-		}
-
-		out[name] = cp
-	}
-
-	return out
-}
-
-func (r *Recorder) scrubURI(u *url.URL, traceReplacements map[string]string) string {
-	cp := *u
-	q := cp.Query()
-	changed := false
-
-	for name := range q {
-		if r.scrubQuery[name] {
-			q.Set(name, redacted)
-
-			changed = true
-		}
-	}
-
-	if changed {
-		cp.RawQuery = q.Encode()
-	}
-
-	return r.redactString(cp.String(), traceReplacements, true)
-}
-
-func (r *Recorder) redactBytes(b []byte, traceReplacements map[string]string) []byte {
-	if len(b) == 0 {
-		return b
-	}
-
-	return []byte(r.redactString(string(b), traceReplacements, false))
-}
-
-func (r *Recorder) redactString(s string, traceReplacements map[string]string, escaped bool) string {
-	// Replace longer values first. Composite formats such as traceparent also
-	// contribute their trace/span components, and replacing a component first
-	// would prevent the full carrier from being recognized.
-	keys := make([]string, 0, len(traceReplacements))
-	for value := range traceReplacements {
-		keys = append(keys, value)
-	}
-
-	sort.Slice(keys, func(i, j int) bool { return len(keys[i]) > len(keys[j]) })
-
-	for _, value := range keys {
-		s = strings.ReplaceAll(s, value, traceReplacements[value])
-		if escaped {
-			if esc := url.QueryEscape(value); esc != value {
-				s = strings.ReplaceAll(s, esc, traceReplacements[value])
-			}
-		}
-	}
-
-	for _, sec := range r.secretValues {
-		s = strings.ReplaceAll(s, sec, redacted)
-		// Query strings carry the key percent-/plus-escaped when it contains
-		// reserved characters; cover the URL-escaped spelling too.
-		if escaped {
-			if esc := url.QueryEscape(sec); esc != sec {
-				s = strings.ReplaceAll(s, esc, redacted)
-			}
-		}
-	}
-
-	return s
-}
-
-// traceReplacements discovers trace/correlation values in request and
-// response headers. Tokens are stable for the lifetime of a Recorder, so a
-// value repeated across headers, JSON and SSE chunks stays correlatable.
-func (r *Recorder) traceReplacements(headers ...http.Header) map[string]string {
-	values := map[string]bool{}
-
-	for _, h := range headers {
-		for name, items := range h {
-			if !traceHeaders[strings.ToLower(name)] {
-				continue
-			}
-
-			for _, item := range items {
-				for _, value := range traceParts(name, item) {
-					if value != "" {
-						values[value] = true
-					}
-				}
-			}
-		}
-	}
-
-	ordered := make([]string, 0, len(values))
-	for value := range values {
-		ordered = append(ordered, value)
-	}
-
-	sort.Strings(ordered)
-
-	out := make(map[string]string, len(ordered))
-	for _, value := range ordered {
-		out[value] = r.traceToken(value)
-	}
-
-	return out
-}
-
-func (r *Recorder) traceToken(value string) string {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-
-	if token := r.traceValues[value]; token != "" {
-		return token
-	}
-
-	r.nextTrace++
-	token := fmt.Sprintf("**TRACE_ID_%d**", r.nextTrace)
-	r.traceValues[value] = token
-
-	return token
-}
-
-// traceParts returns both the full carrier and independently useful trace or
-// span components that may also appear in a JSON/SSE response body.
-func traceParts(name, value string) []string {
-	value = strings.TrimSpace(value)
-	if value == "" {
-		return nil
-	}
-
-	// Very short request IDs are not safe global replacements: replacing an
-	// ID such as "1" throughout a JSON response would corrupt unrelated data.
-	// The header itself is still scrubbed by name; only sufficiently specific
-	// values are propagated into bodies and URIs.
-	parts := make([]string, 0, 3)
-	appendPart := func(part string) {
-		if len(part) >= 8 {
-			parts = append(parts, part)
-		}
-	}
-	appendPart(value)
-
-	switch strings.ToLower(name) {
-	case "b3":
-		fields := strings.Split(value, "-")
-		if len(fields) >= 2 {
-			appendPart(fields[0])
-			appendPart(fields[1])
-		}
-	case "traceparent":
-		fields := strings.Split(value, "-")
-		if len(fields) >= 4 {
-			appendPart(fields[1])
-			appendPart(fields[2])
-		}
-	case "uber-trace-id":
-		fields := strings.Split(value, ":")
-		if len(fields) >= 2 {
-			appendPart(fields[0])
-			appendPart(fields[1])
-		}
-	case "x-cloud-trace-context":
-		traceID, rest, ok := strings.Cut(value, "/")
-		if ok {
-			appendPart(traceID)
-
-			spanID, _, _ := strings.Cut(rest, ";")
-			appendPart(spanID)
-		}
-	case "x-amzn-trace-id":
-		for field := range strings.SplitSeq(value, ";") {
-			key, component, ok := strings.Cut(strings.TrimSpace(field), "=")
-			if ok && (strings.EqualFold(key, "root") || strings.EqualFold(key, "parent")) {
-				appendPart(component)
-			}
-		}
-	}
-
-	return parts
 }
 
 func statusMessage(resp *http.Response) string {

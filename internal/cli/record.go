@@ -14,6 +14,7 @@ import (
 	"github.com/tidwall/gjson"
 
 	"github.com/zereker/opencassette/recorder"
+	"github.com/zereker/opencassette/redact"
 	"github.com/zereker/opencassette/scenario"
 )
 
@@ -31,6 +32,7 @@ type recordOptions struct {
 	out            string
 	authStyle      string
 	keyEnv         string
+	profileDir     string
 	appendExisting bool
 	force          bool
 	timeout        time.Duration
@@ -39,31 +41,26 @@ type recordOptions struct {
 	scrubHeaders   []string
 }
 
-// runConfig carries the per-run recording knobs shared by every mode.
+// runConfig carries the per-run recording knobs shared by every mode. rules
+// is built once (baseline + vendor profile + key + one-off scrub headers) and
+// shared read-only across every scenario's recorder; each recorder derives
+// its own Scrubber, so trace numbering restarts per cassette.
 type runConfig struct {
-	endpoint     string
-	authStyle    string
-	key          string
-	headers      []string
-	scrubHeaders []string
-	timeout      time.Duration
-	pause        time.Duration
-	force        bool
-	stderr       io.Writer
-	version      string
+	endpoint  string
+	authStyle string
+	key       string
+	headers   []string
+	rules     *redact.Rules
+	timeout   time.Duration
+	pause     time.Duration
+	force     bool
+	stderr    io.Writer
+	version   string
 }
 
-// newRecorder builds the recording transport with every scrub the run
-// declared: the literal key value plus any extra header names.
+// newRecorder builds a recording transport over the shared ruleset.
 func (c runConfig) newRecorder() *recorder.Recorder {
-	rec := recorder.New(nil)
-	rec.RedactValue(c.key)
-
-	for _, h := range c.scrubHeaders {
-		rec.ScrubHeader(h)
-	}
-
-	return rec
+	return recorder.NewWithRules(nil, c.rules)
 }
 
 // writeCassette refuses to clobber an existing recording unless the run
@@ -82,11 +79,12 @@ func (c runConfig) writeCassette(rec *recorder.Recorder, path string) error {
 func newRecordCommand(app *application) *cobra.Command {
 	opts := recordOptions{
 		corpusDir: "corpus",
-		bucket:    "auto",
-		authStyle: "bearer",
-		keyEnv:    "RECORD_API_KEY",
-		timeout:   3 * time.Minute,
-		pause:     time.Second,
+		bucket:     "auto",
+		authStyle:  "bearer",
+		keyEnv:     "RECORD_API_KEY",
+		profileDir: "profiles",
+		timeout:    3 * time.Minute,
+		pause:      time.Second,
 	}
 	cmd := &cobra.Command{
 		Use:   "record",
@@ -110,6 +108,7 @@ func newRecordCommand(app *application) *cobra.Command {
 	flags.StringVar(&opts.out, "out", "", "explicit output path (overrides composition)")
 	flags.StringVar(&opts.authStyle, "auth", opts.authStyle, "bearer | x-api-key | api-key | query:<param> | none")
 	flags.StringVar(&opts.keyEnv, "key-env", opts.keyEnv, "environment variable holding the API key")
+	flags.StringVar(&opts.profileDir, "profile-dir", opts.profileDir, "directory of vendor redaction profiles (<vendor>.yaml)")
 	flags.BoolVar(&opts.appendExisting, "append", false, "prepend the existing cassette")
 	flags.BoolVar(&opts.force, "force", false, "overwrite existing cassettes")
 	flags.DurationVar(&opts.timeout, "timeout", opts.timeout, "request timeout")
@@ -157,9 +156,29 @@ func runRecordCommand(app *application, opts recordOptions) error {
 		}
 	}
 
+	profile, err := redact.LoadProfile(opts.profileDir, opts.vendor)
+	if err != nil {
+		return fmt.Errorf("record: %w", err)
+	}
+
+	if profile != nil {
+		_, _ = fmt.Fprintf(app.stderr, "redaction profile: %s/%s.yaml\n", opts.profileDir, opts.vendor)
+	}
+
+	rules := redact.Baseline()
+	if err := rules.Merge(profile); err != nil {
+		return fmt.Errorf("record: %w", err)
+	}
+
+	rules.AddSecret(key)
+
+	for _, h := range opts.scrubHeaders {
+		rules.AddCredentialHeader(h)
+	}
+
 	run := runConfig{
 		endpoint: opts.endpoint, authStyle: opts.authStyle, key: key,
-		headers: opts.headers, scrubHeaders: opts.scrubHeaders,
+		headers: opts.headers, rules: rules,
 		timeout: opts.timeout, pause: opts.pause, force: opts.force,
 		stderr: app.stderr, version: app.version,
 	}

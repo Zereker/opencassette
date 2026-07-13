@@ -1,0 +1,25 @@
+# Azure OpenAI redaction overlay: correlation carriers Azure emits that the
+# cross-vendor baseline does not know about. Loaded automatically when
+# recording with --vendor azure. Values are discovered per exchange and
+# rewritten to stable **TRACE_ID_n** markers across headers, URI and bodies.
+#
+# To cover a newly observed Azure carrier, add one line here — no code change.
+trace_headers:
+  - apim-request-id       # per-request correlation UUID (APIM gateway)
+  - azureml-model-session # model deployment session id
+
+# Custom replacements (optional) run on the recorded copy only, AFTER the
+# scrubbing above — the live request/response are never touched. Exactly one
+# of header/find/pattern per rule; `in` limits scope to header/uri/body
+# (default: all). Leave commented unless a specific value must be masked, and
+# do not mask real provenance (e.g. chatcmpl-* ids the verifier relies on).
+#
+# replacements:
+#   - header: x-ms-region        # replace a whole header value by name
+#     with: "**REGION**"
+#   - find: "my-resource-name"   # literal substring
+#     with: "**RESOURCE**"
+#     in: [uri, body]
+#   - pattern: 'org-[a-z0-9]{24}' # regexp match, body only
+#     with: "**ORG_ID**"
+#     in: [body]
