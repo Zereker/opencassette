@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T08:55:49Z"
+    vendor: google
+    model: gemini-2.5-flash
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_tools
+    scenario_sha256: 5cbd321c7a3ef9304163261fe3fd60aa1633ec201f0f6e13d0379d25f8751b32
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Two names for a pet pelican"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "tools": [{"functionDeclarations": [{"name": "pelican_name_generator", "description": null, "parameters": {"properties": {}, "type": "object"}}]}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-2.5-flash:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"functionCall\": {\"name\": \"pelican_name_generator\",\"args\": {}},\"thoughtSignature\": \"Cl0Bjz1rX2WRSpoU8To+pAQxscIvaycdtcPrCrlGmrQ/MyB8pi2vhDMpI4cqstbeQ54g7IRX2AenpB8qlR6SyeKhTSOrZ2cCuZxd3R4RpSTNHnJm97Mwks5IsQqpR20KagGPPWtfQUDZjqAZDYtTUB7RqcyRLMs73+ymPf9iRsakTJEjbnCM/aS4H9+t1Gb4k1v2KpqAP9zT2/+MlkrVKQIRtefpOCgVGW1XWAUTynBwoKNLhEvf75tYNTSRMPd3AP0JM5CST9WVBQ0KeAGPPWtfCBj3nhNtvHDGXrLQTKD4go/c2qyxTzWz1b2qUx9vZa6DuYQvTyJknWWCoh7hz2lGksvIz0MJww8zi/3wq3ZOXdPwjvwnSFpJf1uAIxD2so8zmqu1ZbEgoi+PvZN8+BcafV8MlyvfZj0AtvPJt4I9Dl/l3Q==\"},{\"functionCall\": {\"name\": \"pelican_name_generator\",\"args\": {}}}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.3251606e-06,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.019812286},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.0072914e-06,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 5.7955487e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.17056693},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 2.601929e-07,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"}]}],\"usageMetadata\": {\"promptTokenCount\": 14,\"candidatesTokenCount\": 12,\"totalTokenCount\": 77,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 14}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 12}],\"thoughtsTokenCount\": 51},\"modelVersion\": \"gemini-2.5-flash\",\"createTime\": \"2026-07-13T08:55:49.409569Z\",\"responseId\": \"FahUauH_GLHh8vUP58mO4Ao\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 08:55:50 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

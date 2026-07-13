@@ -1,0 +1,45 @@
+meta:
+    recorded_at: "2026-07-13T08:22:30Z"
+    vendor: aws
+    model: claude-opus-4-7
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_tool_loop_round_trip
+    scenario_sha256: 4bab5f8cd8122dfc2b47529d7e3549549bf5fa34d98dfaa3ce10a725413a8824
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican"}]},{"role":"assistant","content":[{"type":"text","text":" "},{"type":"tool_use","id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","name":"pelican_name_generator","input":{}},{"type":"tool_use","id":"toolu_01N8a4jWyf116qKTMqKKmjyt","name":"pelican_name_generator","input":{}}]},{"role":"user","content":[{"type":"tool_result","tool_use_id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","content":"Charles"},{"type":"tool_result","tool_use_id":"toolu_01N8a4jWyf116qKTMqKKmjyt","content":"Sammy"}]}],"temperature":1.0,"tools":[{"name":"pelican_name_generator","description":"","input_schema":{"properties":{},"type":"object"}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082230Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fiyykxatgiluk/invoke
+      response:
+        body:
+            string: "{\"model\":\"claude-opus-4-7\",\"id\":\"msg_bdrk_tgua25jjqnrublwbaorz7z55uwoavouvzp5d5s64r6qzlts5s5dq\",\"type\":\"message\",\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"Here are two great name options for your pet pelican:\\n\\n1. **Charles** \U0001F3A9 — dignified and distinguished, perfect for a regal-looking pelican.\\n2. **Sammy** \U0001F41F — friendly and playful, great for a pelican with a fun personality.\\n\\nLet me know if you'd like more suggestions!\"}],\"stop_reason\":\"end_turn\",\"stop_sequence\":null,\"stop_details\":null,\"usage\":{\"input_tokens\":895,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"cache_creation\":{\"ephemeral_5m_input_tokens\":0,\"ephemeral_1h_input_tokens\":0},\"output_tokens\":107,\"output_tokens_details\":{\"thinking_tokens\":0},\"service_tier\":\"standard\"}}"
+        headers:
+            Content-Length:
+                - "778"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:22:33 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "895"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "2967"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "107"
+            X-Amzn-Requestid:
+                - c3776743-76ed-4455-82af-cf00eaa12c83
+        status:
+            code: 200
+            message: OK

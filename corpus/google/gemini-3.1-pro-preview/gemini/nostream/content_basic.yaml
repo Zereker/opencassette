@@ -1,0 +1,113 @@
+meta:
+    recorded_at: "2026-07-13T08:58:33Z"
+    vendor: google
+    model: gemini-3.1-pro-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_basic
+    scenario_sha256: cfe7ad57ae1984efbd37afd5d6a157cb4b76f4a352fb421460f34385b5f985da
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Name for a pet pelican, just the name"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.1-pro-preview:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "Scoop",
+                            "thoughtSignature": "AY89a18kwy3ShPzpP7VmexQ3EeKSrKOGsKG2Nb32I9YM/BUAs1qB5fb1DCocitzhka76sMaj6hWgYW9PP1jtgpXS6twuYY7uTF1dw6Swamme/cxp8vx93bCfLGxY8SyozL8rh6nv4+Use0lnKmZD76O+GFUZpViHUpgGWUWypj18L3da6IzPW5m9zO52rAF0U0MWGNwYqJEgH+7N8A7iN8TgiuVGRep3ARYb9X7rbrn4ansMcLqcuF/klMlttGM5V7BD8w5xi8rUt9M3PNtrYhWGLgNuy1LP3E5XeuDw3kAFJxfzhB/QEWQjzCQthpwTbCVcM+rkYqo3hk6yRCX2sgn2WgZRCkgiFFlhParnRzuFc9RSWt/N1smO1E5DrylT2advshs+f57gzzRKBh0pr4/L0KC5jXposkHZNT0riFIljZ8F5ePCpV8DIxC5Gg6w2wavVoC+QAp8D7K8+cZKM5OfIDqe7JhaD3n2z3OukLFYBG2ki1mKcS926vYOzEYZcFv9t05R2ZAvoPZv6eWVmsGi9wY9Fb0lxYCGD86WqzdA5+yrC+sq2AgBSTpR4u9wIlu8fejfF1i07CGspP3m78OGRhzRS0AP5dyj8ENGfUB2kKHSpBVxaub4qYvEwd74gaQgq6T5ktorUzXg2u89bnKP5BfOkEiESwe1rzHhxsPeQBrMJLSO0U4lIhb+7MY4Kww7cH0f7MLo/L3xeodw6c4zppdwxjg2O0j2l4S5EM9cZ2CFUh2l/9g6hzg+rM9ZB/v6lc5pDq5cfFZOyaSVdVDIezNQ3GDNSQw6abuImuGoRTPjz0UzI93vxHwTbwalRDZDdckATsyEJVWAFYBpEkHYAaMgmWrGjKoavfDALDpDRoxHob1un9FX/Hf6w+MQQ3paOSqlYdm7iXcIPxpsEYnzJyEZ1w827+zcWZN6LnZdVHoQjABvJkvuY23zQ7cjKQsPZaHmF/CM1AgIjlF6BQF+lGVMZS1tRusdMHhW1WgsCA1t/iOOHPP7DrQ="
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "LOW",
+                          "probabilityScore": 0.0121237105,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.015921801
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 0.15702316,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.025386654
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "LOW",
+                          "probabilityScore": 0.049099855,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.070048615
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 0.00063665403,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        }
+                      ]
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 10,
+                    "candidatesTokenCount": 2,
+                    "totalTokenCount": 230,
+                    "trafficType": "PROVISIONED_THROUGHPUT",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 10
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 2
+                      }
+                    ],
+                    "thoughtsTokenCount": 218
+                  },
+                  "modelVersion": "gemini-3.1-pro-preview",
+                  "createTime": "2026-07-13T08:58:34.978315Z",
+                  "responseId": "uqhUaovbO7rj8vUPr9-G0AE"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 08:58:38 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Vertex-Ai-Llm-Request-Type:
+                - dedicated
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

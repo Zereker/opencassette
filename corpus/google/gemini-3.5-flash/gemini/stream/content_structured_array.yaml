@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T09:02:29Z"
+    vendor: google
+    model: gemini-3.5-flash
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_array
+    scenario_sha256: b155a71980b82efd8da8260d287f05e60f348fe0177e43b148afa58ce9f3cc1b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent 3 cool dogs"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"dogs": {"items": {"properties": {"name": {"title": "Name", "type": "string"}, "age": {"title": "Age", "type": "integer"}, "bio": {"title": "Bio", "type": "string"}}, "required": ["name", "age", "bio"], "title": "Dog", "type": "object"}, "title": "Dogs", "type": "array"}}, "required": ["dogs"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.5-flash:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"{\\\"dogs\\\":\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.5-flash\",\"createTime\": \"2026-07-13T09:02:29.950616Z\",\"responseId\": \"palUatiCOput7PkPlaeLwAQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"[{\\\"name\\\":\\\"Zephyr\\\",\\\"age\\\":3,\\\"bio\\\":\\\"A sleek greyhound who wears custom neon goggles and loves to chase laser pointers at skateparks.\\\"},{\\\"name\\\":\\\"Baron\\\",\\\"age\\\":5,\\\"bio\\\":\\\"A sophisticated bernese mountain dog who acts as a therapy\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.5-flash\",\"createTime\": \"2026-07-13T09:02:29.950616Z\",\"responseId\": \"palUatiCOput7PkPlaeLwAQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \" animal and enjoys listening to classical vinyl records.\\\"},{\\\"name\\\":\\\"Roxy\\\",\\\"age\\\":2,\\\"bio\\\":\\\"An energetic border collie mix who\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.5-flash\",\"createTime\": \"2026-07-13T09:02:29.950616Z\",\"responseId\": \"palUatiCOput7PkPlaeLwAQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \" can perform backflips and has her own popular social media channel for agility tricks.\\\"}]}\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.5-flash\",\"createTime\": \"2026-07-13T09:02:29.950616Z\",\"responseId\": \"palUatiCOput7PkPlaeLwAQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"AY89a19NFpPdcsoSEdD5epLlCmaIg/5bGA7Wz7hnrhSKQkmXVrAI9Zpl644FrHG3cBM=\"}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 8.565741e-06,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.0064712763},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 0.00034678218,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.0034820214},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.2217446e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.017793018},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 9.594414e-07,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.01153186}]}],\"usageMetadata\": {\"promptTokenCount\": 141,\"candidatesTokenCount\": 100,\"totalTokenCount\": 241,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 141}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 100}]},\"modelVersion\": \"gemini-3.5-flash\",\"createTime\": \"2026-07-13T09:02:29.950616Z\",\"responseId\": \"palUatiCOput7PkPlaeLwAQ\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:02:31 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

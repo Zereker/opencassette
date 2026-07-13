@@ -1,0 +1,47 @@
+meta:
+    recorded_at: "2026-07-13T08:22:45Z"
+    vendor: aws
+    model: claude-opus-4-6
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_structured_output
+    scenario_sha256: ae602fd46311a632506982b9426daf2653c2fdb1525667a66202009f80f2a3bb
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Invent a good dog"}]}],"output_config":{"format":{"type":"json_schema","schema":{"type":"object","title":"Dog","properties":{"name":{"type":"string","title":"Name"},"age":{"type":"integer","title":"Age"},"bio":{"type":"string","title":"Bio"}},"additionalProperties":false,"required":["name","age","bio"]}}},"temperature":1.0}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082245Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2F5id328713fqx/invoke
+      response:
+        body:
+            string: '{"model":"claude-opus-4-6","id":"msg_bdrk_01Hy9XUNetzzLM9bP59g6UgS","type":"message","role":"assistant","content":[{"type":"text","text":"{\"name\":\"Biscuit\",\"age\":4,\"bio\":\"Biscuit is a golden retriever with a heart of gold and a tail that never stops wagging. He loves fetching tennis balls, swimming in lakes, and curling up at your feet on rainy days. He''s known in the neighborhood for greeting every person and dog with enthusiastic joy, and he has never met a stranger. His favorite treat is peanut butter, and he knows twelve tricks including playing dead and giving high-fives.\"}"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":231,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":113}}'
+        headers:
+            Content-Length:
+                - "853"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:22:50 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Cache-Write-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "231"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "5127"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "113"
+            X-Amzn-Requestid:
+                - e562fd21-8f0c-4d23-bcb5-4aa4cca9eca5
+        status:
+            code: 200
+            message: OK

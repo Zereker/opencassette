@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T08:55:09Z"
+    vendor: google
+    model: gemini-2.5-pro
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_output
+    scenario_sha256: abb2092b96d390d21af1ba01d701224df4456a2c53e5da5520e3cb1cd0bb7248
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent a cool dog"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"name": {"type": "string"}, "age": {"type": "integer"}, "bio": {"type": "string"}}, "required": ["name", "age", "bio"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-2.5-pro:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"{\\n  \\\"name\\\": \\\"Cipher\\\",\\n  \\\"age\\\": 3,\\n  \\\"bio\\\": \\\"A Shiba Inu mix who once hacked into the local dog park's automated ball-throwing machine for a non-stop fetch marathon. Known for\"}]},\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 7.0706825e-08,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.1146635e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.015690297},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 2.7666456e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.5458055e-07,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"}]}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-2.5-pro\",\"createTime\": \"2026-07-13T08:55:09.637889Z\",\"responseId\": \"7adUasH3JoPFi9sPvNa94Qc\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \" his collection of tiny sunglasses and his ability to navigate the city's subway system solo.\\\"\\n}\"}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 8.213517e-08,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 6.445191e-07,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.616325e-06,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.017768353},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 2.1245151e-08,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"}]}],\"usageMetadata\": {\"promptTokenCount\": 14,\"candidatesTokenCount\": 72,\"totalTokenCount\": 479,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 14}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 72}],\"thoughtsTokenCount\": 393},\"modelVersion\": \"gemini-2.5-pro\",\"createTime\": \"2026-07-13T08:55:09.637889Z\",\"responseId\": \"7adUasH3JoPFi9sPvNa94Qc\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 08:55:15 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

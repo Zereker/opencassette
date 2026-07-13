@@ -1,0 +1,45 @@
+meta:
+    recorded_at: "2026-07-13T08:22:04Z"
+    vendor: aws
+    model: claude-opus-4-8
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_multi_turn
+    scenario_sha256: 7fced3d86552a4bc57828286f279c3107b67aea06e09e53e7fe16da9b09d8898
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]},{"role":"assistant","content":[{"type":"text","text":"- Captain\n- Scoop"}]},{"role":"user","content":[{"type":"text","text":"in french"}]}],"temperature":1.0}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082204Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fa7p85oev50sb/invoke
+      response:
+        body:
+            string: '{"model":"claude-opus-4-8","id":"msg_bdrk_xcjwqvomuj362hc3b4cu574nxrn6y4udojbq5lm7zd62xmrtkqea","type":"message","role":"assistant","content":[{"type":"text","text":"- Capitaine\n- Bécquet"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":36,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":15,"output_tokens_details":{"thinking_tokens":0},"service_tier":"standard"}}'
+        headers:
+            Content-Length:
+                - "517"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:22:06 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "36"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "1713"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "15"
+            X-Amzn-Requestid:
+                - bf35c403-7305-4aef-9d45-1433476bb417
+        status:
+            code: 200
+            message: OK

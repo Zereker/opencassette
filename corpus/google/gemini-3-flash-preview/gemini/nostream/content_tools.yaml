@@ -1,0 +1,85 @@
+meta:
+    recorded_at: "2026-07-13T09:01:38Z"
+    vendor: google
+    model: gemini-3-flash-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_tools
+    scenario_sha256: 5cbd321c7a3ef9304163261fe3fd60aa1633ec201f0f6e13d0379d25f8751b32
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Two names for a pet pelican"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "tools": [{"functionDeclarations": [{"name": "pelican_name_generator", "description": null, "parameters": {"properties": {}, "type": "object"}}]}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3-flash-preview:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "functionCall": {
+                              "name": "pelican_name_generator",
+                              "args": {}
+                            },
+                            "thoughtSignature": "AY89a19Akn/kXLGWzqyPOqK5bPOY74D9hNOdH8TxA+JTHIHLceShIp7XnXe7xtDXVTZ/Xh4utjbvQ0k769gsC75FxfrWxnVq7jusBZs2Lv9Ehrgl+4D5lL6UfKxj7saIq9it5kNb/WW5QQXyrni5LLaXDqlPt4Jx3G9oKUkSZP8R7xBWcIdUivMsiwyl0xg8ZquF61Q74NrUFjmQXK+zYmHFxqWATKjfNq0ybIXpZCEebli+5jO8VJn0TdGTqhK6RK2bD59zdFk3p/gdfBMOIJHkXWr72v2rqvhuqVY48m8Sq3r3lSYk3tXPXIyhKiHYNvsjqhJm6lwDNyJC+oxgtAJP3P7zlMLW1uv/JQQAGaOt0l1FZ6Fe91+CWBOn5P+Nqo0uwZgOaw2V9VFbw8fCvtc1+wxk4TwdxRFn7KkPxkYArJGqQHOndgRcJLzneYW1BCGb/V2d9P8uzZQLRPB3QycFZaO11pn0RZbBx8JK58C44FG1+xysMPy1QMBrpMqraGu16wZ5mbNzrRvto3cisfx2cGsuUSZzFpo6KNCacxVstvGl7gJUfDi5FjYIsZrfPP/yDYPcDovyUEgCZkdWaRQyJ9ZWqUa29Y9T6H2Cfyf11i6VGV/DTbNkyN91vOzj1hI26bGJqiAoWRAZ9szvODy58U0ntsNKtDTt4q2mstWM5nx2MTa7E0kxbJylyGJWMvoGJ7XdwbJ16N6/C2c+5H4i/QmT6LpwYMhWlFW5qXEs/TezYSEZ88QDDo7npujadtez1B3jC6Rz73ZXPPvZhP21Z+gwJ9tNVI8p5qAyrigS7pQ8ZwLWGwwNFxhkD7erZC0TPTbiROaswkwAE5TYc1AqAv7HDnbU/zdgOVAL3bBlbdhLduKbhKSlq9Hj+8HiXuR5Dcxc/KjcI2uAYDbxQDyuJCOY+NS8acrzMtNlm1Z/gAAHaGyctA3gHcphPGXoyPip46Cz0Ne0rShqy6da5E1tLtkVMXzdr/TNw5LaY/QBONzecpvgxIaz/wmTahQa0za2T3MZ0TOlgMOdopX5XEYA+BYGs0+r0V/rbwUiSlSYoExbPtbJBfU+NQ0wtLiGLK9ApzIMuvyn2mQmv++3gYxMqSQZ3E5MKtYfi84O61iY/HKAGxRBVSYXZDBT06xWeRYoN/xNZFMsmgIWK/BO7A6vLE96ZVSJVZzG3IgWqE9UR0wtLOCP1sfb8JDSiv5wyuyfUUWhIc61gYu0breeMkKeuC38f4gjoZCGH6FxSdTi7oIDAQ=="
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP"
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 20,
+                    "candidatesTokenCount": 13,
+                    "totalTokenCount": 270,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 20
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 13
+                      }
+                    ],
+                    "thoughtsTokenCount": 237
+                  },
+                  "modelVersion": "gemini-3-flash-preview",
+                  "createTime": "2026-07-13T09:01:38.654376Z",
+                  "responseId": "cqlUaqj4J_fl8vUP8YOvmAU"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 09:01:41 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

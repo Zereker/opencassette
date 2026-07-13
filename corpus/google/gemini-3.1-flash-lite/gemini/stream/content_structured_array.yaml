@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T09:01:06Z"
+    vendor: google
+    model: gemini-3.1-flash-lite
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_array
+    scenario_sha256: b155a71980b82efd8da8260d287f05e60f348fe0177e43b148afa58ce9f3cc1b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent 3 cool dogs"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"dogs": {"items": {"properties": {"name": {"title": "Name", "type": "string"}, "age": {"title": "Age", "type": "integer"}, "bio": {"title": "Bio", "type": "string"}}, "required": ["name", "age", "bio"], "title": "Dog", "type": "object"}, "title": "Dogs", "type": "array"}}, "required": ["dogs"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"{\\n  \\\"dogs\\\":\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"createTime\": \"2026-07-13T09:01:07.122982Z\",\"responseId\": \"U6lUaubAB-67i9sPgKOW6QI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \" [\\n    {\\n      \\\"name\\\": \\\"Nova\\\",\\n      \\\"age\\\": 3,\\n      \\\"bio\\\": \\\"A cosmic-coated husky mix who enjoys chasing laser pointers and howling at the moon.\\\"\\n    },\\n    {\\n      \\\"name\\\": \\\"Barnaby\\\",\\n      \\\"age\\\": 7,\\n      \\\"bio\\\": \\\"A distinguished Golden Retriever with a penchant for wearing\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"createTime\": \"2026-07-13T09:01:07.122982Z\",\"responseId\": \"U6lUaubAB-67i9sPgKOW6QI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \" bowties and collecting vintage tennis balls.\\\"\\n    },\\n    {\\n      \\\"name\\\": \\\"Pip\\\",\\n      \\\"age\\\":\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"createTime\": \"2026-07-13T09:01:07.122982Z\",\"responseId\": \"U6lUaubAB-67i9sPgKOW6QI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \" 1,\\n      \\\"bio\\\": \\\"An energetic Terrier blend who believes he is a guard dog despite his love for cudd\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"createTime\": \"2026-07-13T09:01:07.122982Z\",\"responseId\": \"U6lUaubAB-67i9sPgKOW6QI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"les and squeaky toys.\\\"\\n    }\\n  ]\\n}\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"createTime\": \"2026-07-13T09:01:07.122982Z\",\"responseId\": \"U6lUaubAB-67i9sPgKOW6QI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"AY89a19tRzuwXTnDifyQTH/WbTDcIec1QyJkwTdrdpGoHYsh+DHt4qPrQ1ZkVeVONa0=\"}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 5.173179e-06,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.01977548},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 0.00037665744,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.014643952},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 3.810383e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.00654006},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 5.4851243e-06,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.0059548914}]}],\"usageMetadata\": {\"promptTokenCount\": 141,\"candidatesTokenCount\": 153,\"totalTokenCount\": 294,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 141}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 153}]},\"modelVersion\": \"gemini-3.1-flash-lite\",\"createTime\": \"2026-07-13T09:01:07.122982Z\",\"responseId\": \"U6lUaubAB-67i9sPgKOW6QI\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:01:07 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

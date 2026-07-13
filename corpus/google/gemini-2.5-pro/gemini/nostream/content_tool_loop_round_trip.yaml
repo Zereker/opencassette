@@ -1,0 +1,111 @@
+meta:
+    recorded_at: "2026-07-13T08:03:32Z"
+    vendor: google
+    model: gemini-2.5-pro
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_tool_loop_round_trip
+    scenario_sha256: f9615433dd1e2e4f8552bbb365a9bf0376e377a14ca4e5db40f2342bf0db822a
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Two names for a pet pelican"}]}, {"role": "model", "parts": [{"function_call": {"name": "pelican_name_generator", "args": {}}}]}, {"role": "user", "parts": [{"function_response": {"name": "pelican_name_generator", "response": {"output": "Charles"}}}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "tools": [{"functionDeclarations": [{"name": "pelican_name_generator", "description": null, "parameters": {"properties": {}, "type": "object"}}]}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-2.5-pro:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "I can only generate one name at a time. Here is one name for a pet pelican: Charles. Would you like me to generate another one for you?",
+                            "thoughtSignature": "CowGAY89a1+eVNDWoFh10de3KkE/H9IPrRqTjGLuljBKrbIpCgELDRuBxK9icheBeUaleURF5GedqdtbykBwdLVV8/2Kxla8qga7axM6fBwCS7/iN1wh9phL3ZaV5Qf8NX/uX749lokF0/COsg//AIpE7YnPVtv8wSIESIEzZvzYjQ1mFZP4BmJSTGyQQ1mE/s7A0PlEyVt5v2XmDjL8cNF5sLq6s3hZbujXIda64MHRVG1p30U0bviTJzBJq5k8IS+pGW+RITIFDKLDta/wgc/Nop+gp6iRzNFAOF3p8gY155jPJznS2E2baJ45NwUVfHOrXiyhuetGjLuRWpN8ietD55mTLd7AVmVrwmAD2NSjzCG5EGzQ3v9Ul1E1gY8ym3KInT1rxtUPM0uGhGO6JEji2OOd7VEjtSFfFHfJidmpMOCjC4iiaORiQb7xDq2N39R/fwZfpcZRgLw4isK9ASag5U/MtyOAu1X9Yo5S91/ZPc7vuFsBxLP7ybGdpAHP7QfxdBVjUgfO+W2evtEfwrZLaXQyiTul+dAUzfUZ4R6Qx4N1xB1fW46KvcT2NvcYe6manWLyW0k7+WHTV2J1j3dTdoPOyZjb48NrmmreiuZ1LBzd07s/FRK9tv3Lgqeggts1m7bdKu/4WV9SJ9UYOQ4puZYn4ucx8LiamEfSVoxxkAFRurdX8CmSnGAlJslXmiAlLKexqGgw84w3NVzB5E4ximtgTfGgGDfi1QgtNmgIu6dJtAdhCiMC/MlJ71wvgNNJfQDYYJfUejEaaUX/xlBO4bSoPA+c7T/F2NRPk1fPyGL825duTG0EO1o8KxmgBp6dXdORa7t3VPoXN+df/EIsKhaSNEWftZDxAiCWmhvu2BUHuMkOV9TErB+ixDtPRcqJzDocY0oKkuunOSsD3kRi1WgkewvXvPKKVgrZ0W9y+0BYd6ZC/3FPxgmVbq/yADOHbPmh5zX8BUpMMXxE6XnOCuK+SH3aGJAdiyhsLQb4SwWfzy0BOHgWPVljFLAtBSUvCDD5DdMiotuRFaKP"
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 7.962892e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 3.5733797e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.017309219
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 5.533296e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.0064580813
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 4.5769553e-08,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        }
+                      ],
+                      "avgLogprobs": -0.98858457623106055
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 28,
+                    "candidatesTokenCount": 33,
+                    "totalTokenCount": 237,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 28
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 33
+                      }
+                    ],
+                    "thoughtsTokenCount": 176
+                  },
+                  "modelVersion": "gemini-2.5-pro",
+                  "createTime": "2026-07-13T08:03:33.244763Z",
+                  "responseId": "1ZtUapv4DtDq694P-d62-AM"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 08:03:36 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

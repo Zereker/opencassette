@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T08:59:24Z"
+    vendor: google
+    model: gemini-3.1-pro-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_output
+    scenario_sha256: abb2092b96d390d21af1ba01d701224df4456a2c53e5da5520e3cb1cd0bb7248
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent a cool dog"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"name": {"type": "string"}, "age": {"type": "integer"}, "bio": {"type": "string"}}, "required": ["name", "age", "bio"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.1-pro-preview:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"{\\\"name\\\":\\\"Axel\\\",\\\"age\\\":4,\\\"bio\\\":\\\"A cybernetically enhanced Golden Retriever\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:24.668615Z\",\"responseId\": \"7KhUasfnKK2K694Pu8DL6Q8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \" who surfs solar flares by day and plays bass in an underground jazz club by night.\\\"}\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:24.668615Z\",\"responseId\": \"7KhUasfnKK2K694Pu8DL6Q8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"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\"}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 8.46787e-06,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 2.90208e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.12494645e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 8.8539844e-07,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.014196157}]}],\"usageMetadata\": {\"promptTokenCount\": 89,\"candidatesTokenCount\": 38,\"totalTokenCount\": 609,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 89}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 38}],\"thoughtsTokenCount\": 482},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:24.668615Z\",\"responseId\": \"7KhUasfnKK2K694Pu8DL6Q8\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:00:37 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK
