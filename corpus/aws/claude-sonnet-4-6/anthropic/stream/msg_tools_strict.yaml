@@ -1,0 +1,63 @@
+meta:
+    recorded_at: "2026-07-13T09:25:44Z"
+    vendor: aws
+    model: claude-sonnet-4-6
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_tools_strict
+    scenario_sha256: 53502414d12585c6b5da1310ce2ea5987a3c5dbc25c8182daeb80fa69991e391
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":64000,"messages":[{"role":"user","content":"What''s the weather in Boston, in Celsius?"}],"tools":[{"name":"get_weather","input_schema":{"properties":{"location":{"type":"string"},"unit":{"enum":["C","F"],"type":"string"}},"required":["location","unit"],"type":"object","additionalProperties":false},"description":"Get the weather at a location.","strict":true}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T092544Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2F3z04ny93dpv5/invoke-with-response-stream
+      response:
+        body:
+            string: |+
+                data: {"type":"message_start","message":{"model":"claude-sonnet-4-6","id":"msg_bdrk_01P379BpvVkfW4bi5bWJg7FZ","type":"message","role":"assistant","content":[],"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":598,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":21}}}
+
+                data: {"type":"content_block_start","index":0,"content_block":{"type":"tool_use","id":"toolu_bdrk_012gTSnkmV1GAmRQn7BFKpo3","name":"get_weather","input":{}}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":""}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"{\"l"}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"oc"}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"ation"}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"\": \"Bos"}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"ton\""}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":", \"unit\": "}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"\"C\"}"}}
+
+                data: {"type":"content_block_stop","index":0}
+
+                data: {"type":"message_delta","delta":{"stop_reason":"tool_use","stop_sequence":null,"stop_details":null},"usage":{"input_tokens":598,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":71}}
+
+                data: {"type":"message_stop","amazon-bedrock-invocationMetrics":{"inputTokenCount":598,"outputTokenCount":71,"invocationLatency":1819,"firstByteLatency":1486}}
+
+        headers:
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:25:46 GMT
+            X-Amzn-Bedrock-Content-Type:
+                - application/json
+            X-Amzn-Requestid:
+                - 9c73e430-c5b3-479e-9bb1-a1f03f4f6932
+        status:
+            code: 200
+            message: OK

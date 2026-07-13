@@ -1,0 +1,37 @@
+meta:
+    recorded_at: "2026-07-13T09:24:33Z"
+    vendor: aws
+    model: claude-opus-4-7
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_tool_loop_round_trip
+    scenario_sha256: 4bab5f8cd8122dfc2b47529d7e3549549bf5fa34d98dfaa3ce10a725413a8824
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican"}]},{"role":"assistant","content":[{"type":"text","text":" "},{"type":"tool_use","id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","name":"pelican_name_generator","input":{}},{"type":"tool_use","id":"toolu_01N8a4jWyf116qKTMqKKmjyt","name":"pelican_name_generator","input":{}}]},{"role":"user","content":[{"type":"tool_result","tool_use_id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","content":"Charles"},{"type":"tool_result","tool_use_id":"toolu_01N8a4jWyf116qKTMqKKmjyt","content":"Sammy"}]}],"temperature":1.0,"tools":[{"name":"pelican_name_generator","description":"","input_schema":{"properties":{},"type":"object"}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T092433Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fiyykxatgiluk/invoke-with-response-stream
+      response:
+        body:
+            string: "data: {\"type\":\"message_start\",\"message\":{\"model\":\"claude-opus-4-7\",\"id\":\"msg_bdrk_vmfqow57uu5gh3hvrqv3o42ynkjvgsfkkqbr3ux5anp5y3irm35a\",\"type\":\"message\",\"role\":\"assistant\",\"content\":[],\"stop_reason\":null,\"stop_sequence\":null,\"stop_details\":null,\"usage\":{\"input_tokens\":895,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"cache_creation\":{\"ephemeral_5m_input_tokens\":0,\"ephemeral_1h_input_tokens\":0},\"output_tokens\":5,\"service_tier\":\"standard\"}}}\n\ndata: {\"type\":\"content_block_start\",\"index\":0,\"content_block\":{\"type\":\"text\",\"text\":\"\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"Here are two great\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" name\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" ideas for your pet p\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"elican:\\n\\n1. **\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"Charles** \"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"\U0001F3A9 \"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"– d\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"ignified and dist\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"inguished,\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" perfect for a p\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"elican with\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" a reg\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"al air\\n2. **S\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"ammy** \U0001F41F\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" – friendly and playful\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\", great\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" for a pelican with\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" a\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" cheerful personality\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"\\n\\nDo\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" either\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" of these f\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"it your fe\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"athered friend, or would you\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" like me to generate more options?\"}}\n\ndata: {\"type\":\"content_block_stop\",\"index\":0}\n\ndata: {\"type\":\"message_delta\",\"delta\":{\"stop_reason\":\"end_turn\",\"stop_sequence\":null,\"stop_details\":null},\"usage\":{\"input_tokens\":895,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":119,\"output_tokens_details\":{\"thinking_tokens\":0}}}\n\ndata: {\"type\":\"message_stop\",\"amazon-bedrock-invocationMetrics\":{\"inputTokenCount\":895,\"outputTokenCount\":119,\"invocationLatency\":2133,\"firstByteLatency\":1324}}\n\n"
+        headers:
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:24:35 GMT
+            X-Amzn-Bedrock-Content-Type:
+                - application/json
+            X-Amzn-Requestid:
+                - ac244090-7204-46ef-a2c5-ab08cb80202c
+        status:
+            code: 200
+            message: OK

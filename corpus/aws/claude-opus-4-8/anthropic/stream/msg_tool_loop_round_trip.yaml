@@ -1,0 +1,37 @@
+meta:
+    recorded_at: "2026-07-13T09:24:19Z"
+    vendor: aws
+    model: claude-opus-4-8
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_tool_loop_round_trip
+    scenario_sha256: 4bab5f8cd8122dfc2b47529d7e3549549bf5fa34d98dfaa3ce10a725413a8824
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican"}]},{"role":"assistant","content":[{"type":"text","text":" "},{"type":"tool_use","id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","name":"pelican_name_generator","input":{}},{"type":"tool_use","id":"toolu_01N8a4jWyf116qKTMqKKmjyt","name":"pelican_name_generator","input":{}}]},{"role":"user","content":[{"type":"tool_result","tool_use_id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","content":"Charles"},{"type":"tool_result","tool_use_id":"toolu_01N8a4jWyf116qKTMqKKmjyt","content":"Sammy"}]}],"temperature":1.0,"tools":[{"name":"pelican_name_generator","description":"","input_schema":{"properties":{},"type":"object"}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T092419Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fa7p85oev50sb/invoke-with-response-stream
+      response:
+        body:
+            string: "data: {\"type\":\"message_start\",\"message\":{\"model\":\"claude-opus-4-8\",\"id\":\"msg_bdrk_vjs4y7kuhqtvc3xq6bomzthdgln6ffbxk2fvulmh3cpio2u54klq\",\"type\":\"message\",\"role\":\"assistant\",\"content\":[],\"stop_reason\":null,\"stop_sequence\":null,\"stop_details\":null,\"usage\":{\"input_tokens\":482,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"cache_creation\":{\"ephemeral_5m_input_tokens\":0,\"ephemeral_1h_input_tokens\":0},\"output_tokens\":2,\"service_tier\":\"standard\"}}}\n\ndata: {\"type\":\"content_block_start\",\"index\":0,\"content_block\":{\"type\":\"text\",\"text\":\"\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"Here\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" are two names for your\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" pet pelican:\\n\\n1\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\". **Charles**\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" \"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"\U0001F9A2\\n2. **\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"Sammy** \U0001F426\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"\\n\\nBoth\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" are great\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" choices! \\\"\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"Charles\\\" has\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\" a dignified, dist\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"inguished feel, while \\\"\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"Sammy\\\" is friend\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"ly and play\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"ful. Let me know if you\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"'d like more su\"}}\n\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"text_delta\",\"text\":\"ggestions!\"}}\n\ndata: {\"type\":\"content_block_stop\",\"index\":0}\n\ndata: {\"type\":\"message_delta\",\"delta\":{\"stop_reason\":\"end_turn\",\"stop_sequence\":null,\"stop_details\":null},\"usage\":{\"input_tokens\":482,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":96,\"output_tokens_details\":{\"thinking_tokens\":0}}}\n\ndata: {\"type\":\"message_stop\",\"amazon-bedrock-invocationMetrics\":{\"inputTokenCount\":482,\"outputTokenCount\":96,\"invocationLatency\":2022,\"firstByteLatency\":1328}}\n\n"
+        headers:
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:24:20 GMT
+            X-Amzn-Bedrock-Content-Type:
+                - application/json
+            X-Amzn-Requestid:
+                - 5db1baf0-6a1f-4119-ba41-8d305f8f5f6e
+        status:
+            code: 200
+            message: OK
