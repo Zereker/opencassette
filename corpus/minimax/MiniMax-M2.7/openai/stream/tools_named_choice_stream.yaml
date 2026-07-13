@@ -1,0 +1,53 @@
+meta:
+    recorded_at: "2026-07-13T09:45:32Z"
+    vendor: minimax
+    model: MiniMax-M2.7
+    endpoint: https://api.minimaxi.com
+    scenario: tools_named_choice_stream
+    scenario_sha256: 808bc3a1d316f1cc45666e9da592a91c9136fc429c7df455a64922b356d425c8
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Extract: Erick is 27 years old.","role":"user"}],"model":"MiniMax-M2.7","stream":true,"temperature":0.0,"tool_choice":{"type":"function","function":{"name":"_Person"}},"tools":[{"type":"function","function":{"name":"_Person","description":"A person with a name and age.","parameters":{"properties":{"name":{"description":"The person''s name","type":"string"},"age":{"description":"The person''s age in years","type":"integer"}},"required":["name","age"],"type":"object"}}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: |+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"<think>\nThe user","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935932,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" wants me to extract information from the text \"Erick is 27 years old.\"\n\nThe relevant function is `_Person` which takes a name and age.\n\n-","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935932,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" name: \"Erick\"\n- age: 27\n</think>\n\n\n","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935932,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"role":"assistant","name":"MiniMax AI","tool_calls":[{"id":"call_function_2r5vd84v5iuk_1","type":"function","function":{"name":"_Person","arguments":"{\"name\": \"Erick\", \"age\": "},"index":0}],"audio_content":""}}],"created":1783935932,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"tool_calls","index":0,"delta":{"role":"assistant","name":"MiniMax AI","tool_calls":[{"function":{"arguments":"27}"},"index":0}],"audio_content":""}}],"created":1783935932,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+        headers:
+            Alb_receive_time:
+                - "1783935932.128"
+            Alb_request_id:
+                - 71e1dcf8d668db92799115ed085798b10f696177
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:45:32 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_3**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Session-Id:
+                - '**TRACE_ID_4**'
+        status:
+            code: 200
+            message: OK

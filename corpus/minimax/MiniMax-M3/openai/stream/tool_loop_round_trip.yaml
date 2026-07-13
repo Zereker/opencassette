@@ -1,0 +1,59 @@
+meta:
+    recorded_at: "2026-07-13T09:46:18Z"
+    vendor: minimax
+    model: MiniMax-M3
+    endpoint: https://api.minimaxi.com
+    scenario: tool_loop_round_trip
+    scenario_sha256: 4a05c06dab3664d090ff6ad1a3d478d2824b51c36ed4aa63ecf7b77aac09e825
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"max_tokens":8192,"messages":[{"role":"user","content":"Two names for a pet pelican"},{"role":"assistant","content":" ","tool_calls":[{"id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","type":"function","function":{"name":"pelican_name_generator","arguments":"{}"}},{"id":"toolu_01N8a4jWyf116qKTMqKKmjyt","type":"function","function":{"name":"pelican_name_generator","arguments":"{}"}}]},{"role":"tool","content":"Charles","tool_call_id":"toolu_01LtHJmixrs9NcWQkK8hu8hj"},{"role":"tool","content":"Sammy","tool_call_id":"toolu_01N8a4jWyf116qKTMqKKmjyt"}],"model":"MiniMax-M3","stream":true,"stream_options":{"include_usage":true},"temperature":1,"tools":[{"type":"function","function":{"name":"pelican_name_generator","parameters":{"properties":{},"type":"object"}}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: |+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"**","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935978,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"Two great names for your pet pelican:**\n\n1. **Charles** — a classic, dignified name that suits their stately demeanor (especially nice if","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935978,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" they like to perch regally on your arm).\n2. **Sammy** — a friendly, casual choice that fits their social, chatty nature.\n\nMay I","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935978,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" also offer a few bonus suggestions based on their most iconic feature?\n\n- **","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935978,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"Pouch** — a playful nod to that famous throat pouch\n- **Captain** — for the seabird vibes\n- **Pearl**","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935978,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" — elegant and matches their typically white plumage\n- **Beakley** — charming and descriptive\n\nLet me know if you'd like more","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935978,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"delta":{"content":" options or a different style!","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935978,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[],"created":1783935978,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":{"total_tokens":590,"total_characters":0,"prompt_tokens":448,"completion_tokens":142,"prompt_tokens_details":{"cached_tokens":114}},"service_tier":"standard","base_resp":{"status_code":0,"status_msg":""}}
+
+        headers:
+            Alb_receive_time:
+                - "1783935978.718"
+            Alb_request_id:
+                - a7fe766c56e712d993a9431069d8fd78b9b95930
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:46:19 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_4**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Session-Id:
+                - '**TRACE_ID_3**'
+        status:
+            code: 200
+            message: OK

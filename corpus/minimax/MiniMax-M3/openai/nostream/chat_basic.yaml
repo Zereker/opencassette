@@ -1,0 +1,44 @@
+meta:
+    recorded_at: "2026-07-13T09:45:34Z"
+    vendor: minimax
+    model: MiniMax-M3
+    endpoint: https://api.minimaxi.com
+    scenario: chat_basic
+    scenario_sha256: c88a48870c2ffdb177b8dbbca23f3ced1f791a59ce08288a4bf18e83a69c8099
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"MiniMax-M3"}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: |
+                {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"message":{"content":"<think>\nThe user wants a story about a cat. I'll write an engaging, original short story with a clear narrative arc, a memorable feline character, and some emotional depth. Let me craft something with a good setting, conflict, and resolution.\n</think>\n# The Cartographer of Cobblestone Lane\n\nOn a rain-slicked evening in the old quarter of the city, a small gray cat named Pipkin pressed his nose against the window of the bookshop that had once belonged to Mr. Halloran. The \"For Lease\" sign had hung in the window for eleven months, ever since the old cartographer had passed away in his sleep at the age of ninety-two.\n\nPipkin had been a stray then, scrappy and thin, with one torn ear from a long-forgotten fight. Mr. Halloran had found him shivering beneath the shop's awning and simply opened the door. \"Ah,\" the old man had said, as though he'd been expecting a visitor. \"An explorer, I see. Come in, come in. The world is far too large to map alone.\"\n\nFor seven years, Pipkin had lived in the bookshop. He'd curled on warm stacks of atlases, knocked pens off Mr. Halloran's drafting table, and listened, every evening, to the scratch of the old man's pencil as he drew maps of places he'd never been but knew by heart.\n\nNow the shop was dark. The new landlord, a woman in a sharp coat, planned to turn it into a coffee bar.\n\nPipkin watched her measure the floor that afternoon, and something in him hardened into resolve. He was no longer the scrawny stray who'd once frozen in the rain. He was a cat of the world now, a cat of maps and stories. He would not lose his home without a fight.\n\nThat night, he crept through the loose board in the shop's back door and made his way upstairs to Mr. Halloran's studio. The drafting table still sat where it always had, and on its surface lay a single unfinished map. In the old man's careful script, the title read: *The Hidden City, As Seen By Those Who Have Loved It.*\n\nPipkin studied the page. The map was incomplete in the middle — a blank space where the old cartographer had never quite decided what belonged. The coffee bar's footprint, Pipkin realized, would cover that very space.\n\nHe thought about Mr. Halloran's voice. *The world is far too large to map alone.*\n\nHe picked up the pencil in his mouth — a habit he had once driven Mr. Halloran to laughter — and set to work.\n\nBy morning, the blank space was filled. Pipkin had drawn, in his own clumsy, curving lines, the things that mattered most: the patch of sunlight on the floor where the old man used to nap. The creak in the third stair. The draft that came in through the window in autumn. The exact spot beneath the awning where a small gray cat had once been found.\n\nHe added one more detail in the corner: a tiny X, marked *Home.*\n\nThe woman in the sharp coat returned on Monday with her contractor. She stood in the empty shop, and somehow, the contractor said later, the cat sitting on the drafting table gave her such a look that she paused. She walked up the creaking third stair. She felt the autumn draft. She looked down at the unfinished map, and saw, in the rough lines of a creature who had never learned to hold a pen properly, a kind of love she had not expected to find in a piece of real estate.\n\nShe put down her coffee bar plans the next morning. The shop became, instead, a small museum of maps. Its curator, the neighbors said with smiles, was a one-eared gray cat who greeted every visitor at the door and led them, with great dignity, to the back room.\n\nAnd the sign in the window, which the curator had insisted upon with much indignant meowing, read simply:\n\n*The world is far too large to map alone.*\n*— E. Halloran*\n\n---\n\n*If you listen very carefully on quiet evenings, the locals say, you can still hear the scratch of two pencils at work in that little shop — one steady, one stubborn — drawing a city that is always, only just, beginning.*","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935934,"model":"MiniMax-M3","object":"chat.completion","usage":{"total_tokens":1070,"total_characters":0,"prompt_tokens":183,"completion_tokens":887,"prompt_tokens_details":{"cached_tokens":114}},"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard","base_resp":{"status_code":0,"status_msg":""}}
+        headers:
+            Alb_receive_time:
+                - "1783935934.867"
+            Alb_request_id:
+                - 3ef11b98572aa98abf1bcf972c8fe81a8ce92d80
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:45:52 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_4**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Session-Id:
+                - '**TRACE_ID_3**'
+        status:
+            code: 200
+            message: OK

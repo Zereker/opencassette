@@ -1,0 +1,135 @@
+meta:
+    recorded_at: "2026-07-13T09:45:55Z"
+    vendor: minimax
+    model: MiniMax-M3
+    endpoint: https://api.minimaxi.com
+    scenario: chat_stream_usage
+    scenario_sha256: 73ca6813e2fb764472d020437bab0c06aba10e340bb0db97ea1de671f1c4496b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"MiniMax-M3","stream":true,"stream_options":{"include_usage":true}}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: |+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"<think>\nThe user wants a story about a cat","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". I'll write an engaging, heartwarming short story about a cat. Let me create something with a clear narrative arc, a memorable feline character, and an","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" emotional payoff. I'll aim for a story that feels complete and satisfying.\n</think>\n# The Cartographer of Whiskertail Lane","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"\n\nIn a small, ivy-covered cottage at the end of Whiskertail Lane, there lived a cat named Mosaic. She was a small tortoiseshell with patches","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" of amber, charcoal, and cream that swirled across her fur like a map of places no one had ever been","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". Her eyes were the color of honey left out in the sun, and she had a single white","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" sock on her left hind foot.\n\nMosaic belonged to an old woman named Mrs. Pemberton, who was a","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" cartographer by trade. For fifty years, Mrs. Pemberton had drawn maps of every kind: maps of mountains, maps of rivers, maps of cities","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" that no longer existed, and once, a map of a dream she'd had as a girl. Her cottage was filled with rolled parch","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"ments, ink-stained fingers, and the soft scratch of her pen across paper.\n\nEvery","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" evening, Mrs. Pemberton would unroll a fresh sheet on her great oak desk and begin to work. Mosaic would leap","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" onto the desk without ceremony, circle three times, and settle directly on top of the unfinished map. Mrs","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". Pemberton never minded. She would simply smile, scratch behind Mosaic's ears, and begin work on a new sheet.\n\nFor years, this was their","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" ritual.\n\n---\n\nOne autumn, Mrs. Pemberton grew tired. Her hands, which had once traced coast","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"lines with such precision, began to tremble. She would sit at her desk for hours, pen in hand, but no lines would come. The","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" maps she completed grew sparser, then stopped altogether. The cottage grew quiet.\n\nMosaic noticed.\n\nEach evening, she would still leap onto the desk and circle","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" three times. But Mrs. Pemberton no longer worked. She would simply sit, staring at the empty page, and after a while, she would sigh","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" and reach for the lamp.\n\nOne night, Mrs. Pemberton fell asleep at her desk. Mosaic watched her for","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" a long time. Then, very carefully, the little cat stepped down from the desk and padded across the room to the window.\n\nOutside, the moon was round","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" and bright. The autumn leaves drifted like small boats across the lawn.\n\nMosaic looked at the moon. She looked at the sleeping woman. Then she looked at","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the empty page on the desk.\n\nAnd she had an idea.\n\n---\n\nThe next morning, Mrs. Pemberton woke with a stiff neck and a guilty heart","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". The empty page still sat before her. She reached for her pen, then stopped.\n\nOn the desk, beside the blank","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" sheet, lay something curious: a small spiral of ivy. Beside it, a single acorn. A grey","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" feather. A smooth, blue stone. A four-leaf clover, slightly nibbled at the edges.\n\nMosaic sat beside","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the collection, grooming her white sock, as though she had done nothing at all.\n\nMrs. Pemberton looked at the objects","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". She looked at the cat. She picked up her pen, and very slowly, very carefully, she began to draw.\n\nNot a map of a place. A map of a single evening","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", last September, when she and Mosaic had walked through the woods and she had collected just these","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" things and forgotten she had done so. She drew the ivy curling up an old oak. She drew","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the acorn nestled in moss. She drew the path they'd taken, the bend in the creek, the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" place where a heron had startled them both.\n\nMosaic purred so loudly the ink","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" on the page trembled.\n\n---\n\nFrom that night on, Mosaic continued her work. Each evening, she would bring Mrs","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". Pemberton a small offering: a leaf, a ribbon, a button, a sprig of lavender, a snail shell cleaned and","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" dried. And each evening, Mrs. Pemberton would draw the map that went with it.\n\nThe maps were","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" unlike any she had made before. They were small, and strange, and personal. They mapped a life — not the wide","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" world, but the small, overlooked kingdom of a woman and her cat. The path to the baker's","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". The corner of the garden where the robins nested. The chair by the fire where Mosaic liked to sleep","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". The window where the morning came in.\n\nOther cartographers came from far away to see them","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":". They said the maps were not accurate. The scales were wrong, the compass points made no sense.\n\nBut Mrs. Pemberton would smile and","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" say, *\"They are not maps of places. They are maps of home.\"*\n\nAnd Mosaic, who had never claimed to be a cartographer, would","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" blink her honey-colored eyes, as if to say: *Naturally.*\n\n---\n\nWhen Mrs. Pemberton was very old, and her hands","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" had grown too still to draw, she sat by the window with Mosaic in her lap and looked at the maps one last","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" time. There were dozens of them now, each one a small, perfect world.\n\n\"You know,\" she said to the cat, \"I think I finally finished something worth making","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":".\"\n\nMosaic purred.\n\nAnd outside, on the lawn, an autumn leaf drifted down to rest beside an acorn, beside","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" a feather, beside a small blue stone, as if the whole world were a map being drawn by gentle, invisible","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"delta":{"content":" hands.\n\n*— The End —*","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"service_tier":"standard"}
+
+                data: {"id":"**TRACE_ID_1**","choices":[],"created":1783935955,"model":"MiniMax-M3","object":"chat.completion.chunk","usage":{"total_tokens":1303,"total_characters":0,"prompt_tokens":183,"completion_tokens":1120,"prompt_tokens_details":{"cached_tokens":114}},"service_tier":"standard","base_resp":{"status_code":0,"status_msg":""}}
+
+        headers:
+            Alb_receive_time:
+                - "1783935955.699"
+            Alb_request_id:
+                - aceafe4b740ddf7ec8b49de153f54e256f2e9e1e
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:45:56 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_4**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Session-Id:
+                - '**TRACE_ID_3**'
+        status:
+            code: 200
+            message: OK

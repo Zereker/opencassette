@@ -1,0 +1,44 @@
+meta:
+    recorded_at: "2026-07-13T09:44:40Z"
+    vendor: minimax
+    model: MiniMax-M2.7
+    endpoint: https://api.minimaxi.com
+    scenario: chat_full_params
+    scenario_sha256: 4478e42059595be8552d03b9156059902cde8637a953237d867f10b20ce53f23
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"audio":{"voice":"alloy","format":"wav"},"frequency_penalty":0.1,"max_completion_tokens":2048,"messages":[{"role":"system","content":"You are a helpful assistant."},{"role":"user","content":[{"type":"image_url","image_url":{"url":"https://example.com/view.jpeg","detail":"high"}},{"type":"text","text":"图片主要讲了什么？一句话。"}]}],"metadata":{"case":"full"},"modalities":["text"],"model":"MiniMax-M2.7","n":1,"parallel_tool_calls":true,"prediction":{"type":"content","content":"预测内容"},"presence_penalty":0.1,"response_format":{"type":"text"},"seed":42,"service_tier":"default","stop":["\u003cEND\u003e"],"store":false,"stream":false,"temperature":0.6,"tool_choice":"auto","tools":[{"type":"function","function":{"name":"get_weather","description":"查询城市天气","parameters":{"type":"object","properties":{"city":{"type":"string"}},"required":["city"]}}}],"top_p":0.9,"user":"e2e-field-matrix","web_search_options":{}}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: |
+                {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"message":{"content":"<think>\n用户发送了一个URL链接，想知道这张图片的主要内容。但是这个URL是一个示例链接（example.com），并不是真实的图片链接。\n\nexample.com 是一个保留的域名，用于文档和示例。这个链接指向的是一张JPEG图片，但我无法直接访问互联网来查看这个图片。\n\n我需要告诉用户：\n1. 我无法访问这个URL来查看图片\n2. 链接是example.com的示例链接，不是真实可访问的图片\n3. 如果用户想让我描述图片，可以直接上传图片或使用其他方式\n\n实际上，作为AI助手，我没有工具可以访问外部URL来查看网页内容或图片。即使URL是真实的，我也无法直接访问互联网。\n\n所以我应该告诉用户我无法访问这个链接。\n</think>\n\n我无法访问该链接查看图片内容。请将图片直接上传到对话框中，我可以帮您识别并描述图片内容。","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935880,"model":"MiniMax-M2.7","object":"chat.completion","usage":{"total_tokens":347,"total_characters":0,"prompt_tokens":180,"completion_tokens":167,"completion_tokens_details":{"reasoning_tokens":142}},"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0,"base_resp":{"status_code":0,"status_msg":""}}
+        headers:
+            Alb_receive_time:
+                - "1783935880.424"
+            Alb_request_id:
+                - 928e152371d071f0fe7a6015316dd70c9a07c452
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:44:46 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_4**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Session-Id:
+                - '**TRACE_ID_3**'
+        status:
+            code: 200
+            message: OK

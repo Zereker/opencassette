@@ -1,0 +1,143 @@
+meta:
+    recorded_at: "2026-07-13T09:44:47Z"
+    vendor: minimax
+    model: MiniMax-M2.7
+    endpoint: https://api.minimaxi.com
+    scenario: chat_stream_usage
+    scenario_sha256: 73ca6813e2fb764472d020437bab0c06aba10e340bb0db97ea1de671f1c4496b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"MiniMax-M2.7","stream":true,"stream_options":{"include_usage":true}}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.minimaxi.com/v1/chat/completions
+      response:
+        body:
+            string: |+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"<think>\nThe user","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" says \"Write a story about a cat.\" This is a straightforward request, no disallowed content. The assistant should comply and produce a short story about","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" a cat. Must not produce disallowed content. The story can be any style, any length. It's safe. Let's","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" create a narrative about a cat, perhaps with a magical element or everyday life. We'll just produce a story.","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"\n</think>\n\n**The Midnight Whisker**\n\nMilo was no ordinary tab","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"by. His fur was the colour of a storm‑cloud at dusk, speckled with flecks of silver that caught the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" moonlight like tiny stars. He lived in a small house at the edge of Willowbrook,","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" a town where the streets turned to cobblestones only after dark and the old clock","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" tower chimed a lullaby that no one could quite remember.\n\nEvery night, when the world","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" outside fell into the hush of twilight, Milo would slip through the cat flap and","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" wander the garden. He wasn’t hunting for mice; his appetite was for stories, for the whispers","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" that the night kept to itself.\n\nOn one such night, a sudden","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" gust rattled the garden gate, and a tiny, battered lantern fell from the top","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" of the old oak, landing at Milo’s paws. It was the kind of lantern that had once","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" lit the lantern‑makers’ workshops in the distant city of Lumen.","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" The glass was cracked, but inside a faint, warm glow persisted—unusual for","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" a lantern that had been forgotten for years.\n\nMilo sniffed the lantern, then nudged it with his nose. The glow flick","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"ered, and a soft voice rose from within, as if the lantern itself were","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" speaking.\n\n“Who… who sets me free?” it asked, a trembling sound that seemed to echo","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" from the very cracks in the glass.\n\nMilo’s ears perked. He sat back","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", his whiskers trembling, and meowed a single, low note. It was a question in the language of cats—a sound","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" that humans rarely heard but that the lantern somehow understood.\n\nThe lantern’s light steadied, and a","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" small, translucent figure emerged: a boy no taller than a thimble, with a","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" feathered cap and a smile that seemed to have been stitched together from moonlight and old stories.","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" He introduced himself as Pip, the last apprentice of the lantern‑maker, cursed to live","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" inside the lantern until someone with a “pure heart and midnight curiosity” set him free.\n\n“I","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" was turned to glass,” Pip said, “because I tried to bring light to a village that refused","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" to see beyond its own shadows. The village turned its back, and the magic","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" bound me.”\n\nMilo, being a cat of both curiosity and compassion","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", padded toward the garden’s pond. The water reflected the lantern’s glow, turning","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" it into a rippling river of gold. He nudged the lantern toward the pond, then carefully placed his paw on","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the water’s surface. The ripples widened, carrying the lantern’s light outward, washing the garden in a warm","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", amber hue.\n\nPip felt the change in his form. The glass that had","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":true,"input_sensitive_type":0,"output_sensitive_type":2,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" imprisoned him began to dissolve, and his body solidified, shimmering as if made of living starlight. He stepped onto the wet","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" grass, his tiny feet leaving prints of light.\n\n“Your curiosity saved","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" me,” he whispered. “Now I can return the favour.”\n\nMilo’s eyes","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":true,"input_sensitive_type":0,"output_sensitive_type":2,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" widened as Pip raised his tiny hands, and a burst of luminous dust rose into","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the night. It settled on the garden’s roses, making them glow like fireflies. The","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" garden was transformed into a luminous wonderland, where the ordinary became magical.\n\nThe next morning, the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":true,"input_sensitive_type":0,"output_sensitive_type":2,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" townsfolk of Willowbrook woke to find their garden blooming with glowing roses, and at the centre","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" stood the cracked lantern, now whole and shining. They marvelled, not knowing the","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" secret: a cat with midnight whiskers had answered a lantern’s plea.\n\nFrom that night on, Milo was known","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" as the Whisker of Willowbrook. Children would leave tiny saucers of milk outside his house","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":", hoping for a glimpse of his silver‑flecked fur in the moonlight. And sometimes, when","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":true,"input_sensitive_type":0,"output_sensitive_type":2,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" the clock tower sang its forgotten lullaby, a soft voice would be","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" heard from the lantern, thanking a cat who knew that true illumination comes from curiosity and","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":" a willingness to help.\n\nAnd so, every night, Milo would sit on the windowsill, eyes half","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"index":0,"delta":{"content":"‑closed, listening for the gentle hum of the lantern’s glow—a reminder that even the smallest heart can light the darkest night","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":true,"input_sensitive_type":0,"output_sensitive_type":2,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[{"finish_reason":"stop","index":0,"delta":{"content":".","role":"assistant","name":"MiniMax AI","audio_content":""}}],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":null,"input_sensitive":false,"output_sensitive":false,"input_sensitive_type":0,"output_sensitive_type":0,"output_sensitive_int":0}
+
+                data: {"id":"**TRACE_ID_1**","choices":[],"created":1783935887,"model":"MiniMax-M2.7","object":"chat.completion.chunk","usage":{"total_tokens":955,"total_characters":0,"prompt_tokens":48,"completion_tokens":907,"completion_tokens_details":{"reasoning_tokens":79}},"base_resp":{"status_code":0,"status_msg":""}}
+
+        headers:
+            Alb_receive_time:
+                - "1783935887.839"
+            Alb_request_id:
+                - fd53c06dac547ad5c07ede68a97d24ae748f89b8
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:44:48 GMT
+            Minimax-Request-Id:
+                - '**TRACE_ID_3**'
+            Trace-Id:
+                - '**TRACE_ID_1**'
+            Vary:
+                - Accept-Encoding
+            X-Mm-Request-Id:
+                - '**TRACE_ID_2**'
+            X-Session-Id:
+                - '**TRACE_ID_4**'
+        status:
+            code: 200
+            message: OK
