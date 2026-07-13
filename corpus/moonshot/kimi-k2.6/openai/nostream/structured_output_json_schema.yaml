@@ -1,0 +1,49 @@
+meta:
+    recorded_at: "2026-07-13T10:01:25Z"
+    vendor: moonshot
+    model: kimi-k2.6
+    endpoint: https://api.moonshot.cn
+    scenario: structured_output_json_schema
+    scenario_sha256: b9ee4045cb68240f8adf70a58dc356640b33f236f0ae7c54fa4dfe55edbb15ea
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"respond with good","role":"user"}],"model":"kimi-k2.6","response_format":{"type":"json_schema","json_schema":{"schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"title":"BadModel","type":"object","additionalProperties":false},"name":"BadModel","strict":true}},"stream":false}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.moonshot.cn/v1/chat/completions
+      response:
+        body:
+            string: '{"id":"chatcmpl-e51141dfb5b79941b15bbfe09","object":"chat.completion","created":1783936886,"model":"kimi-k2.6","choices":[{"index":0,"message":{"role":"assistant","content":"\n{ \"response\": \"good\" }","reasoning_content":"The user wants me to respond with the word \"good\". This is a very simple request. I should just output the word \"good\" without any additional fluff or explanation, unless there''s a reason to think they want more. The instruction is straightforward: \"respond with good\". So I''ll respond with exactly that word."},"finish_reason":"stop"}],"usage":{"prompt_tokens":11,"completion_tokens":74,"total_tokens":85,"cached_tokens":3,"prompt_tokens_details":{"cached_tokens":3}}}'
+        headers:
+            Content-Length:
+                - "700"
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 10:01:28 GMT
+            Msh-Gid:
+                - '**REDACTED**'
+            Msh-Org-Id:
+                - '**REDACTED**'
+            Msh-Project-Id:
+                - '**REDACTED**'
+            Msh-Request-Id:
+                - '**TRACE_ID_1**'
+            Msh-Trace-Mode:
+                - "on"
+            Msh-Uid:
+                - '**REDACTED**'
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Origin
+        status:
+            code: 200
+            message: OK

@@ -1,0 +1,48 @@
+meta:
+    recorded_at: "2026-07-13T09:58:17Z"
+    vendor: moonshot
+    model: kimi-k2.5
+    endpoint: https://api.moonshot.cn
+    scenario: chat_basic
+    scenario_sha256: c88a48870c2ffdb177b8dbbca23f3ced1f791a59ce08288a4bf18e83a69c8099
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"kimi-k2.5"}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.moonshot.cn/v1/chat/completions
+      response:
+        body:
+            string: '{"id":"chatcmpl-6a54b6bc006ab410f80642d2","object":"chat.completion","created":1783936700,"model":"kimi-k2.5","choices":[{"index":0,"message":{"role":"assistant","content":"The evenings had grown stiff in Marnie’s hips, but the patrol could not wait.\n\nShe rose from the chenille armchair—her chair, purchased seventeen years ago specifically for her, though the family had forgotten this fact—and stretched until her spine cracked like knuckles. Seventeen was ancient for a tortoiseshell, a fact she wore not as a burden but as a medal: each white whisker a testament to blizzards survived, each patch of missing fur a map of battles won against foxes and garbage bins.\n\nThe house was dark. The children had grown and moved to apartments that didn’t allow cats (“Allergies,” they’d said, as if that excused abandonment), and the parents slept the heavy sleep of the middle-aged, snoring behind their bedroom door. Marnie’s claws clicked against the hardwood as she made her way to the cat flap, the plastic warped from decades of use.\n\nOutside, the street breathed. Mrs. Chen’s hydrangeas rustled. The oak tree at the corner creaked. Marnie began her circuit.\n\nFirst: the Hendersons’ porch, where she checked that the front door was locked (it wasn’t; she yowled until Mr. Henderson stumbled out in his socks, cursing and grateful). Second: the bakery alley, where she ensured the stray orange kitten—new to the territory and foolish—had not gotten trapped in the dumpster (he had; she sat beside it until the baker heard her screaming and lifted the lid). Third: the garden apartment of old Mr. Voss, where she counted his breaths through the window screen, one-two-three, steady as a metronome.\n\nBut tonight, something was wrong.\n\nThe air tasted like copper. The streetlamp at the corner flickered three times, then died, plunging the intersection into velvet dark. Marnie’s ears swiveled. From the new house—the one that had stood empty for months since the divorce—came a sound. Not the scuttling of mice. Not the wind. A human sound, small and fractured.\n\nShe crossed the street, her arthritis screaming, her tail rigid. The new house had a “For Sale” sign that had begun to lean, defeated. Through the bay window, she saw them: a woman, young, sitting on a mattress on the floor. No furniture. No lights. Just the blue glow of a phone held limply in her lap, and shoulders that shook with the kind of crying that makes no noise.\n\nMarnie knew this grief. She had seen it in the daughter who left for college and came back different, in the father who lost his job and sat in the garage for three silent days. It was the grief of anchorless drift.\n\nThe window was cracked open an inch for air. Marnie pressed her nose against it, inhaled the scent of unwashed sheets and stale ramen, and made a decision.\n\nShe jumped.\n\nHer landing on the carpet was softer than her pride, which bruised easily these days. The woman didn’t look up. Marnie padded across the floor, her purr beginning deep in her chest—a sound like a boat motor heard from far across a lake, rhythmic and insistent. She leapt, not without difficulty, onto the mattress.\n\nThe woman startled. “Oh. Oh, hello.” Her voice was sandpaper.\n\nMarnie did not ask permission. She walked in a circle three times—ceremony was important—and settled against the woman’s thigh, pressing her warm, engine-running body into the cold hollow there. She kneaded the blanket with claws that needed trimming, claiming territory not with violence, but with presence.\n\n“I don’t have any food,” the woman whispered. Her hand hovered, then descended, tentative as snow, onto Marnie’s head. “I don’t have anything.”\n\n*You have this,* Marnie thought, leaning into the touch. *You have tonight. You have a cat who has decided you are worth the trouble.*\n\nThey sat that way until the woman’s breathing evened out, until her thumb began to stroke the white star on Marnie’s forehead, until the phone screen went dark and stayed dark. When the sun began to stain the horizon pink, Marnie rose, stretched, and jumped back through the window. She had a bowl of kibble waiting at home, and a patrol to finish.\n\nBut she would be back tomorrow. And the day after. Because some borders need guarding, and some hearts need reminding that they have been seen—chosen, even—by something ancient, stubborn, and inexplicably loyal.\n\nShe walked home through the dawn, her tortoiseshell coat glowing like stained glass, seventeen years of wisdom carried light in her bones.","reasoning_content":"The user wants a story about a cat. This is a very open-ended prompt, so I have creative freedom. I should write something engaging, perhaps with some emotional depth or charm. \n\n Ideas:\n - A stray cat finding a home\n - An old cat reflecting on life\n - A cat with a special talent\n - A cat who thinks it''s something else (like a dog or a tiger)\n - A magical realism story about a cat\n - A mystery from a cat''s perspective\n\n I''ll go with a story about an elderly cat named Marnie who patrols her neighborhood every night, not for mice, but to check on her \"charges\" - the humans she considers her responsibility. It gives a nice perspective shift (cats owning humans rather than vice versa) and allows for gentle observations about community, aging, and care.\n\n Structure:\n - Opening: Establish Marnie''s routine and age\n - The patrol: Visit different houses/neighbors she watches over\n - The conflict: Something is different tonight - a new person or a problem\n - Resolution: Marnie fixes/help the situation in her own way\n - Closing: Return home, showing she''s not just a pet but a guardian\n\n Tone: Warm, slightly melancholic but ultimately hopeful, observational\n\n Details to include:\n - Sensory details (night sounds, textures)\n - Cat behaviors (purring, kneading, whiskers) used metaphorically\n - The contrast between her frail body and her determined spirit\n - A moment of connection that transcends the typical pet-owner dynamic\n\n Let me write this."},"finish_reason":"stop"}],"usage":{"prompt_tokens":14,"completion_tokens":1302,"total_tokens":1316,"completion_tokens_details":{"reasoning_tokens":318}}}'
+        headers:
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:58:49 GMT
+            Msh-Gid:
+                - '**REDACTED**'
+            Msh-Org-Id:
+                - '**REDACTED**'
+            Msh-Project-Id:
+                - '**REDACTED**'
+            Msh-Request-Id:
+                - '**TRACE_ID_1**'
+            Msh-Trace-Mode:
+                - "on"
+            Msh-Uid:
+                - '**REDACTED**'
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+                - Origin
+        status:
+            code: 200
+            message: OK
