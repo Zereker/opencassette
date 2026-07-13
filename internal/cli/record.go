@@ -81,7 +81,7 @@ func (c runConfig) writeCassette(rec *recorder.Recorder, path string) error {
 
 func newRecordCommand(app *application) *cobra.Command {
 	opts := recordOptions{
-		corpusDir: "corpus",
+		corpusDir:  "corpus",
 		bucket:     "auto",
 		authStyle:  "bearer",
 		keyEnv:     "RECORD_API_KEY",

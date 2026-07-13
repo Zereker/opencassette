@@ -158,10 +158,10 @@ func TestCustomReplacements(t *testing.T) {
 // TestReplacementValidation rejects malformed rules at load time.
 func TestReplacementValidation(t *testing.T) {
 	cases := []Replacement{
-		{With: "x"},                            // no matcher
-		{Find: "a", Pattern: "b", With: "x"},   // two matchers
-		{Pattern: "[", With: "x"},              // invalid regexp
-		{Find: "a"},                            // no 'with'
+		{With: "x"},                          // no matcher
+		{Find: "a", Pattern: "b", With: "x"}, // two matchers
+		{Pattern: "[", With: "x"},            // invalid regexp
+		{Find: "a"},                          // no 'with'
 	}
 
 	for i, rp := range cases {
