@@ -1,0 +1,235 @@
+requests:
+- body: !!binary |
+    eyJtYXhfdG9rZW5zIjo2NDAwMCwibWVzc2FnZXMiOlt7InJvbGUiOiJ1c2VyIiwiY29udGVudCI6
+    IkV4dHJhY3Q6IEVyaWNrIGlzIDI3IHllYXJzIG9sZC4ifV0sIm1vZGVsIjoiY2xhdWRlLWhhaWt1
+    LTQtNS0yMDI1MTAwMSIsInN0cmVhbSI6dHJ1ZSwidG9vbF9jaG9pY2UiOnsidHlwZSI6InRvb2wi
+    LCJuYW1lIjoiX1BlcnNvbiJ9LCJ0b29scyI6W3sibmFtZSI6Il9QZXJzb24iLCJpbnB1dF9zY2hl
+    bWEiOnsicHJvcGVydGllcyI6eyJuYW1lIjp7ImRlc2NyaXB0aW9uIjoiVGhlIHBlcnNvbidzIG5h
+    bWUiLCJ0eXBlIjoic3RyaW5nIn0sImFnZSI6eyJkZXNjcmlwdGlvbiI6IlRoZSBwZXJzb24ncyBh
+    Z2UgaW4geWVhcnMiLCJ0eXBlIjoiaW50ZWdlciJ9fSwicmVxdWlyZWQiOlsibmFtZSIsImFnZSJd
+    LCJ0eXBlIjoib2JqZWN0In0sImRlc2NyaXB0aW9uIjoiQSBwZXJzb24gd2l0aCBhIG5hbWUgYW5k
+    IGFnZS4ifV19
+  headers:
+    Accept:
+    - '**REDACTED**'
+    Accept-Encoding:
+    - '**REDACTED**'
+    Connection:
+    - '**REDACTED**'
+    Content-Length:
+    - '**REDACTED**'
+    Content-Type:
+    - '**REDACTED**'
+    Host:
+    - '**REDACTED**'
+    User-Agent:
+    - '**REDACTED**'
+    X-Stainless-Arch:
+    - '**REDACTED**'
+    X-Stainless-Async:
+    - '**REDACTED**'
+    X-Stainless-Lang:
+    - '**REDACTED**'
+    X-Stainless-OS:
+    - '**REDACTED**'
+    X-Stainless-Package-Version:
+    - '**REDACTED**'
+    X-Stainless-Runtime:
+    - '**REDACTED**'
+    X-Stainless-Runtime-Version:
+    - '**REDACTED**'
+    anthropic-version:
+    - '**REDACTED**'
+    x-api-key:
+    - '**REDACTED**'
+    x-stainless-retry-count:
+    - '**REDACTED**'
+    x-stainless-timeout:
+    - '**REDACTED**'
+  method: POST
+  uri: https://api.anthropic.com/v1/messages
+- body: !!binary |
+    eyJtYXhfdG9rZW5zIjo2NDAwMCwibWVzc2FnZXMiOlt7InJvbGUiOiJ1c2VyIiwiY29udGVudCI6
+    IkV4dHJhY3Q6IEVyaWNrIGlzIDI3IHllYXJzIG9sZC4ifV0sIm1vZGVsIjoiY2xhdWRlLWhhaWt1
+    LTQtNS0yMDI1MTAwMSIsInN0cmVhbSI6dHJ1ZSwidG9vbF9jaG9pY2UiOnsidHlwZSI6InRvb2wi
+    LCJuYW1lIjoiX1BlcnNvbiJ9LCJ0b29scyI6W3sibmFtZSI6Il9QZXJzb24iLCJpbnB1dF9zY2hl
+    bWEiOnsicHJvcGVydGllcyI6eyJuYW1lIjp7ImRlc2NyaXB0aW9uIjoiVGhlIHBlcnNvbidzIG5h
+    bWUiLCJ0eXBlIjoic3RyaW5nIn0sImFnZSI6eyJkZXNjcmlwdGlvbiI6IlRoZSBwZXJzb24ncyBh
+    Z2UgaW4geWVhcnMiLCJ0eXBlIjoiaW50ZWdlciJ9fSwicmVxdWlyZWQiOlsibmFtZSIsImFnZSJd
+    LCJ0eXBlIjoib2JqZWN0In0sImRlc2NyaXB0aW9uIjoiQSBwZXJzb24gd2l0aCBhIG5hbWUgYW5k
+    IGFnZS4ifV19
+  headers:
+    Accept:
+    - '**REDACTED**'
+    Accept-Encoding:
+    - '**REDACTED**'
+    Connection:
+    - '**REDACTED**'
+    Content-Length:
+    - '**REDACTED**'
+    Content-Type:
+    - '**REDACTED**'
+    Cookie:
+    - '**REDACTED**'
+    Host:
+    - '**REDACTED**'
+    User-Agent:
+    - '**REDACTED**'
+    X-Stainless-Arch:
+    - '**REDACTED**'
+    X-Stainless-Async:
+    - '**REDACTED**'
+    X-Stainless-Lang:
+    - '**REDACTED**'
+    X-Stainless-OS:
+    - '**REDACTED**'
+    X-Stainless-Package-Version:
+    - '**REDACTED**'
+    X-Stainless-Runtime:
+    - '**REDACTED**'
+    X-Stainless-Runtime-Version:
+    - '**REDACTED**'
+    anthropic-version:
+    - '**REDACTED**'
+    x-api-key:
+    - '**REDACTED**'
+    x-stainless-retry-count:
+    - '**REDACTED**'
+    x-stainless-timeout:
+    - '**REDACTED**'
+  method: POST
+  uri: https://api.anthropic.com/v1/messages
+responses:
+- body:
+    string: !!binary |
+      ZXZlbnQ6IG1lc3NhZ2Vfc3RhcnQKZGF0YTogeyJ0eXBlIjoibWVzc2FnZV9zdGFydCIsIm1lc3Nh
+      Z2UiOnsibW9kZWwiOiJjbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxIiwiaWQiOiJtc2dfMDFYb2g2
+      cWlzOTREaVc2NjhNYWU1YjhKIiwidHlwZSI6Im1lc3NhZ2UiLCJyb2xlIjoiYXNzaXN0YW50Iiwi
+      Y29udGVudCI6W10sInN0b3BfcmVhc29uIjpudWxsLCJzdG9wX3NlcXVlbmNlIjpudWxsLCJzdG9w
+      X2RldGFpbHMiOm51bGwsInVzYWdlIjp7ImlucHV0X3Rva2VucyI6Njk2LCJjYWNoZV9jcmVhdGlv
+      bl9pbnB1dF90b2tlbnMiOjAsImNhY2hlX3JlYWRfaW5wdXRfdG9rZW5zIjowLCJjYWNoZV9jcmVh
+      dGlvbiI6eyJlcGhlbWVyYWxfNW1faW5wdXRfdG9rZW5zIjowLCJlcGhlbWVyYWxfMWhfaW5wdXRf
+      dG9rZW5zIjowfSwib3V0cHV0X3Rva2VucyI6MTMsInNlcnZpY2VfdGllciI6InN0YW5kYXJkIiwi
+      aW5mZXJlbmNlX2dlbyI6Im5vdF9hdmFpbGFibGUifX0gICAgIH0KCmV2ZW50OiBjb250ZW50X2Js
+      b2NrX3N0YXJ0CmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfc3RhcnQiLCJpbmRleCI6MCwi
+      Y29udGVudF9ibG9jayI6eyJ0eXBlIjoidG9vbF91c2UiLCJpZCI6InRvb2x1XzAxSHZ1UFdMQktY
+      QWpyZ1NvcGVtU3phTSIsIm5hbWUiOiJfUGVyc29uIiwiaW5wdXQiOnt9LCJjYWxsZXIiOnsidHlw
+      ZSI6ImRpcmVjdCJ9fSAgIH0KCmV2ZW50OiBwaW5nCmRhdGE6IHsidHlwZSI6ICJwaW5nIn0KCmV2
+      ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVs
+      dGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6ImlucHV0X2pzb25fZGVsdGEiLCJwYXJ0aWFs
+      X2pzb24iOiIifSAgICAgICAgICB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7
+      InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJp
+      bnB1dF9qc29uX2RlbHRhIiwicGFydGlhbF9qc29uIjoie1wibmFtZVwiOiBcIkUifSAgICAgICAg
+      ICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVu
+      dF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoiaW5wdXRfanNvbl9kZWx0
+      YSIsInBhcnRpYWxfanNvbiI6InJpY2tcIiJ9ICAgICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxv
+      Y2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJk
+      ZWx0YSI6eyJ0eXBlIjoiaW5wdXRfanNvbl9kZWx0YSIsInBhcnRpYWxfanNvbiI6IiwgXCJhZ2Vc
+      IjogMjd9In0gICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfc3RvcApkYXRhOiB7InR5cGUi
+      OiJjb250ZW50X2Jsb2NrX3N0b3AiLCJpbmRleCI6MCAgICAgICAgIH0KCmV2ZW50OiBtZXNzYWdl
+      X2RlbHRhCmRhdGE6IHsidHlwZSI6Im1lc3NhZ2VfZGVsdGEiLCJkZWx0YSI6eyJzdG9wX3JlYXNv
+      biI6InRvb2xfdXNlIiwic3RvcF9zZXF1ZW5jZSI6bnVsbCwic3RvcF9kZXRhaWxzIjpudWxsfSwi
+      dXNhZ2UiOnsiaW5wdXRfdG9rZW5zIjo2OTYsImNhY2hlX2NyZWF0aW9uX2lucHV0X3Rva2VucyI6
+      MCwiY2FjaGVfcmVhZF9pbnB1dF90b2tlbnMiOjAsIm91dHB1dF90b2tlbnMiOjUyfSAgICAgICAg
+      ICAgIH0KCmV2ZW50OiBtZXNzYWdlX3N0b3AKZGF0YTogeyJ0eXBlIjoibWVzc2FnZV9zdG9wIiAg
+      ICAgICAgIH0KCg==
+  headers:
+    CF-RAY: '**REDACTED**'
+    Cache-Control: '**REDACTED**'
+    Connection: '**REDACTED**'
+    Content-Security-Policy: '**REDACTED**'
+    Content-Type: '**REDACTED**'
+    Date: '**REDACTED**'
+    Server: '**REDACTED**'
+    Transfer-Encoding: '**REDACTED**'
+    X-Robots-Tag: '**REDACTED**'
+    anthropic-organization-id: '**REDACTED**'
+    anthropic-ratelimit-input-tokens-limit: '**REDACTED**'
+    anthropic-ratelimit-input-tokens-remaining: '**REDACTED**'
+    anthropic-ratelimit-input-tokens-reset: '**REDACTED**'
+    anthropic-ratelimit-output-tokens-limit: '**REDACTED**'
+    anthropic-ratelimit-output-tokens-remaining: '**REDACTED**'
+    anthropic-ratelimit-output-tokens-reset: '**REDACTED**'
+    anthropic-ratelimit-requests-limit: '**REDACTED**'
+    anthropic-ratelimit-requests-remaining: '**REDACTED**'
+    anthropic-ratelimit-requests-reset: '**REDACTED**'
+    anthropic-ratelimit-tokens-limit: '**REDACTED**'
+    anthropic-ratelimit-tokens-remaining: '**REDACTED**'
+    anthropic-ratelimit-tokens-reset: '**REDACTED**'
+    cf-cache-status: '**REDACTED**'
+    request-id: '**REDACTED**'
+    set-cookie: '**REDACTED**'
+    strict-transport-security: '**REDACTED**'
+    x-envoy-upstream-service-time: '**REDACTED**'
+  status:
+    code: 200
+    message: OK
+- body:
+    string: !!binary |
+      ZXZlbnQ6IG1lc3NhZ2Vfc3RhcnQKZGF0YTogeyJ0eXBlIjoibWVzc2FnZV9zdGFydCIsIm1lc3Nh
+      Z2UiOnsibW9kZWwiOiJjbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxIiwiaWQiOiJtc2dfMDFQRG52
+      ZG5yUWh6SFNpQ1VVMnh4S2lvIiwidHlwZSI6Im1lc3NhZ2UiLCJyb2xlIjoiYXNzaXN0YW50Iiwi
+      Y29udGVudCI6W10sInN0b3BfcmVhc29uIjpudWxsLCJzdG9wX3NlcXVlbmNlIjpudWxsLCJzdG9w
+      X2RldGFpbHMiOm51bGwsInVzYWdlIjp7ImlucHV0X3Rva2VucyI6Njk2LCJjYWNoZV9jcmVhdGlv
+      bl9pbnB1dF90b2tlbnMiOjAsImNhY2hlX3JlYWRfaW5wdXRfdG9rZW5zIjowLCJjYWNoZV9jcmVh
+      dGlvbiI6eyJlcGhlbWVyYWxfNW1faW5wdXRfdG9rZW5zIjowLCJlcGhlbWVyYWxfMWhfaW5wdXRf
+      dG9rZW5zIjowfSwib3V0cHV0X3Rva2VucyI6MTMsInNlcnZpY2VfdGllciI6InN0YW5kYXJkIiwi
+      aW5mZXJlbmNlX2dlbyI6Im5vdF9hdmFpbGFibGUifX0gfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tf
+      c3RhcnQKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19zdGFydCIsImluZGV4IjowLCJjb250
+      ZW50X2Jsb2NrIjp7InR5cGUiOiJ0b29sX3VzZSIsImlkIjoidG9vbHVfMDFLTDNKWXVrWWs1M1Jy
+      N054dm95a2NWIiwibmFtZSI6Il9QZXJzb24iLCJpbnB1dCI6e30sImNhbGxlciI6eyJ0eXBlIjoi
+      ZGlyZWN0In19ICAgICAgICAgICAgICB9CgpldmVudDogcGluZwpkYXRhOiB7InR5cGUiOiAicGlu
+      ZyJ9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Js
+      b2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJpbnB1dF9qc29uX2RlbHRhIiwi
+      cGFydGlhbF9qc29uIjoiIn19CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5
+      cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJpbnB1
+      dF9qc29uX2RlbHRhIiwicGFydGlhbF9qc29uIjoie1wibmEifSAgIH0KCmV2ZW50OiBjb250ZW50
+      X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6
+      MCwiZGVsdGEiOnsidHlwZSI6ImlucHV0X2pzb25fZGVsdGEiLCJwYXJ0aWFsX2pzb24iOiJtZVwi
+      In0gICAgICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNv
+      bnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6ImlucHV0X2pzb25f
+      ZGVsdGEiLCJwYXJ0aWFsX2pzb24iOiI6IFwiRXJpY2tcIiJ9ICAgIH0KCmV2ZW50OiBjb250ZW50
+      X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6
+      MCwiZGVsdGEiOnsidHlwZSI6ImlucHV0X2pzb25fZGVsdGEiLCJwYXJ0aWFsX2pzb24iOiIsICJ9
+      fQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9j
+      a19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoiaW5wdXRfanNvbl9kZWx0YSIsInBh
+      cnRpYWxfanNvbiI6IlwiYWdlXCI6IDIifSAgICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2Rl
+      bHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEi
+      OnsidHlwZSI6ImlucHV0X2pzb25fZGVsdGEiLCJwYXJ0aWFsX2pzb24iOiI3fSJ9ICAgICAgIH0K
+      CmV2ZW50OiBjb250ZW50X2Jsb2NrX3N0b3AKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19z
+      dG9wIiwiaW5kZXgiOjAgICAgfQoKZXZlbnQ6IG1lc3NhZ2VfZGVsdGEKZGF0YTogeyJ0eXBlIjoi
+      bWVzc2FnZV9kZWx0YSIsImRlbHRhIjp7InN0b3BfcmVhc29uIjoidG9vbF91c2UiLCJzdG9wX3Nl
+      cXVlbmNlIjpudWxsLCJzdG9wX2RldGFpbHMiOm51bGx9LCJ1c2FnZSI6eyJpbnB1dF90b2tlbnMi
+      OjY5NiwiY2FjaGVfY3JlYXRpb25faW5wdXRfdG9rZW5zIjowLCJjYWNoZV9yZWFkX2lucHV0X3Rv
+      a2VucyI6MCwib3V0cHV0X3Rva2VucyI6NTJ9ICAgICAgICAgfQoKZXZlbnQ6IG1lc3NhZ2Vfc3Rv
+      cApkYXRhOiB7InR5cGUiOiJtZXNzYWdlX3N0b3AiICAgICAgICAgICAgICAgfQoK
+  headers:
+    CF-RAY: '**REDACTED**'
+    Cache-Control: '**REDACTED**'
+    Connection: '**REDACTED**'
+    Content-Security-Policy: '**REDACTED**'
+    Content-Type: '**REDACTED**'
+    Date: '**REDACTED**'
+    Server: '**REDACTED**'
+    Transfer-Encoding: '**REDACTED**'
+    X-Robots-Tag: '**REDACTED**'
+    anthropic-organization-id: '**REDACTED**'
+    anthropic-ratelimit-input-tokens-limit: '**REDACTED**'
+    anthropic-ratelimit-input-tokens-remaining: '**REDACTED**'
+    anthropic-ratelimit-input-tokens-reset: '**REDACTED**'
+    anthropic-ratelimit-output-tokens-limit: '**REDACTED**'
+    anthropic-ratelimit-output-tokens-remaining: '**REDACTED**'
+    anthropic-ratelimit-output-tokens-reset: '**REDACTED**'
+    anthropic-ratelimit-requests-limit: '**REDACTED**'
+    anthropic-ratelimit-requests-remaining: '**REDACTED**'
+    anthropic-ratelimit-requests-reset: '**REDACTED**'
+    anthropic-ratelimit-tokens-limit: '**REDACTED**'
+    anthropic-ratelimit-tokens-remaining: '**REDACTED**'
+    anthropic-ratelimit-tokens-reset: '**REDACTED**'
+    cf-cache-status: '**REDACTED**'
+    request-id: '**REDACTED**'
+    strict-transport-security: '**REDACTED**'
+    x-envoy-upstream-service-time: '**REDACTED**'
+  status:
+    code: 200
+    message: OK

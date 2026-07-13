@@ -1,0 +1,133 @@
+requests:
+- body: null
+  headers:
+    Accept:
+    - '**REDACTED**'
+    Accept-Encoding:
+    - '**REDACTED**'
+    Connection:
+    - '**REDACTED**'
+    user-agent:
+    - '**REDACTED**'
+    x-api-key:
+    - '**REDACTED**'
+  method: GET
+  uri: '**REDACTED**'
+- body: !!binary |
+    eyJpbnB1dCI6W3siY29udGVudCI6ImhpIiwicm9sZSI6InVzZXIiLCJ0eXBlIjoibWVzc2FnZSJ9
+    XSwiaW5zdHJ1Y3Rpb25zIjoiWW91IGFyZSB0ZXJzZS4gQW5zd2VyIGluIGZpdmUgd29yZHMgb3Ig
+    ZmV3ZXIuIiwibW9kZWwiOiJncHQtNS41Iiwic3RvcmUiOmZhbHNlLCJzdHJlYW0iOnRydWV9
+  headers:
+    accept:
+    - '**REDACTED**'
+    accept-encoding:
+    - '**REDACTED**'
+    authorization:
+    - '**REDACTED**'
+    chatgpt-account-id:
+    - '**REDACTED**'
+    connection:
+    - '**REDACTED**'
+    content-length:
+    - '**REDACTED**'
+    content-type:
+    - '**REDACTED**'
+    host:
+    - '**REDACTED**'
+    originator:
+    - '**REDACTED**'
+    user-agent:
+    - '**REDACTED**'
+    x-stainless-arch:
+    - '**REDACTED**'
+    x-stainless-async:
+    - '**REDACTED**'
+    x-stainless-lang:
+    - '**REDACTED**'
+    x-stainless-os:
+    - '**REDACTED**'
+    x-stainless-package-version:
+    - '**REDACTED**'
+    x-stainless-retry-count:
+    - '**REDACTED**'
+    x-stainless-runtime:
+    - '**REDACTED**'
+    x-stainless-runtime-version:
+    - '**REDACTED**'
+  method: POST
+  uri: '**REDACTED**'
+responses:
+- body:
+    string: !!binary |
+      eyJ2ZXJzaW9uIjoiMC4xNi42IiwiZ2l0X3NoYSI6IjhmNjhjY2E2YjFhMDhiMTA0M2M3ODAwMjgz
+      OTY3YjgxNDYxOWRiYjkiLCJpbnN0YW5jZV9mbGFncyI6eyJibG9iX3N0b3JhZ2VfZW5hYmxlZCI6
+      dHJ1ZSwiYmxvYl9zdG9yYWdlX2VuZ2luZSI6ImdjcyIsImNoX2luZ2VzdGlvbl9lbmFibGVkIjp0
+      cnVlLCJjaF9xdWVyeV9lbmFibGVkIjp0cnVlLCJkYXRhc2V0X2V4YW1wbGVzX211bHRpcGFydF9l
+      bmFibGVkIjp0cnVlLCJkZXZlbG9wZXJfdXBncmFkZV90aWVyIjoiZGV2ZWxvcGVyXzAxXzIwMjYi
+      LCJleGFtcGxlc19tdWx0aXBhcnRfZW5hYmxlZCI6dHJ1ZSwiZ2VuZXJhdGVfYWlfcXVlcnlfZW5h
+      YmxlZCI6dHJ1ZSwiZ3ppcF9ib2R5X2VuYWJsZWQiOnRydWUsIm1heF9hcGlfa2V5X2V4cGlyeV9k
+      YXlzIjpudWxsLCJtYXhfcGF0X2V4cGlyeV9kYXlzIjpudWxsLCJtYXhfc2VydmljZV9rZXlfZXhw
+      aXJ5X2RheXMiOm51bGwsIm9yZ19jcmVhdGlvbl9kaXNhYmxlZCI6ZmFsc2UsInBheW1lbnRfZW5h
+      YmxlZCI6dHJ1ZSwicGVyc29uYWxfb3Jnc19kaXNhYmxlZCI6ZmFsc2UsInBob25lX2hvbWVfZW5h
+      YmxlZCI6ZmFsc2UsInBsYXlncm91bmRfYXV0aF9ieXBhc3NfZW5hYmxlZCI6ZmFsc2UsInBsdXNf
+      cGxhbl90cmFuc2l0aW9uX2Jhbm5lcl9kYXlzIjo3LCJwbHVzX3VwZ3JhZGVfdGllciI6InBsdXNf
+      MDFfMjAyNiIsInMzX3N0b3JhZ2VfZW5hYmxlZCI6dHJ1ZSwic2FuZGJveF9mZWF0dXJlX2VuYWJs
+      ZWQiOnRydWUsInNkYl9pbmdlc3Rpb25fZW5hYmxlZCI6dHJ1ZSwic2RiX3F1ZXJ5X2VuYWJsZWQi
+      OnRydWUsInNlYXJjaF9lbmFibGVkIjp0cnVlLCJzZWxmX2hvc3RlZF9qaXRfcHJvdmlzaW9uaW5n
+      X2VuYWJsZWQiOnRydWUsInNob3dfYWdlbnRfcnVuc19wcmljaW5nIjp0cnVlLCJzaG93X3R0bF91
+      aSI6dHJ1ZSwidHJhY2VfdGllcl9kdXJhdGlvbl9kYXlzIjp7ImxvbmdsaXZlZCI6NDAwLCJzaG9y
+      dGxpdmVkIjoxNH0sIndvcmtzcGFjZV9zY29wZV9vcmdfaW52aXRlcyI6ZmFsc2UsInpzdGRfY29t
+      cHJlc3Npb25fZW5hYmxlZCI6dHJ1ZX0sImJhdGNoX2luZ2VzdF9jb25maWciOnsidXNlX211bHRp
+      cGFydF9lbmRwb2ludCI6dHJ1ZSwic2NhbGVfdXBfcXNpemVfdHJpZ2dlciI6MTAwMCwic2NhbGVf
+      dXBfbnRocmVhZHNfbGltaXQiOjE2LCJzY2FsZV9kb3duX25lbXB0eV90cmlnZ2VyIjo0LCJzaXpl
+      X2xpbWl0IjoxMDAsInNpemVfbGltaXRfYnl0ZXMiOjIwOTcxNTIwfX0K
+  headers:
+    Access-Control-Allow-Credentials: '**REDACTED**'
+    Access-Control-Allow-Headers: '**REDACTED**'
+    Access-Control-Allow-Methods: '**REDACTED**'
+    Access-Control-Allow-Origin: '**REDACTED**'
+    Access-Control-Expose-Headers: '**REDACTED**'
+    Access-Control-Max-Age: '**REDACTED**'
+    Alt-Svc: '**REDACTED**'
+    Cache-Control: '**REDACTED**'
+    Content-Length: '**REDACTED**'
+    Content-Security-Policy: '**REDACTED**'
+    Content-Type: '**REDACTED**'
+    Date: '**REDACTED**'
+    Expires: '**REDACTED**'
+    Pragma: '**REDACTED**'
+    Strict-Transport-Security: '**REDACTED**'
+    Timing-Allow-Origin: '**REDACTED**'
+    Vary: '**REDACTED**'
+    Via: '**REDACTED**'
+    X-Accel-Expires: '**REDACTED**'
+    X-Content-Type-Options: '**REDACTED**'
+    X-Datadog-Trace-Id: '**REDACTED**'
+  status:
+    code: 200
+    message: OK
+- body:
+    string: !!binary |
+      eyJkZXRhaWwiOiJDb3VsZCBub3QgcGFyc2UgeW91ciBhdXRoZW50aWNhdGlvbiB0b2tlbi4gUGxl
+      YXNlIHRyeSBzaWduaW5nIGluIGFnYWluLiJ9
+  headers:
+    alt-svc: '**REDACTED**'
+    cf-cache-status: '**REDACTED**'
+    cf-ray: '**REDACTED**'
+    connection: '**REDACTED**'
+    content-length: '**REDACTED**'
+    content-type: '**REDACTED**'
+    cross-origin-opener-policy: '**REDACTED**'
+    date: '**REDACTED**'
+    nel: '**REDACTED**'
+    referrer-policy: '**REDACTED**'
+    report-to: '**REDACTED**'
+    server: '**REDACTED**'
+    set-cookie: '**REDACTED**'
+    strict-transport-security: '**REDACTED**'
+    x-content-type-options: '**REDACTED**'
+    x-oai-request-id: '**REDACTED**'
+    x-openai-proxy-wasm: '**REDACTED**'
+  status:
+    code: 401
+    message: Unauthorized

@@ -202,6 +202,7 @@ func (r *Recorder) PrependFromFile(path string) error {
 	if r.meta == nil {
 		r.meta = doc.Meta
 	}
+
 	r.mu.Unlock()
 
 	return nil
