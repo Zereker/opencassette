@@ -1,0 +1,48 @@
+meta:
+    recorded_at: "2026-07-13T09:59:22Z"
+    vendor: moonshot
+    model: kimi-k2.5
+    endpoint: https://api.moonshot.cn
+    scenario: structured_output_json_schema
+    scenario_sha256: b9ee4045cb68240f8adf70a58dc356640b33f236f0ae7c54fa4dfe55edbb15ea
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"respond with good","role":"user"}],"model":"kimi-k2.5","response_format":{"type":"json_schema","json_schema":{"schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"title":"BadModel","type":"object","additionalProperties":false},"name":"BadModel","strict":true}},"stream":false}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://api.moonshot.cn/v1/chat/completions
+      response:
+        body:
+            string: '{"id":"chatcmpl-6a54b6fa781aa08a916ee3e9","object":"chat.completion","created":1783936762,"model":"kimi-k2.5","choices":[{"index":0,"message":{"role":"assistant","content":"\n       \n\n      \n\n    \n   \n  \n \n\n    \n\n\n\n   \n  \n \n\n    \n\n\n  \n \n\n    \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n    {\n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n\"response\": \"good\"\n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n   \n\n\n}","reasoning_content":"The user wants me to respond with the word \"good\". This is a very simple request. I should just say \"good\" without adding anything else, as that''s exactly what was asked.\n\nHowever, I should consider if there''s any context I''m missing. The user said \"respond with good\" - this could be:\n1. A test to see if I follow instructions literally\n2. A request for the word \"good\" as a response\n3. Part of a larger conversation where they want me to say something is good\n\nBut given the simplicity and directness, I should just respond with the word \"good\" as requested. No punctuation needed unless it feels natural, but since they said \"respond with good\" (lowercase), I''ll match that case or use standard capitalization. \"Good\" with a capital G would be standard at the start of a sentence, but \"good\" lowercase also works. I''ll go with \"good\" to match exactly what they wrote."},"finish_reason":"stop"}],"usage":{"prompt_tokens":10,"completion_tokens":713,"total_tokens":723,"completion_tokens_details":{"reasoning_tokens":196}}}'
+        headers:
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 09:59:37 GMT
+            Msh-Gid:
+                - '**REDACTED**'
+            Msh-Org-Id:
+                - '**REDACTED**'
+            Msh-Project-Id:
+                - '**REDACTED**'
+            Msh-Request-Id:
+                - '**TRACE_ID_1**'
+            Msh-Trace-Mode:
+                - "on"
+            Msh-Uid:
+                - '**REDACTED**'
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+                - Origin
+        status:
+            code: 200
+            message: OK

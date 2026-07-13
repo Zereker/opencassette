@@ -1,0 +1,10 @@
+# Moonshot (Kimi) redaction overlay. Loaded automatically with --vendor
+# moonshot. The API returns a per-request correlation id plus account/org/
+# project/user identifiers not covered by the cross-vendor baseline.
+credential_headers:
+  - msh-gid        # account/group id
+  - msh-org-id     # organization id
+  - msh-project-id # project id
+  - msh-uid        # user id
+trace_headers:
+  - msh-request-id # per-request correlation id
