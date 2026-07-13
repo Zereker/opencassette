@@ -170,3 +170,32 @@ func TestReplacementValidation(t *testing.T) {
 		}
 	}
 }
+
+// TestScrubEndpoint confirms the provenance endpoint is masked by a URI-scope
+// replacement (and secrets), so an internal proxy host does not leak via
+// meta.endpoint.
+func TestScrubEndpoint(t *testing.T) {
+	rules := Baseline()
+	if err := rules.Merge(&Profile{Replacements: []Replacement{
+		{Pattern: `[a-z0-9-]+\.openai\.azure\.com`, With: "**RESOURCE**.openai.azure.com"},
+	}}); err != nil {
+		t.Fatal(err)
+	}
+
+	s := rules.NewScrubber()
+
+	got := s.ScrubEndpoint("https://auto-eastus2-s011-d0429-gpt-5-5-codex-auto.openai.azure.com")
+	if got != "https://**RESOURCE**.openai.azure.com" {
+		t.Fatalf("internal host not normalized: %s", got)
+	}
+
+	// A body-only replacement must NOT touch the endpoint.
+	rules2 := Baseline()
+	_ = rules2.Merge(&Profile{Replacements: []Replacement{
+		{Find: "auto-eastus2", With: "**X**", In: []string{"body"}},
+	}})
+
+	if got := rules2.NewScrubber().ScrubEndpoint("https://auto-eastus2.openai.azure.com"); got != "https://auto-eastus2.openai.azure.com" {
+		t.Fatalf("body-scoped rule leaked into endpoint: %s", got)
+	}
+}

@@ -319,6 +319,19 @@ func (s *Scrubber) Bytes(b []byte, traceReplacements map[string]string) []byte {
 	return []byte(s.applyReplacements(s.redactString(string(b), traceReplacements, false), ScopeBody))
 }
 
+// ScrubEndpoint scrubs a provenance endpoint (the `meta.endpoint` host):
+// literal secrets plus URI-scope custom replacements. There is no trace
+// substitution — meta is aggregate, not tied to one exchange — so a vendor
+// wanting to mask an internal proxy host declares a URI-scope (or unscoped)
+// replacement, which then covers both the request URI and this field.
+func (s *Scrubber) ScrubEndpoint(endpoint string) string {
+	if endpoint == "" {
+		return endpoint
+	}
+
+	return s.applyReplacements(s.redactString(endpoint, nil, false), ScopeURI)
+}
+
 // applyReplacements runs the custom replacements whose scope includes this
 // part of the recorded copy, after standard secret/trace scrubbing. It
 // touches only the string being written to disk, never the live exchange.
