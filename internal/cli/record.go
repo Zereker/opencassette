@@ -194,8 +194,10 @@ func runRecordCommand(app *application, opts recordOptions) error {
 	// aws-sigv4: the key is the Bedrock endpoint metadata JSON. Assume the
 	// role now, register the resulting credentials for redaction, and route
 	// over a TLS-SNI transport (the NLB DNS name doesn't match its cert).
-	var awsAuth *awsBedrockAuth
-	var baseTransport http.RoundTripper
+	var (
+		awsAuth       *awsBedrockAuth
+		baseTransport http.RoundTripper
+	)
 
 	if opts.authStyle == "aws-sigv4" {
 		auth, secrets, err := newAWSBedrockAuth(key)

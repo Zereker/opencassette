@@ -117,6 +117,7 @@ func TestLoadProfileParsesYAML(t *testing.T) {
 // header override, a scoped literal find, and a body-only regexp.
 func TestCustomReplacements(t *testing.T) {
 	rules := Baseline()
+
 	err := rules.Merge(&Profile{
 		Replacements: []Replacement{
 			{Header: "x-ms-region", With: "**REGION**"},
