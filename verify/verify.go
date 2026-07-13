@@ -62,6 +62,31 @@ var credentialHeaders = map[string]bool{
 	"cookie":               true, "set-cookie": true,
 }
 
+// traceHeaders mirrors recorder's automatically scrubbed correlation
+// carriers. Their raw values can be used to look up a published request in
+// vendor logs, so self-recorded cassettes must contain a redaction marker.
+var traceHeaders = map[string]bool{
+	"b3":                    true,
+	"correlation-id":        true,
+	"trace-id":              true,
+	"traceparent":           true,
+	"tracestate":            true,
+	"request-id":            true,
+	"x-amzn-trace-id":       true,
+	"x-b3-traceid":          true,
+	"x-b3-spanid":           true,
+	"x-cloud-trace-context": true,
+	"x-correlation-id":      true,
+	"x-datadog-parent-id":   true,
+	"x-datadog-trace-id":    true,
+	"x-log-id":              true,
+	"x-request-id":          true,
+	"x-trace-id":            true,
+	"uber-trace-id":         true,
+}
+
+var traceMarkerPattern = regexp.MustCompile(`^\*\*TRACE_ID(?:_[0-9]+)?\*\*$`)
+
 // High-confidence secret shapes, safe to scan raw file text for (their
 // prefixes don't occur in base64 noise at meaningful rates).
 var rawSecretPatterns = []*regexp.Regexp{
@@ -179,10 +204,19 @@ func checkHeaders(raw []byte, add func(Level, string, ...any)) {
 
 		for name, vals := range headers {
 			isCredential := credentialHeaders[strings.ToLower(name)]
+			isTrace := traceHeaders[strings.ToLower(name)]
 			check := func(s string) {
 				if isCredential {
 					if s != redacted {
 						add(Fail, "credential header %q is not scrubbed", name)
+					}
+
+					return
+				}
+
+				if isTrace {
+					if s != redacted && !traceMarkerPattern.MatchString(s) {
+						add(Fail, "trace header %q is not scrubbed", name)
 					}
 
 					return

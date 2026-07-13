@@ -21,18 +21,25 @@ const testSecret = "sk-test-secret-4f9a2b"
 // side and the read side agree on the on-disk format, and that no trace of
 // the API key survives anywhere in the file.
 func TestRecordAndLoadRoundTrip(t *testing.T) {
-	jsonReply := `{"id":"real-1","choices":[{"message":{"role":"assistant","content":"hi"}}]}`
-	sseReply := "data: {\"choices\":[{\"delta\":{\"content\":\"h\"}}]}\n\ndata: [DONE]\n\n"
+	const (
+		jsonTrace = "20260713112414ced32426897a4acd"
+		sseTrace  = "20260713112421ba8d677165564ee2"
+	)
+
+	jsonReply := `{"id":"` + jsonTrace + `","request_id":"` + jsonTrace + `","choices":[{"message":{"role":"assistant","content":"hi"}}]}`
+	sseReply := "data: {\"id\":\"" + sseTrace + "\",\"choices\":[{\"delta\":{\"content\":\"h\"}}]}\n\ndata: [DONE]\n\n"
 
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if strings.Contains(r.URL.Path, "stream") {
 			w.Header().Set("Content-Type", "text/event-stream")
+			w.Header().Set("X-Request-Id", sseTrace)
 			_, _ = io.WriteString(w, sseReply)
 
 			return
 		}
 
 		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("X-Log-Id", jsonTrace)
 		// A response header echoing the key back (some vendors do) must be
 		// caught by the value-based scrub, not just the name-based one.
 		w.Header().Set("X-Echoed-Auth", testSecret)
@@ -85,6 +92,12 @@ func TestRecordAndLoadRoundTrip(t *testing.T) {
 		t.Fatalf("the API key leaked into the cassette:\n%s", raw)
 	}
 
+	for _, traceID := range []string{jsonTrace, sseTrace} {
+		if bytes.Contains(raw, []byte(traceID)) {
+			t.Fatalf("trace ID %q leaked into the cassette:\n%s", traceID, raw)
+		}
+	}
+
 	if !bytes.Contains(raw, []byte(redacted)) {
 		t.Fatalf("expected %q markers in the cassette:\n%s", redacted, raw)
 	}
@@ -107,16 +120,107 @@ func TestRecordAndLoadRoundTrip(t *testing.T) {
 		t.Errorf("interaction 0 request mismatch: method=%q body=%q", its[0].Method, its[0].RequestBody)
 	}
 
-	if string(its[0].ResponseBody) != jsonReply {
-		t.Errorf("interaction 0 response mismatch: %q", its[0].ResponseBody)
+	if got := string(its[0].ResponseBody); strings.Contains(got, jsonTrace) || !strings.Contains(got, "**TRACE_ID_1**") {
+		t.Errorf("interaction 0 response trace was not consistently redacted: %q", got)
 	}
 
 	if !strings.Contains(its[0].URI, "key="+redacted) && !strings.Contains(its[0].URI, "key=%2A%2AREDACTED%2A%2A") {
 		t.Errorf("query-string key not redacted in URI: %q", its[0].URI)
 	}
 
-	if string(its[1].ResponseBody) != sseReply {
-		t.Errorf("interaction 1 (SSE) response mismatch: %q", its[1].ResponseBody)
+	if got := string(its[1].ResponseBody); strings.Contains(got, sseTrace) || !strings.Contains(got, "**TRACE_ID_2**") {
+		t.Errorf("interaction 1 (SSE) trace was not redacted: %q", got)
+	}
+}
+
+func TestCompositeTraceHeaderComponentsAreRedacted(t *testing.T) {
+	const (
+		traceID = "4bf92f3577b34da6a3ce929d0e0e4736"
+		spanID  = "00f067aa0ba902b7"
+	)
+
+	traceparent := "00-" + traceID + "-" + spanID + "-01"
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Traceparent", traceparent)
+		_, _ = io.WriteString(w, `{"trace_id":"`+traceID+`","span_id":"`+spanID+`"}`)
+	}))
+	defer srv.Close()
+
+	rec := New(nil)
+	client := &http.Client{Transport: rec}
+
+	resp, err := client.Get(srv.URL)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	callerBody, _ := io.ReadAll(resp.Body)
+	_ = resp.Body.Close()
+
+	if !bytes.Contains(callerBody, []byte(traceID)) {
+		t.Fatalf("caller must receive the untouched response: %s", callerBody)
+	}
+
+	path := filepath.Join(t.TempDir(), "trace.yaml")
+	if err := rec.WriteFile(path); err != nil {
+		t.Fatal(err)
+	}
+
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	for _, sensitive := range []string{traceparent, traceID, spanID} {
+		if bytes.Contains(raw, []byte(sensitive)) {
+			t.Errorf("composite trace component %q leaked:\n%s", sensitive, raw)
+		}
+	}
+
+	if !bytes.Contains(raw, []byte("**TRACE_ID_")) {
+		t.Errorf("trace marker missing:\n%s", raw)
+	}
+}
+
+func TestShortTraceValueDoesNotCorruptBody(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("X-Request-Id", "1")
+		_, _ = io.WriteString(w, `{"count":1}`)
+	}))
+	defer srv.Close()
+
+	rec := New(nil)
+	client := &http.Client{Transport: rec}
+
+	resp, err := client.Get(srv.URL)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	_ = resp.Body.Close()
+
+	path := filepath.Join(t.TempDir(), "short-trace.yaml")
+	if err := rec.WriteFile(path); err != nil {
+		t.Fatal(err)
+	}
+
+	interactions, err := cassette.Load(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if got := string(interactions[0].ResponseBody); got != `{"count":1}` {
+		t.Fatalf("short trace ID corrupted response body: %s", got)
+	}
+
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if !bytes.Contains(raw, []byte("**TRACE_ID**")) {
+		t.Fatalf("short trace header was not scrubbed:\n%s", raw)
 	}
 }
 

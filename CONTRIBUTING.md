@@ -22,8 +22,10 @@ A recording PR must:
    thread.
 3. **Be read by a human before submitting.** Scrubbing removes the
    credentials the tool knows about — not secrets a response body might echo
-   back, and not personal data in your prompts. Don't record prompts you
-   wouldn't publish.
+   back, and not personal data in your prompts. Trace IDs discovered in known
+   correlation headers are scrubbed across headers and bodies automatically,
+   but reviewers should still look for vendor-specific carriers. Don't record
+   prompts you wouldn't publish.
 4. **Land in the standard layout**:
    `corpus/<vendor>/<model>/<protocol>/<stream|nostream>/<scenario>.yaml`.
    Prefer recording a whole scenario pack (`-scenario-dir packs/openai-chat`)

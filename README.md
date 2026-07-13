@@ -35,7 +35,7 @@ grow a shared library of real captures.
 | Piece | What it does |
 |---|---|
 | `cassette` (Go package) | Loads both on-disk cassette formats found in the wild (pytest-recording's `interactions:` and langchain's parallel lists), normalizing bodies (nested/`!!binary`/gzipped) into plain bytes |
-| `recorder` (Go package) | An `http.RoundTripper` that records real calls with name-based **and** value-based credential scrubbing, plus a `meta:` provenance block |
+| `recorder` (Go package) | An `http.RoundTripper` that records real calls with credential scrubbing and cross-header/body trace-ID redaction, plus a `meta:` provenance block |
 | `scenario` (Go package) + `packs/` | Standard request-body packs (SDK-derived, coverage-enforced by tests) for four wire protocols — OpenAI chat, OpenAI Responses, Anthropic Messages, Gemini generateContent — so a recording session exercises tools, tool loops, streaming, structured output — not just `"hi"` |
 | `verify` (Go package) | Checks a corpus for leaked credentials and synthetic-data tells (placeholder ids, impossible timestamps, token accounting that doesn't add up) |
 | `audit` (Go package) | Diffs each pack's field coverage against the protocol's authoritative schema (OpenAI/Anthropic via their SDKs' published OpenAPI specs, Gemini via Google's discovery document) — a one-way ceiling check that suggests what to record next, never a validator of recorded traffic |
@@ -50,9 +50,9 @@ Record a full scenario pack against a vendor (one cassette per scenario):
 go build -o opencassette ./cmd/opencassette
 
 RECORD_API_KEY=sk-... ./opencassette record \
-  -url https://api.deepseek.com/chat/completions \
-  -scenario-dir packs/openai-chat \
-  -vendor deepseek -model deepseek-chat
+  --url https://api.deepseek.com/chat/completions \
+  --scenario-dir packs/openai-chat \
+  --vendor deepseek --model deepseek-chat
 # -> corpus/deepseek/deepseek-chat/openai/{stream,nostream}/<scenario>.yaml
 ```
 

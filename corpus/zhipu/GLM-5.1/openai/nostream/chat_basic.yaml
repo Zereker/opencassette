@@ -1,0 +1,43 @@
+meta:
+    recorded_at: "2026-07-13T05:13:33Z"
+    vendor: zhipu
+    model: GLM-5.1
+    endpoint: https://open.bigmodel.cn
+    scenario: chat_basic
+    scenario_sha256: c88a48870c2ffdb177b8dbbca23f3ced1f791a59ce08288a4bf18e83a69c8099
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"GLM-5.1"}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://open.bigmodel.cn/api/paas/v4/chat/completions
+      response:
+        body:
+            string: '{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"\n\n\n# The Cat Who Knew the Rain Was Coming\n\nMabel was not a particularly remarkable cat. She was gray, the color of a sky that couldn''t decide whether to storm or clear. She had one white paw, as though she''d dipped it in paint by accident, and a small notch in her left ear from a disagreement she never spoke about.\n\nShe lived with an old woman named Dot in a pale blue house at the end of Fir Street, and she had a secret.\n\nMabel could smell the rain.\n\nNot the way all animals sense a coming storm—the drop in pressure, the shift in the wind. Mabel could smell it *days* away, like something sweet and metallic carried on the breath of the world. She''d felt it first as a kitten, an uneasy stirring in her chest, and had pressed herself against the heating vent and refused to move for hours. Her mother had licked her head once, distractedly, and gone back to sleep. No one else understood.\n\nBy the time she came to live with Dot, Mabel had learned to trust the feeling. When it came, she would move through the house with quiet purpose: dragging Dot''s sweater from the back of the kitchen chair to the bedroom, pushing the window shut with her nose, retrieving the small rubber boot from the hallway and leaving it by the door.\n\nDot always laughed. \"Silly girl,\" she''d say, scratching under Mabel''s chin. \"There''s not a cloud in the sky.\"\n\nBut the rain always came.\n\n---\n\nOne October evening, Mabel felt it—the sharp, copper pull in her sinuses, deeper than before. She stood in the middle of the kitchen, her ears pinned back, her tail low and still.\n\nThis was not ordinary rain.\n\nShe went to Dot, who was reading at the table, and meowed. Not the polite, conversational meow she used for dinner, but something raw and urgent, torn from her throat like a ribbon.\n\nDot looked up, startled. \"What is it, sweetheart?\"\n\nMabel ran to the front door and scratched at it. She ran back to Dot, then to the door again. The feeling was enormous now, filling her like water fills a glass—cold and heavy and dark.\n\n\"Mabel, stop that.\" Dot''s voice was firm but kind. \"It''s nearly bedtime.\"\n\nMabel did not stop. She knocked Dot''s book from the table. She swatted the mug of tea until it spilled, until Dot gasped and pushed back her chair.\n\n\"Now that''s enough!\"\n\nBut Mabel was already at the door, throwing herself against it, and something in her eyes—something wild and desperate and certain—made Dot go still.\n\n\"Alright,\" Dot whispered. \"Alright.\"\n\nShe put on her coat over her nightgown, slipped into her shoes, and opened the door. Mabel bolted into the dark.\n\n---\n\nDot followed the white paw flashing ahead of her down the street. She hadn''t walked this fast in years, her knees protesting, her breath coming short. But the cat did not slow, and Dot did not stop.\n\nThey passed the Hendersons'' house. They passed the darkened bakery. They passed the little park where children played during the day, and Mabel finally stopped at the community center, where the door had been left ajar.\n\nInside, a Girl Scout troop was setting up for their overnight. Eleven girls, ages eight to ten, and two exhausted troop leaders unfolding cots in the basement.\n\nMabel screamed at the door.\n\nOne of the leaders, a young woman with tired eyes, poked her head out. \"Is that a—\"\n\n\"Get them out,\" Dot said. She didn''t recognize her own voice. \"Get them out of the basement. Now.\"\n\nThe rain hit eleven minutes later.\n\nIt came not as rain but as a wall of water—the kind of storm the town had never seen, the kind that turned the creek into a river and the river into a monster. The basement of the community center flooded in less than twenty minutes. By the time the last girl was carried up the stairs, the water was already at their calves.\n\nThey all huddled in the upstairs hallway—eleven girls, two leaders, one old woman, and one small gray cat—while the world roared beneath them.\n\n---\n\nIn the morning, the town was unrecognizable. The bakery was gone. The park was a lake. The basement of the community center was filled to the ceiling with mud and debris.\n\nA reporter came from the city. She knelt beside Mabel with her microphone and asked what the cat''s name was.\n\n\"Mabel,\" Dot said.\n\n\"And she warned you?\"\n\nDot looked down at the cat, who was curled in her lap, utterly exhausted, one white paw resting over Dot''s thumb. \"She''d been warning me for years,\" Dot said. \"I just hadn''t been listening.\"\n\n---\n\nAfter that, people on Fir Street started paying attention to Mabel. When she dragged a sweater to the bedroom, someone would mention it. When she pressed her nose to the window, someone would look up at the sky.\n\nBut Mabel didn''t mind the attention. She still slept in the square of sunlight on Dot''s bed each morning. She still ate her kibble in the quiet kitchen. She still watched the birds from the window with the focused, trembling desire that is the burden of all cats.\n\nAnd sometimes, on clear and cloudless afternoons, she would lift her head and taste the air—metal and sweet and far away—and she would close her eyes and simply know.\n\nThe rain was always coming.\n\nAnd Mabel was always ready.","reasoning_content":"The user wants me to write a story about a cat. Let me craft an engaging, creative short story.","role":"assistant"}}],"created":1783919649,"id":"**TRACE_ID_1**","model":"GLM-5.1","object":"chat.completion","request_id":"**TRACE_ID_1**","usage":{"completion_tokens":1181,"completion_tokens_details":{"reasoning_tokens":22},"prompt_tokens":12,"prompt_tokens_details":{"cached_tokens":0},"total_tokens":1193}}'
+        headers:
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 05:14:09 GMT
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+            X-Log-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK

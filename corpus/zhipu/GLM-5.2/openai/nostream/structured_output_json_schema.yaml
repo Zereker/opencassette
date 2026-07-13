@@ -1,0 +1,43 @@
+meta:
+    recorded_at: "2026-07-13T03:24:14Z"
+    vendor: zhipu
+    model: GLM-5.2
+    endpoint: https://open.bigmodel.cn
+    scenario: structured_output_json_schema
+    scenario_sha256: b9ee4045cb68240f8adf70a58dc356640b33f236f0ae7c54fa4dfe55edbb15ea
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"respond with good","role":"user"}],"model":"GLM-5.2","response_format":{"type":"json_schema","json_schema":{"schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"title":"BadModel","type":"object","additionalProperties":false},"name":"BadModel","strict":true}},"stream":false}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://open.bigmodel.cn/api/paas/v4/chat/completions
+      response:
+        body:
+            string: '{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"Good.","reasoning_content":"1.  **Analyze the Input:** The user said \"respond with good\".\n2.  **Determine the Goal:** Provide a response that is exactly the word \"good\" or incorporates \"good\" in a positive, appropriate manner based on the explicit instruction. The simplest and most direct interpretation is to literally output the word \"good\". Another interpretation is to respond with a positive/good message. Let''s just output \"good.\" or \"Good!\" to perfectly fulfill the instruction.\n3.  **Formulate Output:** \"Good.\" (simple, direct, follows instructions perfectly). Let''s use \"Good.\"","role":"assistant"}}],"created":1783913061,"id":"**TRACE_ID_1**","model":"GLM-5.2","object":"chat.completion","request_id":"**TRACE_ID_1**","usage":{"completion_tokens":128,"completion_tokens_details":{"reasoning_tokens":124},"prompt_tokens":15,"prompt_tokens_details":{"cached_tokens":0},"total_tokens":143}}'
+        headers:
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 03:24:21 GMT
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+            X-Log-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK
