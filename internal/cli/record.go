@@ -106,7 +106,7 @@ func newRecordCommand(app *application) *cobra.Command {
 	flags.StringVar(&opts.name, "name", "", "scenario name (file basename without .yaml)")
 	flags.StringVar(&opts.bucket, "bucket", opts.bucket, "stream | nostream | auto")
 	flags.StringVar(&opts.out, "out", "", "explicit output path (overrides composition)")
-	flags.StringVar(&opts.authStyle, "auth", opts.authStyle, "bearer | x-api-key | api-key | query:<param> | none")
+	flags.StringVar(&opts.authStyle, "auth", opts.authStyle, "bearer | x-api-key | api-key | query:<param> | google-sa | none")
 	flags.StringVar(&opts.keyEnv, "key-env", opts.keyEnv, "environment variable holding the API key")
 	flags.StringVar(&opts.profileDir, "profile-dir", opts.profileDir, "directory of vendor redaction profiles (<vendor>.yaml)")
 	flags.BoolVar(&opts.appendExisting, "append", false, "prepend the existing cassette")
@@ -139,6 +139,18 @@ func runRecordCommand(app *application, opts recordOptions) error {
 	key := os.Getenv(opts.keyEnv)
 	if key == "" && opts.authStyle != "none" {
 		return fmt.Errorf("record: environment variable %s is empty (or pass --auth none)", opts.keyEnv)
+	}
+
+	// google-sa resolves a service-account JSON to a short-lived bearer token
+	// up front, so the rest of the pipeline just sees --auth bearer.
+	if opts.authStyle == "google-sa" {
+		token, err := googleServiceAccountToken(key)
+		if err != nil {
+			return fmt.Errorf("record: google-sa auth: %w", err)
+		}
+
+		key = token
+		opts.authStyle = "bearer"
 	}
 
 	batchMode := opts.scenarioDir != "" || opts.probeFields != ""
