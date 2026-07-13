@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/zereker/opencassette/scenario"
+	"github.com/zereker/opencassette/internal/scenario"
 )
 
 // miniSpec exercises the shapes real specs use: the request schema behind
@@ -135,7 +135,7 @@ func TestCompare(t *testing.T) {
 // probe fields (probing covers them even though no body carries them), and
 // gemini's must not invent a model field.
 func TestPackFieldsRealPacks(t *testing.T) {
-	openai, err := scenario.LoadPack("../packs/openai-chat")
+	openai, err := scenario.LoadPack("../../packs/openai-chat")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +145,7 @@ func TestPackFieldsRealPacks(t *testing.T) {
 		t.Errorf("openai-chat pack fields must count synthetic probes: %v", fields)
 	}
 
-	gemini, err := scenario.LoadPack("../packs/gemini-generatecontent")
+	gemini, err := scenario.LoadPack("../../packs/gemini-generatecontent")
 	if err != nil {
 		t.Fatal(err)
 	}

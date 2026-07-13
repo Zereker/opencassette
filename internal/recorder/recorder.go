@@ -33,7 +33,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/zereker/opencassette/redact"
+	"github.com/zereker/opencassette/internal/redact"
 )
 
 // redacted is the marker the redact package writes; kept as a package-local

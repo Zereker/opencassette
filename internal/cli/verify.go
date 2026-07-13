@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/zereker/opencassette/verify"
+	"github.com/zereker/opencassette/internal/verify"
 )
 
 type verifyOptions struct {

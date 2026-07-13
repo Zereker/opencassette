@@ -13,9 +13,9 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/tidwall/gjson"
 
-	"github.com/zereker/opencassette/recorder"
-	"github.com/zereker/opencassette/redact"
-	"github.com/zereker/opencassette/scenario"
+	"github.com/zereker/opencassette/internal/recorder"
+	"github.com/zereker/opencassette/internal/redact"
+	"github.com/zereker/opencassette/internal/scenario"
 )
 
 type recordOptions struct {

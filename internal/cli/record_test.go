@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zereker/opencassette/recorder"
+	"github.com/zereker/opencassette/internal/recorder"
 )
 
 func TestResolveOutPathAndAppendBucket(t *testing.T) {

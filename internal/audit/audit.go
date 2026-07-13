@@ -26,7 +26,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/zereker/opencassette/scenario"
+	"github.com/zereker/opencassette/internal/scenario"
 )
 
 // Fields fetches ref and returns the sorted top-level request-body field
