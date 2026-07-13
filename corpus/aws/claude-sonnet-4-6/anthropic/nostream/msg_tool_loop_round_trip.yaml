@@ -1,0 +1,47 @@
+meta:
+    recorded_at: "2026-07-13T08:23:37Z"
+    vendor: aws
+    model: claude-sonnet-4-6
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_tool_loop_round_trip
+    scenario_sha256: 4bab5f8cd8122dfc2b47529d7e3549549bf5fa34d98dfaa3ce10a725413a8824
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican"}]},{"role":"assistant","content":[{"type":"text","text":" "},{"type":"tool_use","id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","name":"pelican_name_generator","input":{}},{"type":"tool_use","id":"toolu_01N8a4jWyf116qKTMqKKmjyt","name":"pelican_name_generator","input":{}}]},{"role":"user","content":[{"type":"tool_result","tool_use_id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","content":"Charles"},{"type":"tool_result","tool_use_id":"toolu_01N8a4jWyf116qKTMqKKmjyt","content":"Sammy"}]}],"temperature":1.0,"tools":[{"name":"pelican_name_generator","description":"","input_schema":{"properties":{},"type":"object"}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082337Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2F3z04ny93dpv5/invoke
+      response:
+        body:
+            string: "{\"model\":\"claude-sonnet-4-6\",\"id\":\"msg_bdrk_01F5DtaiyEpmJPWuc3tyb4Uc\",\"type\":\"message\",\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"Here are two great names for your pet pelican:\\n\\n1. **Charles** \U0001F426 - A distinguished and regal name, perfect for a pelican with a noble personality!\\n2. **Sammy** \U0001F426 - A fun and friendly name, great for a pelican with a playful and lovable nature!\"}],\"stop_reason\":\"end_turn\",\"stop_sequence\":null,\"stop_details\":null,\"usage\":{\"input_tokens\":679,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"cache_creation\":{\"ephemeral_5m_input_tokens\":0,\"ephemeral_1h_input_tokens\":0},\"output_tokens\":77}}"
+        headers:
+            Content-Length:
+                - "649"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:23:39 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Cache-Write-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "679"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "1975"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "77"
+            X-Amzn-Requestid:
+                - a5e594dc-6c69-418b-8f6b-0150e1451aab
+        status:
+            code: 200
+            message: OK

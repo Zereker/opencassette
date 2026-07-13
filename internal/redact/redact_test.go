@@ -117,6 +117,7 @@ func TestLoadProfileParsesYAML(t *testing.T) {
 // header override, a scoped literal find, and a body-only regexp.
 func TestCustomReplacements(t *testing.T) {
 	rules := Baseline()
+
 	err := rules.Merge(&Profile{
 		Replacements: []Replacement{
 			{Header: "x-ms-region", With: "**REGION**"},
@@ -158,10 +159,10 @@ func TestCustomReplacements(t *testing.T) {
 // TestReplacementValidation rejects malformed rules at load time.
 func TestReplacementValidation(t *testing.T) {
 	cases := []Replacement{
-		{With: "x"},                            // no matcher
-		{Find: "a", Pattern: "b", With: "x"},   // two matchers
-		{Pattern: "[", With: "x"},              // invalid regexp
-		{Find: "a"},                            // no 'with'
+		{With: "x"},                          // no matcher
+		{Find: "a", Pattern: "b", With: "x"}, // two matchers
+		{Pattern: "[", With: "x"},            // invalid regexp
+		{Find: "a"},                          // no 'with'
 	}
 
 	for i, rp := range cases {

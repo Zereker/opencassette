@@ -1,0 +1,47 @@
+meta:
+    recorded_at: "2026-07-13T08:22:51Z"
+    vendor: aws
+    model: claude-opus-4-6
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_thinking
+    scenario_sha256: 691479faad665eb8578c00c9258e0902164d2a3798dc7dc092b2839555fd3997
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]}],"temperature":1.0,"thinking":{"type":"enabled","budget_tokens":1024}}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082251Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2F5id328713fqx/invoke
+      response:
+        body:
+            string: '{"model":"claude-opus-4-6","id":"msg_bdrk_0136guhyE3ejzLgNDnCKDZnX","type":"message","role":"assistant","content":[{"type":"thinking","thinking":"The user wants two names for a pet pelican. I''ll keep it brief.","signature":"EoYCCmUIDxABGAIqQPLM7sxeINaUUcJT3TLBbHZHzh0c5wzVpdF2KanOERBEUZ6EKucm0suEgbxgo2E0L7usx3wVqdeHi60SVQGxKjcyD2NsYXVkZS1vcHVzLTQtNjgAQgh0aGlua2luZxIMfqXlSd/b8N4OVxdbGgyAVP7uVWucgXh4gD4iMB/g5KHedde94Eaaju+82rvO4Bi9Qjb0h8Oe3LxtIQPqlzN7AeMGszSmCNN4yQTHpSpPx7ir7b2Lv1IGE3FEYpAkTokVIfGIfq2ZKZ9sMfxCyq77JTXih2YQ8oUxsxEcu3qSiLRN8GTS4CdrouU45izWhZBU9xu6VNaCj8wtynKh9RgB"},{"type":"text","text":"1. **Gulliver**\n2. **Pouchy**"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":46,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":44,"output_tokens_details":{"thinking_tokens":22}}}'
+        headers:
+            Content-Length:
+                - "939"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:22:54 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Cache-Write-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "46"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "2229"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "44"
+            X-Amzn-Requestid:
+                - 0dc6c2f2-9ff9-4e6e-bc92-24c1233bb742
+        status:
+            code: 200
+            message: OK

@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T09:01:42Z"
+    vendor: google
+    model: gemini-3-flash-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_basic
+    scenario_sha256: cfe7ad57ae1984efbd37afd5d6a157cb4b76f4a352fb421460f34385b5f985da
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Name for a pet pelican, just the name"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3-flash-preview:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"Nigel\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3-flash-preview\",\"createTime\": \"2026-07-13T09:01:43.889411Z\",\"responseId\": \"d6lUasOkNv-HoLAP_svcmA4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"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\"}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"LOW\",\"probabilityScore\": 0.01979385,\"severity\": \"HARM_SEVERITY_LOW\",\"severityScore\": 0.084082276},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 0.18859805,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.058314458},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"LOW\",\"probabilityScore\": 0.06416033,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.07616924},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 0.00058635307,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"}]}],\"usageMetadata\": {\"promptTokenCount\": 10,\"candidatesTokenCount\": 2,\"totalTokenCount\": 392,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 10}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 2}],\"thoughtsTokenCount\": 380},\"modelVersion\": \"gemini-3-flash-preview\",\"createTime\": \"2026-07-13T09:01:43.889411Z\",\"responseId\": \"d6lUasOkNv-HoLAP_svcmA4\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:01:47 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T09:02:02Z"
+    vendor: google
+    model: gemini-3-flash-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_tools
+    scenario_sha256: 5cbd321c7a3ef9304163261fe3fd60aa1633ec201f0f6e13d0379d25f8751b32
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Two names for a pet pelican"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "tools": [{"functionDeclarations": [{"name": "pelican_name_generator", "description": null, "parameters": {"properties": {}, "type": "object"}}]}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3-flash-preview:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"functionCall\": {\"name\": \"pelican_name_generator\",\"args\": {\"type\": \"funny\"}},\"thoughtSignature\": \"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\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3-flash-preview\",\"createTime\": \"2026-07-13T09:02:02.437495Z\",\"responseId\": \"iqlUavfZGsHm8vUP8IKWoQU\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"functionCall\": {\"name\": \"pelican_name_generator\",\"args\": {\"type\": \"regal\"}}}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3-flash-preview\",\"createTime\": \"2026-07-13T09:02:02.437495Z\",\"responseId\": \"iqlUavfZGsHm8vUP8IKWoQU\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\"}]},\"finishReason\": \"STOP\"}],\"usageMetadata\": {\"promptTokenCount\": 20,\"candidatesTokenCount\": 39,\"totalTokenCount\": 593,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 20}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 39}],\"thoughtsTokenCount\": 534},\"modelVersion\": \"gemini-3-flash-preview\",\"createTime\": \"2026-07-13T09:02:02.437495Z\",\"responseId\": \"iqlUavfZGsHm8vUP8IKWoQU\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:02:06 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

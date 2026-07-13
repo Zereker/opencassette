@@ -1,0 +1,111 @@
+meta:
+    recorded_at: "2026-07-13T09:01:17Z"
+    vendor: google
+    model: gemini-3-flash-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_basic
+    scenario_sha256: cfe7ad57ae1984efbd37afd5d6a157cb4b76f4a352fb421460f34385b5f985da
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Name for a pet pelican, just the name"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3-flash-preview:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "Gully",
+                            "thoughtSignature": "AY89a1851INMXZaWSYB8RNETO3+5z9G/0g9DKAm4qU0GFjpent9WEAcjXFe4i+sw0zNDPtaqXiSTezOylmJ3bh/jDQmWG4ngb1CMv7aNp8tp05yFZD2fn9rb9WpcqAgbIh319XbHzk0EPhDUKsML5adK7hwP3Xa8cqeDuVlbHFZvYfsiP2DIZxn0AWk1SL4J8Nq/b9SZTWN5RHSQdk1N3FYaZfRYSh3yEbD94uvjNgzHtgqxSkFvr8qZRESsqWAHezyK7PVvTXgn0y+wlwV18p4laFn+m7naMUKwkzzCyK9LzreJOlK/RygZtIFHicMTck+LZe0Mlv09vdfgloZX6bkowia4YO5JVWKm19Zb8J9+ZfmFcftiKdrXtC6oQjFaR4baGOgKdI2dXhuUFkk5lx6uwu5iE+b4wnThb8P+qB/uhKoi2LQfZm/qF2Xwk8zSyOnBlRO3XHKv2qcgnclZKGXLk22fVgClCP8SMh/Q6Eq0Q/VuCNRnkaiIQIlMzMri8eTjlfhvlmzDXIAKLY7QVfPIZX2fovnYeDi1N0a72WfOSRMBBaRdZu8GNCXasjOjMFuSv0yPhpNvANSbhzplObsIKi/fomtGNRal0A+9oPejPsC1OQm18E0q7coiSagUpMAwwFjkAJk2mKuDRELMIYPdm6wMSUDgACsnLm8J7ECGMzDQG38hSsFH7++jxcFVrpxtHPFzwia+hqbIbDXxaDPC5DLAzQO3F3BnNEsm3IqINehU3Q597pXeDMncbQno9xwy+iHyT/gIAZZxSpv3+SbLzIE7xLL39GXtxgPxsKvv3p94Q6CSRqe8zRvC0NFY23QnVZDEG+CrL8t6IhYVpOBKnWXOQWBirHq7KDwsK6ySn6VlMClJJaLjAQAT54y3aFtorX8wipb+3aeuJgDiW1BkTquXS9EYCb7/ZkOd/tX3ZB8jQUVjrTSC6Wwl1cGuseJRox1Ds234XPOklxh8T9UxLPkJS0tDM96W13vRmg+3OEzYG6c3OKTDM+ZrvcaTcO1b64Sj9mQ6vp05hSdnMtLaK1W3Df16Dp/MrpY0eGM/JYEbLbh7OeWYW1qz6VYCwoZzpgZqWt30S9ZwIx/WVQjnfRe1XUTqxHveQAKzo6ZLpUvz1/kjP2kIHyH8+NpAdYD+5OHMJb8xrJSp9WTpAIH8VyXupbGRwKU0XlLZhqoJFuYDWfQccr0LWH++XnHHZ8i/jwvZn+4+FjTAZ3nImiyOFFPoNRFk5DygGY2M8Ct8JHWRjUtBgN0UzjVh2BUrr8HEIoXQkxDGBfVdlHRhqPdu28lzxg2eEc6LAQGItoyZMlrV5n5WVgqPGh2C/Qm/1Slxfn2jmT4OXjzCmYLqwkfsLaisegm6jQkqRZqApDQARSaBBJ069aH+umIN7QlQ1lQ0Nq2PGFrRbPatf/q+UDdDbKZpXOMCKXHesKL+8VExkYqSOS/+WtRMVtWZl/FJDbwqp2KLchSpXWzHy+gxpS5aREWcybTQaiyCIh62Gy5jGZ6t60/zkcR0Pk0wdIu5N4ONKFxuqWT4ScDQ/yV60EwJQEMi0MY9v1E/MOAMljjNn+jmKPN7ZK75b7Str/eJDA7uI/i401SayLizKFAvbcZMcr2wNzUozM5OUECh/Xec783l5qAE2IbhOP9ENjiHPniPjjh7AqzPWUkbgtdv5a8FO2d9PGinkirKnP3NonuZTLZqoDSqJBWt8H1/WVWCJhFFLEz7n0ynbDvR9Eh7pA+yyk5u/HZC5cFd5oxxQffWk+nyprZ2IzmPYi6kZpd0hzSsOYD7zZhD8WSKaGE+Y9lo9eP0lQjYOGoTVAWD9lgaXVqPPfjCsauXceleeVoFhbx5ONYO69MDBGvKHLwVZL5QABSSONSbP/Kn83zlXEKRTkA40RjF5qA/sQocmSQbOmSgPmoKBdefAMLXOFg3bLjwY8awHrwaugUV7VqwDIjOEN4gMu9uKk9Xvxa7Eavis05pzV4bg2J0FOggjdBFQoDyw4hYEcUPU6eeOutCVWhTmHcMREG5Qo8zvCQ+Tv/oa6kPoLnGzcGiUK9+UAvRv71s0BzZ6mA4U1W3K8qUwZbZxvrnCHhqBEn2HkEpjDA+Brzn4Ybwadi/ouexOQe/X+Rg4cJhFFP2D1lBmPdqf27oucZ3i8GrvbNHcOMjt0wAIieicSSSJnXZVzPMi0NGF82NHruxyaoaH3ZHFajt6p/f+gQJhUw0cHv4+hlDDMAhrXp0dARqX1iDwyYDMSwNFC/T+k0X0Au82dEH26OrUhzJtPKMG9UT9T9xSMg6LQ0yvhQiwHr6/JrqIRURxWNkIm5JjsRDYTkguZZOb7qXrahYPmMmGFBAO7bMlD10YFXImsAsfPVppN+SFoODeWmPzhxUEjgsV8UId0ZzfRUVau5KddKKB5qHRRDC/vvrfkMoQ74R+OfncClZ95cYHpxt0qcUwgNnn18mP60wQ0tMzyfDne0liCr5ZXuOw+fQVd8qBIOp4/7MrA550wbMOfPmX1y5tGNnVVWqMfqt2KyM9vTx9lOsGZbV0HZmM+CNnN6NayMDuWzeElsCLnqnbvnEGiaxOx89EPkNdlN08GWZ1aXB9o3ObR0nFh82MT3IOWMzXsjJ+l2TlS+CWscAO64t31yZUFIcj8McM1OMkfiMBvam0nW72d+o/DqLK00Eqm4VvL5CrOsb0CJ2hJwF0lbwSI28u4QIAeW94pmD5ZrodvFYjZoTtpiYsLNexXPzPEuQB62eM9knHYGSGudQbyKIY44wheNgLehthKPcPWz6X3Jf7MSlp+tTq//F4LyUMQB7zuep7AjbM5/oNJjLdBiKVpC4NuXjLoucnc4if818lGVs9F9BMYTuBQ9KdQaZgpAj3z3ABcV7fK1TseojLTMcglVbT7btSrhtjexpOkAltcpIQ/uovTV26oElSIlDsnCVYqN6RnC6PPYj+OTEqO3igx0GViLyNkRiwodU8J0naJfZb9K9HtlS8x5xy2fF9FUBL/G0h6dlPJUA494ntbe8WcZ1AyMikgX8x10ANCGA7uewoqWe54TkmHMjyzXbyT1vJiRx/QzYvu/owWJNd39+NXXciodoKZB+Na4WiBN8R2BO8t4sArOajXBzo1I9GfzbcxUzvPVLxAIxNdBzCiXWWgqE/1W4cOEJi4E/Xxfz85mVa0P/0XDrQnxIZnejLBG77tqMbT9rP7Kr8VcQqtmhZAbOMhWx8aUpYCHqAM5AQOFdQMSraLzjRln3UBGTl4RhFLmVGKV9E7CGEkDl5GsHOXnoL/IdK1noLmrK/LZpzoPCFIJ21w+HDDxbm50mP3/le4M4YIIztKcIrZQ9bX9MalzDcdddgKmSJlBULEyHN/ihMxVO/vWgXhYfQqceaP6nXgHxfTqR3Bh7HX2qSmurLB+ompvWyAWvMwf3cowkF5uSvY/SVhmBIk/wJVCtD8Rsp/3rm2aOse32FaORINOVdaqnQl9pAEtsQBduJHD4KaDT1oYtwhbMjwBp4+eVOFewjrc8MGQZgKN2tbCN9OVw0aK8Nzl+WMwiH3j3YWIZd5UwIDsONTNSrYW9KTCoYSP/sXjpPXkvU3EE6jeios3M8rvTMLA4hI8BM5Isi391rQNLlPffIUOZiA8K548e6QCLUqvPJblnIcJHDtUOkepK5qnYYw7SV/xW23IcH9wvHcbf8eaHAD6PE/fTgMMFghjF"
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 0.008749217,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.048095614
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 0.10755985,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.045013502
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 0.029039765,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.07111994
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 0.0002371491,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        }
+                      ]
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 10,
+                    "candidatesTokenCount": 2,
+                    "totalTokenCount": 836,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 10
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 2
+                      }
+                    ],
+                    "thoughtsTokenCount": 824
+                  },
+                  "modelVersion": "gemini-3-flash-preview",
+                  "createTime": "2026-07-13T09:01:18.470383Z",
+                  "responseId": "XqlUau_aHMO3i9sPhuCtiAg"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 09:01:24 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

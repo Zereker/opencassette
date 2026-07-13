@@ -1,0 +1,45 @@
+meta:
+    recorded_at: "2026-07-13T08:22:25Z"
+    vendor: aws
+    model: claude-opus-4-7
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_stream
+    scenario_sha256: ad2ee8400836d9b4eb2d093c9fa6700a8cef6dda0a4b7fe91bb2d58dfae8f549
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]}],"temperature":1.0}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082225Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fiyykxatgiluk/invoke
+      response:
+        body:
+            string: '{"model":"claude-opus-4-7","id":"msg_bdrk_2hjuk6au25ckdjyvz7pe3eyylikp6hsoo2hfs5pqpiuc6qitdjoq","type":"message","role":"assistant","content":[{"type":"text","text":"1. Beaker\n2. Scoop"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":25,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":18,"output_tokens_details":{"thinking_tokens":0},"service_tier":"standard"}}'
+        headers:
+            Content-Length:
+                - "513"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:22:26 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "25"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "1079"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "18"
+            X-Amzn-Requestid:
+                - 89e19da7-41ad-43bb-ba1a-c5c9569ff60d
+        status:
+            code: 200
+            message: OK

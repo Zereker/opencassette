@@ -1,0 +1,45 @@
+meta:
+    recorded_at: "2026-07-13T08:22:14Z"
+    vendor: aws
+    model: claude-opus-4-8
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_tool_loop_round_trip
+    scenario_sha256: 4bab5f8cd8122dfc2b47529d7e3549549bf5fa34d98dfaa3ce10a725413a8824
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican"}]},{"role":"assistant","content":[{"type":"text","text":" "},{"type":"tool_use","id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","name":"pelican_name_generator","input":{}},{"type":"tool_use","id":"toolu_01N8a4jWyf116qKTMqKKmjyt","name":"pelican_name_generator","input":{}}]},{"role":"user","content":[{"type":"tool_result","tool_use_id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","content":"Charles"},{"type":"tool_result","tool_use_id":"toolu_01N8a4jWyf116qKTMqKKmjyt","content":"Sammy"}]}],"temperature":1.0,"tools":[{"name":"pelican_name_generator","description":"","input_schema":{"properties":{},"type":"object"}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082214Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fa7p85oev50sb/invoke
+      response:
+        body:
+            string: '{"model":"claude-opus-4-8","id":"msg_bdrk_cktu4u6esr43bp5e2skrcsxx2ugtwyhdeehnduxjkdlsgwge63oa","type":"message","role":"assistant","content":[{"type":"text","text":"Here are two names for your pet pelican:\n\n1. **Charles** – a distinguished, dignified name for a stately bird\n2. **Sammy** – a friendly, playful name for a more laid-back companion\n\nWould you like a few more options to choose from?"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":482,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":81,"output_tokens_details":{"thinking_tokens":0},"service_tier":"standard"}}'
+        headers:
+            Content-Length:
+                - "735"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:22:16 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "482"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "1972"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "81"
+            X-Amzn-Requestid:
+                - ce316c35-bcff-4a33-9934-220e8475c290
+        status:
+            code: 200
+            message: OK

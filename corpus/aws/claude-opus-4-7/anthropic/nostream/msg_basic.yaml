@@ -1,0 +1,45 @@
+meta:
+    recorded_at: "2026-07-13T08:22:18Z"
+    vendor: aws
+    model: claude-opus-4-7
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_basic
+    scenario_sha256: 96900b854ccc0e54a2c4212e2641250233b20c87390701d9f0cb0412a548dc40
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]}],"temperature":1.0}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082218Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fiyykxatgiluk/invoke
+      response:
+        body:
+            string: '{"model":"claude-opus-4-7","id":"msg_bdrk_a5dm36nfup6hvt6i5c4qfxr25fxi2x2jt6z7lk63psndygonvz7q","type":"message","role":"assistant","content":[{"type":"text","text":"1. **Beaky**\n2. **Scoops**"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":25,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":22,"output_tokens_details":{"thinking_tokens":0},"service_tier":"standard"}}'
+        headers:
+            Content-Length:
+                - "521"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:22:19 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "25"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "1138"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "22"
+            X-Amzn-Requestid:
+                - eccc53a4-7656-4fc3-b2af-b664183338cf
+        status:
+            code: 200
+            message: OK

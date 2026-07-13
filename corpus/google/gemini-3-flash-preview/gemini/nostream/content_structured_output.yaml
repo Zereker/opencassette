@@ -1,0 +1,108 @@
+meta:
+    recorded_at: "2026-07-13T09:01:31Z"
+    vendor: google
+    model: gemini-3-flash-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_output
+    scenario_sha256: abb2092b96d390d21af1ba01d701224df4456a2c53e5da5520e3cb1cd0bb7248
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent a cool dog"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"name": {"type": "string"}, "age": {"type": "integer"}, "bio": {"type": "string"}}, "required": ["name", "age", "bio"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3-flash-preview:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "{\"name\": \"Baron von Bark\", \"age\": 5, \"bio\": \"A retired skydiving instructor who now spends his days wearing mirrored sunglasses and catching frisbees mid-air while riding a custom-built skateboard.\"}",
+                            "thoughtSignature": "AY89a19JUX9EzyjByTWJAgiFxA8YVOsM4aa2pskZcqd8/iaydtavj0YRtezNYULMVvYe1OqYBbF1hayyBxnx3OXrXoh8VfavNQrHYmXcX6e22WMGanOut9FUuqBAdQb82PyRx/71HfbTR03A/pqVL3q09wCQNIBor3SooWwInofNPTcIrJjd5T3TWTIPlpGVFeGzUZMHNbljxaFUXNN8m9V+Ngz58a+SkBtbKv7eIW2decYdYsYdepLyOPYsC//WWbX4/sU6GdLjv1fHWZlPw+/dQbObnEPLl4+hZaklFh8v17Xci8gnVcUx5/J/Jryr5ACtZ4CdvgyBVVwqypFMYuX/+yX1NBiw5qxqb6qKhYnK5PcxYdCOtTnh1UAVhR8yhCavHGSA7eLdjj7GkWgfhDSXEvucPBS8+eSs6kYpI8edFayZp23pZCCXyYQrJyLdlqrTihbZX0CAseA6sI9JpxI+X826pcQjWiJOJXtHH0VbTOMOZENby0n+VpeybgrzzgHOcbcEXOvQtL5QoSmYQFjITJy+wcb4LgjHr3icJJWzaXKscWbRYb56/QUlXe8rt5axaqgfh56rNjf6rJvnXUCWlcZQ2SsO6AgcPnHuc4NJKGAHljQYb9sWaUTaxYQK3e3mNekCWGjSSeRH+gx1D+jyXgJ1XpycCPU8UdZXc6Alfm0WDqVaj0Rosy9rU2rDIq3J7PW83BDfUrqg4rI7CI5kJQuClCwICoacR/uEPuV6TGZ3mCAZhqcmFSYbuI3D7/KHyKFMFAxgUoScibsRpE4zU8sG2ffwebzNnq+mWH0FMbVjKXUG01G0x2liJGjvwjEGIljxzeXxRjm4NGkNiBK0wttMQ4S6xcOAleazMDPEpsotP6MJ4GI5t59nSh6uB2R16bSh2jm7x1yDcqAQXguaP2XSwZllIPbIR2eipxHvE7LApgAl9uo2XaRgrj360e2U3snXV0EoUu3mQolyUFBBODqT9Zot8m0LWllHLKhYVA2VtUOGeFeHtpS6AAs7BszOUK3+9LDvCXk2CauV9WKaey9me5Zil5jEKa3tSqinJZHmfAqNK+QhUyogQKBQDixzHLwy1D4lfEE+9ARdH26FTQGnxsFWNjCHU+u02Pi4NQalTvguIU62esTFdODFG9qEDUf4s0w2KtTuFnpWSYLq0u47R5ULos3csVKmSYd85ipHAeLn5HjIhrVzLWFw3S6pj01PV1/GIRT0A7k13589926NTJDnHh7A5uGMqj6p3NJ3DKXnldxwiPopY7u/ZFQ7qbnabwE77AQG76W+ZUtYoKn5v3ZLX8vz+qqESv2PnivF7W9VEgF0Sl4odmDQGaLizzQmjTmYi6rdO2+9/FRqG1rc6VpBDKbDlR2GPE+omRUaU2nA9fCEmjvV8M5p+WCjH8MwXstzb2TXKynKZ2KUKPfsTN9ueRBw7UydykVLOGt8/mlPL3pretmygS/ixVagJ9gnAcr7HM51F/lB3Xg8T+06aJR95FOa1Kons1qfmp6/GL0rW+eoQfayealo/OY5CnzW6vCYthDi+PQk8PF9DSPj/gbbDOpJXFNQ/sMIHpygYf8LMoJE46wdmL4zjWAq5FDyijQFuAQDdAUF3QPDa3nJ1e/drZqTrSo6xMITH4Sj8X5PWNh5BhiqV/CTcTPQFfUOBo21U5PK6luQc1sGkSJHFiHaVjjiTzA="
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.46560615e-05,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 2.2632776e-05,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.908484e-05,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 9.740184e-08,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        }
+                      ]
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 89,
+                    "candidatesTokenCount": 48,
+                    "totalTokenCount": 462,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 89
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 48
+                      }
+                    ],
+                    "thoughtsTokenCount": 325
+                  },
+                  "modelVersion": "gemini-3-flash-preview",
+                  "createTime": "2026-07-13T09:01:31.634865Z",
+                  "responseId": "a6lUavHfJput7PkPlaeLwAQ"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 09:01:35 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

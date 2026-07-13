@@ -1,0 +1,47 @@
+meta:
+    recorded_at: "2026-07-13T08:23:35Z"
+    vendor: aws
+    model: claude-sonnet-4-6
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_thinking
+    scenario_sha256: 691479faad665eb8578c00c9258e0902164d2a3798dc7dc092b2839555fd3997
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]}],"temperature":1.0,"thinking":{"type":"enabled","budget_tokens":1024}}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T082335Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2F3z04ny93dpv5/invoke
+      response:
+        body:
+            string: '{"model":"claude-sonnet-4-6","id":"msg_bdrk_01RoQubafFqAWgmeJDDcyoAT","type":"message","role":"assistant","content":[{"type":"thinking","thinking":"Quick and fun","signature":"EtYBCmcIDxABGAIqQE1uYo40bA46ggQplyoM0S1UL5jHE+UyLFjyniJYddrrRVNDXC5AmW2yQIMbeOse2kcAVPtA88J+sJjt8AdINWcyEWNsYXVkZS1zb25uZXQtNC02OABCCHRoaW5raW5nEgzpMhk3o3EjVfWVbaEaDBueN95hn2Qfqu6a6SIw7KlUG0+RT6QsNeXg4GzrczMvu0wxxPrPmCNznyvlVx88r/cIPhV7DkTsA3eJlLOSKh2A80EfBtkLmL59kiF/8lNHJ0VvWhL0SzJWA0mzVhgB"},{"type":"text","text":"**Bill** and **Scoop**"}],"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"usage":{"input_tokens":46,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":23,"output_tokens_details":{"thinking_tokens":9}}}'
+        headers:
+            Content-Length:
+                - "818"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 08:23:36 GMT
+            X-Amzn-Bedrock-Cache-Read-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Cache-Write-Input-Token-Count:
+                - "0"
+            X-Amzn-Bedrock-Input-Token-Count:
+                - "46"
+            X-Amzn-Bedrock-Invocation-Latency:
+                - "1181"
+            X-Amzn-Bedrock-Output-Token-Count:
+                - "23"
+            X-Amzn-Requestid:
+                - a5803dec-52d2-42cc-97ab-c07a0be176d5
+        status:
+            code: 200
+            message: OK

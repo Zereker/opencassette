@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T08:55:01Z"
+    vendor: google
+    model: gemini-2.5-pro
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_array
+    scenario_sha256: b155a71980b82efd8da8260d287f05e60f348fe0177e43b148afa58ce9f3cc1b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent 3 cool dogs"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"dogs": {"items": {"properties": {"name": {"title": "Name", "type": "string"}, "age": {"title": "Age", "type": "integer"}, "bio": {"title": "Bio", "type": "string"}}, "required": ["name", "age", "bio"], "title": "Dog", "type": "object"}, "title": "Dogs", "type": "array"}}, "required": ["dogs"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-2.5-pro:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"{\\n  \\\"dogs\\\": [\\n    {\\n      \\\"name\\\": \\\"Zephyr\\\",\\n      \\\"age\\\": 4,\\n      \\\"bio\\\": \\\"A cyberpunk corgi with a bio-luminescent tail who excels at hacking into automated treat dispensers.\\\"\\n    },\\n    {\\n      \\\"name\\\": \\\"Cosmo\\\",\\n      \\\"age\\\": 8,\\n      \\\"bio\\\": \\\"A retired space-faring husky who has chased comets across the galaxy and now enjoys quiet nights stargazing.\\\"\\n    },\\n    {\\n      \\\"name\\\": \\\"Riptide\\\",\\n      \\\"age\\\": 2,\\n      \\\"bio\\\": \\\"A golden retriever and professional surfer, known for his signature sunglasses and ability to hang ten.\\\"\\n    }\\n  ]\\n}\"}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 4.7866003e-08,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.010514379},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.375984e-07,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 6.8259776e-09,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 4.557025e-08,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.022224158}]}],\"usageMetadata\": {\"promptTokenCount\": 24,\"candidatesTokenCount\": 161,\"totalTokenCount\": 574,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 24}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 161}],\"thoughtsTokenCount\": 389},\"modelVersion\": \"gemini-2.5-pro\",\"createTime\": \"2026-07-13T08:55:01.956348Z\",\"responseId\": \"5adUaryvOsHm8vUP8IKWoQU\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 08:55:08 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

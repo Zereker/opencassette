@@ -167,6 +167,7 @@ func (r *Rules) AddReplacement(rp Replacement) error {
 	}
 
 	set := 0
+
 	for _, v := range []string{rp.Header, rp.Find, rp.Pattern} {
 		if v != "" {
 			set++
