@@ -1,0 +1,42 @@
+meta:
+    recorded_at: "2026-07-13T07:20:06Z"
+    vendor: zhipu
+    model: GLM-4.7
+    endpoint: https://open.bigmodel.cn
+    scenario: tool_loop_round_trip
+    scenario_sha256: 4a05c06dab3664d090ff6ad1a3d478d2824b51c36ed4aa63ecf7b77aac09e825
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"max_tokens":8192,"messages":[{"role":"user","content":"Two names for a pet pelican"},{"role":"assistant","content":" ","tool_calls":[{"id":"toolu_01LtHJmixrs9NcWQkK8hu8hj","type":"function","function":{"name":"pelican_name_generator","arguments":"{}"}},{"id":"toolu_01N8a4jWyf116qKTMqKKmjyt","type":"function","function":{"name":"pelican_name_generator","arguments":"{}"}}]},{"role":"tool","content":"Charles","tool_call_id":"toolu_01LtHJmixrs9NcWQkK8hu8hj"},{"role":"tool","content":"Sammy","tool_call_id":"toolu_01N8a4jWyf116qKTMqKKmjyt"}],"model":"GLM-4.7","stream":true,"stream_options":{"include_usage":true},"temperature":1,"tools":[{"type":"function","function":{"name":"pelican_name_generator","parameters":{"properties":{},"type":"object"}}}]}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://open.bigmodel.cn/api/paas/v4/chat/completions
+      response:
+        body:
+            string: "data: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"\\n\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"Here\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" are two\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" fun names\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" for a\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" pet pel\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"ican:\\n\\n\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"1.\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" **Charles\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"**\\n2\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\". **\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"Sammy\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"**\\n\\nBoth\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" sound friendly\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" and have\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" a nice\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" ring for\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" a feather\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"ed friend\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"!\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\" \U0001F426\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"\"}}]}\n\ndata: {\"id\":\"**TRACE_ID_1**\",\"created\":1783927206,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.7-jd\",\"choices\":[{\"index\":0,\"finish_reason\":\"stop\",\"delta\":{\"role\":\"assistant\",\"content\":\"\"}}],\"usage\":{\"prompt_tokens\":167,\"completion_tokens\":41,\"total_tokens\":208,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":40}}}\n\ndata: [DONE]\n\n"
+        headers:
+            Content-Type:
+                - text/event-stream;charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 07:20:07 GMT
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+            X-Log-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK

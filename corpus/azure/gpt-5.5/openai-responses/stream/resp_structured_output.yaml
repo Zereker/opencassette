@@ -1,0 +1,111 @@
+meta:
+    recorded_at: "2026-07-13T07:11:29Z"
+    vendor: azure
+    model: gpt-5.5
+    endpoint: https://**RESOURCE**.openai.azure.com
+    scenario: resp_structured_output
+    scenario_sha256: 94a5dfb41bb7e8201e869e0dfeb276856327773a41e064debc7551ec1f5a0ba1
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"input":[{"content":"Say hi.","role":"user","type":"message"}],"instructions":"You are terse. Answer in five words or fewer.","model":"gpt-5.5","store":false,"stream":true,"text":{"format":{"type":"json_schema","name":"Foo","description":"A trivial pydantic schema used to exercise `response_format`.","strict":true,"schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"type":"object","additionalProperties":false}}}}'
+        headers:
+            Api-Key:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://**RESOURCE**.openai.azure.com/openai/v1/responses?api-version=preview
+      response:
+        body:
+            string: |+
+                event: response.created
+                data: {"type":"response.created","response":{"id":"resp_01ecb8231b5c3992016a548fa210008195b2e8a2da8304096a","object":"response","created_at":1783926690,"status":"in_progress","background":false,"completed_at":null,"content_filters":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"auto","store":false,"temperature":1.0,"text":{"format":{"type":"json_schema","description":"A trivial pydantic schema used to exercise `response_format`.","name":"Foo","schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"type":"object","additionalProperties":false},"strict":true},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":0}
+
+                event: response.in_progress
+                data: {"type":"response.in_progress","response":{"id":"resp_01ecb8231b5c3992016a548fa210008195b2e8a2da8304096a","object":"response","created_at":1783926690,"status":"in_progress","background":false,"completed_at":null,"content_filters":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"auto","store":false,"temperature":1.0,"text":{"format":{"type":"json_schema","description":"A trivial pydantic schema used to exercise `response_format`.","name":"Foo","schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"type":"object","additionalProperties":false},"strict":true},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":1}
+
+                event: response.output_item.added
+                data: {"type":"response.output_item.added","item":{"id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","type":"message","status":"in_progress","content":[],"phase":"final_answer","role":"assistant"},"output_index":0,"sequence_number":2}
+
+                event: response.content_part.added
+                data: {"type":"response.content_part.added","content_index":0,"item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","output_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":""},"sequence_number":3}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":"{\"","item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","logprobs":[],"obfuscation":"daTZhGpecdV92Q","output_index":0,"sequence_number":4}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":"response","item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","logprobs":[],"obfuscation":"la0kCwXu","output_index":0,"sequence_number":5}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":"\":\"","item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","logprobs":[],"obfuscation":"pEwzIqeGDsLf5","output_index":0,"sequence_number":6}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":"Hi","item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","logprobs":[],"obfuscation":"NW6ILbazOI7oNG","output_index":0,"sequence_number":7}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":"!\"","item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","logprobs":[],"obfuscation":"xMDcyqMG4FdgrE","output_index":0,"sequence_number":8}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":"}","item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","logprobs":[],"obfuscation":"03tcKJOU8CAAMmj","output_index":0,"sequence_number":9}
+
+                event: response.output_text.done
+                data: {"type":"response.output_text.done","content_index":0,"item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","logprobs":[],"output_index":0,"sequence_number":10,"text":"{\"response\":\"Hi!\"}"}
+
+                event: response.content_part.done
+                data: {"type":"response.content_part.done","content_index":0,"item_id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","output_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":"{\"response\":\"Hi!\"}"},"sequence_number":11}
+
+                event: response.output_item.done
+                data: {"type":"response.output_item.done","item":{"id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","type":"message","status":"completed","content":[{"type":"output_text","annotations":[],"logprobs":[],"text":"{\"response\":\"Hi!\"}"}],"phase":"final_answer","role":"assistant"},"output_index":0,"sequence_number":12}
+
+                event: response.completed
+                data: {"type":"response.completed","response":{"id":"resp_01ecb8231b5c3992016a548fa210008195b2e8a2da8304096a","object":"response","created_at":1783926690,"status":"completed","background":false,"completed_at":1783926690,"content_filters":[{"blocked":false,"source_type":"prompt","content_filter_raw":[],"content_filter_results":{"hate":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"},"self_harm":{"filtered":false,"severity":"safe"},"jailbreak":{"detected":false,"filtered":false}},"content_filter_offsets":{"start_offset":0,"end_offset":1038,"check_offset":0}},{"blocked":false,"source_type":"completion","content_filter_raw":[],"content_filter_results":{"protected_material_text":{"detected":false,"filtered":false},"protected_material_code":{"detected":false,"filtered":false},"hate":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"},"self_harm":{"filtered":false,"severity":"safe"}},"content_filter_offsets":{"start_offset":0,"end_offset":18,"check_offset":0}}],"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[{"id":"msg_01ecb8231b5c3992016a548fa2b0d08195b5ab01bcb3a81851","type":"message","status":"completed","content":[{"type":"output_text","annotations":[],"logprobs":[],"text":"{\"response\":\"Hi!\"}"}],"phase":"final_answer","role":"assistant"}],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"default","store":false,"temperature":1.0,"text":{"format":{"type":"json_schema","description":"A trivial pydantic schema used to exercise `response_format`.","name":"Foo","schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"type":"object","additionalProperties":false},"strict":true},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":{"input_tokens":63,"input_tokens_details":{"cached_tokens":0},"output_tokens":13,"output_tokens_details":{"reasoning_tokens":0},"total_tokens":76},"user":null,"metadata":{}},"sequence_number":13}
+
+        headers:
+            Apim-Request-Id:
+                - '**TRACE_ID_1**'
+            Azureai-Fe-Is-Streaming:
+                - "True"
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 07:11:29 GMT
+            Skip-Error-Remapping:
+                - "true"
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Ms-Aoai-Configured-Data-Retention-Days:
+                - "30"
+            X-Ms-Is-Spilled-Over:
+                - "false"
+            X-Ms-Region:
+                - East US 2
+            X-Ms-Served-Model:
+                - gpt-5.5-2026-04-24
+            X-Ratelimit-Abusepenalty-Active:
+                - "False"
+            X-Ratelimit-Key:
+                - gpt-5.5
+            X-Ratelimit-Limit-Requests:
+                - "15000"
+            X-Ratelimit-Limit-Tokens:
+                - "15000000"
+            X-Ratelimit-Remaining-Requests:
+                - "14999"
+            X-Ratelimit-Remaining-Tokens:
+                - "14908646"
+            X-Ratelimit-Renewalperiod-Requests:
+                - "60"
+            X-Ratelimit-Renewalperiod-Tokens:
+                - "60"
+            X-Ratelimit-Reset-Requests:
+                - "0"
+            X-Ratelimit-Reset-Tokens:
+                - "0"
+            X-Request-Id:
+                - '**TRACE_ID_2**'
+        status:
+            code: 200
+            message: OK

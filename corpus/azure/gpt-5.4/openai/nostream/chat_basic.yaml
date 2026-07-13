@@ -1,0 +1,76 @@
+meta:
+    recorded_at: "2026-07-13T07:09:27Z"
+    vendor: azure
+    model: gpt-5.4
+    endpoint: https://**RESOURCE**.openai.azure.com
+    scenario: chat_basic
+    scenario_sha256: c88a48870c2ffdb177b8dbbca23f3ced1f791a59ce08288a4bf18e83a69c8099
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"gpt-5.4"}'
+        headers:
+            Api-Key:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://**RESOURCE**.openai.azure.com/openai/v1/chat/completions?api-version=preview
+      response:
+        body:
+            string: |
+                {"choices":[{"content_filter_results":{"hate":{"filtered":false,"severity":"safe"},"protected_material_code":{"detected":false,"filtered":false},"protected_material_text":{"detected":false,"filtered":false},"self_harm":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"}},"finish_reason":"stop","index":0,"logprobs":null,"message":{"annotations":[],"content":"Milo was a small gray cat with one white paw and a talent for appearing exactly where he was not supposed to be.\n\nHe lived in a narrow blue house at the end of a windy street, with an old woman named June who wore yellow cardigans and talked to her plants as if they were old friends. June said Milo was “helpful,” though this was generous. Milo knocked pencils off tables, slept in laundry baskets, and once stole an entire sausage from the kitchen counter and hid it behind the curtains for later.\n\nStill, he loved June, in the quiet, serious way cats do.\n\nEvery morning, Milo sat on the windowsill and inspected the neighborhood. He watched sparrows bicker in the hedge, watched the mail carrier march from gate to gate, watched children race past with untied shoes and half-zipped coats. He saw everything. He considered this his job.\n\nOne autumn afternoon, the wind arrived sharp and cold. June was in the garden, gathering the last of the tomatoes, when her scarf slipped from her shoulders and blew away like a red bird. It tumbled over the fence, skipped across the lane, and vanished into the little patch of woods beyond the houses.\n\nJune stood up slowly and sighed. “Oh, bother,” she said.\n\nMilo, from the windowsill, had seen the whole thing.\n\nNow, Milo had never been into the woods. The woods were full of suspicious noises and leaves that touched your back feet when you weren’t looking. But June looked tired, and the evening was coming on, and the red scarf had been her favorite.\n\nSo Milo jumped from the sill, shot through the cat flap, and trotted off.\n\nAcross the lane he went, tail high, paws silent. At the edge of the woods, he paused. The trees creaked above him. Something scurried in the underbrush. Milo puffed slightly, just enough to show the forest he was alert and not to be trifled with.\n\nThen he spotted a flash of red.\n\nThe scarf had snagged on a bramble bush deep between the roots of an old oak. Milo squeezed under fern fronds and pushed through twigs until he reached it. He bit the end of the scarf and tugged.\n\nIt did not move.\n\nHe tugged harder. The brambles held fast.\n\nMilo narrowed his eyes. This had become personal.\n\nHe pulled, twisted, backed up, and yanked with all the dignity he could manage. The scarf suddenly sprang free, and Milo tumbled backward into a pile of leaves. For a moment the world was scarf, paws, tail, and indignation.\n\nThen he stood, shook himself, and proudly took the scarf in his mouth.\n\nDragging a scarf through the woods is difficult work for a cat. It caught on roots, collected leaves, and once wrapped itself around Milo’s middle so that he had to walk sideways like a crab. But he persisted.\n\nWhen he emerged from the trees, the sky had gone gold with sunset. June was standing by the gate, peering down the lane.\n\n“Milo?” she called.\n\nMilo marched forward, red scarf trailing behind him like a victory banner.\n\nJune pressed both hands to her mouth. “Well,” she whispered, “would you look at that.”\n\nShe knelt down, untangled the scarf, and gathered Milo into her arms. He pretended to dislike this, of course. He made a small complaining sound and squirmed exactly once. But then he settled against her cardigan, which smelled of lavender and tomato vines.\n\nThat night June gave him a saucer of cream and half a slice of warm chicken. “For bravery,” she said.\n\nMilo ate every bite, washed his whiskers, and returned to his windowsill. Outside, the street glowed softly under the lamps. Inside, the house was warm, and June was humming in the kitchen, her red scarf looped safely around her neck.\n\nMilo tucked his white paw beneath himself and closed his eyes.\n\nHe had inspected the neighborhood.\nHe had entered the woods.\nHe had rescued the scarf.\n\nIt had been, he decided, a very successful day for a cat.","refusal":null,"role":"assistant"}}],"created":1783926571,"id":"chatcmpl-E1559PRIPvxUixAObizd3J59V3mUz","model":"gpt-5.4-2026-03-05","object":"chat.completion","prompt_filter_results":[{"prompt_index":0,"content_filter_results":{"hate":{"filtered":false,"severity":"safe"},"jailbreak":{"detected":false,"filtered":false},"self_harm":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"}}}],"service_tier":"default","system_fingerprint":null,"usage":{"completion_tokens":848,"completion_tokens_details":{"accepted_prediction_tokens":0,"audio_tokens":0,"reasoning_tokens":0,"rejected_prediction_tokens":0},"latency_checkpoint":{"engine_tbt_ms":18,"engine_ttft_ms":81,"engine_ttlt_ms":14923,"pre_inference_ms":85,"service_tbt_ms":18,"service_ttft_ms":415,"service_ttlt_ms":15252,"total_duration_ms":15178,"user_visible_ttft_ms":330},"prompt_tokens":13,"prompt_tokens_details":{"audio_tokens":0,"cached_tokens":0},"total_tokens":861}}
+        headers:
+            Apim-Request-Id:
+                - '**TRACE_ID_2**'
+            Azureai-Fe-Is-Streaming:
+                - "False"
+            Azureml-Model-Session:
+                - '**TRACE_ID_3**'
+            Content-Length:
+                - "5319"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 07:09:46 GMT
+            Skip-Error-Remapping:
+                - "true"
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            X-Accel-Buffering:
+                - "no"
+            X-Content-Type-Options:
+                - nosniff
+            X-Ms-Is-Spilled-Over:
+                - "false"
+            X-Ms-Rai-Invoked:
+                - "true"
+            X-Ms-Region:
+                - East US 2
+            X-Ms-Served-Model:
+                - gpt-5.4-2026-03-05
+            X-Ratelimit-Abusepenalty-Active:
+                - "False"
+            X-Ratelimit-Key:
+                - gpt-5.4
+            X-Ratelimit-Limit-Requests:
+                - "150000"
+            X-Ratelimit-Limit-Tokens:
+                - "15000000"
+            X-Ratelimit-Remaining-Requests:
+                - "149999"
+            X-Ratelimit-Remaining-Tokens:
+                - "14999987"
+            X-Ratelimit-Renewalperiod-Requests:
+                - "60"
+            X-Ratelimit-Renewalperiod-Tokens:
+                - "60"
+            X-Ratelimit-Reset-Requests:
+                - "0"
+            X-Ratelimit-Reset-Tokens:
+                - "0"
+            X-Request-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK

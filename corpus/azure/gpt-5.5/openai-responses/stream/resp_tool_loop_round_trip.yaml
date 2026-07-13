@@ -1,0 +1,108 @@
+meta:
+    recorded_at: "2026-07-13T07:11:31Z"
+    vendor: azure
+    model: gpt-5.5
+    endpoint: https://**RESOURCE**.openai.azure.com
+    scenario: resp_tool_loop_round_trip
+    scenario_sha256: 43c88f4e84c1f090ff6d1861444a477dbe05063624dd4e9adda95c1c38913143
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"input":[{"content":"What is the weather in San Francisco, CA?","role":"user","type":"message"},{"type":"function_call","name":"get_weather","arguments":"{\"location\":\"San Francisco, CA\"}","call_id":"call_X4GAXMKYDfnh3ZpHjYZe7y4R","id":"fc_0c664333a04fcba5016a0e8d5074ac819a96097efc14791554"},{"type":"function_call_output","output":"It''s sunny.","call_id":"call_X4GAXMKYDfnh3ZpHjYZe7y4R"}],"instructions":"You are terse. Answer in five words or fewer.","model":"gpt-5.5","store":false,"stream":true,"tools":[{"type":"function","name":"get_weather","description":"Get the weather for a location.","parameters":{"properties":{"location":{"type":"string"}},"required":["location"],"type":"object"}}]}'
+        headers:
+            Api-Key:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://**RESOURCE**.openai.azure.com/openai/v1/responses?api-version=preview
+      response:
+        body:
+            string: |+
+                event: response.created
+                data: {"type":"response.created","response":{"id":"resp_0c664333a04fcba5016a548fa42b0c819a831672c83aefe210","object":"response","created_at":1783926692,"status":"in_progress","background":false,"completed_at":null,"content_filters":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"auto","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[{"type":"function","description":"Get the weather for a location.","name":"get_weather","parameters":{"properties":{"location":{"type":"string"}},"required":["location"],"type":"object","additionalProperties":false},"strict":true}],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":0}
+
+                event: response.in_progress
+                data: {"type":"response.in_progress","response":{"id":"resp_0c664333a04fcba5016a548fa42b0c819a831672c83aefe210","object":"response","created_at":1783926692,"status":"in_progress","background":false,"completed_at":null,"content_filters":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"auto","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[{"type":"function","description":"Get the weather for a location.","name":"get_weather","parameters":{"properties":{"location":{"type":"string"}},"required":["location"],"type":"object","additionalProperties":false},"strict":true}],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":1}
+
+                event: response.output_item.added
+                data: {"type":"response.output_item.added","item":{"id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","type":"message","status":"in_progress","content":[],"phase":"final_answer","role":"assistant"},"output_index":0,"sequence_number":2}
+
+                event: response.content_part.added
+                data: {"type":"response.content_part.added","content_index":0,"item_id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","output_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":""},"sequence_number":3}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":"Sunny","item_id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","logprobs":[],"obfuscation":"F8HYuieucqr","output_index":0,"sequence_number":4}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":" in","item_id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","logprobs":[],"obfuscation":"B42dIpBSosqsI","output_index":0,"sequence_number":5}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":" San","item_id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","logprobs":[],"obfuscation":"WeFS3fWygZR3","output_index":0,"sequence_number":6}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":" Francisco","item_id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","logprobs":[],"obfuscation":"jy8ocq","output_index":0,"sequence_number":7}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":".","item_id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","logprobs":[],"obfuscation":"8fuKSXaX8wUINFw","output_index":0,"sequence_number":8}
+
+                event: response.output_text.done
+                data: {"type":"response.output_text.done","content_index":0,"item_id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","logprobs":[],"output_index":0,"sequence_number":9,"text":"Sunny in San Francisco."}
+
+                event: response.content_part.done
+                data: {"type":"response.content_part.done","content_index":0,"item_id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","output_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":"Sunny in San Francisco."},"sequence_number":10}
+
+                event: response.output_item.done
+                data: {"type":"response.output_item.done","item":{"id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","type":"message","status":"completed","content":[{"type":"output_text","annotations":[],"logprobs":[],"text":"Sunny in San Francisco."}],"phase":"final_answer","role":"assistant"},"output_index":0,"sequence_number":11}
+
+                event: response.completed
+                data: {"type":"response.completed","response":{"id":"resp_0c664333a04fcba5016a548fa42b0c819a831672c83aefe210","object":"response","created_at":1783926692,"status":"completed","background":false,"completed_at":1783926693,"content_filters":[{"blocked":false,"source_type":"completion","content_filter_raw":[],"content_filter_results":{"protected_material_code":{"detected":false,"filtered":false},"protected_material_text":{"detected":false,"filtered":false},"hate":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"},"self_harm":{"filtered":false,"severity":"safe"}},"content_filter_offsets":{"start_offset":0,"end_offset":23,"check_offset":0}}],"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[{"id":"msg_0c664333a04fcba5016a548fa4cea8819a816f9c47237c9a8c","type":"message","status":"completed","content":[{"type":"output_text","annotations":[],"logprobs":[],"text":"Sunny in San Francisco."}],"phase":"final_answer","role":"assistant"}],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"default","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[{"type":"function","description":"Get the weather for a location.","name":"get_weather","parameters":{"properties":{"location":{"type":"string"}},"required":["location"],"type":"object","additionalProperties":false},"strict":true}],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":{"input_tokens":103,"input_tokens_details":{"cached_tokens":0},"output_tokens":9,"output_tokens_details":{"reasoning_tokens":0},"total_tokens":112},"user":null,"metadata":{}},"sequence_number":12}
+
+        headers:
+            Apim-Request-Id:
+                - '**TRACE_ID_1**'
+            Azureai-Fe-Is-Streaming:
+                - "True"
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 07:11:32 GMT
+            Skip-Error-Remapping:
+                - "true"
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Ms-Aoai-Configured-Data-Retention-Days:
+                - "30"
+            X-Ms-Is-Spilled-Over:
+                - "false"
+            X-Ms-Region:
+                - East US 2
+            X-Ms-Served-Model:
+                - gpt-5.5-2026-04-24
+            X-Ratelimit-Abusepenalty-Active:
+                - "False"
+            X-Ratelimit-Key:
+                - gpt-5.5
+            X-Ratelimit-Limit-Requests:
+                - "15000"
+            X-Ratelimit-Limit-Tokens:
+                - "15000000"
+            X-Ratelimit-Remaining-Requests:
+                - "14999"
+            X-Ratelimit-Remaining-Tokens:
+                - "14999968"
+            X-Ratelimit-Renewalperiod-Requests:
+                - "60"
+            X-Ratelimit-Renewalperiod-Tokens:
+                - "60"
+            X-Ratelimit-Reset-Requests:
+                - "0"
+            X-Ratelimit-Reset-Tokens:
+                - "0"
+            X-Request-Id:
+                - '**TRACE_ID_2**'
+        status:
+            code: 200
+            message: OK

@@ -1,0 +1,219 @@
+meta:
+    recorded_at: "2026-07-13T07:10:49Z"
+    vendor: azure
+    model: gpt-5.5
+    endpoint: https://**RESOURCE**.openai.azure.com
+    scenario: resp_basic
+    scenario_sha256: 1c997915670921bfaec42eae10da22235fc316664a6084f1cc244bdce3d35435
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"input":[{"content":"Write a story about a cat.","role":"user","type":"message"}],"model":"gpt-5.5"}'
+        headers:
+            Api-Key:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://**RESOURCE**.openai.azure.com/openai/v1/responses?api-version=preview
+      response:
+        body:
+            string: |-
+                {
+                  "id": "resp_03c9a04f7ab7bf3f006a548f7c7dfc81949d958aed4ba5a4ea",
+                  "object": "response",
+                  "created_at": 1783926652,
+                  "status": "completed",
+                  "background": false,
+                  "completed_at": 1783926665,
+                  "content_filters": [
+                    {
+                      "blocked": false,
+                      "source_type": "prompt",
+                      "content_filter_raw": [],
+                      "content_filter_results": {
+                        "hate": {
+                          "filtered": false,
+                          "severity": "safe"
+                        },
+                        "sexual": {
+                          "filtered": false,
+                          "severity": "safe"
+                        },
+                        "violence": {
+                          "filtered": false,
+                          "severity": "safe"
+                        },
+                        "self_harm": {
+                          "filtered": false,
+                          "severity": "safe"
+                        },
+                        "jailbreak": {
+                          "detected": false,
+                          "filtered": false
+                        }
+                      },
+                      "content_filter_offsets": {
+                        "start_offset": 0,
+                        "end_offset": 859,
+                        "check_offset": 0
+                      }
+                    },
+                    {
+                      "blocked": false,
+                      "source_type": "completion",
+                      "content_filter_raw": [],
+                      "content_filter_results": {
+                        "protected_material_code": {
+                          "detected": false,
+                          "filtered": false
+                        },
+                        "protected_material_text": {
+                          "detected": false,
+                          "filtered": false
+                        },
+                        "hate": {
+                          "filtered": false,
+                          "severity": "safe"
+                        },
+                        "sexual": {
+                          "filtered": false,
+                          "severity": "safe"
+                        },
+                        "violence": {
+                          "filtered": false,
+                          "severity": "safe"
+                        },
+                        "self_harm": {
+                          "filtered": false,
+                          "severity": "safe"
+                        }
+                      },
+                      "content_filter_offsets": {
+                        "start_offset": 0,
+                        "end_offset": 2861,
+                        "check_offset": 0
+                      }
+                    }
+                  ],
+                  "error": null,
+                  "frequency_penalty": 0.0,
+                  "incomplete_details": null,
+                  "instructions": null,
+                  "max_output_tokens": null,
+                  "max_tool_calls": null,
+                  "model": "gpt-5.5",
+                  "moderation": null,
+                  "output": [
+                    {
+                      "id": "rs_03c9a04f7ab7bf3f006a548f7cf214819482750b7228db57f4",
+                      "type": "reasoning",
+                      "content": [],
+                      "summary": []
+                    },
+                    {
+                      "id": "msg_03c9a04f7ab7bf3f006a548f7d4f788194b9fbeb8d12554837",
+                      "type": "message",
+                      "status": "completed",
+                      "content": [
+                        {
+                          "type": "output_text",
+                          "annotations": [],
+                          "logprobs": [],
+                          "text": "Milo was a small gray cat with white paws, the kind that made him look as if he had stepped carefully through a bowl of cream.\n\nHe lived in a little house at the end of Willow Lane with an old woman named Mrs. Vale, who knitted scarves in summer and baked bread in winter. Milo had many important duties: guarding the windowsill from sparrows, testing every sunbeam for warmth, and sitting on any newspaper Mrs. Vale tried to read.\n\nBut Milo\u2019s greatest secret was that every night, when the moon rose above the chimney pots, he went exploring.\n\nOne evening, the wind blew open the garden gate.\n\nMilo noticed at once. A cat notices everything, especially things humans miss. He slipped through the gap and padded into the lane, his whiskers twitching.\n\nThe world beyond the garden smelled enormous\u2014rain on stone, chimney smoke, damp leaves, and somewhere far away, fish. Milo followed the smell past the bakery, under a parked bicycle, and across the quiet square where the fountain whispered to itself.\n\nAt the edge of the square stood a tall black cat with green eyes.\n\n\u201cYou\u2019re new,\u201d she said.\n\n\u201cI am exploring,\u201d Milo replied, trying to sound braver than he felt.\n\nThe black cat flicked her tail. \u201cThen you\u2019ll want to see the moon roof.\u201d\n\nMilo had never heard of a moon roof, but he nodded as if he visited such places all the time.\n\nThe black cat led him down an alley, over a wall, across a shed, and up a slanted roof warm from the day\u2019s sunshine. From there, Milo could see the whole town: the church spire, the glowing windows, the silver ribbon of the river, and his own little house at the end of Willow Lane.\n\nThe moon hung above it all like a saucer of milk.\n\nMilo sat very still.\n\n\u201cIt\u2019s beautiful,\u201d he whispered.\n\nThe black cat smiled. \u201cEverything is bigger from the rooftops.\u201d\n\nFor a while, they watched the town sleep. Then, from far below, Milo heard a sound.\n\n\u201cMilo?\u201d called Mrs. Vale\u2019s worried voice. \u201cMilo, where are you?\u201d\n\nHis ears pricked up. Suddenly, the world seemed too big.\n\n\u201cI have to go home,\u201d he said.\n\nThe black cat nodded. \u201cGood explorers always do.\u201d\n\nMilo raced back over the shed, under the wall, across the square, past the bakery, and through the open gate. Mrs. Vale was standing in the garden in her slippers, holding a lantern.\n\nWhen Milo trotted up to her, she bent down with a sigh of relief.\n\n\u201cOh, you troublesome little wanderer,\u201d she said, scooping him into her arms.\n\nMilo purred and pressed his cold nose against her chin.\n\nThat night, he slept at the foot of Mrs. Vale\u2019s bed, dreaming of rooftops and moonlight. And although the garden gate was firmly latched from then on, Milo knew the world was still out there\u2014wide and wonderful.\n\nBut he also knew something even better.\n\nHome was the best place to return to after an adventure."
+                        }
+                      ],
+                      "phase": "final_answer",
+                      "role": "assistant"
+                    }
+                  ],
+                  "parallel_tool_calls": true,
+                  "presence_penalty": 0.0,
+                  "previous_response_id": null,
+                  "prompt_cache_key": null,
+                  "prompt_cache_retention": "24h",
+                  "reasoning": {
+                    "context": "current_turn",
+                    "effort": "medium",
+                    "mode": "standard",
+                    "summary": null
+                  },
+                  "safety_identifier": null,
+                  "service_tier": "default",
+                  "store": true,
+                  "temperature": 1.0,
+                  "text": {
+                    "format": {
+                      "type": "text"
+                    },
+                    "verbosity": "medium"
+                  },
+                  "tool_choice": "auto",
+                  "tools": [],
+                  "top_logprobs": 0,
+                  "top_p": 0.98,
+                  "truncation": "disabled",
+                  "usage": {
+                    "input_tokens": 13,
+                    "input_tokens_details": {
+                      "cached_tokens": 0
+                    },
+                    "output_tokens": 659,
+                    "output_tokens_details": {
+                      "reasoning_tokens": 21
+                    },
+                    "total_tokens": 672
+                  },
+                  "user": null,
+                  "metadata": {}
+                }
+        headers:
+            Apim-Request-Id:
+                - '**TRACE_ID_2**'
+            Azureai-Fe-Is-Streaming:
+                - "False"
+            Content-Length:
+                - "6289"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 07:11:05 GMT
+            Skip-Error-Remapping:
+                - "true"
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Ms-Aoai-Configured-Data-Retention-Days:
+                - "30"
+            X-Ms-Is-Spilled-Over:
+                - "false"
+            X-Ms-Region:
+                - East US 2
+            X-Ms-Served-Model:
+                - gpt-5.5-2026-04-24
+            X-Ratelimit-Abusepenalty-Active:
+                - "False"
+            X-Ratelimit-Key:
+                - gpt-5.5
+            X-Ratelimit-Limit-Requests:
+                - "15000"
+            X-Ratelimit-Limit-Tokens:
+                - "15000000"
+            X-Ratelimit-Remaining-Requests:
+                - "14999"
+            X-Ratelimit-Remaining-Tokens:
+                - "14899982"
+            X-Ratelimit-Renewalperiod-Requests:
+                - "60"
+            X-Ratelimit-Renewalperiod-Tokens:
+                - "60"
+            X-Ratelimit-Reset-Requests:
+                - "0"
+            X-Ratelimit-Reset-Tokens:
+                - "0"
+            X-Request-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK
