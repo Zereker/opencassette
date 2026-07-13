@@ -36,5 +36,6 @@ func Corpus() fs.FS {
 		// Unreachable: "corpus" is a compile-time-embedded directory.
 		panic("opencassette: corpus subtree missing from embed: " + err.Error())
 	}
+
 	return sub
 }

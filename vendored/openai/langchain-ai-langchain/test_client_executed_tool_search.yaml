@@ -1,0 +1,381 @@
+requests:
+- body: !!binary |
+    eyJpbnB1dCI6W3siY29udGVudCI6IldoYXQncyB0aGUgd2VhdGhlciBpbiBTYW4gRnJhbmNpc2Nv
+    PyIsInJvbGUiOiJ1c2VyIiwidHlwZSI6Im1lc3NhZ2UifV0sIm1vZGVsIjoiZ3B0LTUuNCIsInN0
+    cmVhbSI6ZmFsc2UsInRvb2xzIjpbeyJ0eXBlIjoidG9vbF9zZWFyY2giLCJleGVjdXRpb24iOiJj
+    bGllbnQiLCJkZXNjcmlwdGlvbiI6IlNlYXJjaCBmb3IgYXZhaWxhYmxlIHRvb2xzIHRvIGhlbHAg
+    YW5zd2VyIHRoZSBxdWVzdGlvbi4iLCJwYXJhbWV0ZXJzIjp7InR5cGUiOiJvYmplY3QiLCJwcm9w
+    ZXJ0aWVzIjp7ImdvYWwiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsiZ29hbCJdLCJh
+    ZGRpdGlvbmFsUHJvcGVydGllcyI6ZmFsc2V9fV19
+  headers:
+    Accept:
+    - '**REDACTED**'
+    Accept-Encoding:
+    - '**REDACTED**'
+    Connection:
+    - '**REDACTED**'
+    Content-Length:
+    - '**REDACTED**'
+    Content-Type:
+    - '**REDACTED**'
+    Host:
+    - '**REDACTED**'
+    X-Stainless-Arch:
+    - '**REDACTED**'
+    X-Stainless-Async:
+    - '**REDACTED**'
+    X-Stainless-Lang:
+    - '**REDACTED**'
+    X-Stainless-OS:
+    - '**REDACTED**'
+    X-Stainless-Package-Version:
+    - '**REDACTED**'
+    X-Stainless-Raw-Response:
+    - '**REDACTED**'
+    X-Stainless-Runtime:
+    - '**REDACTED**'
+    X-Stainless-Runtime-Version:
+    - '**REDACTED**'
+    authorization:
+    - '**REDACTED**'
+    user-agent:
+    - '**REDACTED**'
+    x-stainless-retry-count:
+    - '**REDACTED**'
+  method: POST
+  uri: '**REDACTED**'
+- body: !!binary |
+    eyJpbnB1dCI6W3siY29udGVudCI6IldoYXQncyB0aGUgd2VhdGhlciBpbiBTYW4gRnJhbmNpc2Nv
+    PyIsInJvbGUiOiJ1c2VyIiwidHlwZSI6Im1lc3NhZ2UifSx7ImlkIjoidHNjXzAzMTFjYTg0N2Uz
+    OTJkNTQwMDY5YWNkZDQwMzk0YzgxOTZhOTkzNDVlMjk5MmViNjU3IiwiYXJndW1lbnRzIjp7Imdv
+    YWwiOiJGaW5kIGF2YWlsYWJsZSB0b29sKHMpIG9yIHdlYXRoZXIgY2FwYWJpbGl0eSB0byBnZXQg
+    Y3VycmVudCB3ZWF0aGVyIGZvciBTYW4gRnJhbmNpc2NvLiJ9LCJjYWxsX2lkIjoiY2FsbF9FY3ZL
+    c2gzcjlJYW1hQlc0Wno5cjdSaUsiLCJleGVjdXRpb24iOiJjbGllbnQiLCJzdGF0dXMiOiJjb21w
+    bGV0ZWQiLCJ0eXBlIjoidG9vbF9zZWFyY2hfY2FsbCJ9LHsidHlwZSI6InRvb2xfc2VhcmNoX291
+    dHB1dCIsImV4ZWN1dGlvbiI6ImNsaWVudCIsImNhbGxfaWQiOiJjYWxsX0VjdktzaDNyOUlhbWFC
+    VzRaejlyN1JpSyIsInN0YXR1cyI6ImNvbXBsZXRlZCIsInRvb2xzIjpbeyJ0eXBlIjoiZnVuY3Rp
+    b24iLCJkZWZlcl9sb2FkaW5nIjp0cnVlLCJuYW1lIjoiZ2V0X3dlYXRoZXIiLCJkZXNjcmlwdGlv
+    biI6IkdldCB0aGUgY3VycmVudCB3ZWF0aGVyIGZvciBhIGxvY2F0aW9uLiIsInBhcmFtZXRlcnMi
+    OnsicHJvcGVydGllcyI6eyJsb2NhdGlvbiI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6
+    WyJsb2NhdGlvbiJdLCJ0eXBlIjoib2JqZWN0In19XX1dLCJtb2RlbCI6ImdwdC01LjQiLCJzdHJl
+    YW0iOmZhbHNlLCJ0b29scyI6W3sidHlwZSI6InRvb2xfc2VhcmNoIiwiZXhlY3V0aW9uIjoiY2xp
+    ZW50IiwiZGVzY3JpcHRpb24iOiJTZWFyY2ggZm9yIGF2YWlsYWJsZSB0b29scyB0byBoZWxwIGFu
+    c3dlciB0aGUgcXVlc3Rpb24uIiwicGFyYW1ldGVycyI6eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVy
+    dGllcyI6eyJnb2FsIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImdvYWwiXSwiYWRk
+    aXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfX1dfQ==
+  headers:
+    Accept:
+    - '**REDACTED**'
+    Accept-Encoding:
+    - '**REDACTED**'
+    Connection:
+    - '**REDACTED**'
+    Content-Length:
+    - '**REDACTED**'
+    Content-Type:
+    - '**REDACTED**'
+    Cookie:
+    - '**REDACTED**'
+    Host:
+    - '**REDACTED**'
+    X-Stainless-Arch:
+    - '**REDACTED**'
+    X-Stainless-Async:
+    - '**REDACTED**'
+    X-Stainless-Lang:
+    - '**REDACTED**'
+    X-Stainless-OS:
+    - '**REDACTED**'
+    X-Stainless-Package-Version:
+    - '**REDACTED**'
+    X-Stainless-Raw-Response:
+    - '**REDACTED**'
+    X-Stainless-Runtime:
+    - '**REDACTED**'
+    X-Stainless-Runtime-Version:
+    - '**REDACTED**'
+    authorization:
+    - '**REDACTED**'
+    user-agent:
+    - '**REDACTED**'
+    x-stainless-retry-count:
+    - '**REDACTED**'
+  method: POST
+  uri: '**REDACTED**'
+- body: !!binary |
+    eyJpbnB1dCI6W3siY29udGVudCI6IldoYXQncyB0aGUgd2VhdGhlciBpbiBTYW4gRnJhbmNpc2Nv
+    PyIsInJvbGUiOiJ1c2VyIiwidHlwZSI6Im1lc3NhZ2UifSx7ImlkIjoidHNjXzAzMTFjYTg0N2Uz
+    OTJkNTQwMDY5YWNkZDQwMzk0YzgxOTZhOTkzNDVlMjk5MmViNjU3IiwiYXJndW1lbnRzIjp7Imdv
+    YWwiOiJGaW5kIGF2YWlsYWJsZSB0b29sKHMpIG9yIHdlYXRoZXIgY2FwYWJpbGl0eSB0byBnZXQg
+    Y3VycmVudCB3ZWF0aGVyIGZvciBTYW4gRnJhbmNpc2NvLiJ9LCJjYWxsX2lkIjoiY2FsbF9FY3ZL
+    c2gzcjlJYW1hQlc0Wno5cjdSaUsiLCJleGVjdXRpb24iOiJjbGllbnQiLCJzdGF0dXMiOiJjb21w
+    bGV0ZWQiLCJ0eXBlIjoidG9vbF9zZWFyY2hfY2FsbCJ9LHsidHlwZSI6InRvb2xfc2VhcmNoX291
+    dHB1dCIsImV4ZWN1dGlvbiI6ImNsaWVudCIsImNhbGxfaWQiOiJjYWxsX0VjdktzaDNyOUlhbWFC
+    VzRaejlyN1JpSyIsInN0YXR1cyI6ImNvbXBsZXRlZCIsInRvb2xzIjpbeyJ0eXBlIjoiZnVuY3Rp
+    b24iLCJkZWZlcl9sb2FkaW5nIjp0cnVlLCJuYW1lIjoiZ2V0X3dlYXRoZXIiLCJkZXNjcmlwdGlv
+    biI6IkdldCB0aGUgY3VycmVudCB3ZWF0aGVyIGZvciBhIGxvY2F0aW9uLiIsInBhcmFtZXRlcnMi
+    OnsicHJvcGVydGllcyI6eyJsb2NhdGlvbiI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6
+    WyJsb2NhdGlvbiJdLCJ0eXBlIjoib2JqZWN0In19XX0seyJhcmd1bWVudHMiOiJ7XCJsb2NhdGlv
+    blwiOlwiU2FuIEZyYW5jaXNjb1wifSIsImNhbGxfaWQiOiJjYWxsX3dIMDlkWnBxRG9WdHBldTd1
+    QmR2WTkxbCIsIm5hbWUiOiJnZXRfd2VhdGhlciIsInR5cGUiOiJmdW5jdGlvbl9jYWxsIiwiaWQi
+    OiJmY18wMzExY2E4NDdlMzkyZDU0MDA2OWFjZGQ0MTUwMjg4MTk2OGIyOWQ5Njg0MDYzMzc0NiIs
+    Im5hbWVzcGFjZSI6ImdldF93ZWF0aGVyIiwic3RhdHVzIjoiY29tcGxldGVkIn0seyJ0eXBlIjoi
+    ZnVuY3Rpb25fY2FsbF9vdXRwdXQiLCJvdXRwdXQiOiJUaGUgd2VhdGhlciBpbiBTYW4gRnJhbmNp
+    c2NvIGlzIHN1bm55IGFuZCA3Mlx1MDBiMEYiLCJjYWxsX2lkIjoiY2FsbF93SDA5ZFpwcURvVnRw
+    ZXU3dUJkdlk5MWwifV0sIm1vZGVsIjoiZ3B0LTUuNCIsInN0cmVhbSI6ZmFsc2UsInRvb2xzIjpb
+    eyJ0eXBlIjoidG9vbF9zZWFyY2giLCJleGVjdXRpb24iOiJjbGllbnQiLCJkZXNjcmlwdGlvbiI6
+    IlNlYXJjaCBmb3IgYXZhaWxhYmxlIHRvb2xzIHRvIGhlbHAgYW5zd2VyIHRoZSBxdWVzdGlvbi4i
+    LCJwYXJhbWV0ZXJzIjp7InR5cGUiOiJvYmplY3QiLCJwcm9wZXJ0aWVzIjp7ImdvYWwiOnsidHlw
+    ZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsiZ29hbCJdLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6
+    ZmFsc2V9fV19
+  headers:
+    Accept:
+    - '**REDACTED**'
+    Accept-Encoding:
+    - '**REDACTED**'
+    Connection:
+    - '**REDACTED**'
+    Content-Length:
+    - '**REDACTED**'
+    Content-Type:
+    - '**REDACTED**'
+    Cookie:
+    - '**REDACTED**'
+    Host:
+    - '**REDACTED**'
+    X-Stainless-Arch:
+    - '**REDACTED**'
+    X-Stainless-Async:
+    - '**REDACTED**'
+    X-Stainless-Lang:
+    - '**REDACTED**'
+    X-Stainless-OS:
+    - '**REDACTED**'
+    X-Stainless-Package-Version:
+    - '**REDACTED**'
+    X-Stainless-Raw-Response:
+    - '**REDACTED**'
+    X-Stainless-Runtime:
+    - '**REDACTED**'
+    X-Stainless-Runtime-Version:
+    - '**REDACTED**'
+    authorization:
+    - '**REDACTED**'
+    user-agent:
+    - '**REDACTED**'
+    x-stainless-retry-count:
+    - '**REDACTED**'
+  method: POST
+  uri: '**REDACTED**'
+responses:
+- body:
+    string: !!binary |
+      ewogICJpZCI6ICJyZXNwXzAzMTFjYTg0N2UzOTJkNTQwMDY5YWNkZDNmYjM0NDgxOTZhYWVmNDZh
+      Y2IxMjcwMWZlIiwKICAib2JqZWN0IjogInJlc3BvbnNlIiwKICAiY3JlYXRlZF9hdCI6IDE3NzI5
+      MzY1MTEsCiAgInN0YXR1cyI6ICJjb21wbGV0ZWQiLAogICJiYWNrZ3JvdW5kIjogZmFsc2UsCiAg
+      ImJpbGxpbmciOiB7CiAgICAicGF5ZXIiOiAiZGV2ZWxvcGVyIgogIH0sCiAgImNvbXBsZXRlZF9h
+      dCI6IDE3NzI5MzY1MTIsCiAgImVycm9yIjogbnVsbCwKICAiZnJlcXVlbmN5X3BlbmFsdHkiOiAw
+      LjAsCiAgImluY29tcGxldGVfZGV0YWlscyI6IG51bGwsCiAgImluc3RydWN0aW9ucyI6IG51bGws
+      CiAgIm1heF9vdXRwdXRfdG9rZW5zIjogbnVsbCwKICAibWF4X3Rvb2xfY2FsbHMiOiBudWxsLAog
+      ICJtb2RlbCI6ICJncHQtNS40LTIwMjYtMDMtMDUiLAogICJvdXRwdXQiOiBbCiAgICB7CiAgICAg
+      ICJpZCI6ICJ0c2NfMDMxMWNhODQ3ZTM5MmQ1NDAwNjlhY2RkNDAzOTRjODE5NmE5OTM0NWUyOTky
+      ZWI2NTciLAogICAgICAidHlwZSI6ICJ0b29sX3NlYXJjaF9jYWxsIiwKICAgICAgInN0YXR1cyI6
+      ICJjb21wbGV0ZWQiLAogICAgICAiYXJndW1lbnRzIjogewogICAgICAgICJnb2FsIjogIkZpbmQg
+      YXZhaWxhYmxlIHRvb2wocykgb3Igd2VhdGhlciBjYXBhYmlsaXR5IHRvIGdldCBjdXJyZW50IHdl
+      YXRoZXIgZm9yIFNhbiBGcmFuY2lzY28uIgogICAgICB9LAogICAgICAiY2FsbF9pZCI6ICJjYWxs
+      X0VjdktzaDNyOUlhbWFCVzRaejlyN1JpSyIsCiAgICAgICJleGVjdXRpb24iOiAiY2xpZW50Igog
+      ICAgfQogIF0sCiAgInBhcmFsbGVsX3Rvb2xfY2FsbHMiOiB0cnVlLAogICJwcmVzZW5jZV9wZW5h
+      bHR5IjogMC4wLAogICJwcmV2aW91c19yZXNwb25zZV9pZCI6IG51bGwsCiAgInByb21wdF9jYWNo
+      ZV9rZXkiOiBudWxsLAogICJwcm9tcHRfY2FjaGVfcmV0ZW50aW9uIjogbnVsbCwKICAicmVhc29u
+      aW5nIjogewogICAgImVmZm9ydCI6ICJub25lIiwKICAgICJzdW1tYXJ5IjogbnVsbAogIH0sCiAg
+      InNhZmV0eV9pZGVudGlmaWVyIjogbnVsbCwKICAic2VydmljZV90aWVyIjogImRlZmF1bHQiLAog
+      ICJzdG9yZSI6IHRydWUsCiAgInRlbXBlcmF0dXJlIjogMS4wLAogICJ0ZXh0IjogewogICAgImZv
+      cm1hdCI6IHsKICAgICAgInR5cGUiOiAidGV4dCIKICAgIH0sCiAgICAidmVyYm9zaXR5IjogIm1l
+      ZGl1bSIKICB9LAogICJ0b29sX2Nob2ljZSI6ICJhdXRvIiwKICAidG9vbHMiOiBbCiAgICB7CiAg
+      ICAgICJ0eXBlIjogInRvb2xfc2VhcmNoIiwKICAgICAgImRlc2NyaXB0aW9uIjogIlNlYXJjaCBm
+      b3IgYXZhaWxhYmxlIHRvb2xzIHRvIGhlbHAgYW5zd2VyIHRoZSBxdWVzdGlvbi4iLAogICAgICAi
+      ZXhlY3V0aW9uIjogImNsaWVudCIsCiAgICAgICJwYXJhbWV0ZXJzIjogewogICAgICAgICJ0eXBl
+      IjogIm9iamVjdCIsCiAgICAgICAgInByb3BlcnRpZXMiOiB7CiAgICAgICAgICAiZ29hbCI6IHsK
+      ICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgfQogICAgICAgIH0sCiAgICAg
+      ICAgInJlcXVpcmVkIjogWwogICAgICAgICAgImdvYWwiCiAgICAgICAgXSwKICAgICAgICAiYWRk
+      aXRpb25hbFByb3BlcnRpZXMiOiBmYWxzZQogICAgICB9CiAgICB9CiAgXSwKICAidG9wX2xvZ3By
+      b2JzIjogMCwKICAidG9wX3AiOiAwLjk4LAogICJ0cnVuY2F0aW9uIjogImRpc2FibGVkIiwKICAi
+      dXNhZ2UiOiB7CiAgICAiaW5wdXRfdG9rZW5zIjogNTQsCiAgICAiaW5wdXRfdG9rZW5zX2RldGFp
+      bHMiOiB7CiAgICAgICJjYWNoZWRfdG9rZW5zIjogMAogICAgfSwKICAgICJvdXRwdXRfdG9rZW5z
+      IjogMzQsCiAgICAib3V0cHV0X3Rva2Vuc19kZXRhaWxzIjogewogICAgICAicmVhc29uaW5nX3Rv
+      a2VucyI6IDAKICAgIH0sCiAgICAidG90YWxfdG9rZW5zIjogODgKICB9LAogICJ1c2VyIjogbnVs
+      bCwKICAibWV0YWRhdGEiOiB7fQp9
+  headers:
+    CF-RAY: '**REDACTED**'
+    Connection: '**REDACTED**'
+    Content-Type: '**REDACTED**'
+    Date: '**REDACTED**'
+    Server: '**REDACTED**'
+    Strict-Transport-Security: '**REDACTED**'
+    Transfer-Encoding: '**REDACTED**'
+    X-Content-Type-Options: '**REDACTED**'
+    alt-svc: '**REDACTED**'
+    cf-cache-status: '**REDACTED**'
+    content-length: '**REDACTED**'
+    openai-organization: '**REDACTED**'
+    openai-processing-ms: '**REDACTED**'
+    openai-project: '**REDACTED**'
+    openai-version: '**REDACTED**'
+    set-cookie: '**REDACTED**'
+    x-ratelimit-limit-requests: '**REDACTED**'
+    x-ratelimit-limit-tokens: '**REDACTED**'
+    x-ratelimit-remaining-requests: '**REDACTED**'
+    x-ratelimit-remaining-tokens: '**REDACTED**'
+    x-ratelimit-reset-requests: '**REDACTED**'
+    x-ratelimit-reset-tokens: '**REDACTED**'
+    x-request-id: '**REDACTED**'
+  status:
+    code: 200
+    message: OK
+- body:
+    string: !!binary |
+      ewogICJpZCI6ICJyZXNwXzAzMTFjYTg0N2UzOTJkNTQwMDY5YWNkZDQwZWNhODgxOTZhODQyNWRi
+      ZDc3NGU1YWQzIiwKICAib2JqZWN0IjogInJlc3BvbnNlIiwKICAiY3JlYXRlZF9hdCI6IDE3NzI5
+      MzY1MTIsCiAgInN0YXR1cyI6ICJjb21wbGV0ZWQiLAogICJiYWNrZ3JvdW5kIjogZmFsc2UsCiAg
+      ImJpbGxpbmciOiB7CiAgICAicGF5ZXIiOiAiZGV2ZWxvcGVyIgogIH0sCiAgImNvbXBsZXRlZF9h
+      dCI6IDE3NzI5MzY1MTMsCiAgImVycm9yIjogbnVsbCwKICAiZnJlcXVlbmN5X3BlbmFsdHkiOiAw
+      LjAsCiAgImluY29tcGxldGVfZGV0YWlscyI6IG51bGwsCiAgImluc3RydWN0aW9ucyI6IG51bGws
+      CiAgIm1heF9vdXRwdXRfdG9rZW5zIjogbnVsbCwKICAibWF4X3Rvb2xfY2FsbHMiOiBudWxsLAog
+      ICJtb2RlbCI6ICJncHQtNS40LTIwMjYtMDMtMDUiLAogICJvdXRwdXQiOiBbCiAgICB7CiAgICAg
+      ICJpZCI6ICJmY18wMzExY2E4NDdlMzkyZDU0MDA2OWFjZGQ0MTUwMjg4MTk2OGIyOWQ5Njg0MDYz
+      Mzc0NiIsCiAgICAgICJ0eXBlIjogImZ1bmN0aW9uX2NhbGwiLAogICAgICAic3RhdHVzIjogImNv
+      bXBsZXRlZCIsCiAgICAgICJhcmd1bWVudHMiOiAie1wibG9jYXRpb25cIjpcIlNhbiBGcmFuY2lz
+      Y29cIn0iLAogICAgICAiY2FsbF9pZCI6ICJjYWxsX3dIMDlkWnBxRG9WdHBldTd1QmR2WTkxbCIs
+      CiAgICAgICJuYW1lIjogImdldF93ZWF0aGVyIiwKICAgICAgIm5hbWVzcGFjZSI6ICJnZXRfd2Vh
+      dGhlciIKICAgIH0KICBdLAogICJwYXJhbGxlbF90b29sX2NhbGxzIjogdHJ1ZSwKICAicHJlc2Vu
+      Y2VfcGVuYWx0eSI6IDAuMCwKICAicHJldmlvdXNfcmVzcG9uc2VfaWQiOiBudWxsLAogICJwcm9t
+      cHRfY2FjaGVfa2V5IjogbnVsbCwKICAicHJvbXB0X2NhY2hlX3JldGVudGlvbiI6IG51bGwsCiAg
+      InJlYXNvbmluZyI6IHsKICAgICJlZmZvcnQiOiAibm9uZSIsCiAgICAic3VtbWFyeSI6IG51bGwK
+      ICB9LAogICJzYWZldHlfaWRlbnRpZmllciI6IG51bGwsCiAgInNlcnZpY2VfdGllciI6ICJkZWZh
+      dWx0IiwKICAic3RvcmUiOiB0cnVlLAogICJ0ZW1wZXJhdHVyZSI6IDEuMCwKICAidGV4dCI6IHsK
+      ICAgICJmb3JtYXQiOiB7CiAgICAgICJ0eXBlIjogInRleHQiCiAgICB9LAogICAgInZlcmJvc2l0
+      eSI6ICJtZWRpdW0iCiAgfSwKICAidG9vbF9jaG9pY2UiOiAiYXV0byIsCiAgInRvb2xzIjogWwog
+      ICAgewogICAgICAidHlwZSI6ICJ0b29sX3NlYXJjaCIsCiAgICAgICJkZXNjcmlwdGlvbiI6ICJT
+      ZWFyY2ggZm9yIGF2YWlsYWJsZSB0b29scyB0byBoZWxwIGFuc3dlciB0aGUgcXVlc3Rpb24uIiwK
+      ICAgICAgImV4ZWN1dGlvbiI6ICJjbGllbnQiLAogICAgICAicGFyYW1ldGVycyI6IHsKICAgICAg
+      ICAidHlwZSI6ICJvYmplY3QiLAogICAgICAgICJwcm9wZXJ0aWVzIjogewogICAgICAgICAgImdv
+      YWwiOiB7CiAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgIH0KICAgICAgICB9
+      LAogICAgICAgICJyZXF1aXJlZCI6IFsKICAgICAgICAgICJnb2FsIgogICAgICAgIF0sCiAgICAg
+      ICAgImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjogZmFsc2UKICAgICAgfQogICAgfSwKICAgIHsKICAg
+      ICAgInR5cGUiOiAibmFtZXNwYWNlIiwKICAgICAgImRlc2NyaXB0aW9uIjogIkdldCB0aGUgY3Vy
+      cmVudCB3ZWF0aGVyIGZvciBhIGxvY2F0aW9uLiIsCiAgICAgICJuYW1lIjogImdldF93ZWF0aGVy
+      IiwKICAgICAgInRvb2xzIjogWwogICAgICAgIHsKICAgICAgICAgICJ0eXBlIjogImZ1bmN0aW9u
+      IiwKICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJHZXQgdGhlIGN1cnJlbnQgd2VhdGhlciBmb3Ig
+      YSBsb2NhdGlvbi4iLAogICAgICAgICAgIm5hbWUiOiAiZ2V0X3dlYXRoZXIiLAogICAgICAgICAg
+      InBhcmFtZXRlcnMiOiB7CiAgICAgICAgICAgICJwcm9wZXJ0aWVzIjogewogICAgICAgICAgICAg
+      ICJsb2NhdGlvbiI6IHsKICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAg
+      ICAgICB9CiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJyZXF1aXJlZCI6IFsKICAgICAgICAg
+      ICAgICAibG9jYXRpb24iCiAgICAgICAgICAgIF0sCiAgICAgICAgICAgICJ0eXBlIjogIm9iamVj
+      dCIsCiAgICAgICAgICAgICJhZGRpdGlvbmFsUHJvcGVydGllcyI6IGZhbHNlCiAgICAgICAgICB9
+      LAogICAgICAgICAgInN0cmljdCI6IHRydWUKICAgICAgICB9CiAgICAgIF0KICAgIH0KICBdLAog
+      ICJ0b3BfbG9ncHJvYnMiOiAwLAogICJ0b3BfcCI6IDAuOTgsCiAgInRydW5jYXRpb24iOiAiZGlz
+      YWJsZWQiLAogICJ1c2FnZSI6IHsKICAgICJpbnB1dF90b2tlbnMiOiAzNTAsCiAgICAiaW5wdXRf
+      dG9rZW5zX2RldGFpbHMiOiB7CiAgICAgICJjYWNoZWRfdG9rZW5zIjogMAogICAgfSwKICAgICJv
+      dXRwdXRfdG9rZW5zIjogMTksCiAgICAib3V0cHV0X3Rva2Vuc19kZXRhaWxzIjogewogICAgICAi
+      cmVhc29uaW5nX3Rva2VucyI6IDAKICAgIH0sCiAgICAidG90YWxfdG9rZW5zIjogMzY5CiAgfSwK
+      ICAidXNlciI6IG51bGwsCiAgIm1ldGFkYXRhIjoge30KfQ==
+  headers:
+    CF-RAY: '**REDACTED**'
+    Connection: '**REDACTED**'
+    Content-Type: '**REDACTED**'
+    Date: '**REDACTED**'
+    Server: '**REDACTED**'
+    Strict-Transport-Security: '**REDACTED**'
+    Transfer-Encoding: '**REDACTED**'
+    X-Content-Type-Options: '**REDACTED**'
+    alt-svc: '**REDACTED**'
+    cf-cache-status: '**REDACTED**'
+    content-length: '**REDACTED**'
+    openai-organization: '**REDACTED**'
+    openai-processing-ms: '**REDACTED**'
+    openai-project: '**REDACTED**'
+    openai-version: '**REDACTED**'
+    x-ratelimit-limit-requests: '**REDACTED**'
+    x-ratelimit-limit-tokens: '**REDACTED**'
+    x-ratelimit-remaining-requests: '**REDACTED**'
+    x-ratelimit-remaining-tokens: '**REDACTED**'
+    x-ratelimit-reset-requests: '**REDACTED**'
+    x-ratelimit-reset-tokens: '**REDACTED**'
+    x-request-id: '**REDACTED**'
+  status:
+    code: 200
+    message: OK
+- body:
+    string: !!binary |
+      ewogICJpZCI6ICJyZXNwXzAzMTFjYTg0N2UzOTJkNTQwMDY5YWNkZDQxYjMzYzgxOTZhZDM0NGYw
+      NGQ4MmJjZmIyIiwKICAib2JqZWN0IjogInJlc3BvbnNlIiwKICAiY3JlYXRlZF9hdCI6IDE3NzI5
+      MzY1MTMsCiAgInN0YXR1cyI6ICJjb21wbGV0ZWQiLAogICJiYWNrZ3JvdW5kIjogZmFsc2UsCiAg
+      ImJpbGxpbmciOiB7CiAgICAicGF5ZXIiOiAiZGV2ZWxvcGVyIgogIH0sCiAgImNvbXBsZXRlZF9h
+      dCI6IDE3NzI5MzY1MTQsCiAgImVycm9yIjogbnVsbCwKICAiZnJlcXVlbmN5X3BlbmFsdHkiOiAw
+      LjAsCiAgImluY29tcGxldGVfZGV0YWlscyI6IG51bGwsCiAgImluc3RydWN0aW9ucyI6IG51bGws
+      CiAgIm1heF9vdXRwdXRfdG9rZW5zIjogbnVsbCwKICAibWF4X3Rvb2xfY2FsbHMiOiBudWxsLAog
+      ICJtb2RlbCI6ICJncHQtNS40LTIwMjYtMDMtMDUiLAogICJvdXRwdXQiOiBbCiAgICB7CiAgICAg
+      ICJpZCI6ICJtc2dfMDMxMWNhODQ3ZTM5MmQ1NDAwNjlhY2RkNDIwYjY0ODE5NmE2MDMzMDZmNTU0
+      NmZhYmQiLAogICAgICAidHlwZSI6ICJtZXNzYWdlIiwKICAgICAgInN0YXR1cyI6ICJjb21wbGV0
+      ZWQiLAogICAgICAiY29udGVudCI6IFsKICAgICAgICB7CiAgICAgICAgICAidHlwZSI6ICJvdXRw
+      dXRfdGV4dCIsCiAgICAgICAgICAiYW5ub3RhdGlvbnMiOiBbXSwKICAgICAgICAgICJsb2dwcm9i
+      cyI6IFtdLAogICAgICAgICAgInRleHQiOiAiU2FuIEZyYW5jaXNjbyBpcyBzdW5ueSBhbmQgNzJc
+      dTAwYjBGLiIKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJwaGFzZSI6ICJmaW5hbF9hbnN3ZXIi
+      LAogICAgICAicm9sZSI6ICJhc3Npc3RhbnQiCiAgICB9CiAgXSwKICAicGFyYWxsZWxfdG9vbF9j
+      YWxscyI6IHRydWUsCiAgInByZXNlbmNlX3BlbmFsdHkiOiAwLjAsCiAgInByZXZpb3VzX3Jlc3Bv
+      bnNlX2lkIjogbnVsbCwKICAicHJvbXB0X2NhY2hlX2tleSI6IG51bGwsCiAgInByb21wdF9jYWNo
+      ZV9yZXRlbnRpb24iOiBudWxsLAogICJyZWFzb25pbmciOiB7CiAgICAiZWZmb3J0IjogIm5vbmUi
+      LAogICAgInN1bW1hcnkiOiBudWxsCiAgfSwKICAic2FmZXR5X2lkZW50aWZpZXIiOiBudWxsLAog
+      ICJzZXJ2aWNlX3RpZXIiOiAiZGVmYXVsdCIsCiAgInN0b3JlIjogdHJ1ZSwKICAidGVtcGVyYXR1
+      cmUiOiAxLjAsCiAgInRleHQiOiB7CiAgICAiZm9ybWF0IjogewogICAgICAidHlwZSI6ICJ0ZXh0
+      IgogICAgfSwKICAgICJ2ZXJib3NpdHkiOiAibWVkaXVtIgogIH0sCiAgInRvb2xfY2hvaWNlIjog
+      ImF1dG8iLAogICJ0b29scyI6IFsKICAgIHsKICAgICAgInR5cGUiOiAidG9vbF9zZWFyY2giLAog
+      ICAgICAiZGVzY3JpcHRpb24iOiAiU2VhcmNoIGZvciBhdmFpbGFibGUgdG9vbHMgdG8gaGVscCBh
+      bnN3ZXIgdGhlIHF1ZXN0aW9uLiIsCiAgICAgICJleGVjdXRpb24iOiAiY2xpZW50IiwKICAgICAg
+      InBhcmFtZXRlcnMiOiB7CiAgICAgICAgInR5cGUiOiAib2JqZWN0IiwKICAgICAgICAicHJvcGVy
+      dGllcyI6IHsKICAgICAgICAgICJnb2FsIjogewogICAgICAgICAgICAidHlwZSI6ICJzdHJpbmci
+      CiAgICAgICAgICB9CiAgICAgICAgfSwKICAgICAgICAicmVxdWlyZWQiOiBbCiAgICAgICAgICAi
+      Z29hbCIKICAgICAgICBdLAogICAgICAgICJhZGRpdGlvbmFsUHJvcGVydGllcyI6IGZhbHNlCiAg
+      ICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0eXBlIjogIm5hbWVzcGFjZSIsCiAgICAgICJkZXNj
+      cmlwdGlvbiI6ICJHZXQgdGhlIGN1cnJlbnQgd2VhdGhlciBmb3IgYSBsb2NhdGlvbi4iLAogICAg
+      ICAibmFtZSI6ICJnZXRfd2VhdGhlciIsCiAgICAgICJ0b29scyI6IFsKICAgICAgICB7CiAgICAg
+      ICAgICAidHlwZSI6ICJmdW5jdGlvbiIsCiAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiR2V0IHRo
+      ZSBjdXJyZW50IHdlYXRoZXIgZm9yIGEgbG9jYXRpb24uIiwKICAgICAgICAgICJuYW1lIjogImdl
+      dF93ZWF0aGVyIiwKICAgICAgICAgICJwYXJhbWV0ZXJzIjogewogICAgICAgICAgICAicHJvcGVy
+      dGllcyI6IHsKICAgICAgICAgICAgICAibG9jYXRpb24iOiB7CiAgICAgICAgICAgICAgICAidHlw
+      ZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9LAogICAgICAgICAgICAi
+      cmVxdWlyZWQiOiBbCiAgICAgICAgICAgICAgImxvY2F0aW9uIgogICAgICAgICAgICBdLAogICAg
+      ICAgICAgICAidHlwZSI6ICJvYmplY3QiLAogICAgICAgICAgICAiYWRkaXRpb25hbFByb3BlcnRp
+      ZXMiOiBmYWxzZQogICAgICAgICAgfSwKICAgICAgICAgICJzdHJpY3QiOiB0cnVlCiAgICAgICAg
+      fQogICAgICBdCiAgICB9CiAgXSwKICAidG9wX2xvZ3Byb2JzIjogMCwKICAidG9wX3AiOiAwLjk4
+      LAogICJ0cnVuY2F0aW9uIjogImRpc2FibGVkIiwKICAidXNhZ2UiOiB7CiAgICAiaW5wdXRfdG9r
+      ZW5zIjogMzkyLAogICAgImlucHV0X3Rva2Vuc19kZXRhaWxzIjogewogICAgICAiY2FjaGVkX3Rv
+      a2VucyI6IDAKICAgIH0sCiAgICAib3V0cHV0X3Rva2VucyI6IDEzLAogICAgIm91dHB1dF90b2tl
+      bnNfZGV0YWlscyI6IHsKICAgICAgInJlYXNvbmluZ190b2tlbnMiOiAwCiAgICB9LAogICAgInRv
+      dGFsX3Rva2VucyI6IDQwNQogIH0sCiAgInVzZXIiOiBudWxsLAogICJtZXRhZGF0YSI6IHt9Cn0=
+  headers:
+    CF-RAY: '**REDACTED**'
+    Connection: '**REDACTED**'
+    Content-Type: '**REDACTED**'
+    Date: '**REDACTED**'
+    Server: '**REDACTED**'
+    Strict-Transport-Security: '**REDACTED**'
+    Transfer-Encoding: '**REDACTED**'
+    X-Content-Type-Options: '**REDACTED**'
+    alt-svc: '**REDACTED**'
+    cf-cache-status: '**REDACTED**'
+    content-length: '**REDACTED**'
+    openai-organization: '**REDACTED**'
+    openai-processing-ms: '**REDACTED**'
+    openai-project: '**REDACTED**'
+    openai-version: '**REDACTED**'
+    x-ratelimit-limit-requests: '**REDACTED**'
+    x-ratelimit-limit-tokens: '**REDACTED**'
+    x-ratelimit-remaining-requests: '**REDACTED**'
+    x-ratelimit-remaining-tokens: '**REDACTED**'
+    x-ratelimit-reset-requests: '**REDACTED**'
+    x-ratelimit-reset-tokens: '**REDACTED**'
+    x-request-id: '**REDACTED**'
+  status:
+    code: 200
+    message: OK

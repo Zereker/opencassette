@@ -166,6 +166,7 @@ func fetch(client *http.Client, url string) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("audit: fetch %s: %w", url, err)
 	}
+
 	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
