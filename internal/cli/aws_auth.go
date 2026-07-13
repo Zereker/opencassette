@@ -92,19 +92,26 @@ func newAWSBedrockAuth(metadataJSON string) (*awsBedrockAuth, []string, error) {
 // transport returns an HTTP transport whose TLS ServerName is the real Bedrock
 // runtime host, so a request to the NLB DNS name still passes certificate
 // verification (which is NOT disabled).
-func (a *awsBedrockAuth) transport() http.RoundTripper {
-	return &http.Transport{
+func (a *awsBedrockAuth) transport(stream bool) http.RoundTripper {
+	base := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			ServerName: "bedrock-runtime." + a.region + ".amazonaws.com",
 		},
 		ForceAttemptHTTP2: true,
 	}
+
+	if stream {
+		return &bedrockStreamTransport{base: base}
+	}
+
+	return base
 }
 
-// buildRequest constructs and signs the Bedrock invoke request: the URL is
-// {base}/model/{ARN}/invoke and the body has model/stream stripped (the model
-// is identified by the ARN in the path) with anthropic_version injected.
-func (a *awsBedrockAuth) buildRequest(base string, body []byte) (*http.Request, error) {
+// buildRequest constructs and signs the Bedrock request: the URL is
+// {base}/model/{ARN}/{invoke|invoke-with-response-stream} and the body has
+// model/stream stripped (the model is identified by the ARN in the path) with
+// anthropic_version injected.
+func (a *awsBedrockAuth) buildRequest(base string, body []byte, stream bool) (*http.Request, error) {
 	nb, err := rewriteBedrockBody(body)
 	if err != nil {
 		return nil, err
@@ -115,11 +122,16 @@ func (a *awsBedrockAuth) buildRequest(base string, body []byte) (*http.Request, 
 		return nil, fmt.Errorf("parse --url: %w", err)
 	}
 
+	suffix := "invoke"
+	if stream {
+		suffix = "invoke-with-response-stream"
+	}
+
 	// The ARN is one path segment. url.PathEscape encodes its "/" to %2F and
 	// leaves ":"; RawPath carries that spelling, and the SDK signer re-encodes
 	// it for the canonical request (Bedrock's expected double encoding).
-	u.Path = "/model/" + a.arn + "/invoke"
-	u.RawPath = "/model/" + url.PathEscape(a.arn) + "/invoke"
+	u.Path = "/model/" + a.arn + "/" + suffix
+	u.RawPath = "/model/" + url.PathEscape(a.arn) + "/" + suffix
 
 	req, err := http.NewRequest(http.MethodPost, u.String(), strings.NewReader(string(nb)))
 	if err != nil {
