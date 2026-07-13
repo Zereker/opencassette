@@ -34,11 +34,12 @@ grow a shared library of real captures.
 
 | Piece | What it does |
 |---|---|
-| `cassette` (Go package) | Loads both on-disk cassette formats found in the wild (pytest-recording's `interactions:` and langchain's parallel lists), normalizing bodies (nested/`!!binary`/gzipped) into plain bytes |
-| `recorder` (Go package) | An `http.RoundTripper` that records real calls with credential scrubbing and cross-header/body trace-ID redaction, plus a `meta:` provenance block |
-| `scenario` (Go package) + `packs/` | Standard request-body packs (SDK-derived, coverage-enforced by tests) for four wire protocols — OpenAI chat, OpenAI Responses, Anthropic Messages, Gemini generateContent — so a recording session exercises tools, tool loops, streaming, structured output — not just `"hi"` |
-| `verify` (Go package) | Checks a corpus for leaked credentials and synthetic-data tells (placeholder ids, impossible timestamps, token accounting that doesn't add up) |
-| `audit` (Go package) | Diffs each pack's field coverage against the protocol's authoritative schema (OpenAI/Anthropic via their SDKs' published OpenAPI specs, Gemini via Google's discovery document) — a one-way ceiling check that suggests what to record next, never a validator of recorded traffic |
+| `cassette` (public Go package) | Loads both on-disk cassette formats found in the wild (pytest-recording's `interactions:` and langchain's parallel lists), normalizing bodies (nested/`!!binary`/gzipped) into plain bytes — the package you import to replay captures |
+| `internal/recorder` | An `http.RoundTripper` that records real calls, delegating all scrubbing to `redact` and adding a `meta:` provenance block |
+| `internal/redact` + `profiles/` | The redaction policy: an embedded cross-vendor baseline (credential headers, plus trace/correlation carriers rewritten to `**TRACE_ID_n**`), per-vendor overlays in `profiles/<vendor>.yaml`, and custom header/find/pattern replacements — applied to the recorded copy only |
+| `internal/scenario` + `packs/` | Standard request-body packs (SDK-derived, coverage-enforced by tests) for four wire protocols — OpenAI chat, OpenAI Responses, Anthropic Messages, Gemini generateContent — so a recording session exercises tools, tool loops, streaming, structured output — not just `"hi"` |
+| `internal/verify` | Checks a corpus for leaked credentials and synthetic-data tells (placeholder ids, impossible timestamps, token accounting that doesn't add up) |
+| `internal/audit` | Diffs each pack's field coverage against the protocol's authoritative schema (OpenAI/Anthropic via their SDKs' published OpenAPI specs, Gemini via Google's discovery document) — a one-way ceiling check that suggests what to record next, never a validator of recorded traffic |
 | `cmd/opencassette` | The CLI over all of it: `record`, `verify` and `audit` |
 | `corpus/` | The recordings themselves, laid out `vendor/model/protocol/{stream,nostream}/scenario.yaml` |
 
@@ -84,6 +85,40 @@ RECORD_API_KEY=sk-... ./opencassette record \
   -probe-fields packs/openai-chat \
   -vendor deepseek -model deepseek-chat
 ```
+
+### Redaction and vendor profiles
+
+Every recording is scrubbed against a built-in cross-vendor baseline —
+credential headers blanked, and trace/correlation carriers (`traceparent`,
+B3, `X-Request-Id`, …) rewritten to stable `**TRACE_ID_n**` markers,
+consistently across headers, URI and bodies. The baseline
+(`internal/redact/baseline.yaml`) is embedded in the binary, so a capture is
+safe even with no profile.
+
+A vendor can declare extra carriers in `profiles/<vendor>.yaml`, loaded
+automatically by `--vendor`:
+
+```yaml
+# profiles/azure.yaml
+trace_headers:
+  - apim-request-id
+  - azureml-model-session
+replacements:                    # custom substitutions on the recorded copy
+  - header: x-ms-region          # replace a whole header value by name
+    with: "**REGION**"
+  - find: "my-resource-name"     # literal substring
+    with: "**RESOURCE**"
+    in: [uri, body]
+  - pattern: 'org-[a-z0-9]{24}'  # regexp match, body only
+    with: "**ORG_ID**"
+    in: [body]
+```
+
+Replacements run after the baseline scrubbing and touch only the recorded
+copy — never the live request/response, nor the `meta` provenance block.
+Prefer sinking a newly observed carrier into the vendor profile over a one-off
+`--scrub-header`. Automatic redaction is a safety net, not a substitute for
+reading the file and running `verify` before publishing.
 
 Verify a corpus (CI runs this on every PR):
 
