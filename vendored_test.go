@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/zereker/opencassette"
+	"github.com/zereker/opencassette/cassette"
 )
 
 // TestVendoredEmbed checks the third-party corpus is embedded intact: a
@@ -62,5 +63,30 @@ func TestVendoredEmbed(t *testing.T) {
 
 	if len(gz) < 2 || gz[0] != 0x1f || gz[1] != 0x8b {
 		t.Errorf("gzipped cassette lost its gzip magic (text-converted on checkout?)")
+	}
+}
+
+// TestLoadDirFSOverEmbeddedCorpora loads both embedded corpora through the
+// cassette package's fs.FS loader end-to-end — the exact path downstream
+// consumers use — asserting every file parses and nothing loads empty.
+func TestLoadDirFSOverEmbeddedCorpora(t *testing.T) {
+	for name, fsys := range map[string]fs.FS{
+		"corpus":   opencassette.Corpus(),
+		"vendored": opencassette.Vendored(),
+	} {
+		all, err := cassette.LoadDirFS(fsys)
+		if err != nil {
+			t.Fatalf("%s: LoadDirFS: %v", name, err)
+		}
+
+		if len(all) < 50 {
+			t.Errorf("%s: suspiciously few cassettes: %d", name, len(all))
+		}
+
+		for _, p := range cassette.SortedKeys(all) {
+			if len(all[p]) == 0 {
+				t.Errorf("%s/%s: loaded 0 interactions", name, p)
+			}
+		}
 	}
 }

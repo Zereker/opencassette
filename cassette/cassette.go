@@ -15,6 +15,10 @@
 // The whole file may also be gzip-compressed (`*.yaml.gz`); Load detects
 // and decompresses that up front, and LoadDir globs both extensions.
 //
+// Every loader has an fs.FS twin (LoadFS / LoadDirFS) for reading a corpus
+// that isn't on the local disk — most importantly the corpora this module
+// itself embeds (the repo root's Corpus() / Vendored()).
+//
 // Unknown top-level keys (such as the recorder's `meta:` provenance block)
 // are ignored, so provenance-carrying and provenance-less files load the
 // same way.
@@ -25,8 +29,8 @@ import (
 	"compress/gzip"
 	"fmt"
 	"io"
+	"io/fs"
 	"os"
-	"path/filepath"
 	"sort"
 	"strings"
 
@@ -42,13 +46,30 @@ type Interaction struct {
 }
 
 // Load reads a single cassette YAML file (optionally whole-file gzipped)
-// and returns its interactions in recorded order.
+// from the local filesystem and returns its interactions in recorded order.
 func Load(path string) ([]Interaction, error) {
 	raw, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("cassette: read %s: %w", path, err)
 	}
 
+	return parse(raw, path)
+}
+
+// LoadFS is Load for a cassette read from an fs.FS (e.g. this module's
+// embedded corpora) rather than the local filesystem.
+func LoadFS(fsys fs.FS, name string) ([]Interaction, error) {
+	raw, err := fs.ReadFile(fsys, name)
+	if err != nil {
+		return nil, fmt.Errorf("cassette: read %s: %w", name, err)
+	}
+
+	return parse(raw, name)
+}
+
+// parse turns a raw cassette file's bytes into interactions; path is only
+// used in error messages.
+func parse(raw []byte, path string) ([]Interaction, error) {
 	raw = gunzipIfNeeded(raw)
 
 	var doc map[string]any
@@ -153,9 +174,16 @@ func gunzipIfNeeded(b []byte) []byte {
 // found. The returned map is keyed by path relative to dir (forward-slash
 // separated); iterate via SortedKeys for deterministic order.
 func LoadDir(dir string) (map[string][]Interaction, error) {
+	return LoadDirFS(os.DirFS(dir))
+}
+
+// LoadDirFS is LoadDir for an fs.FS (e.g. this module's embedded corpora):
+// it walks the whole fs and loads every *.yaml / *.yaml.gz file, keyed by
+// fs path (forward-slash separated, relative to the fs root).
+func LoadDirFS(fsys fs.FS) (map[string][]Interaction, error) {
 	out := make(map[string][]Interaction)
 
-	err := filepath.WalkDir(dir, func(path string, d os.DirEntry, err error) error {
+	err := fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -164,17 +192,12 @@ func LoadDir(dir string) (map[string][]Interaction, error) {
 			return nil
 		}
 
-		rel, err := filepath.Rel(dir, path)
+		interactions, err := LoadFS(fsys, path)
 		if err != nil {
 			return err
 		}
 
-		interactions, err := Load(path)
-		if err != nil {
-			return err
-		}
-
-		out[filepath.ToSlash(rel)] = interactions
+		out[path] = interactions
 
 		return nil
 	})
