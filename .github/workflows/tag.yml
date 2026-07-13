@@ -1,0 +1,38 @@
+# Cut a release tag via workflow dispatch — for clients whose git
+# credentials can push branches but not tags (e.g. proxied CI sessions).
+# Tags the HEAD of the ref the workflow is dispatched on. Never force-moves
+# an existing tag; re-releasing a version requires deleting the tag first,
+# deliberately by hand.
+name: tag
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag name to create at this ref's HEAD (e.g. v0.0.4)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate tag name
+        run: |
+          if ! echo "${{ inputs.tag }}" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+([-+][A-Za-z0-9.-]+)?$'; then
+            echo "tag must look like vX.Y.Z (got: ${{ inputs.tag }})" >&2
+            exit 1
+          fi
+      - name: Create and push tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --tags origin "refs/tags/${{ inputs.tag }}" | grep -q .; then
+            echo "tag ${{ inputs.tag }} already exists; refusing to move it" >&2
+            exit 1
+          fi
+          git tag -a "${{ inputs.tag }}" -m "${{ inputs.tag }}"
+          git push origin "refs/tags/${{ inputs.tag }}"
+          echo "tagged $(git rev-parse HEAD) as ${{ inputs.tag }}"
