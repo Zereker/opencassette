@@ -1,0 +1,57 @@
+meta:
+    recorded_at: "2026-07-13T09:24:07Z"
+    vendor: aws
+    model: claude-opus-4-8
+    endpoint: https://**NLB**.elb.ap-northeast-1.amazonaws.com
+    scenario: msg_basic
+    scenario_sha256: 96900b854ccc0e54a2c4212e2641250233b20c87390701d9f0cb0412a548dc40
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"anthropic_version":"bedrock-2023-05-31","max_tokens":8192,"messages":[{"role":"user","content":[{"type":"text","text":"Two names for a pet pelican, be brief"}]}],"temperature":1.0}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+            X-Amz-Date:
+                - 20260713T092407Z
+            X-Amz-Security-Token:
+                - '**REDACTED**'
+        method: POST
+        uri: https://**NLB**.elb.ap-northeast-1.amazonaws.com/model/arn:aws:bedrock:ap-northeast-1:**ACCOUNT**:application-inference-profile%2Fa7p85oev50sb/invoke-with-response-stream
+      response:
+        body:
+            string: |+
+                data: {"type":"message_start","message":{"model":"claude-opus-4-8","id":"msg_bdrk_hs7tv3fer4bkxs3slzdxh6zkwtyifcjdfiodmqn3a2bnvqttgf2a","type":"message","role":"assistant","content":[],"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":20,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":5,"service_tier":"standard"}}}
+
+                data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Here are two names"}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" for a pet pelican:"}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\n\n1. **Pete"}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"**\n2. **Sc"}}
+
+                data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"oop**"}}
+
+                data: {"type":"content_block_stop","index":0}
+
+                data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null},"usage":{"input_tokens":20,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":32,"output_tokens_details":{"thinking_tokens":0}}}
+
+                data: {"type":"message_stop","amazon-bedrock-invocationMetrics":{"inputTokenCount":20,"outputTokenCount":32,"invocationLatency":1157,"firstByteLatency":1118}}
+
+        headers:
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:24:08 GMT
+            X-Amzn-Bedrock-Content-Type:
+                - application/json
+            X-Amzn-Requestid:
+                - a0e6c3cf-f0de-4c3d-b744-57d2a9964c2f
+        status:
+            code: 200
+            message: OK
