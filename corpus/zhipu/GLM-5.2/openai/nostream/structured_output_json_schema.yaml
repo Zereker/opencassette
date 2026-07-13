@@ -1,5 +1,5 @@
 meta:
-    recorded_at: "2026-07-13T03:24:14Z"
+    recorded_at: "2026-07-13T07:16:29Z"
     vendor: zhipu
     model: GLM-5.2
     endpoint: https://open.bigmodel.cn
@@ -18,12 +18,12 @@ interactions:
         uri: https://open.bigmodel.cn/api/paas/v4/chat/completions
       response:
         body:
-            string: '{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"Good.","reasoning_content":"1.  **Analyze the Input:** The user said \"respond with good\".\n2.  **Determine the Goal:** Provide a response that is exactly the word \"good\" or incorporates \"good\" in a positive, appropriate manner based on the explicit instruction. The simplest and most direct interpretation is to literally output the word \"good\". Another interpretation is to respond with a positive/good message. Let''s just output \"good.\" or \"Good!\" to perfectly fulfill the instruction.\n3.  **Formulate Output:** \"Good.\" (simple, direct, follows instructions perfectly). Let''s use \"Good.\"","role":"assistant"}}],"created":1783913061,"id":"**TRACE_ID_1**","model":"GLM-5.2","object":"chat.completion","request_id":"**TRACE_ID_1**","usage":{"completion_tokens":128,"completion_tokens_details":{"reasoning_tokens":124},"prompt_tokens":15,"prompt_tokens_details":{"cached_tokens":0},"total_tokens":143}}'
+            string: '{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"good","reasoning_content":"1.  **Analyze the Request:** The user is asking me to \"respond with good\".\n2.  **Identify the Intent:** The user wants a specific, single-word response (\"good\"). This is a very direct and simple prompt.\n3.  **Determine the Output:** The exact string \"good\" or perhaps \"Good.\" depending on standard capitalization, but strictly following \"good\". I will just output \"good\".\n4.  **Format:** No extra text, just the requested response.","role":"assistant"}}],"created":1783926993,"id":"**TRACE_ID_1**","model":"GLM-5.2","object":"chat.completion","request_id":"**TRACE_ID_1**","usage":{"completion_tokens":107,"completion_tokens_details":{"reasoning_tokens":104},"prompt_tokens":15,"prompt_tokens_details":{"cached_tokens":0},"total_tokens":122}}'
         headers:
             Content-Type:
                 - application/json; charset=UTF-8
             Date:
-                - Mon, 13 Jul 2026 03:24:21 GMT
+                - Mon, 13 Jul 2026 07:16:33 GMT
             Set-Cookie:
                 - '**REDACTED**'
             Strict-Transport-Security:

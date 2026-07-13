@@ -1,0 +1,96 @@
+meta:
+    recorded_at: "2026-07-13T07:11:08Z"
+    vendor: azure
+    model: gpt-5.5
+    endpoint: https://**RESOURCE**.openai.azure.com
+    scenario: resp_reasoning
+    scenario_sha256: 8f556552d61a72ae3818cdc8cc62506b2c1fb85d9f9b8ce4e09d8afa86991bb2
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"input":[{"content":"What is 2 + 2?","role":"user","type":"message"}],"instructions":"You are terse. Answer in five words or fewer.","model":"gpt-5.5","reasoning":{"effort":"low"},"store":false,"stream":true}'
+        headers:
+            Api-Key:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://**RESOURCE**.openai.azure.com/openai/v1/responses?api-version=preview
+      response:
+        body:
+            string: |+
+                event: response.created
+                data: {"type":"response.created","response":{"id":"resp_0bd3a3354a642f4f016a548f8cefa481949ab08ffb08b43608","object":"response","created_at":1783926668,"status":"in_progress","background":false,"completed_at":null,"content_filters":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"low","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"auto","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":0}
+
+                event: response.in_progress
+                data: {"type":"response.in_progress","response":{"id":"resp_0bd3a3354a642f4f016a548f8cefa481949ab08ffb08b43608","object":"response","created_at":1783926668,"status":"in_progress","background":false,"completed_at":null,"content_filters":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"low","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"auto","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":1}
+
+                event: response.output_item.added
+                data: {"type":"response.output_item.added","item":{"id":"msg_0bd3a3354a642f4f016a548f8da9b081949a88b90d1973a8b3","type":"message","status":"in_progress","content":[],"phase":"final_answer","role":"assistant"},"output_index":0,"sequence_number":2}
+
+                event: response.content_part.added
+                data: {"type":"response.content_part.added","content_index":0,"item_id":"msg_0bd3a3354a642f4f016a548f8da9b081949a88b90d1973a8b3","output_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":""},"sequence_number":3}
+
+                event: response.output_text.delta
+                data: {"type":"response.output_text.delta","content_index":0,"delta":"4","item_id":"msg_0bd3a3354a642f4f016a548f8da9b081949a88b90d1973a8b3","logprobs":[],"obfuscation":"T3sFjoxuOfNnrbx","output_index":0,"sequence_number":4}
+
+                event: response.output_text.done
+                data: {"type":"response.output_text.done","content_index":0,"item_id":"msg_0bd3a3354a642f4f016a548f8da9b081949a88b90d1973a8b3","logprobs":[],"output_index":0,"sequence_number":5,"text":"4"}
+
+                event: response.content_part.done
+                data: {"type":"response.content_part.done","content_index":0,"item_id":"msg_0bd3a3354a642f4f016a548f8da9b081949a88b90d1973a8b3","output_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":"4"},"sequence_number":6}
+
+                event: response.output_item.done
+                data: {"type":"response.output_item.done","item":{"id":"msg_0bd3a3354a642f4f016a548f8da9b081949a88b90d1973a8b3","type":"message","status":"completed","content":[{"type":"output_text","annotations":[],"logprobs":[],"text":"4"}],"phase":"final_answer","role":"assistant"},"output_index":0,"sequence_number":7}
+
+                event: response.completed
+                data: {"type":"response.completed","response":{"id":"resp_0bd3a3354a642f4f016a548f8cefa481949ab08ffb08b43608","object":"response","created_at":1783926668,"status":"completed","background":false,"completed_at":1783926669,"content_filters":[{"blocked":false,"source_type":"prompt","content_filter_raw":[],"content_filter_results":{"hate":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"},"self_harm":{"filtered":false,"severity":"safe"},"jailbreak":{"detected":false,"filtered":false}},"content_filter_offsets":{"start_offset":0,"end_offset":847,"check_offset":0}},{"blocked":false,"source_type":"completion","content_filter_raw":[],"content_filter_results":{"protected_material_code":{"detected":false,"filtered":false},"protected_material_text":{"detected":false,"filtered":false},"hate":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"},"self_harm":{"filtered":false,"severity":"safe"}},"content_filter_offsets":{"start_offset":0,"end_offset":1,"check_offset":0}}],"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[{"id":"msg_0bd3a3354a642f4f016a548f8da9b081949a88b90d1973a8b3","type":"message","status":"completed","content":[{"type":"output_text","annotations":[],"logprobs":[],"text":"4"}],"phase":"final_answer","role":"assistant"}],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"low","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"default","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":{"input_tokens":29,"input_tokens_details":{"cached_tokens":0},"output_tokens":5,"output_tokens_details":{"reasoning_tokens":0},"total_tokens":34},"user":null,"metadata":{}},"sequence_number":8}
+
+        headers:
+            Apim-Request-Id:
+                - '**TRACE_ID_1**'
+            Azureai-Fe-Is-Streaming:
+                - "True"
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 07:11:08 GMT
+            Skip-Error-Remapping:
+                - "true"
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Ms-Aoai-Configured-Data-Retention-Days:
+                - "30"
+            X-Ms-Is-Spilled-Over:
+                - "false"
+            X-Ms-Region:
+                - East US 2
+            X-Ms-Served-Model:
+                - gpt-5.5-2026-04-24
+            X-Ratelimit-Abusepenalty-Active:
+                - "False"
+            X-Ratelimit-Key:
+                - gpt-5.5
+            X-Ratelimit-Limit-Requests:
+                - "15000"
+            X-Ratelimit-Limit-Tokens:
+                - "15000000"
+            X-Ratelimit-Remaining-Requests:
+                - "14999"
+            X-Ratelimit-Remaining-Tokens:
+                - "14999986"
+            X-Ratelimit-Renewalperiod-Requests:
+                - "60"
+            X-Ratelimit-Renewalperiod-Tokens:
+                - "60"
+            X-Ratelimit-Reset-Requests:
+                - "0"
+            X-Ratelimit-Reset-Tokens:
+                - "0"
+            X-Request-Id:
+                - '**TRACE_ID_2**'
+        status:
+            code: 200
+            message: OK

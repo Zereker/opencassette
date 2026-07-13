@@ -1,0 +1,818 @@
+meta:
+    recorded_at: "2026-07-13T07:18:23Z"
+    vendor: zhipu
+    model: GLM-4.7
+    endpoint: https://open.bigmodel.cn
+    scenario: chat_stream_usage
+    scenario_sha256: 73ca6813e2fb764472d020437bab0c06aba10e340bb0db97ea1de671f1c4496b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"GLM-4.7","stream":true,"stream_options":{"include_usage":true}}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://open.bigmodel.cn/api/paas/v4/chat/completions
+      response:
+        body:
+            string: |+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"\nThe"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" user wants a story about a cat.\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"I need to decide on the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" plot, setting, and characters"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".\nPossible ideas:\n1"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".  A magical cat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".\n2.  A"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" street cat finding a home.\n3"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".  A cat solving"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" a mystery.\n4.  A"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" slice-of-life story from"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" the cat's perspective.\n\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"Idea 2 is"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" a classic trope but can"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" be done well. Idea"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" 4 is often rel"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"atable and charming. Let"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"'s go with a mix of"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" 2 and 4,"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" but maybe give it a slight"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" twist. Maybe an old,"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" grumpy cat who thinks he runs"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" the neighborhood, but secretly"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" cares. Or a young"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":", curious cat exploring the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" world.\n\nLet's go"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" with a young cat named \""}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"Mochi\" ("}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"cute name) who"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" is an indoor cat longing"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" for the outside. This allows"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" for sensory descriptions (s"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ights, smells, sounds"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":") and a journey of discovery"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".\n\n*   **Character:** M"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ochi. Fluffy,"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" white with grey patches (a"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" tuxedo or just"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" patches? Let's go"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" with a calico pattern"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" or maybe just a grey"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" tabby for simplicity, but"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" \"Mochi\" sounds"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" soft. Let's make"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" him a chubby ginger cat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". Ginger cats have personality).\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"*   **Setting:** A"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" quiet suburban house, a"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" garden, and the wider"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" street beyond.\n*   **"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"Plot:** Mochi watches"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" birds from the window. One"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" day, the door is left"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" ajar. He sneaks out"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". He explores the garden"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":", encounters a neighbor cat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" (the \"veteran\"),"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" sees something scary (a dog or"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" a loud car), and"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" then realizes home is best"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":", or maybe finds a new appreciation"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" for his little world. Let"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"'s go with the \"real"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"izing home is best but"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" with a new confidence\" arc"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".\n\n*   **Opening:** M"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ochi by the window"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". The \"Great Beyond"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".\"\n*   **Inc"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"iting Incident:** The screen"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" door doesn't latch.\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"*   **Rising Action"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":":** The escape. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" sensory overload of the grass. Meeting"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" the neighbor cat (let"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"'s call him Barnaby)."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" Barnaby is a scar"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"red black cat. He gives"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" advice.\n*   **"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"Climax:** A threat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" appears. The Mail Carrier"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"'s terrifying bag? Or"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" a dog. Let's go"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" with a squirrel that fights"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" back, or a sudden"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" thunderstorm. A storm"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" is dramatic. The sky turns"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" dark.\n*   **Falling Action"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":":** Mochi gets"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" scared. He can't get"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" back in the way he came"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". He has to me"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ow loudly. His human hears"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" him.\n*   **Resolution:** Back"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" inside, warm milk, dry fur"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". He still looks out"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" the window, but he's the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" King of the Inside now"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".\n\n*   *Ref"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ining the sensory details:* The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" smell of wet pavement, the rough"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" texture of bark, the vibration"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" of thunder.\n*   *"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"Refining the character voice:* Cat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" logic. Humans are \""}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"The Giants\" or \"The Can"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"-Openers.\" Food"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" is \"Crunchies"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".\"\n\nLet's write.\n\n*   *"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"Drafting - Scene 1:*"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" The Window. Mochi is"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" a ginger tom. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" glass is cold. He"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" sees a bird (The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" Feathered Enemy).\n*"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"   *Drafting - Scene"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" 2:* The Escape. The human"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":", \"Sarah,\" brings"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" in groceries. The door is"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" open for just a second too"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" long. Mochi d"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"arts.\n*   *Draft"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ing - Scene 3:* The Garden"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". It's huge. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" grass tickles his belly. He sees"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" a butterfly. He catches"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"... nothing.\n*   *Drafting"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" - Scene 4:* The Encounter"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". Barnaby, the stray"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" cat. He looks like"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" a shadow. \"You"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"'re soft, house cat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":",\" he says. M"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ochi tries to puff"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" up.\n*   *Drafting"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" - Scene 5:* The Storm"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". The sky turns grey. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" wind howls. Barn"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"aby vanishes to his"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" secret spot. Mochi"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" is exposed. Rain falls"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":".\n*   *Drafting"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" - Scene 6:* The Rescue"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". He huddles under"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" a porch. Sarah calls his"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" name. He meows pit"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ifully. She finds"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" him.\n*   *Drafting"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" - Scene 7:* Home"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". Towel dry. Treat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"s. He is a"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" veteran now.\n\nLet's polish the prose"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". Make it cozy but adventurous"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":". Focus on the cat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"'s perspective. Use verbs"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" like \"slink,\" \"p"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ounce,\" \"vibrate.\"\n\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"*Self-Correction during"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" drafting:* Make sure M"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"ochi doesn't seem"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" *too* dumb. He's"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" curious. Make Barnaby a mentor"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":" figure, not a bully.\n\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"Okay, ready to generate"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","reasoning_content":"."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"Barnaby was a cat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of substantial girth and"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" even more substantial opinions. He was an"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" orange tabby, the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" color of burnt toast, with a belly"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" that swung gently from side to side as"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" he walked. To the casual"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" observer, Barnaby was merely"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" a house pet. To"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" Barnaby, he was the Emperor"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of the Living Room, the Duke"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of the Dry Food, and the undis"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"puted Sovereign of the Sun"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"beams.\n\nHis kingdom"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" was a small, tidy house"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" occupied by a human named Clara"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". Clara was adequate."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" She provided the crunchy salmon"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" delights in the morning and"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the soft, expensive chicken"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" pâté in the evening"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". She kept the thermostat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" at a perfect seventy-two degrees."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" However, she lacked one"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" crucial quality: she did not understand that"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the Front Door was the enemy.\n\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"The Front Door was a magical"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" portal. Beyond it lay"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the Great Green Untamed (the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" front lawn) and the Whisper"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ing Woods (the park"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" across the street). Barnaby spent"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" hours sitting on the entry"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"way rug, staring at"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the wood grain, his"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" tail twitching with calculated intent"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":".\n\nOne Tuesday, the opportunity"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" presented itself. Clara returned"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" from the outside world,"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" arms full of brown paper bags that"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" smelled of fresh produce and—"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"gloriously—catnip"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". As she kicked the door"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" shut behind her, she"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" struggled with the bags. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" heavy door didn't catch"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". It sat slightly ajar, leaving"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" a gap the size of a mouse"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":".\n\nBarnaby froze"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". His ears swive"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"led forward. The air"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" coming through the crack smelled"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of damp earth, exhaust"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" fumes, and freedom"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":".\n\nClara went into the kitchen."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" The house was silent.\n\nBarnaby"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" engaged his rear leg thr"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"usters. He pushed off the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" rug, a furry orange"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" rocket, and squeezed through the gap.\n\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"The world outside was loud and"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" bright. The sun hit his"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" eyes with the intensity of a thousand"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" laser pointers. Barnaby blinked"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", momentarily stunned. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" grass beneath his paws was cool"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" and wet, not at all"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" like the comfortable beige carpet"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of the living room."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" It tickled his toe beans.\n\nHe"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" took a tentative step."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" Then another. He was an"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" explorer. A Viking of"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the Suburbs.\n\nHe"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" crept along the edge"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of the house, staying"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" low to the ground, his belly"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" brushing the damp mulch. He"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" saw a butterfly—a foolish"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", erratic creature—and considered"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" giving chase, but he"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" decided it was beneath his dignity"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". He was on a mission.\n\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"Suddenly, a shadow fell over him"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". Barnaby looked up."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" It was the Beast from"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" Next Door.\n\nThe Beast was"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" a golden retriever named Max."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" Max was a creature of simple"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" enthusiasms, primarily"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" tennis balls and mud. Max"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" saw Barnaby. Max"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"’s tail began a met"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ronome swing that threatened"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" to level the fence.\n\n\"W"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"oof?\" Max in"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"quired, sticking his large"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", wet snout through the fence"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" slats.\n\nBarnaby’s"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" fur instantly tripled in"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" volume. He looked like a bottle"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" brush that had been electro"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"cuted. He let out a his"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"s that sounded like steam"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" escaping a radiator. He"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" did not run; he simply"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" puffed up and stared"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" Max down with the fury"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of a thousand suns. Max"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", confused by this hostile"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", spiky orange orb"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", retreated to dig a hole.\n\nVict"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ory was sweet.\n\nEm"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"boldened, Barnaby ventured"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" further. He reached the driveway"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", a vast expanse of"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" grey gravel. In the center"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of the driveway sat a formidable"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" opponent: The Plastic Bag"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". It was white, cr"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"inkly, and flutter"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ing in the wind with"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" a menacing rustle.\n\nB"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"arnaby approached it with the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" caution of a bomb disposal expert"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". He batted it"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". It crinkled. He"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" jumped back. He p"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ounced on it, biting"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the plastic handle. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" bag fought back, wrapping"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" itself around his head.\n\n"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"Barnaby panicked. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" world had gone white!"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" He shook his head violently"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", back-pedaling"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", doing the \"crab"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" walk\" sideways as he tried"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" to shake off the suff"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ocating monster. He"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" tripped over his own feet"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" and rolled onto his back, the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" bag still clinging to his ears"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":".\n\nJust then, the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" sky—previously a"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" benevolent blue—grow"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"led. A low rum"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ble echoed through the neighborhood"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". Then, a drop"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" of water hit Barnaby right"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" on the nose. Then"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" another.\n\nThe Great Green Unt"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"amed was leaking.\n\nWithin"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" moments, the pleasant spring"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" air turned into a del"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"uge. The warm, dry"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" fur of the Emperor was"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" soaked. He looked like"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" a drowned rat. He was cold"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". He was wet. The"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" Plastic Bag was now a sog"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"gy rag plastered to his shoulder"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":".\n\nHe forgot about being a Viking"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". He forgot about conqu"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ering the Whispering Woods."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" He wanted his seventy-two degrees."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" He wanted his salmon p"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"âté. He wanted Clara"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":".\n\nHe bolted for"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the house, slipping on the wet grass"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", scrambled up the porch"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" steps, and threw himself at"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the door. It was closed."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" He let out a pit"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"iful, high-pitched m"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ew that was entirely und"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"ignified for a ruler of his"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" stature.\n\nThe door flew"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" open.\n\n\"Barnaby!\" Clara"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" cried out. She scooped"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" him up, ignoring his"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" wet fur soaking her shirt. \""}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"Oh, you silly goose"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", you're soaked!\"\n\nBarnaby"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" didn't even protest being"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" held. He buried his face"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" in her armpit, the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" safest place in the world.\n\nInside"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":", Clara toweled"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" him dry. It was a"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" rough, humiliating process involving"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" much rubbing and purring, but"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" eventually, he was fl"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"uffed and warm again. She"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" set him down and,"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" as a peace offering,"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" opened a fresh tin of the"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" expensive chicken pâté"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":".\n\nBarnaby ate with"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" gusto, his adventure already"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" fading into memory. He finished"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" his meal, groomed his wet"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" paws, and walked to"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the living room window.\n\nHe sat"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" down on the wide sill and"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" looked out at the rain"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"-soaked world. It"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" was wet and chaotic and"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" filled with dogs and plastic"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" bags.\n\nHe turned his back"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" to the window. He"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" walked to his favorite spot on"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" the armchair, kne"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"aded the fabric with his p"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"aws, and curled into a tight"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" orange circle.\n\nThe Empire"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" was safe. The Emperor was home"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":". And he had no intention of leaving"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":" until at least tomorrow afternoon"}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":"."}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"delta":{"role":"assistant","content":""}}]}
+
+                data: {"id":"**TRACE_ID_1**","created":1783927103,"object":"chat.completion.chunk","model":"glm-4.7-ali","choices":[{"index":0,"finish_reason":"stop","delta":{"role":"assistant","content":""}}],"usage":{"prompt_tokens":12,"completion_tokens":2228,"total_tokens":2240,"prompt_tokens_details":{"cached_tokens":0},"completion_tokens_details":{"reasoning_tokens":949}}}
+
+                data: [DONE]
+
+        headers:
+            Content-Type:
+                - text/event-stream;charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 07:18:24 GMT
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+            X-Log-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK

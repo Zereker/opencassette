@@ -1,0 +1,43 @@
+meta:
+    recorded_at: "2026-07-13T07:22:43Z"
+    vendor: zhipu
+    model: GLM-4.6V
+    endpoint: https://open.bigmodel.cn
+    scenario: structured_output_json_schema
+    scenario_sha256: b9ee4045cb68240f8adf70a58dc356640b33f236f0ae7c54fa4dfe55edbb15ea
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"respond with good","role":"user"}],"model":"GLM-4.6V","response_format":{"type":"json_schema","json_schema":{"schema":{"properties":{"response":{"title":"Response","type":"string"}},"required":["response"],"title":"BadModel","type":"object","additionalProperties":false},"name":"BadModel","strict":true}},"stream":false}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://open.bigmodel.cn/api/paas/v4/chat/completions
+      response:
+        body:
+            string: '{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"\nI''m glad to hear that! I''m here to help. What can I do for you?","reasoning_content":"The user''s prompt is simply \"respond with good\". This is a very short and open-ended request. I need to figure out what they mean by \"good\" and how to respond appropriately.\n\n1.  **Analyze the user''s intent:** The user wants a \"good\" response. What does \"good\" mean in this context?\n    *   It could be a test of my ability to understand a simple, slightly ambiguous prompt.\n    *   It could be a request for a positive, encouraging, or high-quality response.\n    *   It could be a joke or a playful interaction.\n    *   It could be a way of saying \"give me something useful\" or \"give me something that will make me feel good.\"\n\n2.  **Brainstorm possible responses:**\n    *   **Literal interpretation:** Just say \"good\". This is too simple and doesn''t add any value. It might seem robotic or unhelpful.\n    *   **Positive/Encouraging:** \"I hope you have a good day!\" or \"That''s great to hear!\" This is friendly and positive, but might not be what they''re looking for if they want something more substantial.\n    *   **Helpful/Offering assistance:** \"How can I help you have a good day?\" or \"I''m here to help make things good for you.\" This is proactive and useful. It invites further interaction.\n    *   **Creative/Poetic:** \"Goodness is a journey, not a destination. I''m here to help you along the way.\" This is a bit more philosophical and might be overkill for such a simple prompt.\n    *   **Simple and Direct, but with a positive spin:** \"Good is a great word. What can I do to make your day even better?\" This acknowledges the word and pivots to offering help.\n    *   **A bit of humor:** \"Good? I can do good. I can do great. What''s on your mind?\" This is friendly and engaging.\n\n3.  **Select the best approach:** I want to be helpful, positive, and open the door for further conversation. The user''s prompt is so short that they are likely looking for a response that is more than just a single word. A response that is encouraging and offers assistance seems like the most appropriate and useful path.\n\n4.  **Draft a response:**\n    *   Start with a positive affirmation. \"That''s great to hear!\" or \"Good is always a wonderful goal.\"\n    *   Follow up with an offer of help. \"How can I help you today?\" or \"What can I do to make things good for you?\"\n    *   Combine them: \"That''s great to hear! How can I help you today?\" This is friendly, positive, and directly asks for the user''s next step. It''s a good, solid, and safe response.\n\n5.  **Refine the final response:** Let''s go with something that is warm, positive, and open-ended. \"That''s great to hear! I''m here to help make things good for you. What can I do for you today?\" This feels a bit more proactive and service-oriented. It''s a good balance of acknowledging the user''s positive word and immediately offering value.\n\n    Let''s try another one. \"Good is a wonderful word. I''m here to help. What''s on your mind?\" This is also good. It''s slightly more conversational.\n\n    Let''s consider the simplest, most direct, yet still positive and helpful option. \"I''m glad to hear that! How can I help you today?\" This is clear, positive, and immediately invites the user to state their actual request. It''s efficient and user-friendly.\n\n    Let''s go with a slightly more expansive version to feel more \"human\" and less like a canned response. \"That''s great to hear! I''m here to help make your day a good one. What can I do for you?\" This feels warm and supportive.\n\n    Let''s try one more. \"Good is a fantastic goal. I''m here to help. What''s on your mind?\" This is also good.\n\n    Let''s stick with the one that is both positive and directly asks for the user''s need. \"That''s great to hear! How can I help you today?\" It''s concise, positive, and functional. It directly addresses the \"good\" part and then moves to the core function of an AI assistant: helping.\n\n    Let''s re-evaluate. The user said \"respond with good\". Maybe they want me to *be* good. So, a response that is itself \"good\" would be a good response. What makes a response \"good\"?\n    *   It''s helpful.\n    *   It''s positive.\n    *   It''s clear.\n    *   It''s polite.\n\n    So, a response that is helpful, positive, clear, and polite would be a \"good\" response. The one I drafted fits this. \"That''s great to hear! How can I help you today?\" is helpful (offers assistance), positive (acknowledges \"good\"), clear (easy to understand), and polite (uses \"please\" implicitly).\n\n    Let''s go with a slightly different phrasing to make it even more welcoming. \"I''m glad to hear that! I''m here to help. What can I do for you?\" This feels very natural and friendly.\n\n    Okay, I''ll go with that. It''s a good, solid, and helpful response to a very open-ended prompt. It doesn''t overthink it but provides a clear path forward for the user.","role":"assistant"}}],"created":1783927411,"id":"**TRACE_ID_1**","model":"GLM-4.6V","object":"chat.completion","request_id":"**TRACE_ID_1**","usage":{"completion_tokens":1173,"completion_tokens_details":{"reasoning_tokens":1149},"prompt_tokens":9,"prompt_tokens_details":{"cached_tokens":4},"total_tokens":1182}}'
+        headers:
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 07:23:31 GMT
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+            X-Log-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK

@@ -1,0 +1,76 @@
+meta:
+    recorded_at: "2026-07-13T07:10:08Z"
+    vendor: azure
+    model: gpt-5.5
+    endpoint: https://**RESOURCE**.openai.azure.com
+    scenario: chat_basic
+    scenario_sha256: c88a48870c2ffdb177b8dbbca23f3ced1f791a59ce08288a4bf18e83a69c8099
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"gpt-5.5"}'
+        headers:
+            Api-Key:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://**RESOURCE**.openai.azure.com/openai/v1/chat/completions?api-version=preview
+      response:
+        body:
+            string: |
+                {"choices":[{"content_filter_results":{"hate":{"filtered":false,"severity":"safe"},"protected_material_code":{"detected":false,"filtered":false},"protected_material_text":{"detected":false,"filtered":false},"self_harm":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"}},"finish_reason":"stop","index":0,"logprobs":null,"message":{"annotations":[],"content":"Milo was a small gray cat with white paws, a crooked tail, and the serious expression of someone who believed the world had been poorly organized.\n\nEvery morning, he sat on the kitchen windowsill and watched the birds hop around the garden.\n\n“Unfair,” Milo would mutter, flicking his tail. “They get wings, and I get a bell on my collar.”\n\nMilo lived with an old woman named Mrs. Vale, who knitted scarves, baked lemon biscuits, and spoke to him as if he were a person. Milo did not mind this. In fact, he rather agreed that he was a person—just a more elegant kind.\n\nOne rainy afternoon, Mrs. Vale left the back door open while carrying in firewood. Milo slipped outside.\n\nAt first, the adventure was wonderful. The grass was wet and shiny. The air smelled of earth and leaves. A beetle crawled under the hedge, and Milo followed it with great dignity until he sneezed into a puddle.\n\nThen he heard a sound.\n\n“Mew.”\n\nIt was tiny. Frightened.\n\nMilo lifted his head. Under the rosebush, shivering beside an overturned flowerpot, was a kitten no bigger than a slipper. Its fur was orange and muddy, and its eyes were wide as moons.\n\nMilo stared at it.\n\nThe kitten stared back.\n\n“Mew,” it said again.\n\nMilo sighed. He had not planned on becoming responsible for anything.\n\n“Come along, then,” he said, though of course it sounded like, “Mrrrp.”\n\nThe kitten did not move.\n\nMilo stepped carefully through the wet grass, picked up the kitten by the scruff of its neck, and carried it toward the house. The kitten was damp, wiggly, and extremely undignified. Milo was embarrassed for both of them.\n\nWhen Mrs. Vale saw him at the door, she gasped.\n\n“Milo! What have you found?”\n\nMilo placed the kitten gently on the mat and sat beside it, looking away as if the whole thing had been none of his idea.\n\nMrs. Vale wrapped the kitten in a towel and warmed milk on the stove. She named him Pumpkin.\n\nPumpkin grew quickly. He chased string. He fell off chairs. He tried to pounce on Milo’s tail at least six times a day.\n\nMilo pretended to be annoyed.\n\nBut every night, when the rain tapped softly on the roof and Mrs. Vale’s knitting needles clicked by the fire, Pumpkin curled against Milo’s side. And Milo, who had once believed the world was poorly organized, began to think perhaps it had made one or two good decisions after all.","refusal":null,"role":"assistant"}}],"created":1783926609,"id":"chatcmpl-E155l4ltnUQpJbWGN3aQIrA0PXfql","model":"gpt-5.5-2026-04-24","object":"chat.completion","prompt_filter_results":[{"prompt_index":0,"content_filter_results":{"hate":{"filtered":false,"severity":"safe"},"jailbreak":{"detected":false,"filtered":false},"self_harm":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"}}}],"service_tier":"default","system_fingerprint":null,"usage":{"completion_tokens":560,"completion_tokens_details":{"accepted_prediction_tokens":0,"audio_tokens":0,"reasoning_tokens":8,"rejected_prediction_tokens":0},"latency_checkpoint":{"engine_tbt_ms":18,"engine_ttft_ms":152,"engine_ttlt_ms":9952,"pre_inference_ms":65,"service_tbt_ms":18,"service_ttft_ms":283,"service_ttlt_ms":10069,"total_duration_ms":10011,"user_visible_ttft_ms":218},"prompt_tokens":13,"prompt_tokens_details":{"audio_tokens":0,"cached_tokens":0},"total_tokens":573}}
+        headers:
+            Apim-Request-Id:
+                - '**TRACE_ID_1**'
+            Azureai-Fe-Is-Streaming:
+                - "False"
+            Azureml-Model-Session:
+                - '**TRACE_ID_2**'
+            Content-Length:
+                - "3853"
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 13 Jul 2026 07:10:19 GMT
+            Skip-Error-Remapping:
+                - "true"
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            X-Accel-Buffering:
+                - "no"
+            X-Content-Type-Options:
+                - nosniff
+            X-Ms-Is-Spilled-Over:
+                - "false"
+            X-Ms-Rai-Invoked:
+                - "true"
+            X-Ms-Region:
+                - East US 2
+            X-Ms-Served-Model:
+                - gpt-5.5-2026-04-24
+            X-Ratelimit-Abusepenalty-Active:
+                - "False"
+            X-Ratelimit-Key:
+                - gpt-5.5
+            X-Ratelimit-Limit-Requests:
+                - "15000"
+            X-Ratelimit-Limit-Tokens:
+                - "15000000"
+            X-Ratelimit-Remaining-Requests:
+                - "14999"
+            X-Ratelimit-Remaining-Tokens:
+                - "14999987"
+            X-Ratelimit-Renewalperiod-Requests:
+                - "60"
+            X-Ratelimit-Renewalperiod-Tokens:
+                - "60"
+            X-Ratelimit-Reset-Requests:
+                - "0"
+            X-Ratelimit-Reset-Tokens:
+                - "0"
+            X-Request-Id:
+                - '**TRACE_ID_3**'
+        status:
+            code: 200
+            message: OK

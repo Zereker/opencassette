@@ -1,0 +1,43 @@
+meta:
+    recorded_at: "2026-07-13T07:17:26Z"
+    vendor: zhipu
+    model: GLM-4.7
+    endpoint: https://open.bigmodel.cn
+    scenario: chat_basic
+    scenario_sha256: c88a48870c2ffdb177b8dbbca23f3ced1f791a59ce08288a4bf18e83a69c8099
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"messages":[{"content":"Write a story about a cat.","role":"user"}],"model":"GLM-4.7"}'
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://open.bigmodel.cn/api/paas/v4/chat/completions
+      response:
+        body:
+            string: '{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"","reasoning_content":"\n1.  **Analyze the Request:** The user wants a story about a cat. This is a broad prompt, so I have a lot of creative freedom. I can choose the tone (funny, mysterious, heartwarming, sad, adventurous), the setting (modern house, magical world, historical era, space), and the specific type of cat.\n\n2.  **Brainstorming Core Concepts:**\n    *   *Idea 1: The aloof, superior cat.* A cat observing humans and judging them. Classic, funny, relatable.\n    *   *Idea 2: The adventurous street cat.* A cat navigating a city, making friends, finding a home. A bit more serious, maybe heartwarming.\n    *   *Idea 3: The magical cat.* A cat with special powers, maybe a witch''s familiar. Opens up a fantasy angle.\n    *   *Idea 4: The misunderstood cat.* A \"bad\" cat who''s actually just misunderstood, like a chaotic agent who solves a problem by accident.\n    *   *Idea 5: The old, wise cat.* A cat who''s seen it all, narrating from its favorite sunny spot. Reflective and poignant.\n\n3.  **Selecting the Best Concept:** Let''s go with a blend of Idea 1 and Idea 5. A cat with a strong internal monologue, a bit superior, but ultimately observing the simple, important things in life. This allows for both humor and a touch of heart. It''s a classic cat trope for a reason—it works well. Let''s name the cat. Barnaby? Sir Pounce-a-Lot? Mochi? Let''s go with **Barnaby**. It sounds dignified yet a bit goofy, which fits a cat perfectly.\n\n4.  **Developing the Plot:**\n    *   **Introduction:** Introduce Barnaby and his kingdom (the house). Establish his personality: regal, observant, slightly superior.\n    *   **Inciting Incident:** Something changes in his kingdom. A new element is introduced. What if it''s a new human? Or a new pet? A new human is a good one. It''s a common, relatable experience for cat owners and observers.\n    *   **Rising Action:**\n        *   Barnaby observes the new human, a young woman named Elara.\n        *   He watches her unpack. He judges her choices.\n        *   He creates small, mischievous \"tests\" for her. Does she know the proper way to be a human servant?\n        *   A moment of connection. Maybe she''s sad. He senses this.\n    *   **Climax:** A shared moment of quiet comfort. It''s raining outside. Elara is crying. Barnaby, in his own way, provides comfort. This shows his underlying affection, despite his superior exterior.\n    *   **Falling Action:** The next morning. Things feel a bit more settled. The routine is beginning to form.\n    *   **Resolution:** Barnaby accepts her. She''s passed his tests. His kingdom is complete again. He allows himself to purr.\n\n5.  **Drafting - Section by Section:**\n\n    *   **Intro:** Start with Barnaby on his perch. A high-up place gives him a good vantage point. A bookshelf or a tall cat tree. Let''s go with the top of the refrigerator. It''s a classic cat spot. It reinforces his sense of superiority. Introduce his humans: The Tall One and The Loud One. He''s their benevolent ruler.\n    *   **Inciting Incident:** The Tall One brings The New One. Describe her through Barnaby''s eyes. Small, nervous. Smelling of lavender and uncertainty. She has boxes. Boxes are interesting.\n    *   **Rising Action:**\n        *   Barnaby watches from his perch. He''s not *afraid*, just *cautious*.\n        *   He observes her unpacking. She puts books on shelves. Good. She unpacks a strange, shiny ball. A Christmas ornament? No, just a decorative object. Useless.\n        *   He decides to initiate contact. Not *too* friendly. A slow blink is a good start. He sits near her, but not *with* her.\n        *   She notices him. \"Hello, kitty.\" He internally scoffs at the unimaginative name but acknowledges her greeting. He allows a single, degrading \"meow.\"\n        *   Over the next few days, she learns his routine. He sees her trying to figure out the best way to scratch his head. She''s clumsy but well-intentioned.\n    *   **The Climax:** One evening, a storm. It''s loud and scary for many humans. He sees Elara sitting on the sofa, curled up. She''s crying. This is... distressing. His kingdom is meant to be peaceful. He decides to intervene.\n        *   He hops onto the sofa. Not *on* her, but close. This is a strategic move. He needs to be close enough to provide comfort but distant enough to maintain his dignity.\n        *   He starts a low, rumbling purr. It''s a powerful tool. A form of sonic therapy for the weak-willed humans.\n        *   She seems to respond. She reaches out a hand. He allows her to stroke his fur. Her crying subsides. A job well done. He''s maintaining the peace.\n    *   **Falling Action:** The storm passes. The morning sun streams in. Elara is making coffee. The scent is pleasant. Barnaby hops onto the counter. The Tall One says, \"Barnaby, get down.\" Elara just smiles and says, \"It''s okay.\" She understands the hierarchy. She is learning.\n    *   **Resolution:** Barnaby decides she is acceptable. She''s not a threat. She might even be an asset. He allows himself a full, unreserved purr as he kneads his paws on her blanket. He has judged her, and she has been found worthy. His kingdom is safe.","role":"assistant"}}],"created":1783927101,"id":"**TRACE_ID_1**","model":"glm-4.7-jd","object":"chat.completion","request_id":"**TRACE_ID_1**","usage":{"completion_tokens":1274,"completion_tokens_details":{"reasoning_tokens":1273},"prompt_tokens":12,"prompt_tokens_details":{"cached_tokens":0},"total_tokens":1286}}'
+        headers:
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 07:18:21 GMT
+            Set-Cookie:
+                - '**REDACTED**'
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+                - Origin
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+            X-Log-Id:
+                - '**TRACE_ID_1**'
+        status:
+            code: 200
+            message: OK

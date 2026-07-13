@@ -1,0 +1,114 @@
+meta:
+    recorded_at: "2026-07-13T07:11:34Z"
+    vendor: azure
+    model: gpt-5.5
+    endpoint: https://**RESOURCE**.openai.azure.com
+    scenario: resp_tools
+    scenario_sha256: b804b5d350a99ec9cf06f008b83ff52b424d609d0e3a179455c211e3969b271b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: '{"input":[{"content":"What is 5 times 4?","role":"user","type":"message"}],"instructions":"You are terse. Answer in five words or fewer.","model":"gpt-5.5","store":false,"stream":true,"tools":[{"type":"function","name":"multiply","description":"Return x * y.","parameters":{"properties":{"x":{"type":"integer"},"y":{"type":"integer"}},"required":["x","y"],"type":"object"}}]}'
+        headers:
+            Api-Key:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://**RESOURCE**.openai.azure.com/openai/v1/responses?api-version=preview
+      response:
+        body:
+            string: |+
+                event: response.created
+                data: {"type":"response.created","response":{"id":"resp_05d7b8076abab33a016a548fa672f881948c3667aff0a841b7","object":"response","created_at":1783926694,"status":"in_progress","background":false,"completed_at":null,"content_filters":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"auto","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[{"type":"function","description":"Return x * y.","name":"multiply","parameters":{"properties":{"x":{"type":"integer"},"y":{"type":"integer"}},"required":["x","y"],"type":"object","additionalProperties":false},"strict":true}],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":0}
+
+                event: response.in_progress
+                data: {"type":"response.in_progress","response":{"id":"resp_05d7b8076abab33a016a548fa672f881948c3667aff0a841b7","object":"response","created_at":1783926694,"status":"in_progress","background":false,"completed_at":null,"content_filters":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"auto","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[{"type":"function","description":"Return x * y.","name":"multiply","parameters":{"properties":{"x":{"type":"integer"},"y":{"type":"integer"}},"required":["x","y"],"type":"object","additionalProperties":false},"strict":true}],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":1}
+
+                event: response.output_item.added
+                data: {"type":"response.output_item.added","item":{"id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","type":"function_call","status":"in_progress","arguments":"","call_id":"call_awMmpbRe1ZPrhoZF5XH2r7Ww","name":"multiply"},"output_index":0,"sequence_number":2}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":"{\"","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"F60KUnWaI1bkPV","output_index":0,"sequence_number":3}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":"x","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"twULBZuiKpgHF0a","output_index":0,"sequence_number":4}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":"\":","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"O5wYZiU82D94sU","output_index":0,"sequence_number":5}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":"5","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"opuSjU4sJhADoeW","output_index":0,"sequence_number":6}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":",\"","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"fbhtuw5sOi826G","output_index":0,"sequence_number":7}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":"y","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"ob3lcSo5H62tr92","output_index":0,"sequence_number":8}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":"\":","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"e7J2UvLOMmNAKN","output_index":0,"sequence_number":9}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":"4","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"3rZEurjZp2v00Wx","output_index":0,"sequence_number":10}
+
+                event: response.function_call_arguments.delta
+                data: {"type":"response.function_call_arguments.delta","delta":"}","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","obfuscation":"mmta8EjTKtY8QnL","output_index":0,"sequence_number":11}
+
+                event: response.function_call_arguments.done
+                data: {"type":"response.function_call_arguments.done","arguments":"{\"x\":5,\"y\":4}","item_id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","output_index":0,"sequence_number":12}
+
+                event: response.output_item.done
+                data: {"type":"response.output_item.done","item":{"id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","type":"function_call","status":"completed","arguments":"{\"x\":5,\"y\":4}","call_id":"call_awMmpbRe1ZPrhoZF5XH2r7Ww","name":"multiply"},"output_index":0,"sequence_number":13}
+
+                event: response.completed
+                data: {"type":"response.completed","response":{"id":"resp_05d7b8076abab33a016a548fa672f881948c3667aff0a841b7","object":"response","created_at":1783926694,"status":"completed","background":false,"completed_at":1783926695,"content_filters":[{"blocked":false,"source_type":"prompt","content_filter_raw":[],"content_filter_results":{"hate":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"},"self_harm":{"filtered":false,"severity":"safe"},"jailbreak":{"detected":false,"filtered":false}},"content_filter_offsets":{"start_offset":0,"end_offset":51,"check_offset":0}},{"blocked":false,"source_type":"completion","content_filter_raw":[],"content_filter_results":{"protected_material_text":{"detected":false,"filtered":false},"protected_material_code":{"detected":false,"filtered":false},"hate":{"filtered":false,"severity":"safe"},"sexual":{"filtered":false,"severity":"safe"},"violence":{"filtered":false,"severity":"safe"},"self_harm":{"filtered":false,"severity":"safe"}},"content_filter_offsets":{"start_offset":0,"end_offset":13,"check_offset":0}}],"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":"You are terse. Answer in five words or fewer.","max_output_tokens":null,"max_tool_calls":null,"model":"gpt-5.5","moderation":null,"output":[{"id":"fc_05d7b8076abab33a016a548fa6f67481948065adc8eb359913","type":"function_call","status":"completed","arguments":"{\"x\":5,\"y\":4}","call_id":"call_awMmpbRe1ZPrhoZF5XH2r7Ww","name":"multiply"}],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"24h","reasoning":{"context":"current_turn","effort":"medium","mode":"standard","summary":null},"safety_identifier":null,"service_tier":"default","store":false,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[{"type":"function","description":"Return x * y.","name":"multiply","parameters":{"properties":{"x":{"type":"integer"},"y":{"type":"integer"}},"required":["x","y"],"type":"object","additionalProperties":false},"strict":true}],"top_logprobs":0,"top_p":0.98,"truncation":"disabled","usage":{"input_tokens":67,"input_tokens_details":{"cached_tokens":0},"output_tokens":21,"output_tokens_details":{"reasoning_tokens":0},"total_tokens":88},"user":null,"metadata":{}},"sequence_number":14}
+
+        headers:
+            Apim-Request-Id:
+                - '**TRACE_ID_1**'
+            Azureai-Fe-Is-Streaming:
+                - "True"
+            Content-Type:
+                - text/event-stream; charset=utf-8
+            Date:
+                - Mon, 13 Jul 2026 07:11:34 GMT
+            Skip-Error-Remapping:
+                - "true"
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Ms-Aoai-Configured-Data-Retention-Days:
+                - "30"
+            X-Ms-Is-Spilled-Over:
+                - "false"
+            X-Ms-Region:
+                - East US 2
+            X-Ms-Served-Model:
+                - gpt-5.5-2026-04-24
+            X-Ratelimit-Abusepenalty-Active:
+                - "False"
+            X-Ratelimit-Key:
+                - gpt-5.5
+            X-Ratelimit-Limit-Requests:
+                - "15000"
+            X-Ratelimit-Limit-Tokens:
+                - "15000000"
+            X-Ratelimit-Remaining-Requests:
+                - "14999"
+            X-Ratelimit-Remaining-Tokens:
+                - "14999985"
+            X-Ratelimit-Renewalperiod-Requests:
+                - "60"
+            X-Ratelimit-Renewalperiod-Tokens:
+                - "60"
+            X-Ratelimit-Reset-Requests:
+                - "0"
+            X-Ratelimit-Reset-Tokens:
+                - "0"
+            X-Request-Id:
+                - '**TRACE_ID_2**'
+        status:
+            code: 200
+            message: OK
