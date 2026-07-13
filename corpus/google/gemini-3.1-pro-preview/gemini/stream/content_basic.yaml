@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T08:59:03Z"
+    vendor: google
+    model: gemini-3.1-pro-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_basic
+    scenario_sha256: cfe7ad57ae1984efbd37afd5d6a157cb4b76f4a352fb421460f34385b5f985da
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Name for a pet pelican, just the name"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.1-pro-preview:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"Scoop\"}]}}],\"usageMetadata\": {\"trafficType\": \"PROVISIONED_THROUGHPUT\"},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:04.855161Z\",\"responseId\": \"2KhUavmYNLPrjNAPz96G8A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"AY89a18guQU1KxPxjP/E+ZELMv/pPd4xSBryjltjbvBu3XXBt1O8+VhEL9wbe36pVtAQWBlcwCB/b0xfZwWLNMDINA25ClPGs1A+Kn66CImhdjIjSWCyZTcD4oTN2hYfpK9XfMIe04dHTVzf6aXCQtY4OV+8STzpAfF9/X+uXXhg7npkwUl3Tk+RrXbVofK4xo+fu6DyNbnY3wiXMJCs5uUcVk/JwFqMLSImywP5YTwqPtpNZCP8/vZc8ha55998COkiDXhB/YRK1+F90AZMB5CpK6VLNF9nAoptaDg8GUFeu0C4oe5wzH9JqHSpJx1t9y+/UKZSUq7f7Zy4ichJhMQpAANFCTe0VwZNOcWM7WwUA5oeVaafY7zyunXq1OjUn1KN6t+CpYYruaqdKzzFwr+dRiGFwHJ7/+VIR0b9LpA/gwqoE5KNHU4DFSGyo2OUwLo0aZD+dmJe8OpeV7M+jeE9wbPaI8rWhdTlzSrhBPnTi9tn3pKCN07gpg/4V3444ccevN5vBKZCRAdBQ/V61+u15+mdb9MlKYqsbnrn3pBcchyFoUVFUJNPaTwzZ8NTMHXHzuLWgVZaUb5BIVue+hSDQ7SuaVxsGb7kfCaiWtNjPSjUXDu0uvJ4FuIpf030+7gWpzXcTUXW0dgw++qmn16CHrcenbrDbeCOVjepE76gNYrA50ouoG4ty7h5EYlHuIuCMBkmJ2OYVis8ZbCAoMpdkjVHdt0jj8KxXfLHdhe8tqGM3fl3H+uOrynMnz2+8+0IDYefmRR4MmBgJTyp2lbo3u8uQ0OehMWQHnme+By2OAJUUNBeeBqUY+S+amdA6kWoUvULJDnz8FdpdnddIvNAqnhJtOr7YiXMzjuEDS497pgA+U+oPPwXeuULdJx1Np/7OF6sIQwpY6aRbge1TLcGufhPekbgBhU8N3POgMpS3rhhyA/onI1T/be8vn7ooQigBUm9txbVbioMfiZfD+VLgKU+Jy7hLiEilzSv0JFb1czwDTNtpQTfpFKthiyB5Ov9D+UicWuBAikSx3j5vfdjlNHPiURyGsJ6HrVwyIYlch+m/GiSkm74ybpaRqWQiiQ8yCnCkMO9/TUGhXh6QmOqlQ5HBFlNDJFRLVmVMOZoOYipyjqXtVlxBFEyrTXhcybBiJR+3mWpZbkk\"}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"LOW\",\"probabilityScore\": 0.0121237105,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.015921801},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 0.15702316,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.025386654},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"LOW\",\"probabilityScore\": 0.049099855,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.070048615},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 0.00063665403,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"}]}],\"usageMetadata\": {\"promptTokenCount\": 10,\"candidatesTokenCount\": 2,\"totalTokenCount\": 226,\"trafficType\": \"PROVISIONED_THROUGHPUT\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 10}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 2}],\"thoughtsTokenCount\": 214},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:04.855161Z\",\"responseId\": \"2KhUavmYNLPrjNAPz96G8A8\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 08:59:08 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

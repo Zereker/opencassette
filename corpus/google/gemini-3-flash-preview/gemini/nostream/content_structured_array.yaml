@@ -1,0 +1,109 @@
+meta:
+    recorded_at: "2026-07-13T09:01:25Z"
+    vendor: google
+    model: gemini-3-flash-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_array
+    scenario_sha256: b155a71980b82efd8da8260d287f05e60f348fe0177e43b148afa58ce9f3cc1b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent 3 cool dogs"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"dogs": {"items": {"properties": {"name": {"title": "Name", "type": "string"}, "age": {"title": "Age", "type": "integer"}, "bio": {"title": "Bio", "type": "string"}}, "required": ["name", "age", "bio"], "title": "Dog", "type": "object"}, "title": "Dogs", "type": "array"}}, "required": ["dogs"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3-flash-preview:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "{\"dogs\":[{\"name\":\"Jax\",\"age\":3,\"bio\":\"A mountain rescue specialist with a penchant for blue bandanas.\"},{\"name\":\"Luna\",\"age\":5,\"bio\":\"A retired space program beagle who still dreams of the moon.\"},{\"name\":\"Turbo\",\"age\":2,\"bio\":\"Fastest greyhound in the neon city, known for his glowing collar.\"}]}",
+                            "thoughtSignature": "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"
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 5.690602e-06,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 3.719795e-05,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 3.903726e-06,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 1.6422719e-07,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE",
+                          "severityScore": 0.0029788613
+                        }
+                      ]
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 141,
+                    "candidatesTokenCount": 75,
+                    "totalTokenCount": 803,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 141
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 75
+                      }
+                    ],
+                    "thoughtsTokenCount": 587
+                  },
+                  "modelVersion": "gemini-3-flash-preview",
+                  "createTime": "2026-07-13T09:01:25.670749Z",
+                  "responseId": "ZalUap34KIaFoLAPt-PSkA4"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 09:01:30 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

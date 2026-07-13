@@ -1,0 +1,108 @@
+meta:
+    recorded_at: "2026-07-13T08:58:39Z"
+    vendor: google
+    model: gemini-3.1-pro-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_array
+    scenario_sha256: b155a71980b82efd8da8260d287f05e60f348fe0177e43b148afa58ce9f3cc1b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent 3 cool dogs"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"dogs": {"items": {"properties": {"name": {"title": "Name", "type": "string"}, "age": {"title": "Age", "type": "integer"}, "bio": {"title": "Bio", "type": "string"}}, "required": ["name", "age", "bio"], "title": "Dog", "type": "object"}, "title": "Dogs", "type": "array"}}, "required": ["dogs"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.1-pro-preview:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "text": "{\"dogs\":[{\"name\":\"Rex Thunderpaw\",\"age\":4,\"bio\":\"A cybernetically enhanced Golden Retriever who solves crimes in Neo-Tokyo.\"},{\"name\":\"Barkley Ruffington\",\"age\":7,\"bio\":\"A jazz-loving Bulldog who plays the saxophone at underground clubs.\"},{\"name\":\"Luna Stardust\",\"age\":2,\"bio\":\"An astronaut Husky who was the first canine to successfully surf on the rings of Saturn.\"}]}",
+                            "thoughtSignature": "AY89a18kPK/p21nYezaAGHwh6Dk1MX2aKruF/qvulzZM0Kw2HQNxzJCz+ClsjN9CvVLdLMGjS+872PM/MhlPQjamjKYcrGzkXgZRb0Hd9U1ZIdHggxRHIaCjIG6ZkZT/xH41zA1gBCQFW1lMTb7AyZKHAjUJmMqRyCkwcvNdsuoCKxb7Lc/eJ9r+MB5r7+w0G0uwcyDmad1D5D8FaNN1LQda2I3HBPDNTZS0//R/iDI8EvsOggF09Z2Qwi8OOQ3464Jq609YOJGxSn7tx7W7qMyOLv9jsOxLNMo8cXH4oetcmvBlpUGmMH3VMjFLQVZQhdzMxg+qC90HotiWsg40BLy56UbiSHU0EO2gKGFp7peOIrB5DIKiGT7wmSioByt5mwJJUs7W7jlc0mGpcRuEmVw7prCkUG70O2bB7uzobuSN0VRpJUQTJ6EZrmHL9q3ItzXRb2QkwNx71he4aTDXi5bRe+zZ8lYu+pGWE0HL7IwP6ld1rqLBbXw5w/Rp7SayCQh5EjWVFXOaU5Y+S9bZ82lY1rEpWzpSt9WPr+vyhUc2j7JJR1X8lNkaNV2ZCzAf112kmiNQCYxLEeQVAKIazQSbVS2gJoZIDmPY2wRdkLJf+b+r3P0BLF37aunmflHqM/uaCatIHV8mqur0pE/lfLI9vYjfuAA836dwNtRoSlTUkdo8lx7KdQcaZqZisO+ZGulcN2i7WTQnMHrsht8DLCsrrRtlYxOLiaaUy0yfJ2g+oCfgOrGDu7s+aw6FC1MnSaLWLCQh9kVMZjfYhNn6ph2ffPU7dNQy8SvDMnQA2k3szG/xz5GrxaFXourY+LXeKohJEhu47qr1dZSb8fLI/f8uyO0Jea0uqiRBwezCE3QgVCHCxGigLo0MoxHlPlg/S3Xm3lGQZQ+z644HtVq8WKHeCHwoOYiZmMVw/d/g/TM+Bkh+TqxMoR9KbXMYyk1mf47lZBjMHYVKHfeJb5/wyE/o6XbBJb5VaXxUC91HJej3IiQxMjmf24DcjvoJAHoWfKgcpqlT+eXfSc2NWrT3R0Z7T6de/1TWpv6B/W4Shz4SlO15PQ6MhvFvjsE3VPwCpzqC1XI0Yb02Bz9R4DlK0vmeMM/1Ymly4HlDbQiiCegR+dQzIc2SqZ4LTCwFJ0ZTZJc6XxAcgso/w4vJTwpYhIOYYdoFnWXy51jjMQXLHQNOXmR2aVm1FmYIqFxwF8tVDnGrRQDCoMbiZGsAfU65QEb7tDKzmADToQs/v1qKf6ifMUeHzQ3GC2W9tuQ8btqDSIepV/grHhuhvVvbFQK54h1Iuy5yKq5JF1Dr36VXYdIp8qD0Zil8iInJOBL1WrZSdr0e7tv6QI3jBE8lSaSzqo9CcDYYLMtD5yCEXX0/AIFe3HrFb/ROsaI/VF0rFEd2X7ekDMLa/MFC5r3S98KtmpaF1xscQ4LlEbcKeE4CF8l1HW82FL3CTFCfrDm2ffAZzOien6hOaEiFdeWJRagZQI3kENSSHG9mGrXd7R6kZ5uwhCyBaTZ1+/cuT8C1OpSQ3Dh9ZFapTcqXBz3GqFILJYnfGza36UHEj2GgzAqaNR8/iVU1zuSRT3laK+IAvafK5AhCkLwpiuKpHGRYiJ7sCOeqc2bR1naG8G4bgNHcwXSPGYHnoBXIRQotV1hm/fKir0KnvcI/7yuv1DpJ2i6YXX91ERLXB1n7fIYh/XskKNMecmYfJqXXgH6HQSBO0fcWAflkeq7AEOMz/Aq8C/pgIsmwkACrQlsOpDMgc0PM8yJvPD+/z5XnpRqqh2wCPDFXIi4NSk9LO/RTNWDjVNWUxTpCur8YKxs2XJ62K6xBNhkP4wCyod2sF/1B4MLGNdm/UR97F0GXVedN8esL+H/Xk7Q+WAT6TriUA6n0hLlQJjppRJHK3HS4SLbYBpe/F3ZZ4gRkr+SbV92Jkgz6JC7BhZn0wH2dr35rd/NXZ/FNn4K3OaKAWCflZedKPDTCKatUyVDXBcn+caTINXue8pqRu6o6kInGr9lfLJdCuTxLiZ9bG7jsriTDIZg4AfRaUDF+gx5Ejdie3pmIRU5IqQ1nZ2niQtB1/Xj5fEXcMglnsqExfwrt4jucjVSUWBWpWIlZZyma2B8ht8mNW/Fp5i5cAWtSAtajxtzpdSw7X44/Ta+5iw40P0P8RgsnNV6OF4YAHpyJZxwNhcG1QlayfIdfZJ5k93CTi8GHW6qeZmFvfHywKm6FFCdqhM9nBWkN3ztXCf6LWQTRGRoTb5Ix3V2qJZSzGrxCt9hC9HMNmH/4YgDG6V/WvMbEBS7dIuXygwSX6N5888OtkFb9Z/GxR/fgsGtP18DyqOPfusKCxEytrQ4BqVLJ76L7oJQGVZdrV666h8NDq4ae+RWYelnF9NCVtAiEGGTSKYeYAv+PbwrLH9hfqrPlO3M+jPwgSSxbN9Z/v60ZVJXtqvOZzBzmGoQSnCeavTY3EiQ7uY7prLvKMn67dKOyQ9CMMwNXoxUHnSexVqtRoQlvs52sS75IiDdILCLYjdQnKcyKlhoWc4MWhyDwiWVpIvIBtH0rj7x2UyW2cGV5Alr8g9eEkTz7KGZfzeakwtRuv9qStPyONLlj6uG/BrdKM0wBIkcJHXYQRPA6RzvWcSnb5bEJxCi1Hw+SvB4XKrztSLsbqDmk/p8bLdZt/NknPqt8X+dKHUgLmchI5nj5TIunQ/5zu99BfJ0syjvImen6YA4vtcyhnRGL3fJsaad8cX9nRTDNFZcLf8p9llXY6z0zCmbBxGAMhk3IXS3WnJ5+Hrbi2ieWtuloV8SdxmEtm3+Y4ngvj4MV7BQ8t7KTUq4ONRMHL19j1krUVUVWs6pD03hJ2dNHukw0nAckcyVPsk+nmv4X0Yvv92RBQw=="
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP",
+                      "safetyRatings": [
+                        {
+                          "category": "HARM_CATEGORY_HATE_SPEECH",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 5.41326e-06,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 4.3358796e-05,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_HARASSMENT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 4.575071e-06,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        },
+                        {
+                          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                          "probability": "NEGLIGIBLE",
+                          "probabilityScore": 8.105727e-08,
+                          "severity": "HARM_SEVERITY_NEGLIGIBLE"
+                        }
+                      ]
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 141,
+                    "candidatesTokenCount": 88,
+                    "totalTokenCount": 819,
+                    "trafficType": "ON_DEMAND",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 141
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 88
+                      }
+                    ],
+                    "thoughtsTokenCount": 590
+                  },
+                  "modelVersion": "gemini-3.1-pro-preview",
+                  "createTime": "2026-07-13T08:58:40.269104Z",
+                  "responseId": "wKhUarC2EOvl8vUPiJDcyAk"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 08:58:47 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

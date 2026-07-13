@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T09:02:39Z"
+    vendor: google
+    model: gemini-3.5-flash
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_tools
+    scenario_sha256: 5cbd321c7a3ef9304163261fe3fd60aa1633ec201f0f6e13d0379d25f8751b32
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Two names for a pet pelican"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "tools": [{"functionDeclarations": [{"name": "pelican_name_generator", "description": null, "parameters": {"properties": {}, "type": "object"}}]}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.5-flash:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"functionCall\": {\"name\": \"pelican_name_generator\",\"args\": {}},\"thoughtSignature\": \"AY89a18IKkxDCW3wRLECINBDkc8X32DmZ10Md3zZXIQgi6tfUubwQW57c0XBgpArYGk=\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.5-flash\",\"createTime\": \"2026-07-13T09:02:39.489824Z\",\"responseId\": \"r6lUauDyHaPg694Pwqq8yAs\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\"}]},\"finishReason\": \"STOP\"}],\"usageMetadata\": {\"promptTokenCount\": 20,\"candidatesTokenCount\": 13,\"totalTokenCount\": 33,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 20}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 13}]},\"modelVersion\": \"gemini-3.5-flash\",\"createTime\": \"2026-07-13T09:02:39.489824Z\",\"responseId\": \"r6lUauDyHaPg694Pwqq8yAs\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:02:40 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

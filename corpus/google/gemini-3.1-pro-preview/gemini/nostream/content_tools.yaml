@@ -1,0 +1,93 @@
+meta:
+    recorded_at: "2026-07-13T08:58:57Z"
+    vendor: google
+    model: gemini-3.1-pro-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_tools
+    scenario_sha256: 5cbd321c7a3ef9304163261fe3fd60aa1633ec201f0f6e13d0379d25f8751b32
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Two names for a pet pelican"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "tools": [{"functionDeclarations": [{"name": "pelican_name_generator", "description": null, "parameters": {"properties": {}, "type": "object"}}]}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.1-pro-preview:generateContent
+      response:
+        body:
+            string: |
+                {
+                  "candidates": [
+                    {
+                      "content": {
+                        "role": "model",
+                        "parts": [
+                          {
+                            "functionCall": {
+                              "name": "pelican_name_generator",
+                              "args": {}
+                            },
+                            "thoughtSignature": "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"
+                          },
+                          {
+                            "functionCall": {
+                              "name": "pelican_name_generator",
+                              "args": {}
+                            }
+                          }
+                        ]
+                      },
+                      "finishReason": "STOP"
+                    }
+                  ],
+                  "usageMetadata": {
+                    "promptTokenCount": 20,
+                    "candidatesTokenCount": 26,
+                    "totalTokenCount": 445,
+                    "trafficType": "PROVISIONED_THROUGHPUT",
+                    "promptTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 20
+                      }
+                    ],
+                    "candidatesTokensDetails": [
+                      {
+                        "modality": "TEXT",
+                        "tokenCount": 26
+                      }
+                    ],
+                    "thoughtsTokenCount": 399
+                  },
+                  "modelVersion": "gemini-3.1-pro-preview",
+                  "createTime": "2026-07-13T08:58:57.596362Z",
+                  "responseId": "0ahUaoqzJPfl8vUP8YOvmAU"
+                }
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Mon, 13 Jul 2026 08:59:02 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Vertex-Ai-Llm-Request-Type:
+                - dedicated
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

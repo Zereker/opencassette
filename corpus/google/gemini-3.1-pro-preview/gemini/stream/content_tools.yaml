@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T09:00:40Z"
+    vendor: google
+    model: gemini-3.1-pro-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_tools
+    scenario_sha256: 5cbd321c7a3ef9304163261fe3fd60aa1633ec201f0f6e13d0379d25f8751b32
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Two names for a pet pelican"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "tools": [{"functionDeclarations": [{"name": "pelican_name_generator", "description": null, "parameters": {"properties": {}, "type": "object"}}]}]}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.1-pro-preview:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"functionCall\": {\"name\": \"pelican_name_generator\",\"args\": {}},\"thoughtSignature\": \"AY89a1/DQllJ95D22A0IpZB2ES/r4LZUm5OGhNWb0zCnGPcQEoqyRU3ccaCFzGd5GdUNAR00nXy3YVHoqb1zyLzUQYifc6jhbAizVZxWLoWhhV7PoDSOhpt8MfauVGNTZblaGLKeAIGDsisPESVlAPGRQt57EgLTE/XL4RMN7Q2h17b5lDeP+1iVtYbR3U6hzSdM5SXGkUK7loA5bEkYmCfNUij3jTHV5jyUyq6U6uybdnTBwTu0NY7H0wSGXjg7XTqlMxn7W6AHAq7pOt51x4UQauRaXGejYdhG+KNibUmWm+06zH1JFHWV4mwqXqoQu1Tnc5GqAgrQsabUXM809OzMq94RGJTaZnI6V4PaCRmFRZfaQYV+oBtcdaG/Grg+Pghikz/Ar/quBWtyzApgdB5gxb7Xq+RewOH/+n4/FzdW8x+/+qZNUBXt5SV5MTQj09/40cVz/CGp9urinG1qzCD8/SbvZVMTTmOUoY3QtndJ03DcPNgIWyP8ImYVhXOvGZhHEp6G4VzWm1Zt1c06DJzbmCGSJ12rmbKTi+sJPLE/ZQpFHlBoutqbmnDujifCrQd/nt0dHiEQmz2Y5khb3Ew9U1ZabfHgWTDjJ68w/2cjCa/IwNhrWBbVUUiac1Bk7IbLPX3FeBOAoWJTNPdKDMpzpgjCHUf5gHHRFd80B9p2eOnDv8QnSzkX/qCOnsqHBwFpYWa8HrjsGF5FyBCXEYXsY11Yx+LjHxjDzLmbnRsc1zGpp6razP7vKM88IbZE+JTMzpflkh+GTEUEt/kreK/swlwnxkSQBAhvG+got+1VS8AjvEsjFMmOu9EXr9VgBrdsC2hbIXPTifK2a6SIOGKkG4cb/tfsjjOVxqGd2zGNkWoLNvCgRgbkthNUkPtFjvOgzy95PiHTD3lHmmNuK13SQ4Kix9OaGqcasBEPnlhZdWC+bu1dYupq4muhqjnU7/dYF0CxbDDp/dWUuTFy55TK0bXMJfvmDIa/Er9IRzJHo0UljKTS0iyIc87qBn0L22DFw88BFApaIUaUdPT1UIS371a1C2Woq2qJpK5+BWhwSGjjQkmdoZMT0HsFMu+z3kquOawby1+wAcoU5wwFcJj6V5z80nLi0mecGsoD9jSZ24A3sDb01QpT+Z9sX/DOsvs/jvqFoJEpQro0gL3rDG/IAJDmrVBwfcTLn7huM3jPOWELguJSI9mKHcBK6RwXcXyt7z+oOGtXCehhM4vGLf04N2tgS2S2I2lBA1J97bFoTwG5dmLnWpvZTfluk4QnxKntpMP6Fc/91LAPHRxgad+CP8cd9nRa4HDt78aosV0Z36z77Xryuzm9idO31sIZ5MnVeVsR9US2o+ZPgzEL+xUEG00aokCk+Zk2edICG3dgGpbrNRFlSn5iJ2msyszltiX5fgUWTWidhY7VfRO/Yut4wJAL55qukQUJ7FSwjcJCFw9+qicWcQK2FXms/5kb6cTl9h9GG7WUqixicNwGcoFqwZWQtDaheP5QOPo9kxwjWkAEMm60CY1Qo31jUR6gmpoSlCf5N5cBhw66j2PWckRwd/ahdsXVKOIyxcuMvTwl13LdO9euwo8=\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T09:00:40.601623Z\",\"responseId\": \"OKlUapfcJKPg694Pwqq8yAs\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"functionCall\": {\"name\": \"pelican_name_generator\",\"args\": {}}}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T09:00:40.601623Z\",\"responseId\": \"OKlUapfcJKPg694Pwqq8yAs\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\"}]},\"finishReason\": \"STOP\"}],\"usageMetadata\": {\"promptTokenCount\": 20,\"candidatesTokenCount\": 26,\"totalTokenCount\": 311,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 20}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 26}],\"thoughtsTokenCount\": 265},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T09:00:40.601623Z\",\"responseId\": \"OKlUapfcJKPg694Pwqq8yAs\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 09:00:49 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK

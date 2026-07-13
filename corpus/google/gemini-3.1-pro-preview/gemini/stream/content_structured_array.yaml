@@ -1,0 +1,46 @@
+meta:
+    recorded_at: "2026-07-13T08:59:09Z"
+    vendor: google
+    model: gemini-3.1-pro-preview
+    endpoint: https://aiplatform.googleapis.com
+    scenario: content_structured_array
+    scenario_sha256: b155a71980b82efd8da8260d287f05e60f348fe0177e43b148afa58ce9f3cc1b
+    tool: opencassette/0.1.0
+interactions:
+    - request:
+        body: |
+            {"contents": [{"role": "user", "parts": [{"text": "Invent 3 cool dogs"}]}], "safetySettings": [{"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}], "generationConfig": {"response_mime_type": "application/json", "response_schema": {"properties": {"dogs": {"items": {"properties": {"name": {"title": "Name", "type": "string"}, "age": {"title": "Age", "type": "integer"}, "bio": {"title": "Bio", "type": "string"}}, "required": ["name", "age", "bio"], "title": "Dog", "type": "object"}, "title": "Dogs", "type": "array"}}, "required": ["dogs"], "type": "object"}}}
+        headers:
+            Authorization:
+                - '**REDACTED**'
+            Content-Type:
+                - application/json
+        method: POST
+        uri: https://aiplatform.googleapis.com/v1/projects/**PROJECT**/locations/global/publishers/google/models/gemini-3.1-pro-preview:streamGenerateContent?alt=sse
+      response:
+        body:
+            string: "data: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"{\\\"dogs\\\":\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:09.718239Z\",\"responseId\": \"3ahUap_rK9Sk0r4PqY-X2Qc\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"[{\\\"name\\\":\\\"Rex\\\",\\\"age\\\":5,\\\"bio\\\":\\\"A sunglasses-wearing Golden Retriever who loves surfing.\\\"},{\\\"name\\\":\\\"Luna\\\",\\\"age\\\":3,\\\"bio\\\":\\\"A cyber-punk Husky with a neon collar and a knack for skateboarding.\\\"},{\\\"name\\\":\\\"Apollo\\\",\\\"age\\\":7,\\\"bio\\\":\\\"A retired space-dog who now spends his\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:09.718239Z\",\"responseId\": \"3ahUap_rK9Sk0r4PqY-X2Qc\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \" days DJing at the local dog park.\\\"}]}\"}]}}],\"usageMetadata\": {\"trafficType\": \"ON_DEMAND\"},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:09.718239Z\",\"responseId\": \"3ahUap_rK9Sk0r4PqY-X2Qc\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"role\": \"model\",\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"AY89a1/ZbFevf5mxSFN4SbzQnHqHVpwWwgS2mlTkCf4gkc0vmY81k4HvSz9J/v31hrVD49q6/KSm3zsuxl+vuiwYL/cboiqsbr65bNcL8+tx/yF6wywecZio4GkdZFRKWHt+gfM/lP2ScvWmJs0wsycAsavJ0XI0NhyHEPHdp0ync5nkD8QcLMlsPiQOMnnegUcFIGoyomLpRD10SoCxVgVSlwBn4iWITwNW5sG1B4WDbbV72ebniHmw9mNSHt49OWQFp847+IBkHCg5Z0Enj7awF5QrDA1dd31vayArJMai0MGOzlInSNfffHhrH9j2Lw9bgqd4kp+9nPYuH3WXn0RMZQLDaLX+wtIwrt8ibtt0rVatmR4qsGjvmTEDyM2T1AduNneUu9pJ0SbgeNB+5l/Z7wjRKRq3IqDDDLswK74ZOSMJS8ppuHZqdNDIeRfLFYzzdpLEy7GA3J+47kEqOFKpIo9DrFAa7vM8kZAz1pI3//Yzk4hVWRstuJr2E+W5qp+dJX5iDOuSz/SzbTHUFHJ2PvAH+UPAuO9XWK1eqOQaLDanFad2+qPBOFjd5xN7hrJCyYh/gJY/stahUsapeRwS9sqHyyh5q8bE/O1JTqJOIgfDs77y3xD6jGWvqVDwG4B0e+l2R+kxv1repxVQOtDObczA3BBGG0Sox8QNihJYcB1OUzAOuN2uLeBsFpzSvMcYcQqMCYofBcdtUH6EQtAoa6WmeaCXAzcI/vHBIUyFrbu1aaJP0MSzIiT3m6mgydk1OfCh9TrmNu7O+5vXZrSOq3xEUVSOhlL8Q7uC2bKy+kMICIo1hS/nJGWiookQoXVwWh85BFUAAs25IFPybtsZPW/IxEBjGdNR9QjlNU7OfRweOrUzUfIjf33ZN/CKnpMBrb2NxAZnP5fVkBmWE2wzzF1X+xaHs2OyIn4T95udGjjGfALofYPFZ5zVnrDu9CxqRHbCXeAaLz35jpPy3YM91D2j48IzeRyJfafj9ALfIrH5+X3EFneST4xQbJKR0JMmLi3MR1DgUQF7j47/2dSBq73qNsrX9dmn3tw18QMnTlt3JqqY7Qx4cg9bX0RXPW11B67YS46ZiLrEA7AlSTapm1+62XwLXRzXtYZI6SyDz7zDNQIfDreCM0tmlgI8Ct/bv8IEGXLzJRy1LtfMEdWVPNKY/ZY6rGsCpz0ohzQ4p2nMuEUI4wWoLjO8kHu4fOrxRYcKcvU5BcVPyGZET3+PzENaz9xsDZTQ4p7R4FX4RxL4YrM/LWkdFxUerisgpoKppSPbU/6Ctiu+vDhlz2X72MESdEJrxGC37jhCGfj7moUpjALf6yFaJZQp/nYxUJ4Klyr6YFM2LBNBdP/DfZZ8PwnoguXlC6R8pfPVYFsVKgNDkcpDzy/o372aTeNaO3RpROV6jFMgu56AIxpCXJ0udan2Jt7gr/YGcAhDdfeqHypeasV+V08HzVrVIYIf6Jd2CJQcOysPF3LOtdhaUAmF2HEai36CNZuOi19/BtCM+kep0l6h+vzhnfaQWKk9QbvNwd5KOtdLOmvOwS0HJuk2Sou9YbjZtjIhqBdvH9q9SbpkKxzcBUSz1xHWJndv4VnmixF6CvvFk+zNW+RKw8d0C9sa7mhN1uGDlGBec3swDL4eKQBk7IlQbgn/FNytDNS7RNbYdC37jpzWlU43zkXGct12/Q5FE9Vx3ifmXRPCkdKNEE+q5Bn3glMGJAnTAOn/SwaShG8UjURFMhaSfL13FRXnx6hBWYJctkXaGknDRYprQ2FY0ydFlv0PUY3gmO4AWKu4NYGmwJbiPIjWIFfancZroOxfHrfbNrHUwNo+Hn6lXFvqmbeFkXTRvKMJ5v/yZYDqru4b4mtX+LGEOts9f4evI4X0R1sSlqTUQhReqGVdhpRtE1jsuVfxVSmG3MgPp5/kGzhpQ5ZTXKeDzY3Ljm/d3jVYz7muK4qQxMJ+AQ2gPkPhY4xuwu1us383qjjXy3XBZpMaITKcjq+LvsGdOXfOl7U6v3FwIm9cRi8ld/U0/FruKc+J3zPxMmj6jMmN3a5+wD7/h3IdN+al9tRgcBVB0b5AH2K3CgCwXqc4Kz0qBDBKEqTC3PlUIjLL5yConc7xj8cGNt4zaYqdFihQxvjkG8Fui7mqriSvt1JMhoKIailb5ZnKVpwmeXdYImJWLP3BEL36YevDQvMe4K9aDhqeDMOZuXIkKzxXoH4+LiRb84rmMKnIFmVB2TT/4+afY6rPjvy7hMg/+eI7GROemDe1W6Kpx0YPkM80ORfmV/sxtwPeBfuONkLu2FE2zgZe2Tr05Dx9ZaV/YwgdhDEXWiqmiyh0mjWse0lWCQN4P8GOKNeaNjxGJWsk4UjiYpp/waIQT3aP8/L0f3yRjm9DXpQsktJRFtn0oi7+JhMhB33VvEroGMbH+9grK4JxJd8QiUickH3t2Mrf5TQgK0rlsL1pCs/LJ/qf/MlZibJpWcPALU1YEAofeu5H8vhuEy/zbFMqTs7yk408JLlDfLipm63Lb4xLDzTLEvf0Eki8QjBnBgJlvx4qFnPzNGNdfnjFxdtjo8vUbOMax9KYFswYpA+bY/DRtX6MVhZaruR2n36QUqcb55j4+3DOEvY5zpuDbOIvsNdOLqZ0p2OuQUTrbTJZKb1+mpUgyliEPQFG9EgOuvA56lNxiLQElp2OgU8/FaI63I6u83uFNPJkHrjwoZlcFug7kb8FFKlKx7yHLpCtn4B4vCqWyk05HDJ7WG6a3q5Mn7IkCxt/nk4AFO4Axr9CunRiEOw3B8HW/MU/azHEDvQ6hgpSwXuk+iXZBX9IfWwtligXZRvEFQsQNTQ/vezhOOUNo9WDqCu5GYObI+7B3bcXFJBU1lGygL3MMD14hEgHoP4Y7A0VH+JDDgR2PVfn7I9iVT+FoJwpPz/P8WWtSw4n5e8uWUxTBlbMZFhqjQs/WmiVc5VO/HjjiNXQ881DPgTdUhXRA66U39O7aR251KFNDpoYyVBsg3PGlguhA8WV1z/bJjVwGGjauzMX+sP7baXgEhJ6vybEUKLXoSyj3+pXiOZneDNllxQ4as7LBl6rE7aCRm5xNGwD1kYDwxE4G3Dpsf4maOG6DGlmHXDyaCu94BGt0sEBufjtJZ90IwWeoeSdwTfnQTd5G3vCya29AQMB2vsep+8f7WWaug2My4E5XW9VuLsXz/ePSoAoEr+DrcINF7j1k8Jq+LwvMrRwP+3J5NRzLrMa3x9sVQ3cX3Wc9y+2+knnBlPn6oYQCYqo1AKfGzjhpz38VI3LVDr/aMzwjU1cMjH/URyt+jOVHHl/kraBn9L5bhHc44gvKB3Co+YZg2JDfS1MyZkTnKSl+knoT+qLCjJ0+D/D5iiGsGWXMAaZvQeekxwKDTF87M2Ql9RI49lRhI8rvWnfMJPg3zoX02P6151qQa2CZufU+nNgWOxf9dLV7xyN1dq9wPqfDJBuBrRqUJBqdM5NkdUIxsKW44aO/qtN6yFX9p1auiUL9k48+wsdYHBmItbB9UU8ut6YdHWRabaaLkEaRfUFRXlU5nVts7vMivNdARGB3XouPlbZ6d5NxF8bczJwGy7P6ywozkeaShhrbo0ufqPyei0UgMS+sSASE//p6icj8+CPTUzqvQ+eTMwGWndCoQchhD5QDx8QaXy6iWVid4pXrmdl68DtrMGQunl3iDABYoaCWPda1XWoq/j85fyxV455mGtCRHhDvJdq\"}]},\"finishReason\": \"STOP\",\"safetyRatings\": [{\"category\": \"HARM_CATEGORY_HATE_SPEECH\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 2.2234071e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 0.00014673067,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_HARASSMENT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.1750886e-05,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\"},{\"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",\"probability\": \"NEGLIGIBLE\",\"probabilityScore\": 1.8615957e-06,\"severity\": \"HARM_SEVERITY_NEGLIGIBLE\",\"severityScore\": 0.0076369345}]}],\"usageMetadata\": {\"promptTokenCount\": 141,\"candidatesTokenCount\": 79,\"totalTokenCount\": 897,\"trafficType\": \"ON_DEMAND\",\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 141}],\"candidatesTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 79}],\"thoughtsTokenCount\": 677},\"modelVersion\": \"gemini-3.1-pro-preview\",\"createTime\": \"2026-07-13T08:59:09.718239Z\",\"responseId\": \"3ahUap_rK9Sk0r4PqY-X2Qc\"}\r\n\r\n"
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+            Content-Disposition:
+                - attachment
+            Content-Type:
+                - text/event-stream
+            Date:
+                - Mon, 13 Jul 2026 08:59:22 GMT
+            Server:
+                - scaffolding on HTTPServer2
+            Vary:
+                - Origin
+                - X-Origin
+                - Referer
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Xss-Protection:
+                - "0"
+        status:
+            code: 200
+            message: OK
