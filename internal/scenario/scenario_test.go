@@ -11,7 +11,7 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-const packDir = "../packs/openai-chat"
+const packDir = "../../packs/openai-chat"
 
 func loadPack(t *testing.T) []Scenario {
 	t.Helper()

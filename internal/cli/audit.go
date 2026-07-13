@@ -10,8 +10,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/zereker/opencassette/audit"
-	"github.com/zereker/opencassette/scenario"
+	"github.com/zereker/opencassette/internal/audit"
+	"github.com/zereker/opencassette/internal/scenario"
 )
 
 type auditOptions struct {

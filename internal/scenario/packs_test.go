@@ -26,7 +26,7 @@ func loadNamedPack(t *testing.T, dir string) *Pack {
 }
 
 func TestAnthropicMessagesPack(t *testing.T) {
-	pack := loadNamedPack(t, "../packs/anthropic-messages")
+	pack := loadNamedPack(t, "../../packs/anthropic-messages")
 	if pack.Protocol != "anthropic" || pack.ModelField != "model" || pack.StreamField != "stream" {
 		t.Fatalf("manifest: %+v", pack.Manifest)
 	}
@@ -116,7 +116,7 @@ func TestAnthropicMessagesPack(t *testing.T) {
 }
 
 func TestGeminiGenerateContentPack(t *testing.T) {
-	pack := loadNamedPack(t, "../packs/gemini-generatecontent")
+	pack := loadNamedPack(t, "../../packs/gemini-generatecontent")
 	if pack.Protocol != "gemini" || pack.ModelField != "" || pack.StreamField != "" {
 		t.Fatalf("manifest: %+v", pack.Manifest)
 	}
@@ -198,7 +198,7 @@ func TestGeminiGenerateContentPack(t *testing.T) {
 }
 
 func TestOpenAIResponsesPack(t *testing.T) {
-	pack := loadNamedPack(t, "../packs/openai-responses")
+	pack := loadNamedPack(t, "../../packs/openai-responses")
 	if pack.Protocol != "openai-responses" || pack.ModelField != "model" || pack.StreamField != "stream" {
 		t.Fatalf("manifest: %+v", pack.Manifest)
 	}

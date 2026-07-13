@@ -1,0 +1,36 @@
+# Cross-vendor redaction baseline, embedded into the binary (see redact.go's
+# go:embed). Applied to every recording regardless of vendor, so a capture is
+# safe even with no vendor profile. Vendor profiles (profiles/<vendor>.yaml)
+# overlay increments — do NOT copy these entries into them.
+#
+# credential_headers: value blanked to **REDACTED**
+# trace_headers:      value discovered and rewritten to **TRACE_ID_n**,
+#                     consistently across headers, URI and bodies
+credential_headers:
+  - authorization
+  - proxy-authorization
+  - x-api-key
+  - api-key
+  - x-goog-api-key
+  - x-auth-token
+  - x-amz-security-token
+  - cookie
+  - set-cookie
+trace_headers:
+  - b3
+  - correlation-id
+  - trace-id
+  - traceparent
+  - tracestate
+  - request-id
+  - x-amzn-trace-id
+  - x-b3-traceid
+  - x-b3-spanid
+  - x-cloud-trace-context
+  - x-correlation-id
+  - x-datadog-parent-id
+  - x-datadog-trace-id
+  - x-log-id
+  - x-request-id
+  - x-trace-id
+  - uber-trace-id

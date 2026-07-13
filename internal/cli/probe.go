@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/zereker/opencassette/recorder"
-	"github.com/zereker/opencassette/scenario"
+	"github.com/zereker/opencassette/internal/recorder"
+	"github.com/zereker/opencassette/internal/scenario"
 )
 
 // fieldSupport is the machine-readable support matrix a probe run writes
