@@ -5,8 +5,8 @@ go 1.25.7
 require (
 	github.com/aws/aws-sdk-go-v2 v1.42.1
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.14
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.28
-	github.com/aws/aws-sdk-go-v2/service/sts v1.44.0
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.29
+	github.com/aws/aws-sdk-go-v2/service/sts v1.44.1
 	github.com/spf13/cobra v1.10.2
 	github.com/tidwall/gjson v1.19.0
 	golang.org/x/oauth2 v0.36.0
