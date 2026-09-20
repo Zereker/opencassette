@@ -1,6 +1,6 @@
 module github.com/zereker/opencassette
 
-go 1.25.7
+go 1.26.0
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.42.1
@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.44.0
 	github.com/spf13/cobra v1.10.2
 	github.com/tidwall/gjson v1.19.0
-	golang.org/x/oauth2 v0.36.0
+	golang.org/x/oauth2 v0.37.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
